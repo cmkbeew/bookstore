@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fullstack4.bookstore.mapper.AdminMapper">
+
+    <select id="getJSON" resultType="map">
+        SELECT JSON_OBJECT('notice_idx', notice_idx, 'title', title, 'member_id', member_id, 'content', content
+                   , 'reg_date', reg_date, 'org_file_name', org_file_name, 'save_file_name', save_file_name)
+        from tbl_notice
+        where notice_idx = 1
+    </select>
+</mapper>

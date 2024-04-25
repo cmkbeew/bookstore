@@ -5,27 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="64051777-53e8-4d29-985d-b98c77db865d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/controller/AdminController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/controller/LoginController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/domain/MemberVO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/dto/MemberDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/login/login.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/css/bootstrap.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/css/owl.carousel.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/css/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/fonts/icomoon/fonts/icomoon.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/fonts/icomoon/fonts/icomoon.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/fonts/icomoon/fonts/icomoon.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/fonts/icomoon/fonts/icomoon.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/fonts/icomoon/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/js/bootstrap.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/js/jquery-3.3.1.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/js/main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/js/popper.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/bookstore.test.iml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/domain/FaqVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/domain/QnaVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/dto/FaqDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/dto/QnaDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/mapper/AdminMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/service/AdminService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/resources/mappers/AdminMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/bbsList.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/bbsView.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/test/java/org/fullstack4/bookstore/mapper/AdminMapperTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/controller/AdminController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/memberList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/memberList.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/root-context.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/root-context.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,6 +48,7 @@
         <option value="JUnit5 Test Class" />
         <option value="Class" />
         <option value="Jsp File" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -90,7 +84,9 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Gradle.AdminMapperTests.testGetJSON.executor": "Run",
     "Gradle.Build bookstore.executor": "Run",
+    "Gradle.CommunityServiceTests.testNoticeListService.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "Tomcat Server.Tomcat 9.0.87.executor": "Run",
@@ -99,7 +95,7 @@
     "create.test.in.the.same.root": "true",
     "git-widget-placeholder": "yh",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/bookstorePrj",
+    "last_opened_file_path": "C:/bookstorePrj/bookstore/src/main/resources/mappers",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -110,6 +106,10 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\bookstorePrj\bookstore\src\main\resources\mappers" />
+      <recent name="C:\bookstorePrj\bookstore\src\main\webapp\WEB-INF\admin" />
+    </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
@@ -117,10 +117,61 @@
       <recent name="org.fullstack4.bookstore.controller" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.fullstack4.bookstore.mapper" />
+      <recent name="org.fullstack4.bookstore.dto" />
+      <recent name="org.fullstack4.bookstore.domain" />
       <recent name="org.fullstack4.bookstore.controller" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Gradle.AdminMapperTests.testGetJSON">
+    <configuration name="AdminMapperTests.testGetJSON" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/bookstore" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;org.fullstack4.bookstore.mapper.AdminMapperTests.testGetJSON&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="CommunityServiceTests.testNoticeListService" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/bookstore" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;org.fullstack4.bookstore.service.CommunityServiceTests.testNoticeListService&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
     <configuration name="Tomcat 9.0.87" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.87" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="11" nameIsGenerated="true">
       <option name="COMMON_VM_ARGUMENTS" value="-Dfile.encoding=UTF-8" />
       <option name="UPDATE_ON_FRAME_DEACTIVATION" value="true" />
@@ -208,6 +259,12 @@
         <option name="BuildArtifacts" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.AdminMapperTests.testGetJSON" />
+        <item itemvalue="Gradle.CommunityServiceTests.testNoticeListService" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -225,7 +282,8 @@
       <option name="presentableId" value="Default" />
       <updated>1714023043568</updated>
       <workItem from="1714023044588" duration="7400000" />
-      <workItem from="1714030728650" duration="6897000" />
+      <workItem from="1714030728650" duration="7852000" />
+      <workItem from="1714051880256" duration="13265000" />
     </task>
     <servers />
   </component>
@@ -234,6 +292,26 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/bookstore/src/test/java/org/fullstack4/bookstore/mapper/AdminMapperTests.java</url>
+          <line>24</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/bookstore/src/test/java/org/fullstack4/bookstore/mapper/AdminMapperTests.java</url>
+          <line>23</line>
+          <properties class="org.fullstack4.bookstore.mapper.AdminMapperTests" method="testGetJSON">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
