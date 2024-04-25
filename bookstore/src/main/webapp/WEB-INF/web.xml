@@ -47,11 +47,11 @@
     </servlet-mapping>
 
     <!-- 모든 페이지 header, footer 적용 -->
-    <jsp-config>
-        <jsp-property-group>
-            <url-pattern>*.jsp</url-pattern>
-            <include-prelude>/WEB-INF/common/header.jsp</include-prelude>
-            <include-coda>/WEB-INF/common/footer.jsp</include-coda>
-        </jsp-property-group>
-    </jsp-config>
+<!--    <jsp-config>-->
+<!--        <jsp-property-group>-->
+<!--            <url-pattern>*.jsp</url-pattern>-->
+<!--            <include-prelude>/WEB-INF/common/header.jsp</include-prelude>-->
+<!--            <include-coda>/WEB-INF/common/footer.jsp</include-coda>-->
+<!--        </jsp-property-group>-->
+<!--    </jsp-config>-->
 </web-app>
