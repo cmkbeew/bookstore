@@ -33,7 +33,7 @@
         <property name="mapperLocations" value="classpath:/mappers/**/*.xml" />
     </bean>
 
-    <mybatis:scan base-package="org.fullstack4.springmvc.mapper"></mybatis:scan>
+    <mybatis:scan base-package="org.fullstack4.bookstore.mapper"></mybatis:scan>
 
     <context:component-scan base-package="org.fullstack4.bookstore.config" />
     <context:component-scan base-package="org.fullstack4.bookstore.service" />
