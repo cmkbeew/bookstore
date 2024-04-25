@@ -5,15 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="64051777-53e8-4d29-985d-b98c77db865d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/modules/bookstore.test.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/controller/AdminController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/controller/LoginController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/domain/MemberVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/dto/MemberDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/login/login.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/css/bootstrap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/css/owl.carousel.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/css/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/fonts/icomoon/fonts/icomoon.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/fonts/icomoon/fonts/icomoon.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/fonts/icomoon/fonts/icomoon.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/fonts/icomoon/fonts/icomoon.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/fonts/icomoon/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/js/bootstrap.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/js/jquery-3.3.1.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/js/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/js/popper.min.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/bookstore.test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/memberList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/memberList.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/common/footer.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/common/footer.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/common/header.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/common/header.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookstore/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/index.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,9 +52,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Jsp File" />
-        <option value="Class" />
         <option value="JUnit5 Test Class" />
+        <option value="Class" />
+        <option value="Jsp File" />
       </list>
     </option>
   </component>
@@ -64,9 +76,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2fZylILUtZ6pL4LxnWfiD6VANOv" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -81,7 +93,6 @@
     "Gradle.Build bookstore.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Tomcat Server.Tomcat 9.0.87.executor": "Run",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
@@ -103,6 +114,9 @@
       <recent name="" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="org.fullstack4.bookstore.controller" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="org.fullstack4.bookstore.controller" />
     </key>
   </component>
@@ -191,9 +205,7 @@
       </ConfigurationWrapper>
       <method v="2">
         <option name="Make" enabled="true" />
-        <option name="BuildArtifacts" enabled="true">
-          <artifact name="Gradle : org.fullstack4 : bookstore-1.0-SNAPSHOT.war (exploded)" />
-        </option>
+        <option name="BuildArtifacts" enabled="true" />
       </method>
     </configuration>
   </component>
@@ -212,7 +224,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1714023043568</updated>
-      <workItem from="1714023044588" duration="6363000" />
+      <workItem from="1714023044588" duration="7400000" />
+      <workItem from="1714030728650" duration="6897000" />
     </task>
     <servers />
   </component>
