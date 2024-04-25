@@ -31,7 +31,7 @@
 </head>
 <body>
     <%@ include file="/WEB-INF/common/header.jsp"%>
-    <h1>admin >> memberList</h1>
+    <h1 style="padding-top: 92px;">admin >> memberList</h1>
     <div class="container py-5">
         <div class="row text-center text-white mb-5">
             <div class="col-lg-7 mx-auto">
