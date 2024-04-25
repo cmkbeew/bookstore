@@ -9,13 +9,15 @@
        http://www.springframework.org/schema/context
        https://www.springframework.org/schema/context/spring-context.xsd">
 
-    <mvc:resources mapping="/resources/**" location="/resources/"></mvc:resources>
+    <mvc:annotation-driven></mvc:annotation-driven>
 
-    <context:component-scan base-package="org.fullstack4.bookstore.controller" />
+    <mvc:resources mapping="/resources/**" location="/resources/"></mvc:resources>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/"></property>
         <property name="suffix" value=".jsp"></property>
     </bean>
+
+    <context:component-scan base-package="org.fullstack4.bookstore.controller" />
 
 </beans>

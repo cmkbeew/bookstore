@@ -37,11 +37,11 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="boards" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">커뮤니티</a>
                     <ul class="dropdown-menu" aria-labelledby="boards">
-                        <li><a class="dropdown-item" href="/community/noticeList">공지사항</a></li>
+                        <li><a class="dropdown-item" href="/community/notice/list">공지사항</a></li>
                         <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="/community/faqList">FAQ</a></li>
+                        <li><a class="dropdown-item" href="/community/faq/list">FAQ</a></li>
                         <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="/community/qnaList">QnA</a></li>
+                        <li><a class="dropdown-item" href="/community/qna/list">QnA</a></li>
                     </ul>
                 </li>
                 <li class="nav-item"><a class="nav-link" href="/data/list">자료실</a></li>
