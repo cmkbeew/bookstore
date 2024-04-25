@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fullstack4.bookstore.mapper.CommunityMapper">
+
+    <select id="noticeList" resultType="org.fullstack4.bookstore.domain.NoticeVO">
+        select notice_idx, title, member_id, content, reg_date, org_file_name, save_file_name, fix_state
+        from tbl_notice
+        order by notice_idx desc
+    </select>
+
+    <select id="noticeView" resultType="org.fullstack4.bookstore.domain.NoticeVO">
+        select notice_idx, title, member_id, content, reg_date, org_file_name, save_file_name, fix_state
+        from tbl_notice
+        where notice_idx = #{notice_idx}
+    </select>
+
+</mapper>
