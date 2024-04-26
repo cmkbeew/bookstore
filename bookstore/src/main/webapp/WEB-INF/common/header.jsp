@@ -1,9 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page trimDirectiveWhitespaces="true" %>
+<html>
 <nav class="navbar navbar-expand-lg navbar-light bg-light" style="position: fixed; width:100%; z-index: 10000;">
     <div class="container px-4 px-lg-5">
-        <a class="navbar-brand" href="/">Start Bootstrap</a>
+        <a class="navbar-brand" href="/">Ddoi Story</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
                 class="navbar-toggler-icon"></span></button>
@@ -99,4 +100,4 @@
         </div>
     </div>
 </nav>
-
+</html>

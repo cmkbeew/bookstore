@@ -12,62 +12,62 @@
 
     <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 
-    <link rel="stylesheet" href="/resources/css/style.css">
+    <link rel="stylesheet" href="/resources/css/login/style.css">
     <title>Login</title>
-    <script nonce="527f5118-0b83-4ded-83c4-52d880cabcd3">try {
-        (function (w, d) {
-            !function (ng, nh, ni, nj) {
-                ng[ni] = ng[ni] || {};
-                ng[ni].executed = [];
-                ng.zaraz = {deferred: [], listeners: []};
-                ng.zaraz._v = "5594";
-                ng.zaraz.q = [];
-                ng.zaraz._f = function (nk) {
-                    return async function () {
-                        var nl = Array.prototype.slice.call(arguments);
-                        ng.zaraz.q.push({m: nk, a: nl})
-                    }
-                };
-                for (const nm of ["track", "set", "debug"]) ng.zaraz[nm] = ng.zaraz._f(nm);
-                ng.zaraz.init = () => {
-                    var nn = nh.getElementsByTagName(nj)[0], no = nh.createElement(nj),
-                        np = nh.getElementsByTagName("title")[0];
-                    np && (ng[ni].t = nh.getElementsByTagName("title")[0].text);
-                    ng[ni].x = Math.random();
-                    ng[ni].w = ng.screen.width;
-                    ng[ni].h = ng.screen.height;
-                    ng[ni].j = ng.innerHeight;
-                    ng[ni].e = ng.innerWidth;
-                    ng[ni].l = ng.location.href;
-                    ng[ni].r = nh.referrer;
-                    ng[ni].k = ng.screen.colorDepth;
-                    ng[ni].n = nh.characterSet;
-                    ng[ni].o = (new Date).getTimezoneOffset();
-                    if (ng.dataLayer) for (const nt of Object.entries(Object.entries(dataLayer).reduce(((nu, nv) => ({...nu[1], ...nv[1]})), {}))) zaraz.set(nt[0], nt[1], {scope: "page"});
-                    ng[ni].q = [];
-                    for (; ng.zaraz.q.length;) {
-                        const nw = ng.zaraz.q.shift();
-                        ng[ni].q.push(nw)
-                    }
-                    no.defer = !0;
-                    for (const nx of [localStorage, sessionStorage]) Object.keys(nx || {}).filter((nz => nz.startsWith("_zaraz_"))).forEach((ny => {
-                        try {
-                            ng[ni]["z_" + ny.slice(7)] = JSON.parse(nx.getItem(ny))
-                        } catch {
-                            ng[ni]["z_" + ny.slice(7)] = nx.getItem(ny)
-                        }
-                    }));
-                    no.referrerPolicy = "origin";
-                    no.src = "/cdn-cgi/zaraz/s.js?z=" + btoa(encodeURIComponent(JSON.stringify(ng[ni])));
-                    nn.parentNode.insertBefore(no, nn)
-                };
-                ["complete", "interactive"].includes(nh.readyState) ? zaraz.init() : ng.addEventListener("DOMContentLoaded", zaraz.init)
-            }(w, d, "zarazData", "script");
-        })(window, document)
-    } catch (e) {
-        throw fetch("/cdn-cgi/zaraz/t"), e;
-    }
-    ;</script>
+<%--    <script nonce="527f5118-0b83-4ded-83c4-52d880cabcd3">try {--%>
+<%--        (function (w, d) {--%>
+<%--            !function (ng, nh, ni, nj) {--%>
+<%--                ng[ni] = ng[ni] || {};--%>
+<%--                ng[ni].executed = [];--%>
+<%--                ng.zaraz = {deferred: [], listeners: []};--%>
+<%--                ng.zaraz._v = "5594";--%>
+<%--                ng.zaraz.q = [];--%>
+<%--                ng.zaraz._f = function (nk) {--%>
+<%--                    return async function () {--%>
+<%--                        var nl = Array.prototype.slice.call(arguments);--%>
+<%--                        ng.zaraz.q.push({m: nk, a: nl})--%>
+<%--                    }--%>
+<%--                };--%>
+<%--                for (const nm of ["track", "set", "debug"]) ng.zaraz[nm] = ng.zaraz._f(nm);--%>
+<%--                ng.zaraz.init = () => {--%>
+<%--                    var nn = nh.getElementsByTagName(nj)[0], no = nh.createElement(nj),--%>
+<%--                        np = nh.getElementsByTagName("title")[0];--%>
+<%--                    np && (ng[ni].t = nh.getElementsByTagName("title")[0].text);--%>
+<%--                    ng[ni].x = Math.random();--%>
+<%--                    ng[ni].w = ng.screen.width;--%>
+<%--                    ng[ni].h = ng.screen.height;--%>
+<%--                    ng[ni].j = ng.innerHeight;--%>
+<%--                    ng[ni].e = ng.innerWidth;--%>
+<%--                    ng[ni].l = ng.location.href;--%>
+<%--                    ng[ni].r = nh.referrer;--%>
+<%--                    ng[ni].k = ng.screen.colorDepth;--%>
+<%--                    ng[ni].n = nh.characterSet;--%>
+<%--                    ng[ni].o = (new Date).getTimezoneOffset();--%>
+<%--                    if (ng.dataLayer) for (const nt of Object.entries(Object.entries(dataLayer).reduce(((nu, nv) => ({...nu[1], ...nv[1]})), {}))) zaraz.set(nt[0], nt[1], {scope: "page"});--%>
+<%--                    ng[ni].q = [];--%>
+<%--                    for (; ng.zaraz.q.length;) {--%>
+<%--                        const nw = ng.zaraz.q.shift();--%>
+<%--                        ng[ni].q.push(nw)--%>
+<%--                    }--%>
+<%--                    no.defer = !0;--%>
+<%--                    for (const nx of [localStorage, sessionStorage]) Object.keys(nx || {}).filter((nz => nz.startsWith("_zaraz_"))).forEach((ny => {--%>
+<%--                        try {--%>
+<%--                            ng[ni]["z_" + ny.slice(7)] = JSON.parse(nx.getItem(ny))--%>
+<%--                        } catch {--%>
+<%--                            ng[ni]["z_" + ny.slice(7)] = nx.getItem(ny)--%>
+<%--                        }--%>
+<%--                    }));--%>
+<%--                    no.referrerPolicy = "origin";--%>
+<%--                    no.src = "/cdn-cgi/zaraz/s.js?z=" + btoa(encodeURIComponent(JSON.stringify(ng[ni])));--%>
+<%--                    nn.parentNode.insertBefore(no, nn)--%>
+<%--                };--%>
+<%--                ["complete", "interactive"].includes(nh.readyState) ? zaraz.init() : ng.addEventListener("DOMContentLoaded", zaraz.init)--%>
+<%--            }(w, d, "zarazData", "script");--%>
+<%--        })(window, document)--%>
+<%--    } catch (e) {--%>
+<%--        throw fetch("/cdn-cgi/zaraz/t"), e;--%>
+<%--    }--%>
+<%--    ;</script>--%>
 </head>
 <body>
 <div class="content">

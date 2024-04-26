@@ -128,15 +128,37 @@ public class LoginController {
     public void findGet() {
         log.info("계정찾기 페이지");
     }
-
     @GetMapping("/findId")
-    public void findId() {
+    public void findIdGet() {
         log.info("아이디 찾기");
     }
-
+    @PostMapping("/findId")
+    public void findIdPost() {
+        log.info("아이디 찾기");
+    }
+    @GetMapping("/findIdResult")
+    public void findIdResult() {
+        log.info("아이디 찾기 결과");
+    }
+    @PostMapping("/findIdResult")
+    public void findIdResultPost() {
+        log.info("아이디 찾기 결과");
+    }
     @GetMapping("/findPwd")
-    public void findPwd() {
+    public void findPwdGet() {
         log.info("비밀번호 찾기");
+    }
+    @PostMapping("/findPwd")
+    public void findPwdPost() {
+        log.info("비밀번호 찾기");
+    }
+    @GetMapping("/findPwdResult")
+    public void findPwdResult() {
+        log.info("비밀번호 찾기 결과");
+    }
+    @PostMapping("/findPwdResult")
+    public void findPwdResultPost() {
+        log.info("비밀번호 찾기 결과");
     }
 
 }
