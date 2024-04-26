@@ -4,10 +4,42 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.fullstack4.bookstore.mapper.AdminMapper">
 
-    <select id="getJSON" resultType="map">
-        SELECT JSON_OBJECT('notice_idx', notice_idx, 'title', title, 'member_id', member_id, 'content', content
-                   , 'reg_date', reg_date, 'org_file_name', org_file_name, 'save_file_name', save_file_name)
-        from tbl_bbs_notice
-        where notice_idx = 1
+    <!-- 공지사항 -->
+    <select id="noticeList" resultType="org.fullstack4.bookstore.domain.NoticeVO2">
+        SELECT idx, title, member_id, content, reg_date, org_file_name, save_file_name, fix_state
+        FROM tbl_bbs_notice2
+        ORDER BY idx DESC
+    </select>
+
+    <select id="noticeView" resultType="org.fullstack4.bookstore.domain.NoticeVO2">
+        SELECT idx, title, member_id, content, reg_date, org_file_name, save_file_name, fix_state
+        FROM tbl_bbs_notice2
+        WHERE idx = #{idx}
+    </select>
+
+    <!-- FAQ -->
+    <select id="faqList" resultType="org.fullstack4.bookstore.domain.FaqVO2">
+        SELECT idx, title, content, writer, reg_date, modify_date
+        FROM tbl_bbs_faq2
+        ORDER BY idx DESC
+    </select>
+
+    <select id="faqView" resultType="org.fullstack4.bookstore.domain.FaqVO2">
+        SELECT idx, title, content, writer, reg_date, modify_date
+        FROM tbl_bbs_faq2
+        WHERE idx = #{idx}
+    </select>
+
+    <!-- QnA -->
+    <select id="qnaList" resultType="org.fullstack4.bookstore.domain.QnaVO2">
+        SELECT idx, title, content, writer, read_cnt, reg_date, modify_date, reply_state
+        FROM tbl_bbs_qna2
+        ORDER BY idx DESC
+    </select>
+
+    <select id="qnaView" resultType="org.fullstack4.bookstore.domain.QnaVO2">
+        SELECT idx, title, content, writer, read_cnt, reg_date, modify_date, reply_state
+        FROM tbl_bbs_qna2
+        WHERE idx = #{idx}
     </select>
 </mapper>

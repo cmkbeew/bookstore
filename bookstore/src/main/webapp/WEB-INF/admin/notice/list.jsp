@@ -15,7 +15,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
 
-    <title>admin >> bbsList</title>
+    <title>admin >> noticeList</title>
 
     <%--  header 부트스트랩  --%>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
@@ -34,12 +34,12 @@
         <div class="border-end bg-white" id="sidebar-wrapper">
             <div class="sidebar-heading border-bottom bg-light">관리자 페이지</div>
             <div class="list-group list-group-flush">
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">회원내역</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">공지사항</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">FAQ</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">QnA</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">도서(교재)</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">배송관리</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/notice/list">공지사항</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/faq/list">FAQ</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/qna/list">QnA</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/member/list">회원내역</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/product/list">도서(교재)</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/delivery/list">배송관리</a>
             </div>
         </div>
         <!-- Page content wrapper-->
@@ -54,7 +54,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title text-uppercase mb-0">공지사항</h5>
+                                <h5 class="card-title text-uppercase mb-0" style="text-align: center;">공지사항</h5>
                             </div>
                             <div class="table-responsive">
                                 <table class="table no-wrap user-table mb-0">
@@ -77,22 +77,22 @@
                                                             <div class="control__indicator"></div>
                                                         </td>
                                                         <td class="pl-4">
-                                                            <a href="/admin/bbsView?notice_idx=${list.notice_idx}">
+                                                            <a href="/admin/notice/view?notice_idx=${list.notice_idx}">
                                                                 <h5 class="font-medium mb-0">${list.notice_idx}</h5>
                                                             </a>
                                                         </td>
                                                         <td>
-                                                            <a href="/admin/bbsView?notice_idx=${list.notice_idx}">
+                                                            <a href="/admin/notice/view?notice_idx=${list.notice_idx}">
                                                                 <h5 class="font-medium mb-0">${list.title}</h5>
                                                             </a>
                                                         </td>
                                                         <td>
-                                                            <a href="/admin/bbsView?notice_idx=${list.notice_idx}">
+                                                            <a href="/admin/notice/view?notice_idx=${list.notice_idx}">
                                                                 <h5 class="font-medium mb-0">${list.member_id}</h5>
                                                             </a>
                                                         </td>
                                                         <td>
-                                                            <a href="/admin/bbsView?notice_idx=${list.notice_idx}">
+                                                            <a href="/admin/notice/view?notice_idx=${list.notice_idx}">
                                                                 <h5 class="font-medium mb-0">${list.reg_date}</h5>
                                                             </a>
                                                                 <%--                                                            <span class="text-muted">${list.reg_date}</span>--%>
@@ -121,10 +121,10 @@
                         </div>
                         <div style="display: flex; justify-content: space-between; margin-top: 4px;">
                             <div>
-                                <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2"><i class="fa fa-edit"></i> </button>
-                                <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2"><i class="fa fa-trash"></i> </button>
+                                <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle"><i class="fa fa-edit"></i></button>
+                                <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2"><i class="fa fa-trash"></i></button>
                             </div>
-                            <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2"><i class="fa fa-upload"></i> </button>
+                            <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2"><i class="fa fa-upload"></i></button>
                         </div>
 
                     </div>

@@ -9,8 +9,8 @@ import java.time.LocalDate;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class FaqVO {
-    private int faq_idx;
+public class FaqVO2 {
+    private int idx;
     private String title;
     private String content;
     private String writer;

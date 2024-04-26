@@ -9,8 +9,8 @@ import java.time.LocalDate;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class NoticeVO {
-    private int notice_idx;
+public class NoticeVO2 {
+    private int idx;
     private String title;
     private String member_id;
     private String content;

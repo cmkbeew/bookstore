@@ -9,8 +9,8 @@ import java.time.LocalDate;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class QnaVO {
-    private int qna_idx;
+public class QnaVO2 {
+    private int idx;
     private String title;
     private String content;
     private String writer;

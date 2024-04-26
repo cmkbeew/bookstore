@@ -15,7 +15,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
 
-    <title>admin >> bbsView</title>
+    <title>admin >> noticeRegist</title>
 
     <%--  header 부트스트랩  --%>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
@@ -27,7 +27,7 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/common/header.jsp"%>
-<h1 style="padding-top: 92px;">admin >> bbsView</h1>
+<h1 style="padding-top: 92px;">admin >> noticeRegist</h1>
 <ul>
     <li>${noticeDTO}</li>
 </ul>

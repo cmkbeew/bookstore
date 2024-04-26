@@ -5,10 +5,37 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="64051777-53e8-4d29-985d-b98c77db865d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/domain/FaqVO2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/domain/NoticeVO2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/domain/QnaVO2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/dto/FaqDTO2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/dto/NoticeDTO2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/dto/QnaDTO2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/service/AdminServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/delivery/list.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/faq/list.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/faq/view.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/list.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/member/view.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/notice/modify.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/notice/regist.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/notice/view.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/product/list.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/product/modify.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/product/regist.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/product/view.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/qna/list.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/qna/view.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/view.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/bbsList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/bbsList.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/memberList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/memberList.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/root-context.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/root-context.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/controller/AdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/mapper/AdminMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/mapper/AdminMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/service/AdminService.java" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/service/AdminService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookstore/src/main/resources/mappers/AdminMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/resources/mappers/AdminMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/bbsList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/notice/list.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/bbsView.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/delivery/view.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/memberList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/member/list.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/common/header.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/common/header.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,7 +112,7 @@
     "create.test.in.the.same.root": "true",
     "git-widget-placeholder": "yh",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/82108/Desktop/springMVC",
+    "last_opened_file_path": "C:/bookstorePrj/bookstore/src/main/webapp/WEB-INF/admin",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -97,13 +124,18 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\bookstorePrj\bookstore\src\main\resources\mappers" />
       <recent name="C:\bookstorePrj\bookstore\src\main\webapp\WEB-INF\admin" />
+      <recent name="C:\bookstorePrj\bookstore\src\main\webapp\WEB-INF\admin\product" />
+      <recent name="C:\bookstorePrj\bookstore\src\main\webapp\WEB-INF\admin\notice" />
+      <recent name="C:\bookstorePrj\bookstore\src\main\webapp\WEB-INF\admin\delivery" />
+      <recent name="C:\bookstorePrj\bookstore\src\main\webapp\WEB-INF\admin\faq" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\bookstorePrj\bookstore\src\main\webapp\WEB-INF\admin\notice" />
+      <recent name="C:\bookstorePrj\bookstore\src\main\webapp\WEB-INF\admin\member" />
       <recent name="C:\bookstorePrj\bookstore\src\main\webapp\resources\js\admin" />
       <recent name="C:\bookstorePrj\bookstore\src\main\webapp\resources\css\admin" />
     </key>
@@ -111,9 +143,10 @@
       <recent name="org.fullstack4.bookstore.controller" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="org.fullstack4.bookstore.mapper" />
       <recent name="org.fullstack4.bookstore.dto" />
       <recent name="org.fullstack4.bookstore.domain" />
+      <recent name="org.fullstack4.bookstore.service" />
+      <recent name="org.fullstack4.bookstore.mapper" />
       <recent name="org.fullstack4.bookstore.controller" />
     </key>
   </component>
@@ -278,7 +311,7 @@
       <workItem from="1714023044588" duration="7400000" />
       <workItem from="1714030728650" duration="7852000" />
       <workItem from="1714051880256" duration="13841000" />
-      <workItem from="1714091857936" duration="16434000" />
+      <workItem from="1714091857936" duration="34905000" />
     </task>
     <servers />
   </component>
@@ -295,6 +328,11 @@
           <url>file://$PROJECT_DIR$/bookstore/src/test/java/org/fullstack4/bookstore/mapper/AdminMapperTests.java</url>
           <line>24</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/controller/AdminController.java</url>
+          <line>96</line>
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/bookstore/src/test/java/org/fullstack4/bookstore/mapper/AdminMapperTests.java</url>

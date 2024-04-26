@@ -34,12 +34,12 @@
         <div class="border-end bg-white" id="sidebar-wrapper">
             <div class="sidebar-heading border-bottom bg-light">관리자 페이지</div>
             <div class="list-group list-group-flush">
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/notice/list">공지사항</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/faq/list">FAQ</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/qna/list">QnA</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/member/list">회원내역</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/product/list">도서(교재)</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/delivery/list">배송관리</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/list?bbsName=notice">공지사항</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/list?bbsName=faq">FAQ</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/list?bbsName=qna">QnA</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/list?bbsName=member">회원내역</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/list?bbsName=product">도서(교재)</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/list?bbsName=delivery">배송관리</a>
             </div>
         </div>
         <!-- Page content wrapper-->
@@ -69,43 +69,33 @@
                                     </thead>
                                     <tbody>
                                     <c:choose>
-                                        <c:when test="${!empty noticeList}">
-                                            <c:forEach items="${noticeList}" var="list">
+                                        <c:when test="${!empty bbsList}">
+                                            <c:forEach items="${bbsList}" var="list">
                                                 <tr>
-                                                        <td class="pl-4" style="vertical-align: middle;">
-                                                            <input type="checkbox" name="select" id="select" value="" />
-                                                            <div class="control__indicator"></div>
-                                                        </td>
-                                                        <td class="pl-4">
-                                                            <a href="/admin/notice/view?notice_idx=${list.notice_idx}">
-                                                                <h5 class="font-medium mb-0">${list.notice_idx}</h5>
-                                                            </a>
-                                                        </td>
-                                                        <td>
-                                                            <a href="/admin/notice/view?notice_idx=${list.notice_idx}">
-                                                                <h5 class="font-medium mb-0">${list.title}</h5>
-                                                            </a>
-                                                        </td>
-                                                        <td>
-                                                            <a href="/admin/notice/view?notice_idx=${list.notice_idx}">
-                                                                <h5 class="font-medium mb-0">${list.member_id}</h5>
-                                                            </a>
-                                                        </td>
-                                                        <td>
-                                                            <a href="/admin/notice/view?notice_idx=${list.notice_idx}">
-                                                                <h5 class="font-medium mb-0">${list.reg_date}</h5>
-                                                            </a>
-                                                                <%--                                                            <span class="text-muted">${list.reg_date}</span>--%>
-                                                        </td>
-
-<%--                                                        <td>--%>
-<%--                                                            <select class="form-control category-select" id="exampleFormControlSelect1">--%>
-<%--                                                                <option>Modulator</option>--%>
-<%--                                                                <option>Admin</option>--%>
-<%--                                                                <option>User</option>--%>
-<%--                                                                <option>Subscriber</option>--%>
-<%--                                                            </select>--%>
-<%--                                                        </td>--%>
+                                                    <td class="pl-4" style="vertical-align: middle;">
+                                                        <input type="checkbox" name="select" id="select" value="" />
+                                                        <div class="control__indicator"></div>
+                                                    </td>
+                                                    <td class="pl-4">
+                                                        <a href="/admin/view?idx=${list.idx}">
+                                                            <h5 class="font-medium mb-0">${list.idx}</h5>
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="/admin/notice/view?idx=${list.idx}">
+                                                            <h5 class="font-medium mb-0">${list.title}</h5>
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="/admin/notice/view?idx=${list.idx}">
+                                                            <h5 class="font-medium mb-0">${list.writer}</h5>
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="/admin/notice/view?idx=${list.idx}">
+                                                            <h5 class="font-medium mb-0">${list.reg_date}</h5>
+                                                        </a>
+                                                    </td>
                                                 </tr>
                                             </c:forEach>
                                         </c:when>

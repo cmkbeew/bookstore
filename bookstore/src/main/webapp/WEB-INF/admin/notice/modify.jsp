@@ -1,11 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: 82108
-  Date: 2024-04-26
-  Time: 오전 12:05
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -15,7 +7,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
 
-    <title>admin >> bbsView</title>
+    <title>admin >> noticeModify</title>
 
     <%--  header 부트스트랩  --%>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />

@@ -1,6 +1,9 @@
 package org.fullstack4.bookstore.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
@@ -8,8 +11,8 @@ import java.time.LocalDate;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class NoticeDTO {
-    private int notice_idx;
+public class NoticeDTO2 {
+    private int idx;
     private String title;
     private String member_id;
     private String content;

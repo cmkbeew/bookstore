@@ -11,8 +11,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class QnaDTO {
-    private int qna_idx;
+public class QnaDTO2 {
+    private int idx;
     private String title;
     private String content;
     private String writer;
