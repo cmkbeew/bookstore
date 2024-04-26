@@ -5,12 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="64051777-53e8-4d29-985d-b98c77db865d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/css/admin/styles.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookstore/src/main/resources/mappers/AdminMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/resources/mappers/AdminMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookstore/src/main/resources/mappers/CommunityMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/resources/mappers/CommunityMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/bbsList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/bbsList.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/memberList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/memberList.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/js/scripts.js" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/js/scripts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/root-context.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/root-context.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -280,7 +278,7 @@
       <workItem from="1714023044588" duration="7400000" />
       <workItem from="1714030728650" duration="7852000" />
       <workItem from="1714051880256" duration="13841000" />
-      <workItem from="1714091857936" duration="9346000" />
+      <workItem from="1714091857936" duration="16434000" />
     </task>
     <servers />
   </component>
@@ -297,11 +295,6 @@
           <url>file://$PROJECT_DIR$/bookstore/src/test/java/org/fullstack4/bookstore/mapper/AdminMapperTests.java</url>
           <line>24</line>
           <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/bbsList.jsp</url>
-          <line>43</line>
-          <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/bookstore/src/test/java/org/fullstack4/bookstore/mapper/AdminMapperTests.java</url>
