@@ -6,9 +6,9 @@ import java.time.LocalDate;
 
 @ToString
 @Getter
-@AllArgsConstructor
-@NoArgsConstructor
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class FaqVO {
     private int faq_idx;
     private String title;

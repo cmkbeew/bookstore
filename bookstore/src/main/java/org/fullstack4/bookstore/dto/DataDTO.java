@@ -1,21 +1,21 @@
-package org.fullstack4.bookstore.domain;
+package org.fullstack4.bookstore.dto;
+
 
 import lombok.*;
 
 import java.time.LocalDate;
 
-@ToString
-@Getter
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class QnaVO {
-    private int qna_idx;
+public class DataDTO {
+    private int data_idx;
     private String title;
     private String content;
     private String writer;
-    private int read_cnt;
+    private String org_file_name;
+    private String save_file_name;
     private LocalDate reg_date;
     private LocalDate modify_date;
-    private String reply_state;
 }
