@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.PositiveOrZero;
 import java.time.LocalDate;
 
 @Data
@@ -13,7 +12,6 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Builder
 public class QnaDTO {
-    @PositiveOrZero
     private int qna_idx;
     private String title;
     private String content;

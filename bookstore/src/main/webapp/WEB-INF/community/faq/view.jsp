@@ -15,17 +15,17 @@
     <table>
         <tr>
             <td>번호</td>
-            <td>아이디</td>
             <td>제목</td>
             <td>내용</td>
+            <td>작성자</td>
             <td>등록일</td>
         </tr>
         <tr>
-            <td>${noticeDTO.notice_idx}</td>
-            <td>${noticeDTO.member_id}</td>
-            <td>${noticeDTO.title}</td>
-            <td>${noticeDTO.content}</td>
-            <td>${noticeDTO.reg_date}</td>
+            <td>${faqDTO.faq_idx}</td>
+            <td>${faqDTO.title}</td>
+            <td>${faqDTO.content}</td>
+            <td>${faqDTO.writer}</td>
+            <td>${faqDTO.reg_date}</td>
         </tr>
     </table>
 </div>
