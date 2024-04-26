@@ -1,29 +1,27 @@
-package org.fullstack4.bookstore.mapper;
+package org.fullstack4.bookstore.service;
 
-//import jdk.nashorn.internal.parser.JSONParser;
 import lombok.extern.log4j.Log4j2;
-//import org.fullstack4.bookstore.domain.NoticeVO;
+import org.fullstack4.bookstore.dto.MemberDTO;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.List;
-import java.util.Map;
-
 @Log4j2
 @ExtendWith(SpringExtension.class)
+//스프링에 테스트 위임
 @ContextConfiguration(locations = "file:src/main/webapp/WEB-INF/root-context.xml")
-public class AdminMapperTests {
-
+public class LoginServiceTests {
     @Autowired(required = false)
-    AdminMapper adminMapper;
+    private LoginServiceIf loginServiceIf;
 
     @Test
-    public void testGetJSON() {
-        Map<String, Object> json = adminMapper.getJSON();
-
-        log.info("json : " + json.get("member_id"));
+    public void login_info() {
+        MemberDTO memberDTO = MemberDTO.builder()
+                .member_id("test")
+                .pwd("12")
+                .build();
+        log.info(loginServiceIf.login_info(memberDTO.getMember_id(), memberDTO.getPwd()));
     }
 }

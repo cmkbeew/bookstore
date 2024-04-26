@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class LoginServiceImpl implements LoginServiceIf{
-    private final LoginMapper loginMapper;
+    private final LoginMapper loginXmlMapper;
     private final ModelMapper modelMapper;
     @Override
     public MemberDTO login_info(String member_id, String pwd) {
@@ -20,12 +20,14 @@ public class LoginServiceImpl implements LoginServiceIf{
     log.info("memberId, pwd : " + member_id, pwd);
     log.info("===============================");
 
-    MemberVO memberVO = loginMapper.login_info(member_id, pwd);
-
+    MemberVO memberVO = loginXmlMapper.login_info(member_id, pwd);
+        log.info("memberVO : " +memberVO);
+        log.info("pwd : " +pwd);
     MemberDTO memberDTO = null;
 
     if( memberVO != null && memberVO.getPwd().equals(pwd)){
         memberDTO = modelMapper.map(memberVO, MemberDTO.class);
+        log.info("loginserviceimpl >> 넘어옴>>> 제발,,, : "+memberDTO.toString());
     }
         return memberDTO;
     }

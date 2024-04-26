@@ -109,7 +109,7 @@
                                                 <label for="pwd">비밀번호</label>
                                                 <input type="password" class="form-control" name="pwd" id="pwd">
                                             </div>
-                                            <div class="invalid-feedback mb-3">
+                                            <div class="invalid-feedback mb-3" id="div_err">
                                             </div>
                                             <div class="d-flex mb-5 align-items-center">
                                                 <label class="control control--checkbox mb-0"><span class="caption">아이디 저장</span>
@@ -226,6 +226,15 @@
             tabTrigger.show()
         })
     })
+    const serverValidResult = {};
+    <c:forEach items="${errors}" var="err">
+    if (document.getElementById("div_err") != null) {
+        document.getElementById("div_err").innerHTML = "<div style='width:100%;margin-bottom:.25rem;font-size:.875em;color:#dc3545'>${err.getField()}필드는 공백일 수 없습니다.</div>";
+        document.getElementById("div_err").style.display = "block";
+    }
+    serverValidResult['${err.getField()}'] = '${err.defaultMessage}';
+    </c:forEach>
+    console.log(serverValidResult);
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"

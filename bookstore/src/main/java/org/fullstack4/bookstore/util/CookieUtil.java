@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.fullstack4.bookstore.utils;
+package org.fullstack4.bookstore.util;
 
 
 

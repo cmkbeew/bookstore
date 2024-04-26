@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.fullstack4.bookstore.dto.MemberDTO;
 import org.fullstack4.bookstore.service.LoginServiceIf;
-import org.fullstack4.bookstore.utils.CookieUtil;
+import org.fullstack4.bookstore.util.CookieUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -50,38 +50,49 @@ public class LoginController {
             @RequestParam(name = "pwd", defaultValue = "") String pwd,
             @RequestParam(name = "save_id", defaultValue = "") String save_id,
             @RequestParam(name = "auto_login", defaultValue = "") String auto_login,
+//            @RequestParam(name = "return_url", defaultValue = "/", required = false) String return_url,
             Model model,
             RedirectAttributes redirectAttributes,
             HttpServletResponse resp,
             HttpServletRequest req,
             HttpSession session) {
         log.info("로그인 포스트");
+        log.info("pwd" + pwd);
+        log.info("member_id" + member_id);
         System.out.println("save_id"+save_id);
         System.out.println("auto_login"+auto_login);
         MemberDTO loginMemberDTO = loginServiceIf.login_info(member_id, pwd);
-
         System.out.println("loginMemberDTO"+loginMemberDTO);
 
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+            return "redirect:/login/login";
+        }
+        session = req.getSession();
         if (loginMemberDTO != null) {
-//            UuidUtil.getUUID(); 고도화 시 추가
+//            암호화 복호화 고도화 시 추가
             if(save_id.equals("on")) {
+                System.out.println("save_id.equals");
                 CookieUtil.setCookies(resp, "id", member_id, 60 * 60 * 24, "", "/");
                 CookieUtil.setCookies(resp, "save_id", save_id, 60 * 60 * 24, "", "/");
             }
             if(auto_login.equals("on")) {
+                System.out.println("auto_login.equals");
                 CookieUtil.setCookies(resp, "id", member_id, 60 * 60 * 24, "", "/");
                 CookieUtil.setCookies(resp, "auto_login", auto_login, 60 * 60 * 24, "", "/");
             }
 //            (member_id.isEmpty() || member_id == null) &&
-            if((save_id.isEmpty() || save_id != "on") &&  (auto_login.isEmpty() || auto_login != "on")) {
+            if((save_id.isEmpty() || !save_id.equals("on")) &&  (auto_login.isEmpty() || !auto_login.equals("on"))) {
                 CookieUtil.setCookies(resp, "id","" , 0, "", "/");
                 CookieUtil.setCookies(resp, "save_id","" , 0, "", "/");
                 CookieUtil.setCookies(resp, "auto_login", "", 0, "", "/");
             }
-        }
         session.setAttribute("member_id", member_id);
         model.addAttribute("member_id", member_id);
         return "redirect:/";
+        } else {
+            return "/login/login";
+        }
     }
 
     @PostMapping("/guest")
