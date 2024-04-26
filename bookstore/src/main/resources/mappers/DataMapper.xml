@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fullstack4.bookstore.mapper.DataMapper">
+
+    <insert id="regist_data">
+        INSERT INTO tbl_bbs_data(title, content, writer, org_file_name, save_file_name)
+        VALUES (#{title}, #{content}, #{writer}, #{org_file_name}, #{save_file_name})
+    </insert>
+
+    <select id="list_data" resultType="org.fullstack4.bookstore.domain.DataVO">
+        SELECT data_idx, title, content, writer, org_file_name, save_file_name, reg_date, modify_date
+        FROM tbl_bbs_data
+        ORDER BY data_idx DESC
+    </select>
+
+    <select id="view_data" resultType="org.fullstack4.bookstore.domain.DataVO">
+        SELECT data_idx, title, content, writer, org_file_name, save_file_name, reg_date, modify_date
+        FROM tbl_bbs_data
+        WHERE data_idx = #{data_idx}
+    </select>
+
+    <update id="modify_data">
+        UPDATE tbl_bbs_data SET
+        title = #{title},
+        content = #{content},
+        writer = #{writer},
+        org_file_name = #{org_file_name},
+        save_file_name = #{save_file_name},
+        modify_date = NOW()
+        WHERE data_idx = #{data_idx}
+    </update>
+
+    <delete id="delete_data">
+        DELETE FROM tbl_bbs_data
+        WHERE data_idx = #{data_idx}
+    </delete>
+</mapper>

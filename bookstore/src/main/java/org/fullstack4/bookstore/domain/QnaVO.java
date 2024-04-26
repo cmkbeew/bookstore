@@ -9,13 +9,13 @@ import java.time.LocalDate;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class NoticeVO {
-    private int notice_idx;
+public class QnaVO {
+    private int qna_idx;
     private String title;
-    private String member_id;
     private String content;
+    private String writer;
+    private int read_cnt;
     private LocalDate reg_date;
-    private String org_file_name;
-    private String save_file_name;
-    private String fix_state;
+    private LocalDate modify_date;
+    private String reply_state;
 }
