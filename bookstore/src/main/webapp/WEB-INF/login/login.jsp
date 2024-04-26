@@ -78,13 +78,13 @@
                     <div class="col-md-12">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
+                                <button class="nav-link active" id="member-tab" data-bs-toggle="tab"
                                         data-bs-target="#home-tab-pane" type="button" role="tab"
                                         aria-controls="home-tab-pane" aria-selected="true">회원 로그인
                                 </button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
+                                <button class="nav-link" id="guest-tab" data-bs-toggle="tab"
                                         data-bs-target="#profile-tab-pane" type="button" role="tab"
                                         aria-controls="profile-tab-pane" aria-selected="false">비회원 로그인(주문 조회)
                                 </button>
@@ -105,13 +105,13 @@
                                                 <input type="text" class="form-control" name="member_id" id="member_id"
                                                        value="${requestScope.id}">
                                             </div>
-                                            <div class="form-floating form-group last mb-4">
+                                            <div class="form-floating form-group last mb-4 mt-4">
                                                 <label for="pwd">비밀번호</label>
                                                 <input type="password" class="form-control" name="pwd" id="pwd">
                                             </div>
                                             <div class="invalid-feedback mb-3" id="div_err">
                                             </div>
-                                            <div class="d-flex mb-5 align-items-center">
+                                            <div class="d-flex mb-5 align-items-center mt-4">
                                                 <label class="control control--checkbox mb-0"><span class="caption">아이디 저장</span>
                                                     <input type="checkbox" name="save_id" id="save_id" value=""
                                                            <c:if test="${not empty requestScope.save_id}">checked="checked"</c:if>>
@@ -143,15 +143,15 @@
                                     </div>
                                     <main class="form-signin">
                                         <form name="frmLoginGuest" id="frmLoginGuest" action="/my/order" method="post">
-                                            <div class="form-floating form-group first">
+                                            <div class="form-floating form-group first mt-4">
                                                 <label for="name">이름</label>
                                                 <input type="text" class="form-control" name="name" id="name">
                                             </div>
-                                            <div class="form-floating form-group last mb-4">
+                                            <div class="form-floating form-group last mb-4 mt-4">
                                                 <label for="order_no">주문번호</label>
                                                 <input type="text" class="form-control" name="order_no" id="order_no">
                                             </div>
-                                            <div class="form-floating form-group last mb-4">
+                                            <div class="form-floating form-group last mb-4 mt-4">
                                                 <label for="pwdGuest">비밀번호</label>
                                                 <input type="password" class="form-control" name="pwd" id="pwdGuest">
                                             </div>
@@ -166,19 +166,7 @@
                                         </form>
                                     </main>
                                 </div>
-
                             </div>
-                            <%--                                <div class="social-login text-center">--%>
-                            <%--                                    <a href="#" class="facebook">--%>
-                            <%--                                        <span class="icon-facebook mr-3"></span>--%>
-                            <%--                                    </a>--%>
-                            <%--                                    <a href="#" class="twitter">--%>
-                            <%--                                        <span class="icon-twitter mr-3"></span>--%>
-                            <%--                                    </a>--%>
-                            <%--                                    <a href="#" class="google">--%>
-                            <%--                                        <span class="icon-google mr-3"></span>--%>
-                            <%--                                    </a>--%>
-                            <%--                                </div>--%>
                         </div>
                     </div>
                 </div>
@@ -235,6 +223,20 @@
     serverValidResult['${err.getField()}'] = '${err.defaultMessage}';
     </c:forEach>
     console.log(serverValidResult);
+    let member_tab = document.getElementById("member-tab");
+    let guest_tab = document.getElementById("guest-tab");
+    member_tab.addEventListener("click", (e) => {
+       document.getElementById("name").value = '';
+       document.getElementById("order_no").value = '';
+       document.getElementById("pwdGuest").value = '';
+    });
+    guest_tab.addEventListener("click", (e) => {
+        if(${empty requestScope.save_id}) {
+            document.getElementById("member_id").value = '';
+            document.getElementById("pwd").value = '';
+            document.getElementById("save_id").checked = false;
+        }
+    });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"

@@ -133,16 +133,26 @@ public class LoginController {
         log.info("아이디 찾기");
     }
     @PostMapping("/findId")
-    public void findIdPost() {
-        log.info("아이디 찾기");
+    public String findIdPost(
+            @Valid MemberDTO memberDTO,
+            @RequestParam(name = "name", defaultValue = "") String name,
+            @RequestParam(name = "email", defaultValue = "") String email,
+            RedirectAttributes redirectAttributes
+    ) {
+        log.info("아이디 찾기 나와냐>??????????");
+        String member_id = loginServiceIf.search_id(name,email);
+        log.info(member_id);
+        redirectAttributes.addFlashAttribute("member_id", member_id);
+        //model.addAttribute("member_id", member_id);
+        return "redirect:/login/findIdResult";
     }
     @GetMapping("/findIdResult")
-    public void findIdResult() {
-        log.info("아이디 찾기 결과");
-    }
-    @PostMapping("/findIdResult")
-    public void findIdResultPost() {
-        log.info("아이디 찾기 결과");
+    public void findIdResult(
+            HttpServletRequest req,
+            @RequestParam(name = "member_id", defaultValue = "") String member_id
+            ) {
+        req.setAttribute("member_id",member_id);
+        log.info(member_id);
     }
     @GetMapping("/findPwd")
     public void findPwdGet() {

@@ -40,7 +40,7 @@
                                         <p class="mt-4 mb-4">이름과 가입할 때 작성한 이메일을 적어주세요.</p>
                                     </div>
                                     <main class="form-signin">
-                                        <form name="frmLogin" id="frmLogin" action="/login/findIdResult" method="post">
+                                        <form name="frmLogin" id="frmLogin" action="/login/findId" method="post">
                                             <div class="form-floating form-group first mb-3">
                                                 <label for="name">이름</label>
                                                 <input type="text" class="form-control" name="name" id="name">

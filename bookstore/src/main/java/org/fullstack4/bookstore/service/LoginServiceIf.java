@@ -4,4 +4,5 @@ import org.fullstack4.bookstore.dto.MemberDTO;
 
 public interface LoginServiceIf {
     MemberDTO login_info(String member_id, String pwd);
+    String search_id(String name, String email);
 }

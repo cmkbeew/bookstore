@@ -8,4 +8,10 @@
             FROM tbl_member
             WHERE member_id = #{member_id}
     </select>
+
+    <select id="search_id" resultType="String">
+        SELECT member_id
+        FROM tbl_member
+        WHERE name = #{name} and email = #{email}
+    </select>
 </mapper>

@@ -31,4 +31,17 @@ public class LoginServiceImpl implements LoginServiceIf{
     }
         return memberDTO;
     }
+
+    @Override
+    public String search_id(String name, String email) {
+        log.info("===============================");
+        log.info("name, email : " + name, email);
+        log.info("===============================");
+
+        String member_id = loginXmlMapper.search_id(name, email);
+        log.info("memberid : "+loginXmlMapper.search_id(name, email));
+        return loginXmlMapper.search_id(name, email);
+    }
+
+
 }

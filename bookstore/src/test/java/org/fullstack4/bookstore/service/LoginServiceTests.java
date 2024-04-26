@@ -24,4 +24,12 @@ public class LoginServiceTests {
                 .build();
         log.info(loginServiceIf.login_info(memberDTO.getMember_id(), memberDTO.getPwd()));
     }
+@Test
+    public void search_idTests() {
+        MemberDTO memberDTO = MemberDTO.builder()
+                .name("test")
+                .email("jjj@jjj.ddd")
+                .build();
+        log.info(loginServiceIf.search_id(memberDTO.getName(), memberDTO.getEmail()));
+    }
 }
