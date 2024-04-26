@@ -38,11 +38,12 @@
         <div class="border-end bg-white" id="sidebar-wrapper">
             <div class="sidebar-heading border-bottom bg-light">관리자 페이지</div>
             <div class="list-group list-group-flush">
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">회원내역</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">공지사항</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">FAQ</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/notice/list">공지사항</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/">FAQ</a>
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">QnA</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/member/list">회원내역</a>
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">도서(교재)</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">배송관리</a>
             </div>
         </div>
         <!-- Page content wrapper-->

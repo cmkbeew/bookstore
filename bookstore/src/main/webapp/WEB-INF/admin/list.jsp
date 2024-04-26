@@ -15,7 +15,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
 
-    <title>admin >> bbsList</title>
+    <title>admin >> noticeList</title>
 
     <%--  header 부트스트랩  --%>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
@@ -34,12 +34,12 @@
         <div class="border-end bg-white" id="sidebar-wrapper">
             <div class="sidebar-heading border-bottom bg-light">관리자 페이지</div>
             <div class="list-group list-group-flush">
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">회원내역</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">공지사항</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">FAQ</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">QnA</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">도서(교재)</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">배송관리</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/list?bbsName=notice">공지사항</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/list?bbsName=faq">FAQ</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/list?bbsName=qna">QnA</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/list?bbsName=member">회원내역</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/list?bbsName=product">도서(교재)</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/list?bbsName=delivery">배송관리</a>
             </div>
         </div>
         <!-- Page content wrapper-->
@@ -54,13 +54,13 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title text-uppercase mb-0">공지사항</h5>
+                                <h5 class="card-title text-uppercase mb-0" style="text-align: center;">공지사항</h5>
                             </div>
                             <div class="table-responsive">
                                 <table class="table no-wrap user-table mb-0">
                                     <thead>
                                     <tr>
-                                        <th scope="col" class="border-0 text-uppercase font-medium pl-4">#</th>
+                                        <th scope="col" class="border-0 text-uppercase font-medium pl-4">선택</th>
                                         <th scope="col" class="border-0 text-uppercase font-medium pl-4">번호</th>
                                         <th scope="col" class="border-0 text-uppercase font-medium">제목</th>
                                         <th scope="col" class="border-0 text-uppercase font-medium">작성자</th>
@@ -69,29 +69,33 @@
                                     </thead>
                                     <tbody>
                                     <c:choose>
-                                        <c:when test="${!empty noticeList}">
-                                            <c:forEach items="${noticeList}" var="list">
+                                        <c:when test="${!empty bbsList}">
+                                            <c:forEach items="${bbsList}" var="list">
                                                 <tr>
-                                                    <td class="pl-4"><input type="checkbox"/></td>
-                                                    <td class="pl-4"><h5 class="font-medium mb-0">${list.notice_idx}</h5></td>
-                                                    <td>
-                                                        <h5 class="font-medium mb-0">${list.title}</h5>
+                                                    <td class="pl-4" style="vertical-align: middle;">
+                                                        <input type="checkbox" name="select" id="select" value="" />
+                                                        <div class="control__indicator"></div>
+                                                    </td>
+                                                    <td class="pl-4">
+                                                        <a href="/admin/view?idx=${list.idx}">
+                                                            <h5 class="font-medium mb-0">${list.idx}</h5>
+                                                        </a>
                                                     </td>
                                                     <td>
-                                                        <h5 class="font-medium mb-0">${list.member_id}</h5>
+                                                        <a href="/admin/notice/view?idx=${list.idx}">
+                                                            <h5 class="font-medium mb-0">${list.title}</h5>
+                                                        </a>
                                                     </td>
                                                     <td>
-                                                        <h5 class="font-medium mb-0">${list.reg_date}</h5>
-<%--                                                        <span class="text-muted">${list.reg_date}</span>--%>
+                                                        <a href="/admin/notice/view?idx=${list.idx}">
+                                                            <h5 class="font-medium mb-0">${list.writer}</h5>
+                                                        </a>
                                                     </td>
-<%--                                                    <td>--%>
-<%--                                                        <select class="form-control category-select" id="exampleFormControlSelect1">--%>
-<%--                                                            <option>Modulator</option>--%>
-<%--                                                            <option>Admin</option>--%>
-<%--                                                            <option>User</option>--%>
-<%--                                                            <option>Subscriber</option>--%>
-<%--                                                        </select>--%>
-<%--                                                    </td>--%>
+                                                    <td>
+                                                        <a href="/admin/notice/view?idx=${list.idx}">
+                                                            <h5 class="font-medium mb-0">${list.reg_date}</h5>
+                                                        </a>
+                                                    </td>
                                                 </tr>
                                             </c:forEach>
                                         </c:when>
@@ -107,10 +111,10 @@
                         </div>
                         <div style="display: flex; justify-content: space-between; margin-top: 4px;">
                             <div>
-                                <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2"><i class="fa fa-edit"></i> </button>
-                                <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2"><i class="fa fa-trash"></i> </button>
+                                <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle"><i class="fa fa-edit"></i></button>
+                                <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2"><i class="fa fa-trash"></i></button>
                             </div>
-                            <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2"><i class="fa fa-upload"></i> </button>
+                            <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2"><i class="fa fa-upload"></i></button>
                         </div>
 
                     </div>
