@@ -20,110 +20,267 @@
     <%--  header 부트스트랩  --%>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/minty/bootstrap.min.css" rel="stylesheet"/>
-    <link href="/resources/css/styles.css" rel="stylesheet" />
+    <link href="/resources/css/admin/styles.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/minty/bootstrap.min.css" integrity="sha384-H4X+4tKc7b8s4GoMrylmy2ssQYpDHoqzPa9aKXbDwPoPUA3Ra8PA5dGzijN+ePnH" crossorigin="anonymous">
 
     <%-- memberList 부트스트랩   --%>
+<%--    <link href="/resources/css/admin/styles.css" rel="stylesheet" />--%>
 <%--    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />--%>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" />
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+<%--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>--%>
+<%--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>--%>
 </head>
 <body>
     <%@ include file="/WEB-INF/common/header.jsp"%>
-    <h1 style="padding-top: 92px;">admin >> memberList</h1>
-    <div class="container py-5">
-        <div class="row text-center text-white mb-5">
-            <div class="col-lg-7 mx-auto">
-                <h1 class="display-4">Product List</h1>
+    <div class="d-flex" id="wrapper" style="padding-top: 92px;">
+        <!-- Sidebar-->
+        <div class="border-end bg-white" id="sidebar-wrapper">
+            <div class="sidebar-heading border-bottom bg-light">관리자 페이지</div>
+            <div class="list-group list-group-flush">
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">회원내역</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">공지사항</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">FAQ</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">QnA</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">도서(교재)</a>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-8 mx-auto">
-                <!-- List group-->
-                <ul class="list-group shadow">
-                    <!-- list group item-->
-                    <li class="list-group-item">
-                        <!-- Custom content-->
-                        <div class="media align-items-lg-center flex-column flex-lg-row p-3">
-                            <div class="media-body order-2 order-lg-1">
-                                <h5 class="mt-0 font-weight-bold mb-2">Apple iPhone XR (Red, 128 GB)</h5>
-                                <p class="font-italic text-muted mb-0 small">128 GB ROM | 15.49 cm (6.1 inch) Display 12MP Rear Camera | 7MP Front Camera A12 Bionic Chip Processor</p>
-                                <div class="d-flex align-items-center justify-content-between mt-1">
-                                    <h6 class="font-weight-bold my-2">₹64,999</h6>
-                                    <ul class="list-inline small">
-                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                                        <li class="list-inline-item m-0"><i class="fa fa-star-o text-gray"></i></li>
-                                    </ul>
-                                </div>
-                            </div><img src="https://i.imgur.com/KFojDGa.jpg" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
-                        </div> <!-- End -->
-                    </li> <!-- End -->
-                    <!-- list group item-->
-                    <li class="list-group-item">
-                        <!-- Custom content-->
-                        <div class="media align-items-lg-center flex-column flex-lg-row p-3">
-                            <div class="media-body order-2 order-lg-1">
-                                <h5 class="mt-0 font-weight-bold mb-2">Apple iPhone XS (Silver, 64 GB)</h5>
-                                <p class="font-italic text-muted mb-0 small">64 GB ROM | 14.73 cm (5.8 inch) Super Retina HD Display 12MP + 12MP | 7MP Front Camera A12 Bionic Chip Processor</p>
-                                <div class="d-flex align-items-center justify-content-between mt-1">
-                                    <h6 class="font-weight-bold my-2">₹99,900</h6>
-                                    <ul class="list-inline small">
-                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                                    </ul>
-                                </div>
-                            </div><img src="https://i.imgur.com/KFojDGa.jpg" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
-                        </div> <!-- End -->
-                    </li> <!-- End -->
-                    <!-- list group item -->
-                    <li class="list-group-item">
-                        <!-- Custom content-->
-                        <div class="media align-items-lg-center flex-column flex-lg-row p-3">
-                            <div class="media-body order-2 order-lg-1">
-                                <h5 class="mt-0 font-weight-bold mb-2">Apple iPhone XS Max (Gold, 64 GB)</h5>
-                                <p class="font-italic text-muted mb-0 small">64 GB ROM | 16.51 cm (6.5 inch) Super Retina HD Display 12MP + 12MP | 7MP Front Camera A12 Bionic Chip Processor</p>
-                                <div class="d-flex align-items-center justify-content-between mt-1">
-                                    <h6 class="font-weight-bold my-2">₹1,09,900</h6>
-                                    <ul class="list-inline small">
-                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                                        <li class="list-inline-item m-0"><i class="fa fa-star-o text-gray"></i></li>
-                                    </ul>
-                                </div>
-                            </div><img src="https://i.imgur.com/KFojDGa.jpg" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
-                        </div> <!-- End -->
-                    </li> <!-- End -->
-                    <!-- list group item -->
-                    <li class="list-group-item">
-                        <!-- Custom content-->
-                        <div class="media align-items-lg-center flex-column flex-lg-row p-3">
-                            <div class="media-body order-2 order-lg-1">
-                                <h5 class="mt-0 font-weight-bold mb-2">OnePlus 7 Pro (Almond, 256 GB)</h5>
-                                <p class="font-italic text-muted mb-0 small">Rear Camera|48MP (Primary)+ 8MP (Tele-photo)+16MP (ultrawide)| Front Camera|16 MP POP-UP Camera|8GB RAM|Android pie</p>
-                                <div class="d-flex align-items-center justify-content-between mt-1">
-                                    <h6 class="font-weight-bold my-2">₹ 52,999</h6>
-                                    <ul class="list-inline small">
-                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                                    </ul>
-                                </div>
-                            </div><img src="https://i.imgur.com/6IUbEME.jpg" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
-                        </div> <!-- End -->
-                    </li> <!-- End -->
-                </ul> <!-- End -->
+        <!-- Page content wrapper-->
+        <div id="page-content-wrapper">
+            <button class="btn btn-primary" id="sidebarToggle">
+                <i class="fa fa-arrow-left" aria-hidden="true" style="display: block;"></i>
+                <i class="fa fa-arrow-right" aria-hidden="true" style="display: none;"></i>
+            </button>
+            <!-- Page content-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title text-uppercase mb-0">Manage Users</h5>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table no-wrap user-table mb-0">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col" class="border-0 text-uppercase font-medium pl-4">#</th>
+                                        <th scope="col" class="border-0 text-uppercase font-medium">Name</th>
+                                        <th scope="col" class="border-0 text-uppercase font-medium">Occupation</th>
+                                        <th scope="col" class="border-0 text-uppercase font-medium">Email</th>
+                                        <th scope="col" class="border-0 text-uppercase font-medium">Added</th>
+                                        <th scope="col" class="border-0 text-uppercase font-medium">Category</th>
+                                        <th scope="col" class="border-0 text-uppercase font-medium">Manage</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td class="pl-4">1</td>
+                                        <td>
+                                            <h5 class="font-medium mb-0">Daniel Kristeen</h5>
+                                            <span class="text-muted">Texas, Unitedd states</span>
+                                        </td>
+                                        <td>
+                                            <span class="text-muted">Visual Designer</span><br>
+                                            <span class="text-muted">Past : teacher</span>
+                                        </td>
+                                        <td>
+                                            <span class="text-muted">daniel@website.com</span><br>
+                                            <span class="text-muted">999 - 444 - 555</span>
+                                        </td>
+                                        <td>
+                                            <span class="text-muted">15 Mar 1988</span><br>
+                                            <span class="text-muted">10: 55 AM</span>
+                                        </td>
+                                        <td>
+                                            <select class="form-control category-select" id="exampleFormControlSelect1">
+                                                <option>Modulator</option>
+                                                <option>Admin</option>
+                                                <option>User</option>
+                                                <option>Subscriber</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle"><i class="fa fa-key"></i> </button>
+                                            <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-trash"></i> </button>
+                                            <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-edit"></i> </button>
+                                            <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-upload"></i> </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pl-4">2</td>
+                                        <td>
+                                            <h5 class="font-medium mb-0">Emma Smith</h5>
+                                            <span class="text-muted">Texas, Unitedd states</span>
+                                        </td>
+                                        <td>
+                                            <span class="text-muted">Visual Designer</span><br>
+                                            <span class="text-muted">Past : teacher</span>
+                                        </td>
+                                        <td>
+                                            <span class="text-muted">daniel@website.com</span><br>
+                                            <span class="text-muted">999 - 444 - 555</span>
+                                        </td>
+                                        <td>
+                                            <span class="text-muted">15 Mar 1855</span><br>
+                                            <span class="text-muted">10: 00 AM</span>
+                                        </td>
+                                        <td>
+                                            <select class="form-control category-select" id="exampleFormControlSelect1">
+                                                <option>Modulator</option>
+                                                <option>Admin</option>
+                                                <option>User</option>
+                                                <option>Subscriber</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle"><i class="fa fa-key"></i> </button>
+                                            <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-trash"></i> </button>
+                                            <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-edit"></i> </button>
+                                            <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-upload"></i> </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pl-4">3</td>
+                                        <td>
+                                            <h5 class="font-medium mb-0">Olivia Johnson</h5>
+                                            <span class="text-muted">Texas, Unitedd states</span>
+                                        </td>
+                                        <td>
+                                            <span class="text-muted">Visual Designer</span><br>
+                                            <span class="text-muted">Past : teacher</span>
+                                        </td>
+                                        <td>
+                                            <span class="text-muted">daniel@website.com</span><br>
+                                            <span class="text-muted">999 - 444 - 555</span>
+                                        </td>
+                                        <td>
+                                            <span class="text-muted">17 Aug 1988</span><br>
+                                            <span class="text-muted">12: 55 AM</span>
+                                        </td>
+                                        <td>
+                                            <select class="form-control category-select" id="exampleFormControlSelect1">
+                                                <option>Modulator</option>
+                                                <option>Admin</option>
+                                                <option>User</option>
+                                                <option>Subscriber</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle"><i class="fa fa-key"></i> </button>
+                                            <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-trash"></i> </button>
+                                            <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-edit"></i> </button>
+                                            <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-upload"></i> </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pl-4">4</td>
+                                        <td>
+                                            <h5 class="font-medium mb-0">Isabella Williams</h5>
+                                            <span class="text-muted">Texas, Unitedd states</span>
+                                        </td>
+                                        <td>
+                                            <span class="text-muted">Visual Designer</span><br>
+                                            <span class="text-muted">Past : teacher</span>
+                                        </td>
+                                        <td>
+                                            <span class="text-muted">daniel@website.com</span><br>
+                                            <span class="text-muted">999 - 444 - 555</span>
+                                        </td>
+                                        <td>
+                                            <span class="text-muted">26 Mar 1999</span><br>
+                                            <span class="text-muted">10: 55 AM</span>
+                                        </td>
+                                        <td>
+                                            <select class="form-control category-select" id="exampleFormControlSelect1">
+                                                <option>Modulator</option>
+                                                <option>Admin</option>
+                                                <option>User</option>
+                                                <option>Subscriber</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle"><i class="fa fa-key"></i> </button>
+                                            <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-trash"></i> </button>
+                                            <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-edit"></i> </button>
+                                            <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-upload"></i> </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pl-4">5</td>
+                                        <td>
+                                            <h5 class="font-medium mb-0">Sophia Jones</h5>
+                                            <span class="text-muted">Texas, Unitedd states</span>
+                                        </td>
+                                        <td>
+                                            <span class="text-muted">Visual Designer</span><br>
+                                            <span class="text-muted">Past : teacher</span>
+                                        </td>
+                                        <td>
+                                            <span class="text-muted">daniel@website.com</span><br>
+                                            <span class="text-muted">999 - 444 - 555</span>
+                                        </td>
+                                        <td>
+                                            <span class="text-muted">16 Aug 2001</span><br>
+                                            <span class="text-muted">10: 55 AM</span>
+                                        </td>
+                                        <td>
+                                            <select class="form-control category-select" id="exampleFormControlSelect1">
+                                                <option>Modulator</option>
+                                                <option>Admin</option>
+                                                <option>User</option>
+                                                <option>Subscriber</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle"><i class="fa fa-key"></i> </button>
+                                            <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-trash"></i> </button>
+                                            <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-edit"></i> </button>
+                                            <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-upload"></i> </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pl-4">6</td>
+                                        <td>
+                                            <h5 class="font-medium mb-0">Charlotte Brown</h5>
+                                            <span class="text-muted">Texas, Unitedd states</span>
+                                        </td>
+                                        <td>
+                                            <span class="text-muted">Visual Designer</span><br>
+                                            <span class="text-muted">Past : teacher</span>
+                                        </td>
+                                        <td>
+                                            <span class="text-muted">daniel@website.com</span><br>
+                                            <span class="text-muted">999 - 444 - 555</span>
+                                        </td>
+                                        <td>
+                                            <span class="text-muted">15 Mar 1988</span><br>
+                                            <span class="text-muted">10: 55 AM</span>
+                                        </td>
+                                        <td>
+                                            <select class="form-control category-select" id="exampleFormControlSelect1">
+                                                <option>Modulator</option>
+                                                <option>Admin</option>
+                                                <option>User</option>
+                                                <option>Subscriber</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle"><i class="fa fa-key"></i> </button>
+                                            <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-trash"></i> </button>
+                                            <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-edit"></i> </button>
+                                            <button type="button" class="btn btn-outline-info btn-circle btn-lg btn-circle ml-2"><i class="fa fa-upload"></i> </button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+
+
         </div>
     </div>
     <%@ include file="/WEB-INF/common/footer.jsp"%>

@@ -5,20 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="64051777-53e8-4d29-985d-b98c77db865d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/domain/FaqVO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/domain/QnaVO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/dto/FaqDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/dto/QnaDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/mapper/AdminMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/service/AdminService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookstore/src/main/resources/mappers/AdminMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/bbsList.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/bbsView.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookstore/src/test/java/org/fullstack4/bookstore/mapper/AdminMapperTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/css/admin/styles.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/controller/AdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookstore/src/main/resources/mappers/AdminMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/resources/mappers/AdminMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookstore/src/main/resources/mappers/CommunityMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/resources/mappers/CommunityMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/memberList.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/memberList.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/root-context.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/root-context.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/js/scripts.js" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/js/scripts.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +87,7 @@
     "create.test.in.the.same.root": "true",
     "git-widget-placeholder": "yh",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/bookstorePrj/bookstore/src/main/resources/mappers",
+    "last_opened_file_path": "C:/Users/82108/Desktop/springMVC",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -113,6 +105,10 @@
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\bookstorePrj\bookstore\src\main\webapp\resources\js\admin" />
+      <recent name="C:\bookstorePrj\bookstore\src\main\webapp\resources\css\admin" />
+    </key>
     <key name="CreateTestDialog.RecentsKey">
       <recent name="org.fullstack4.bookstore.controller" />
     </key>
@@ -123,7 +119,7 @@
       <recent name="org.fullstack4.bookstore.controller" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.AdminMapperTests.testGetJSON">
+  <component name="RunManager" selected="Tomcat Server.Tomcat 9.0.87">
     <configuration name="AdminMapperTests.testGetJSON" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -283,7 +279,8 @@
       <updated>1714023043568</updated>
       <workItem from="1714023044588" duration="7400000" />
       <workItem from="1714030728650" duration="7852000" />
-      <workItem from="1714051880256" duration="13265000" />
+      <workItem from="1714051880256" duration="13841000" />
+      <workItem from="1714091857936" duration="8741000" />
     </task>
     <servers />
   </component>
@@ -300,6 +297,11 @@
           <url>file://$PROJECT_DIR$/bookstore/src/test/java/org/fullstack4/bookstore/mapper/AdminMapperTests.java</url>
           <line>24</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/bbsList.jsp</url>
+          <line>43</line>
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/bookstore/src/test/java/org/fullstack4/bookstore/mapper/AdminMapperTests.java</url>
