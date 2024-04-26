@@ -3,6 +3,7 @@ package org.fullstack4.bookstore.controller;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Log4j2
@@ -17,7 +18,11 @@ public class MyController {
     @GetMapping("/order")
     public void orderGet() {
         log.info("결제내역페이지");
-        log.info("목록페이지");
+
+    }
+    @PostMapping("/order")
+    public void orderPost() {
+        log.info("결제내역페이지");
     }
 
     @GetMapping("/cart")

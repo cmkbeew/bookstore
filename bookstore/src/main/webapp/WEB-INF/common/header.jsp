@@ -34,11 +34,11 @@
                 <li class="nav-item"><a class="nav-link" href="/data/list">자료실</a></li>
             </ul>
             <div class="col-md-5 text-end">
-                <c:if test="${sessionScope.user_id != null}">
+                <c:if test="${sessionScope.member_id != null}">
                     <button type="button" class="btn btn-outline-primary me-2" onclick="location.href='/login/logout'">로그아웃</button>
-                    <button type="button" class="btn btn-primary" onclick="location.href='/member/view?user_id=${sessionScope.user_id}'">마이페이지</button>
+                    <button type="button" class="btn btn-primary" onclick="location.href='/member/view?user_id=${sessionScope.member_id}'">마이페이지</button>
                 </c:if>
-                <c:if test="${sessionScope.user_id == null}">
+                <c:if test="${sessionScope.member_id == null}">
                     <button type="button" class="btn btn-outline-primary me-2" onclick="location.href='/login/login'">로그인</button>
                     <button type="button" class="btn btn-primary me-2" onclick="location.href='/member/join'">회원가입</button>
                     <button type="button" class="btn btn-outline-dark" onclick="location.href='/member/join'">
