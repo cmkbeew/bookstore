@@ -60,7 +60,7 @@
                                 <table class="table no-wrap user-table mb-0">
                                     <thead>
                                     <tr>
-                                        <th scope="col" class="border-0 text-uppercase font-medium pl-4">#</th>
+                                        <th scope="col" class="border-0 text-uppercase font-medium pl-4">선택</th>
                                         <th scope="col" class="border-0 text-uppercase font-medium pl-4">번호</th>
                                         <th scope="col" class="border-0 text-uppercase font-medium">제목</th>
                                         <th scope="col" class="border-0 text-uppercase font-medium">작성자</th>
@@ -72,26 +72,40 @@
                                         <c:when test="${!empty noticeList}">
                                             <c:forEach items="${noticeList}" var="list">
                                                 <tr>
-                                                    <td class="pl-4"><input type="checkbox"/></td>
-                                                    <td class="pl-4"><h5 class="font-medium mb-0">${list.notice_idx}</h5></td>
-                                                    <td>
-                                                        <h5 class="font-medium mb-0">${list.title}</h5>
-                                                    </td>
-                                                    <td>
-                                                        <h5 class="font-medium mb-0">${list.member_id}</h5>
-                                                    </td>
-                                                    <td>
-                                                        <h5 class="font-medium mb-0">${list.reg_date}</h5>
-<%--                                                        <span class="text-muted">${list.reg_date}</span>--%>
-                                                    </td>
-<%--                                                    <td>--%>
-<%--                                                        <select class="form-control category-select" id="exampleFormControlSelect1">--%>
-<%--                                                            <option>Modulator</option>--%>
-<%--                                                            <option>Admin</option>--%>
-<%--                                                            <option>User</option>--%>
-<%--                                                            <option>Subscriber</option>--%>
-<%--                                                        </select>--%>
-<%--                                                    </td>--%>
+                                                        <td class="pl-4" style="vertical-align: middle;">
+                                                            <input type="checkbox" name="select" id="select" value="" />
+                                                            <div class="control__indicator"></div>
+                                                        </td>
+                                                        <td class="pl-4">
+                                                            <a href="/admin/bbsView?notice_idx=${list.notice_idx}">
+                                                                <h5 class="font-medium mb-0">${list.notice_idx}</h5>
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <a href="/admin/bbsView?notice_idx=${list.notice_idx}">
+                                                                <h5 class="font-medium mb-0">${list.title}</h5>
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <a href="/admin/bbsView?notice_idx=${list.notice_idx}">
+                                                                <h5 class="font-medium mb-0">${list.member_id}</h5>
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <a href="/admin/bbsView?notice_idx=${list.notice_idx}">
+                                                                <h5 class="font-medium mb-0">${list.reg_date}</h5>
+                                                            </a>
+                                                                <%--                                                            <span class="text-muted">${list.reg_date}</span>--%>
+                                                        </td>
+
+<%--                                                        <td>--%>
+<%--                                                            <select class="form-control category-select" id="exampleFormControlSelect1">--%>
+<%--                                                                <option>Modulator</option>--%>
+<%--                                                                <option>Admin</option>--%>
+<%--                                                                <option>User</option>--%>
+<%--                                                                <option>Subscriber</option>--%>
+<%--                                                            </select>--%>
+<%--                                                        </td>--%>
                                                 </tr>
                                             </c:forEach>
                                         </c:when>

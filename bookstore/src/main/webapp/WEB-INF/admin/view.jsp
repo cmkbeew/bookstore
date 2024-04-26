@@ -15,7 +15,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
 
-    <title>admin >> memberView</title>
+    <title>admin >> bbsView</title>
 
     <%--  header 부트스트랩  --%>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
@@ -27,15 +27,9 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/common/header.jsp"%>
-<h1 style="padding-top: 92px;">admin >> memberView</h1>
+<h1 style="padding-top: 92px;">admin >> bbsView</h1>
 <ul>
-    <c:forEach items="${noticeList}" var="list">
-        <a href="/admin/bbsView?notice_idx=${list.notice_idx}"><li>${list}</li></a>
-        <%--            <li>${list.title}</li>--%>
-        <%--            <li>${list.member_id}</li>--%>
-        <%--            <li>${list.content}</li>--%>
-        <%--            <li>${list.reg_date}</li>--%>
-    </c:forEach>
+    <li>${noticeDTO}</li>
 </ul>
 
 
