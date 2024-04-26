@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 import java.time.LocalDate;
 
@@ -28,12 +29,16 @@ public class MemberDTO {
     private String phone_num;
     @NotBlank
     private String email;
+    @NotBlank
     private String forever_yn;
     private String option;
     private int point;
     private int mileage;
+    @NotBlank
     private String member_state;
+    @NotBlank
     private String join_state;
+    @NotNull
     private LocalDate reg_date;
     private LocalDate leave_date;
 }

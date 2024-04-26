@@ -1,0 +1,19 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: juyoun
+  Date: 2024-04-26
+  Time: 오전 1:37
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ page trimDirectiveWhitespaces="true" %>
+<html>
+<head>
+    <title>Title</title>
+    <meta charset="utf-8"/>
+</head>
+<body>
+<button type="button"class="btn btn-pill text-white btn-block btn-dark" onclick="location.href='/login/findId'">아이디</button>
+<button type="button"class="btn btn-pill text-white btn-block btn-dark" onclick="location.href='/login/findPwd'">비밀번호</button>
+</body>
+</html>
