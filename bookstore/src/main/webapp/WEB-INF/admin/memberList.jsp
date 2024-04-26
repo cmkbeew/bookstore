@@ -33,7 +33,7 @@
 </head>
 <body>
     <%@ include file="/WEB-INF/common/header.jsp"%>
-    <div class="d-flex" id="wrapper" style="padding-top: 92px;">
+    <div class="d-flex" id="wrapper" style="padding-top: 56px;">
         <!-- Sidebar-->
         <div class="border-end bg-white" id="sidebar-wrapper">
             <div class="sidebar-heading border-bottom bg-light">관리자 페이지</div>
@@ -278,9 +278,6 @@
                     </div>
                 </div>
             </div>
-
-
-
         </div>
     </div>
     <%@ include file="/WEB-INF/common/footer.jsp"%>
