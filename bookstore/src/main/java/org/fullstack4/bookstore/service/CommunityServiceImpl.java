@@ -5,9 +5,7 @@ import lombok.extern.log4j.Log4j2;
 import org.fullstack4.bookstore.domain.FaqVO;
 import org.fullstack4.bookstore.domain.NoticeVO;
 import org.fullstack4.bookstore.domain.QnaVO;
-import org.fullstack4.bookstore.dto.FaqDTO;
-import org.fullstack4.bookstore.dto.NoticeDTO;
-import org.fullstack4.bookstore.dto.QnaDTO;
+import org.fullstack4.bookstore.dto.*;
 import org.fullstack4.bookstore.mapper.CommunityMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -44,14 +42,27 @@ public class CommunityServiceImpl implements CommunityService {
     }
 
     @Override
-    public List<FaqDTO> faqList() {
-        List<FaqVO> voList = communityMapper.faqList();
+    public PageResponseDTO<FaqDTO> faqList(PageRequestDTO pageRequestDTO) {
+        List<FaqVO> voList = communityMapper.faqList(pageRequestDTO);
 
         List<FaqDTO> dtoList = voList.stream()
                 .map(vo -> modelMapper.map(vo, FaqDTO.class))
                 .collect(Collectors.toList());
 
-        return dtoList;
+        int total_count = communityMapper.faqTotalCount(pageRequestDTO);
+
+        PageResponseDTO<FaqDTO> responseDTO = PageResponseDTO.<FaqDTO>withAll()
+                .requestDTO(pageRequestDTO)
+                .dtoList(dtoList)
+                .total_count(total_count)
+                .build();
+
+        return responseDTO;
+    }
+
+    @Override
+    public int faqTotalCount(PageRequestDTO requestDTO) {
+        return communityMapper.faqTotalCount(requestDTO);
     }
 
     @Override
