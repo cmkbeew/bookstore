@@ -23,8 +23,9 @@
     <link href="/resources/css/admin/styles.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/minty/bootstrap.min.css" integrity="sha384-H4X+4tKc7b8s4GoMrylmy2ssQYpDHoqzPa9aKXbDwPoPUA3Ra8PA5dGzijN+ePnH" crossorigin="anonymous">
 
-    <%-- bbsList 부트스트랩   --%>
+    <%-- list 부트스트랩   --%>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/resources/fonts/icomoon/style.css">
 </head>
 <body>
     <%@ include file="/WEB-INF/common/header.jsp"%>
@@ -37,7 +38,7 @@
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/list?bbsName=faq">FAQ</a>
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/list?bbsName=qna">QnA</a>
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/list?bbsName=member">회원내역</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/list?bbsName=product">도서(교재)</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/list?bbsName=product">도서</a>
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/list?bbsName=delivery">배송관리</a>
             </div>
         </div>
@@ -53,13 +54,13 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title text-uppercase mb-0 text-center">공지사항</h5>
+                                <h5 class="card-title text-uppercase mb-0 text-center">${bbsTitle}</h5>
                             </div>
                             <div class="table-responsive">
                                 <table class="table no-wrap user-table mb-0">
                                     <thead>
                                     <tr>
-                                        <th scope="col" class="border-0 text-uppercase font-medium pl-4">선택</th>
+                                        <th scope="col" class="border-0 text-uppercase font-medium pl-4">삭제</th>
                                         <th scope="col" class="border-0 text-uppercase font-medium pl-4">번호</th>
                                         <th scope="col" class="border-0 text-uppercase font-medium">제목</th>
                                         <th scope="col" class="border-0 text-uppercase font-medium">작성자</th>
@@ -71,18 +72,20 @@
                                         <c:when test="${!empty bbsList}">
                                             <c:forEach items="${bbsList}" var="list">
                                                 <tr>
-                                                    <td class="pl-4" style="vertical-align: middle;">
-                                                        <input type="checkbox" name="select" id="select" value="" />
-                                                        <div class="control__indicator"></div>
+                                                    <td class="pl-4" style="width: 80px;">
+                                                        <label class="control control--checkbox">
+                                                            <input type="checkbox" name="select" id="select" value="">
+                                                            <div class="control__indicator"></div>
+                                                        </label>
                                                     </td>
                                                     <td class="pl-4">
                                                         <a href="/admin/${bbsName}/view?idx=${list.idx}">
                                                             <h5 class="font-medium mb-0">${list.idx}</h5>
                                                         </a>
                                                     </td>
-                                                    <td>
+                                                    <td style="max-width: 300px;">
                                                         <a href="/admin/${bbsName}/view?idx=${list.idx}">
-                                                            <h5 class="font-medium mb-0">${list.title}</h5>
+                                                            <h5 class="font-medium mb-0" style="max-width: 100%; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">${list.title}</h5>
                                                         </a>
                                                     </td>
                                                     <td>
@@ -100,7 +103,7 @@
                                         </c:when>
                                         <c:otherwise>
                                             <tr>
-                                                <td colspan="5" style="text-align: center;">등록된 게시글이 없습니다.</td>
+                                                <td class="text-center" colspan="5">등록된 게시글이 없습니다.</td>
                                             </tr>
                                         </c:otherwise>
                                     </c:choose>

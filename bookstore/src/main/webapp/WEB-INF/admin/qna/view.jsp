@@ -94,24 +94,6 @@
                 </div>
                 <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2"><i class="fa fa-upload"></i></button>
             </div>
-            <div class="card mt-5">
-                <table class="table no-wrap user-table mb-0 text-lg-start">
-                    <tr>
-                        <th style="width: 120px;">
-                            <span class="material-symbols-outlined">expand_less</span>
-                            <span>이전글</span>
-                        </th>
-                        <td><a href="#">이전글 타이틀</a></td>
-                    </tr>
-                    <tr>
-                        <th style="width: 120px;">
-                            <span class="material-symbols-outlined">expand_more</span>
-                            <span>다음글</span>
-                        </th>
-                        <td><a href="#">다음글 타이틀</a></td>
-                    </tr>
-                </table>
-            </div>
         </div>
     </div>
 </div>

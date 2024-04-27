@@ -107,14 +107,14 @@
                             <span class="material-symbols-outlined">expand_less</span>
                             <span>이전글</span>
                         </th>
-                        <td><a href="#">이전글 타이틀</a></td>
+                        <td><a href="/admin/notice/view?idx=${idx -1}">${totalCount}</a></td>
                     </tr>
                     <tr>
                         <th style="width: 120px;">
                             <span class="material-symbols-outlined">expand_more</span>
                             <span>다음글</span>
                         </th>
-                        <td><a href="#">다음글 타이틀</a></td>
+                        <td><a href="/admin/notice/view?idx=${idx +1}">다음글 타이틀</a></td>
                     </tr>
                 </table>
             </div>

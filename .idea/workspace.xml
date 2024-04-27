@@ -7,18 +7,20 @@
     <list default="true" id="64051777-53e8-4d29-985d-b98c77db865d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/controller/AdminController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/domain/NoticeVO2.java" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/domain/NoticeVO2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/dto/NoticeDTO2.java" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/dto/NoticeDTO2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/mapper/AdminMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/mapper/AdminMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/service/AdminService.java" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/service/AdminService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/service/AdminServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/service/AdminServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bookstore/src/main/resources/mappers/AdminMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/resources/mappers/AdminMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/faq/list.jsp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/faq/view.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/faq/view.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/list.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/list.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/notice/list.jsp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/notice/view.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/notice/view.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/qna/list.jsp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/qna/view.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/qna/view.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/view.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/common/header.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/common/header.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/css/admin/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/css/admin/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/css/styles.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bookstore/src/test/java/org/fullstack4/bookstore/mapper/AdminMapperTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/test/java/org/fullstack4/bookstore/mapper/AdminMapperTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookstore/src/test/java/org/fullstack4/bookstore/service/CommunityServiceTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/test/java/org/fullstack4/bookstore/service/CommunityServiceTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,9 +35,17 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
+        <task path="$PROJECT_DIR$/bookstore">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
-            <expand />
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="bookstore" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
             <select />
           </tree_state>
         </projects_view>
@@ -81,30 +91,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Gradle.AdminMapperTests.testGetJSON.executor": "Run",
-    "Gradle.Build bookstore.executor": "Run",
-    "Gradle.CommunityServiceTests.testNoticeListService.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "Tomcat Server.Tomcat 9.0.87.executor": "Run",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "create.test.in.the.same.root": "true",
-    "git-widget-placeholder": "yh",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/82108/Desktop/springMVC",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "editor.preferences.fonts.default",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Gradle.AdminMapperTests.testGetJSON.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.AdminMapperTests.testPrev.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.AdminMapperTests.testPrevNotice.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Build bookstore.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.CommunityServiceTests.testNoticeListService.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Tomcat Server.Tomcat 9.0.87.executor&quot;: &quot;Run&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;create.test.in.the.same.root&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;yh&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/bookstorePrj&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\bookstorePrj\bookstore\src\main\webapp\WEB-INF\admin" />
@@ -149,6 +161,54 @@
             <option value=":test" />
             <option value="--tests" />
             <option value="&quot;org.fullstack4.bookstore.mapper.AdminMapperTests.testGetJSON&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="AdminMapperTests.testPrev" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/bookstore" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;org.fullstack4.bookstore.mapper.AdminMapperTests.testPrev&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="AdminMapperTests.testPrevNotice" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/bookstore" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;org.fullstack4.bookstore.mapper.AdminMapperTests.testPrevNotice&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -272,6 +332,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.AdminMapperTests.testPrev" />
+        <item itemvalue="Gradle.AdminMapperTests.testPrevNotice" />
         <item itemvalue="Gradle.AdminMapperTests.testGetJSON" />
         <item itemvalue="Gradle.CommunityServiceTests.testNoticeListService" />
       </list>
@@ -296,6 +358,8 @@
       <workItem from="1714030728650" duration="7852000" />
       <workItem from="1714051880256" duration="13841000" />
       <workItem from="1714091857936" duration="34905000" />
+      <workItem from="1714245994244" duration="639000" />
+      <workItem from="1714246646276" duration="148000" />
     </task>
     <servers />
   </component>

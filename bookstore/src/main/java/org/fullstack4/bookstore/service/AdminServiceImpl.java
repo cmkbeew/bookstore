@@ -20,6 +20,16 @@ public class AdminServiceImpl implements AdminService {
     private final AdminMapper adminMapper;
     private final ModelMapper modelMapper;
 
+//    @Override
+//    public int noticeTotalCount(PageRequestDTO pageRequestDTO) {
+//        return adminMapper.noticeTotalCount(pageRequestDTO);
+//    }
+//
+//    @Override
+//    public int faqTotalCount(PageRequestDTO pageRequestDTO) {
+//        return adminMapper.faqTotalCount(pageRequestDTO);
+//    }
+
     @Override
     public List<NoticeDTO2> noticeList() {
         List<NoticeVO2> voList = adminMapper.noticeList();
@@ -39,6 +49,14 @@ public class AdminServiceImpl implements AdminService {
 
         return noticeDTO;
     }
+
+//    @Override
+//    public NoticeDTO2 prevNotice(int idx) {
+//        NoticeVO2 noticeVO = adminMapper.prevNotice(idx);
+//        NoticeDTO2 noticeDTO = modelMapper.map(noticeVO, NoticeDTO2.class);
+//
+//        return noticeDTO;
+//    }
 
     @Override
     public List<FaqDTO2> faqList() {

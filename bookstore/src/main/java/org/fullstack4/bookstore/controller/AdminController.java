@@ -34,18 +34,21 @@ public class AdminController {
         if (bbsName.equals("notice")) {
             List<NoticeDTO2> noticeList = adminService.noticeList();
             model.addAttribute("bbsList", noticeList);
+            model.addAttribute("bbsTitle", "공지사항");
             model.addAttribute("bbsName", "notice");
         }
 
         if (bbsName.equals("faq")) {
             List<FaqDTO2> faqList = adminService.faqList();
             model.addAttribute("bbsList", faqList);
+            model.addAttribute("bbsTitle", "FAQ");
             model.addAttribute("bbsName", "faq");
         }
 
         if (bbsName.equals("qna")) {
             List<QnaDTO2> qnaList = adminService.qnaList();
             model.addAttribute("bbsList", qnaList);
+            model.addAttribute("bbsTitle", "QnA");
             model.addAttribute("bbsName", "qna");
         }
         log.info("===============================");
@@ -55,12 +58,20 @@ public class AdminController {
     @GetMapping(path="/notice/view", params="idx")
     public void noticeViewGET(
             @RequestParam int idx,
+            PageRequestDTO pageRequestDTO,
             Model model
     ) {
         log.info("===============================");
         log.info("AdminController >> bbsViewGET()");
         NoticeDTO2 noticeDTO = adminService.noticeView(idx);
+//        int totalCount = adminService.noticeTotalCount(pageRequestDTO);
+//        NoticeDTO2 noticeDTO2 = adminService.prevNotice(idx);
+
+//        log.info("prev!! : " + noticeDTO2);
+
         model.addAttribute("noticeDTO", noticeDTO);
+        model.addAttribute("idx", idx);
+//        model.addAttribute("totalCount", totalCount);
 
         log.info("===============================");
     }

@@ -72,10 +72,6 @@
                                                 <th>작성일 <i class="fa fa-calendar"></i></th>
                                                 <td>${faqDTO.reg_date}</td>
                                             </tr>
-                                            <%--                                            <tr>--%>
-                                            <%--                                                <th>조회수 <i class="fa fa-eye" aria-hidden="true"></i></th>--%>
-                                            <%--                                                <td>${noticeDTO.read_cnt}</td>--%>
-                                            <%--                                            </tr>--%>
                                         </table>
                                     </div>
                                     <div class="p-3" style="min-height: 20vh;">

@@ -3,6 +3,13 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.fullstack4.bookstore.mapper.AdminMapper">
+<!--    <select id="noticeTotalCount" resultType="int">-->
+<!--        SELECT COUNT(*) FROM tbl_bbs_notice2-->
+<!--    </select>-->
+
+<!--    <select id="faqTotalCount" resultType="int">-->
+<!--        SELECT COUNT(*) FROM tbl_bbs_faq2-->
+<!--    </select>-->
 
     <!-- 공지사항 -->
     <select id="noticeList" resultType="org.fullstack4.bookstore.domain.NoticeVO2">
@@ -16,6 +23,14 @@
         FROM tbl_bbs_notice2
         WHERE idx = #{idx}
     </select>
+
+<!--    <select id="prevNotice" resultType="org.fullstack4.bookstore.domain.NoticeVO2">-->
+<!--        SELECT idx, title, save_file_name-->
+<!--        FROM tbl_bbs_notice2-->
+<!--        WHERE idx < #{idx}-->
+<!--        ORDER BY idx DESC-->
+<!--        LIMIT 1-->
+<!--    </select>-->
 
     <!-- FAQ -->
     <select id="faqList" resultType="org.fullstack4.bookstore.domain.FaqVO2">
