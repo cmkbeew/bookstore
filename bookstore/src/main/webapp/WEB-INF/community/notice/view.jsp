@@ -15,14 +15,14 @@
     <table>
         <tr>
             <td>번호</td>
-            <td>아이디</td>
+            <td>작성자</td>
             <td>제목</td>
             <td>내용</td>
             <td>등록일</td>
         </tr>
         <tr>
             <td>${noticeDTO.notice_idx}</td>
-            <td>${noticeDTO.member_id}</td>
+            <td>${noticeDTO.writer}</td>
             <td>${noticeDTO.title}</td>
             <td>${noticeDTO.content}</td>
             <td>${noticeDTO.reg_date}</td>

@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface DataMapper {
 
-    int regist_data(DataVO dataVO);
-    List<DataVO> list_data();
-    DataVO view_data(int data_idx);
-    int modify_data(DataVO dataVO);
-    int delete_data(int data_idx);
+    int dataRegist(DataVO dataVO);
+    List<DataVO> dataList();
+    DataVO dataView(int data_idx);
+    int dataModify(DataVO dataVO);
+    int dataDelete(int data_idx);
 }

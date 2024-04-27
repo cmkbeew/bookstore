@@ -18,17 +18,17 @@ public class DataServiceImpl implements DataService {
     private final ModelMapper modelMapper;
 
     @Override
-    public int regist_data(DataDTO dataDTO) {
+    public int dataRegist(DataDTO dataDTO) {
         DataVO dataVO = modelMapper.map(dataDTO, DataVO.class);
 
-        int result = dataMapper.regist_data(dataVO);
+        int result = dataMapper.dataRegist(dataVO);
 
         return result;
     }
 
     @Override
-    public List<DataDTO> list_data() {
-        List<DataVO> voList = dataMapper.list_data();
+    public List<DataDTO> dataList() {
+        List<DataVO> voList = dataMapper.dataList();
         List<DataDTO> dtoList = voList.stream()
                                       .map(vo -> modelMapper.map(vo, DataDTO.class))
                                       .collect(Collectors.toList());
@@ -37,25 +37,25 @@ public class DataServiceImpl implements DataService {
     }
 
     @Override
-    public DataDTO view_data(int data_idx) {
-        DataVO dataVO = dataMapper.view_data(data_idx);
+    public DataDTO dataView(int data_idx) {
+        DataVO dataVO = dataMapper.dataView(data_idx);
         DataDTO dataDTO = modelMapper.map(dataVO, DataDTO.class);
 
         return dataDTO;
     }
 
     @Override
-    public int modify_data(DataDTO dataDTO) {
+    public int dataModify(DataDTO dataDTO) {
         DataVO dataVO = modelMapper.map(dataDTO, DataVO.class);
 
-        int result = dataMapper.modify_data(dataVO);
+        int result = dataMapper.dataModify(dataVO);
 
         return result;
     }
 
     @Override
-    public int delete_data(int data_idx) {
-        int result = dataMapper.delete_data(data_idx);
+    public int dataDelete(int data_idx) {
+        int result = dataMapper.dataDelete(data_idx);
 
         return result;
     }

@@ -54,10 +54,9 @@ public class PageRequestDTO {
     private int page_block_end=1;
 
     // 검색 조건
-    private String[] search_type;
+    private String search_date;
+    private String search_type;
     private String search_word;
-    private LocalDate search_date1;
-    private LocalDate search_date2;
 
 
     public void setTotal_count(int total_count) {

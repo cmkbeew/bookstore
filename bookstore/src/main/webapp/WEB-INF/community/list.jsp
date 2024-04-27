@@ -11,40 +11,15 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/common/header.jsp"%>
-<div id="snippetContent" style="padding-top: 52px;">
+
+<h1>공지사항 페이지</h1>
+<div id="snippetContent">
     <div class="container mt-5">
         <div class="row">
             <div class="col-12 mb-3 mb-lg-5">
                 <div class="overflow-hidden card table-nowrap table-card">
-                    <!-- 검색 -->
-                    <form id="frmSearch" name="frmSearch" method="get" action="/community/faq/list">
-                        <div class="d-flex justify-content-center align-items-center">
-                            <div class="mx-2 my-3">
-                                <select class="form-select form-select-lg" name="search_date" id="search_date">
-                                    <option value="all">전체</option>
-                                    <option value="day" <c:if test="${faqList.search_date == 'day'}">selected</c:if>>하루</option>
-                                    <option value="week" <c:if test="${faqList.search_date == 'week'}">selected</c:if>>일주일</option>
-                                    <option value="month"<c:if test="${faqList.search_date == 'month'}">selected</c:if>>한달</option>
-                                </select>
-                            </div>
-                            <div class="mx-2 my-3">
-                                <select class="form-select form-select-lg" name="search_type" id="search_type">
-                                    <option value="">전체</option>
-                                    <option value="title" <c:if test="${faqList.search_type == 'title'}">selected</c:if>>제목</option>
-                                    <option value="writer"<c:if test="${faqList.search_type == 'writer'}">selected</c:if>>작성자</option>
-                                </select>
-                            </div>
-                            <div class="me-2">
-                                <input class="form-control form-control-lg me-2" type="search" placeholder="Search" aria-label="Search" name="search_word" id="search_word" value="${faqList.search_word}">
-                            </div>
-                            <button class="btn btn-primary me-2" type="submit" id="btn_search">검색</button>
-                            <button class="btn btn-outline-danger" type="reset">초기화</button>
-                        </div>
-                    </form>
-                    <!-- 검색 끝 -->
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0">FAQ</h5>
-                    </div>
+                        <h5 class="mb-0">자료실</h5> <a href="#!" class="btn btn-light btn-sm">View All</a></div>
                     <div class="table-responsive">
                         <table class="table mb-0">
                             <thead class="small text-uppercase bg-body text-muted">
@@ -52,24 +27,68 @@
                                 <th>제목</th>
                                 <th>내용</th>
                                 <th class="text-end">작성자</th>
+                                <th class="text-end">조회수</th>
                                 <th class="text-end">작성일</th>
                             </tr>
                             </thead>
                             <tbody>
-                                <c:forEach items="${faqList.dtoList}" var="list">
-                                    <tr class="align-middle">
-                                        <td>
-                                            <a href="/community/faq/view?faq_idx=${list.faq_idx}">
-                                                <div class="d-flex align-items-center">
-                                                    <div class="h6 mb-0 lh-1">${list.title}</div>
-                                                </div>
-                                            </a>
-                                        </td>
-                                        <td>${list.content}</td>
-                                        <td class="text-end">${list.writer}</td>
-                                        <td class="text-end">${list.reg_date}</td>
+
+                            <c:choose>
+                                <c:when test="${faqList != null}">
+                                    <c:forEach items="${faqList.dtoList}" var="list">
+                                        <tr class="align-middle">
+                                            <td>
+                                                <a href="/community/faq/view?faq_idx=${list.faq_idx}">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="h6 mb-0 lh-1">${list.title}</div>
+                                                    </div>
+                                                </a>
+                                            </td>
+                                            <td>${list.content}</td>
+                                            <td class="text-end">${list.writer}</td>
+                                            <td class="text-end">${list.reg_date}</td>
+                                        </tr>
+                                    </c:forEach>
+                                </c:when>
+                                <c:when test="${noticeList != null}">
+                                    <c:forEach items="${noticeList}" var="list">
+                                        <tr class="align-middle">
+                                            <td>
+                                                <a href="/community/notice/view?faq_idx=${list.notice_idx}">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="h6 mb-0 lh-1">${list.title}</div>
+                                                    </div>
+                                                </a>
+                                            </td>
+                                            <td>${list.content}</td>
+                                            <td class="text-end">${list.member_id}</td>
+                                            <td class="text-end">${list.reg_date}</td>
+                                        </tr>
+                                    </c:forEach>
+                                </c:when>
+                                <c:when test="${qnaList != null}">
+                                    <c:forEach items="${qnaList}" var="list">
+                                        <tr class="align-middle">
+                                            <td>
+                                                <a href="/community/qna/view?faq_idx=${list.qna_idx}">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="h6 mb-0 lh-1">${list.title}</div>
+                                                    </div>
+                                                </a>
+                                            </td>
+                                            <td>${list.content}</td>
+                                            <td class="text-end">${list.writer}</td>
+                                            <td class="text-end">${list.reg_date}</td>
+                                        </tr>
+                                    </c:forEach>
+                                </c:when>
+                                <c:otherwise>
+                                    <tr>
+                                        <td>????</td>
                                     </tr>
-                                </c:forEach>
+                                </c:otherwise>
+                            </c:choose>
+
                             </tbody>
                         </table>
                     </div>

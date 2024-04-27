@@ -4,15 +4,20 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.fullstack4.bookstore.dto.*;
 import org.fullstack4.bookstore.service.CommunityService;
+import org.fullstack4.bookstore.util.FileUploadUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Log4j2
@@ -24,7 +29,7 @@ public class CommunityController {
     private final CommunityService communityService;
 
     @GetMapping("/notice/list")
-    public void noticeList(@Valid PageRequestDTO pageRequestDTO,
+    public String noticeList(@Valid PageRequestDTO pageRequestDTO,
                            BindingResult bindingResult,
                            RedirectAttributes redirectAttributes,
                            Model model) {
@@ -32,9 +37,11 @@ public class CommunityController {
             redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
         }
 
-        List<NoticeDTO> noticeList = communityService.noticeList();
+        PageResponseDTO<NoticeDTO> noticeList = communityService.noticeList(pageRequestDTO);
 
         model.addAttribute("noticeList", noticeList);
+
+        return "/community/notice/list";
     }
 
     @GetMapping("/notice/view")
@@ -45,7 +52,7 @@ public class CommunityController {
     }
 
     @GetMapping("/faq/list")
-    public void faqList(@Valid PageRequestDTO pageRequestDTO,
+    public String faqList(@Valid PageRequestDTO pageRequestDTO,
                         BindingResult bindingResult,
                         RedirectAttributes redirectAttributes,
                         Model model) {
@@ -55,9 +62,9 @@ public class CommunityController {
 
         PageResponseDTO<FaqDTO> faqList = communityService.faqList(pageRequestDTO);
 
-        log.info("faqList : " + faqList);
-
         model.addAttribute("faqList", faqList);
+
+        return "/community/faq/list";
     }
 
     @GetMapping("/faq/view")
@@ -68,10 +75,19 @@ public class CommunityController {
     }
 
     @GetMapping("/qna/list")
-    public void qnaList(Model model) {
-        List<QnaDTO> qnaList = communityService.qnaList();
+    public String qnaList(@Valid PageRequestDTO pageRequestDTO,
+                          BindingResult bindingResult,
+                          RedirectAttributes redirectAttributes,
+                          Model model) {
+        if(bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+        }
+
+        PageResponseDTO<QnaDTO> qnaList = communityService.qnaList(pageRequestDTO);
 
         model.addAttribute("qnaList", qnaList);
+
+        return "/community/qna/list";
     }
 
     @GetMapping("/qna/view")
@@ -80,4 +96,80 @@ public class CommunityController {
 
         model.addAttribute("qnaDTO", qnaDTO);
     }
+
+    @GetMapping("/qna/regist")
+    public void qna_regist() {
+
+    }
+
+    @PostMapping("/qna/regist")
+    public String qna_regist(
+            //@RequestParam("file") MultipartFile multipartFile,
+                              QnaDTO qnaDTO,
+                              RedirectAttributes redirectAttributes) {
+//        String save_file_name = "";
+
+//        if(!multipartFile.isEmpty()) {
+//            save_file_name = FileUploadUtil.saveFile(multipartFile);
+//        }
+
+//        dataDTO.setOrg_file_name(multipartFile.getOriginalFilename());
+//        dataDTO.setSave_file_name(save_file_name);
+
+        int result = communityService.qnaRegist(qnaDTO);
+
+        if(result > 0) {
+            return "redirect:/community/qna/list";
+        } else {
+            redirectAttributes.addFlashAttribute("qnaDTO", qnaDTO);
+
+            return "redirect:/community/qna/regist";
+        }
+    }
+
+//    @GetMapping("/modify")
+//    public void data_modify(int data_idx, Model model) {
+//        DataDTO dataDTO = dataService.view_data(data_idx);
+//
+//        model.addAttribute("dataDTO", dataDTO);
+//    }
+//
+//    @PostMapping("/modify")
+//    public String data_modify(@RequestParam("file") MultipartFile multipartFile,
+//                              DataDTO dataDTO,
+//                              RedirectAttributes redirectAttributes) {
+//        DataDTO dto = dataService.view_data(dataDTO.getData_idx());
+//
+//        String save_file_name = "";
+//
+//        if(!multipartFile.isEmpty()) {
+//            save_file_name = FileUploadUtil.saveFile(multipartFile);
+//
+//            FileUploadUtil.deleteFile(dto.getSave_file_name());
+//        }
+//
+//        dataDTO.setOrg_file_name(multipartFile.getOriginalFilename());
+//        dataDTO.setSave_file_name(save_file_name);
+//
+//        int result = dataService.modify_data(dataDTO);
+//
+//        if(result > 0) {
+//            return "redirect:/data/view?data_idx=" + dataDTO.getData_idx();
+//        } else {
+//            redirectAttributes.addFlashAttribute("dataDTO", dataDTO);
+//
+//            return "redirect:/data/modify?data_idx=" + dataDTO.getData_idx();
+//        }
+//    }
+//
+//    @PostMapping("/delete")
+//    public String data_delete(int data_idx, RedirectAttributes redirectAttributes) {
+//        int result = dataService.delete_data(data_idx);
+//
+//        if(result > 0) {
+//            return "redirect:/data/list";
+//        } else {
+//            return "redirect:/data/view?data_idx=" + data_idx;
+//        }
+//    }
 }

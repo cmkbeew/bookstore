@@ -25,15 +25,15 @@ public class DataController {
     private final DataService dataService;
 
     @GetMapping("/list")
-    public void data_list(Model model) {
-        List<DataDTO> dataList = dataService.list_data();
+    public void dataList(Model model) {
+        List<DataDTO> dataList = dataService.dataList();
 
         model.addAttribute("dataList", dataList);
     }
 
     @GetMapping("/view")
-    public void data_view(int data_idx, Model model) {
-        DataDTO dataDTO = dataService.view_data(data_idx);
+    public void dataView(int data_idx, Model model) {
+        DataDTO dataDTO = dataService.dataView(data_idx);
 
         model.addAttribute("dataDTO", dataDTO);
     }
@@ -44,7 +44,7 @@ public class DataController {
     }
 
     @PostMapping("regist")
-    public String data_regist(@RequestParam("file") MultipartFile multipartFile,
+    public String dataRegist(@RequestParam("file") MultipartFile multipartFile,
                               DataDTO dataDTO,
                               RedirectAttributes redirectAttributes) {
         String save_file_name = "";
@@ -56,7 +56,7 @@ public class DataController {
         dataDTO.setOrg_file_name(multipartFile.getOriginalFilename());
         dataDTO.setSave_file_name(save_file_name);
 
-        int result = dataService.regist_data(dataDTO);
+        int result = dataService.dataRegist(dataDTO);
 
         if(result > 0) {
             return "redirect:/data/list";
@@ -68,8 +68,8 @@ public class DataController {
     }
 
     @GetMapping("/modify")
-    public void data_modify(int data_idx, Model model) {
-        DataDTO dataDTO = dataService.view_data(data_idx);
+    public void dataModify(int data_idx, Model model) {
+        DataDTO dataDTO = dataService.dataView(data_idx);
 
         model.addAttribute("dataDTO", dataDTO);
     }
@@ -78,7 +78,7 @@ public class DataController {
     public String data_modify(@RequestParam("file") MultipartFile multipartFile,
                               DataDTO dataDTO,
                               RedirectAttributes redirectAttributes) {
-        DataDTO dto = dataService.view_data(dataDTO.getData_idx());
+        DataDTO dto = dataService.dataView(dataDTO.getData_idx());
 
         String save_file_name = "";
 
@@ -91,7 +91,7 @@ public class DataController {
         dataDTO.setOrg_file_name(multipartFile.getOriginalFilename());
         dataDTO.setSave_file_name(save_file_name);
 
-        int result = dataService.modify_data(dataDTO);
+        int result = dataService.dataModify(dataDTO);
 
         if(result > 0) {
             return "redirect:/data/view?data_idx=" + dataDTO.getData_idx();
@@ -104,7 +104,13 @@ public class DataController {
 
     @PostMapping("/delete")
     public String data_delete(int data_idx, RedirectAttributes redirectAttributes) {
-        int result = dataService.delete_data(data_idx);
+        DataDTO dataDTO = dataService.dataView(data_idx);
+
+        if(dataDTO != null && dataDTO.getSave_file_name() != null) {
+            FileUploadUtil.deleteFile(dataDTO.getSave_file_name());
+        }
+
+        int result = dataService.dataDelete(data_idx);
 
         if(result > 0) {
             return "redirect:/data/list";

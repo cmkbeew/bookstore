@@ -4,37 +4,48 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.fullstack4.bookstore.mapper.CommunityMapper">
     <sql id="whereCondition">
-        <where>
+        <trim prefix="where" prefixOverrides="AND">
             <if test="search_type != null">
-                <foreach collection="search_type" item="type" open="(" close=")" separator=" OR ">
-                    <if test="type == 't'.toString()">
-                        title LIKE concat('%', #{search_word}, '%')
-                    </if>
-                    <if test="type == 'u'.toString()">
-                        user_id LIKE concat('%', #{search_word}, '%')
-                    </if>
-                </foreach>
+                <if test="search_type == 'title'">
+                    AND title LIKE concat('%', #{search_word}, '%')
+                </if>
+                <if test="search_type == 'writer'">
+                    AND writer LIKE concat('%', #{search_word}, '%')
+                </if>
             </if>
-            <if test="search_date1 != null">
-                AND reg_date <![CDATA[>=]]> #{search_date1}
+            <if test="search_date != null">
+                <choose>
+                    <when test="search_date == 'day'">
+                        AND reg_date <![CDATA[>=]]> ADDDATE(NOW(), INTERVAL -1 day)
+                    </when>
+                    <when test="search_date == 'week'">
+                        AND reg_date <![CDATA[>=]]> ADDDATE(NOW(), INTERVAL -1 week)
+                    </when>
+                    <when test="search_date == 'month'">
+                        AND reg_date <![CDATA[>=]]> ADDDATE(NOW(), INTERVAL -1 month)
+                    </when>
+                </choose>
             </if>
-            <if test="search_date2 != null">
-                AND reg_date <![CDATA[<=]]> #{search_date2}
-            </if>
-        </where>
+        </trim>
     </sql>
 
     <!-- 공지사항 -->
     <select id="noticeList" resultType="org.fullstack4.bookstore.domain.NoticeVO">
-        SELECT notice_idx, title, member_id, content, reg_date, org_file_name, save_file_name, fix_state
+        SELECT notice_idx, title, writer, content, reg_date, org_file_name, save_file_name, fix_state
         FROM tbl_bbs_notice
         <include refid="whereCondition"></include>
         ORDER BY notice_idx DESC
---         LIMIT #{page_skip_count}, #{page_size}
+        LIMIT #{page_skip_count}, #{page_size}
+    </select>
+
+    <select id="noticeTotalCount" resultType="int">
+        SELECT COUNT(*)
+        FROM tbl_bbs_notice
+        <include refid="whereCondition"></include>
     </select>
 
     <select id="noticeView" resultType="org.fullstack4.bookstore.domain.NoticeVO">
-        SELECT notice_idx, title, member_id, content, reg_date, org_file_name, save_file_name, fix_state
+        SELECT notice_idx, title, writer, content, reg_date, org_file_name, save_file_name, fix_state
         FROM tbl_bbs_notice
         WHERE notice_idx = #{notice_idx}
     </select>
@@ -51,6 +62,7 @@
     <select id="faqTotalCount" resultType="int">
         SELECT COUNT(*)
         FROM tbl_bbs_faq
+        <include refid="whereCondition"></include>
     </select>
 
     <select id="faqView" resultType="org.fullstack4.bookstore.domain.FaqVO">
@@ -63,7 +75,15 @@
     <select id="qnaList" resultType="org.fullstack4.bookstore.domain.QnaVO">
         SELECT qna_idx, title, content, writer, read_cnt, reg_date, modify_date, reply_state
         FROM tbl_bbs_qna
+        <include refid="whereCondition"></include>
         ORDER BY qna_idx DESC
+        LIMIT #{page_skip_count}, #{page_size}
+    </select>
+
+    <select id="qnaTotalCount" resultType="int">
+        SELECT COUNT(*)
+        FROM tbl_bbs_qna
+        <include refid="whereCondition"></include>
     </select>
 
     <select id="qnaView" resultType="org.fullstack4.bookstore.domain.QnaVO">
@@ -71,5 +91,10 @@
         FROM tbl_bbs_qna
         WHERE qna_idx = #{qna_idx}
     </select>
+
+    <insert id="qnaRegist">
+        INSERT INTO tbl_bbs_qna(title, content, writer)
+        VALUES (#{title}, #{content}, #{writer})
+    </insert>
 
 </mapper>

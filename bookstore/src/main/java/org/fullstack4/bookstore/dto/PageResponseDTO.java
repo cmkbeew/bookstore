@@ -26,10 +26,9 @@ public class PageResponseDTO<E> {
     List<E> dtoList;
 
     // 검색 조건
-    private String[] search_type;
+    private String search_date;
+    private String search_type;
     private String search_word;
-    private LocalDate search_date1;
-    private LocalDate search_date2;
 
     private String linkParams;
 
@@ -54,27 +53,20 @@ public class PageResponseDTO<E> {
 
         this.dtoList = dtoList;
 
+        this.search_date = requestDTO.getSearch_date();
         this.search_type = requestDTO.getSearch_type();
+        this.search_word = requestDTO.getSearch_word();
 
         StringBuilder sb = new StringBuilder();
-        if(search_type != null) {
-            for(String type : search_type) {
-                sb.append("&search_type=" + type);
-            }
+
+        if(search_date != null) {
+            sb.append("&search_date=" + search_date);
         }
-
-        this.search_word = requestDTO.getSearch_word();
-        this.search_date1 = requestDTO.getSearch_date1();
-        this.search_date2 = requestDTO.getSearch_date2();
-
+        if(search_type != null) {
+            sb.append("&search_type=" + search_type);
+        }
         if(search_word != null) {
             sb.append("&search_word=" + search_word);
-        }
-        if(search_date1 != null) {
-            sb.append("&search_date1=" + search_date1);
-        }
-        if(search_date2 != null) {
-            sb.append("&search_date2=" + search_date2);
         }
 
         this.linkParams = "?page_size=" + this.page_size + sb;

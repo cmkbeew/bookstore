@@ -22,14 +22,27 @@ public class CommunityServiceImpl implements CommunityService {
     private final ModelMapper modelMapper;
 
     @Override
-    public List<NoticeDTO> noticeList() {
-        List<NoticeVO> voList = communityMapper.noticeList();
+    public PageResponseDTO<NoticeDTO> noticeList(PageRequestDTO pageRequestDTO) {
+        List<NoticeVO> voList = communityMapper.noticeList(pageRequestDTO);
 
         List<NoticeDTO> dtoList = voList.stream()
                                         .map(vo -> modelMapper.map(vo, NoticeDTO.class))
                                         .collect(Collectors.toList());
 
-        return dtoList;
+        int total_count = communityMapper.noticeTotalCount(pageRequestDTO);
+
+        PageResponseDTO<NoticeDTO> responseDTO = PageResponseDTO.<NoticeDTO>withAll()
+                .requestDTO(pageRequestDTO)
+                .dtoList(dtoList)
+                .total_count(total_count)
+                .build();
+
+        return responseDTO;
+    }
+
+    @Override
+    public int noticeTotalCount(PageRequestDTO pageRequestDTO) {
+        return communityMapper.noticeTotalCount(pageRequestDTO);
     }
 
     @Override
@@ -75,14 +88,27 @@ public class CommunityServiceImpl implements CommunityService {
     }
 
     @Override
-    public List<QnaDTO> qnaList() {
-        List<QnaVO> voList = communityMapper.qnaList();
+    public PageResponseDTO<QnaDTO> qnaList(PageRequestDTO pageRequestDTO) {
+        List<QnaVO> voList = communityMapper.qnaList(pageRequestDTO);
 
         List<QnaDTO> dtoList = voList.stream()
                 .map(vo -> modelMapper.map(vo, QnaDTO.class))
                 .collect(Collectors.toList());
 
-        return dtoList;
+        int total_count = communityMapper.qnaTotalCount(pageRequestDTO);
+
+        PageResponseDTO<QnaDTO> responseDTO = PageResponseDTO.<QnaDTO>withAll()
+                .requestDTO(pageRequestDTO)
+                .dtoList(dtoList)
+                .total_count(total_count)
+                .build();
+
+        return responseDTO;
+    }
+
+    @Override
+    public int qnaTotalCount(PageRequestDTO requestDTO) {
+        return communityMapper.qnaTotalCount(requestDTO);
     }
 
     @Override
@@ -92,5 +118,14 @@ public class CommunityServiceImpl implements CommunityService {
         QnaDTO qnaDTO = modelMapper.map(qnaVO, QnaDTO.class);
 
         return qnaDTO;
+    }
+
+    @Override
+    public int qnaRegist(QnaDTO qnaDTO) {
+        QnaVO qnaVO = modelMapper.map(qnaDTO, QnaVO.class);
+
+        int result = communityMapper.qnaRegist(qnaVO);
+
+        return result;
     }
 }

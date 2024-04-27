@@ -9,7 +9,8 @@ import java.util.List;
 public interface CommunityService {
 
     // 공지사항
-    List<NoticeDTO> noticeList();
+    PageResponseDTO<NoticeDTO> noticeList(PageRequestDTO pageRequestDTO);
+    int noticeTotalCount(PageRequestDTO pageRequestDTO);
     NoticeDTO noticeView(int notice_idx);
 
     // FAQ
@@ -18,6 +19,8 @@ public interface CommunityService {
     FaqDTO faqView(int faq_idx);
 
     // QnA
-    List<QnaDTO> qnaList();
+    PageResponseDTO<QnaDTO> qnaList(PageRequestDTO pageRequestDTO);
+    int qnaTotalCount(PageRequestDTO requestDTO);
     QnaDTO qnaView(int qna_idx);
+    int qnaRegist(QnaDTO qnaDTO);
 }
