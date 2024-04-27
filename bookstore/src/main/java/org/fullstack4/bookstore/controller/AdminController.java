@@ -20,36 +20,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AdminController {
 
-    private final CommunityService communityService;
     private final AdminService adminService;
 
-
-//    @GetMapping("/list")
-//    public void listGET() {
-//        log.info("===============================");
-//        log.info("AdminController >> listGET()");
-//        log.info("===============================");
-//    }
-
-//    @GetMapping("/member/list")
-//    public void memberListGET() {
-//        log.info("===============================");
-//        log.info("AdminController >> memberListGET()");
-//        log.info("===============================");
-//    }
-//    @GetMapping("/notice/list")
-//    public void noticeListGET(Model model) {
-//        log.info("===============================");
-//        log.info("AdminController >> bbsListGET()");
-//
-//        List<NoticeDTO> noticeList = communityService.noticeList();
-//
-//        model.addAttribute("noticeList", noticeList);
-//
-//        log.info("===============================");
-//    }
-
-//    @GetMapping(value= {"/notice/list", "/faq/list", "/qna/list" })
     @GetMapping(path="/list", params = "bbsName")
     public void bbsListGET(
             @RequestParam String bbsName,
@@ -62,38 +34,72 @@ public class AdminController {
         if (bbsName.equals("notice")) {
             List<NoticeDTO2> noticeList = adminService.noticeList();
             model.addAttribute("bbsList", noticeList);
+            model.addAttribute("bbsName", "notice");
         }
 
         if (bbsName.equals("faq")) {
             List<FaqDTO2> faqList = adminService.faqList();
             model.addAttribute("bbsList", faqList);
+            model.addAttribute("bbsName", "faq");
         }
 
         if (bbsName.equals("qna")) {
             List<QnaDTO2> qnaList = adminService.qnaList();
             model.addAttribute("bbsList", qnaList);
+            model.addAttribute("bbsName", "qna");
         }
-
-
-
         log.info("===============================");
     }
 
 
-
-
-    @GetMapping("/notice/view")
+    @GetMapping(path="/notice/view", params="idx")
     public void noticeViewGET(
-            @RequestParam int notice_idx,
+            @RequestParam int idx,
             Model model
     ) {
         log.info("===============================");
-        log.info("AdminController >> bbsView()");
-
-        NoticeDTO noticeDTO = communityService.noticeView(notice_idx);
+        log.info("AdminController >> bbsViewGET()");
+        NoticeDTO2 noticeDTO = adminService.noticeView(idx);
         model.addAttribute("noticeDTO", noticeDTO);
 
         log.info("===============================");
     }
+
+    @GetMapping(path="/faq/view", params="idx")
+    public void faqViewGET(
+            @RequestParam int idx,
+            Model model
+    ) {
+        log.info("===============================");
+        log.info("AdminController >> faqViewGET()");
+        FaqDTO2 faqDTO = adminService.faqView(idx);
+        model.addAttribute("faqDTO", faqDTO);
+
+        log.info("===============================");
+    }
+
+    @GetMapping(path="/qna/view", params="idx")
+    public void qnaViewGET(
+            @RequestParam int idx,
+            Model model
+    ) {
+        log.info("===============================");
+        log.info("AdminController >> qnaViewGET()");
+        QnaDTO2 qnaDTO = adminService.qnaView(idx);
+        model.addAttribute("qnaDTO", qnaDTO);
+
+        log.info("===============================");
+    }
+
+
+
+    @GetMapping("/member/list")
+    public void memberListGET() {
+        log.info("===============================");
+        log.info("AdminController >> memberListGET()");
+        log.info("===============================");
+    }
+
+
 
 }

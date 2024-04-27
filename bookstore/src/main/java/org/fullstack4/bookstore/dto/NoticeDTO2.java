@@ -14,7 +14,7 @@ import java.time.LocalDate;
 public class NoticeDTO2 {
     private int idx;
     private String title;
-    private String member_id;
+    private String writer;
     private String content;
     private LocalDate reg_date;
     private String org_file_name;

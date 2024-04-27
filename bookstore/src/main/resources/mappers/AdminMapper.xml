@@ -6,13 +6,13 @@
 
     <!-- 공지사항 -->
     <select id="noticeList" resultType="org.fullstack4.bookstore.domain.NoticeVO2">
-        SELECT idx, title, member_id, content, reg_date, org_file_name, save_file_name, fix_state
+        SELECT idx, title, writer, content, reg_date, org_file_name, save_file_name, fix_state
         FROM tbl_bbs_notice2
         ORDER BY idx DESC
     </select>
 
     <select id="noticeView" resultType="org.fullstack4.bookstore.domain.NoticeVO2">
-        SELECT idx, title, member_id, content, reg_date, org_file_name, save_file_name, fix_state
+        SELECT idx, title, writer, content, reg_date, org_file_name, save_file_name, fix_state
         FROM tbl_bbs_notice2
         WHERE idx = #{idx}
     </select>

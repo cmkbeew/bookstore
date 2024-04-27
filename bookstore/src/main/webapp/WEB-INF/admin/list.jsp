@@ -24,12 +24,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/minty/bootstrap.min.css" integrity="sha384-H4X+4tKc7b8s4GoMrylmy2ssQYpDHoqzPa9aKXbDwPoPUA3Ra8PA5dGzijN+ePnH" crossorigin="anonymous">
 
     <%-- bbsList 부트스트랩   --%>
-<%--    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" />--%>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 </head>
 <body>
     <%@ include file="/WEB-INF/common/header.jsp"%>
-    <div class="d-flex" id="wrapper" style="padding-top: 56px;">
+    <div class="d-flex py-h" id="wrapper">
         <!-- Sidebar-->
         <div class="border-end bg-white" id="sidebar-wrapper">
             <div class="sidebar-heading border-bottom bg-light">관리자 페이지</div>
@@ -49,12 +48,12 @@
                 <i class="fa fa-arrow-right" aria-hidden="true" style="display: none;"></i>
             </button>
             <!-- Page content-->
-            <div class="container" style="margin-top: 24px;">
+            <div class="container py-h">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title text-uppercase mb-0" style="text-align: center;">공지사항</h5>
+                                <h5 class="card-title text-uppercase mb-0 text-center">공지사항</h5>
                             </div>
                             <div class="table-responsive">
                                 <table class="table no-wrap user-table mb-0">
@@ -77,22 +76,22 @@
                                                         <div class="control__indicator"></div>
                                                     </td>
                                                     <td class="pl-4">
-                                                        <a href="/admin/view?idx=${list.idx}">
+                                                        <a href="/admin/${bbsName}/view?idx=${list.idx}">
                                                             <h5 class="font-medium mb-0">${list.idx}</h5>
                                                         </a>
                                                     </td>
                                                     <td>
-                                                        <a href="/admin/notice/view?idx=${list.idx}">
+                                                        <a href="/admin/${bbsName}/view?idx=${list.idx}">
                                                             <h5 class="font-medium mb-0">${list.title}</h5>
                                                         </a>
                                                     </td>
                                                     <td>
-                                                        <a href="/admin/notice/view?idx=${list.idx}">
+                                                        <a href="/admin/${bbsName}/view?idx=${list.idx}">
                                                             <h5 class="font-medium mb-0">${list.writer}</h5>
                                                         </a>
                                                     </td>
                                                     <td>
-                                                        <a href="/admin/notice/view?idx=${list.idx}">
+                                                        <a href="/admin/${bbsName}/view?idx=${list.idx}">
                                                             <h5 class="font-medium mb-0">${list.reg_date}</h5>
                                                         </a>
                                                     </td>

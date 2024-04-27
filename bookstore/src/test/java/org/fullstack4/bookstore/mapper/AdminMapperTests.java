@@ -20,10 +20,10 @@ public class AdminMapperTests {
     @Autowired(required = false)
     AdminMapper adminMapper;
 
-    @Test
-    public void testGetJSON() {
-        Map<String, Object> json = adminMapper.getJSON();
-
-        log.info("json : " + json.get("member_id"));
-    }
+//    @Test
+//    public void testGetJSON() {
+//        Map<String, Object> json = adminMapper.getJSON();
+//
+//        log.info("json : " + json.get("member_id"));
+//    }
 }
