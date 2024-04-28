@@ -2,6 +2,7 @@ package org.fullstack4.bookstore.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.fullstack4.bookstore.domain.DeliveryVO;
 import org.fullstack4.bookstore.domain.FaqVO;
 import org.fullstack4.bookstore.domain.NoticeVO;
 import org.fullstack4.bookstore.domain.QnaVO;

@@ -12,7 +12,7 @@
 <!--    </select>-->
 
     <!-- 공지사항 -->
-    <select id="noticeList" resultType="org.fullstack4.bookstore.domain.NoticeVO2">
+    <select id="noticeList" resultType="org.fullstack4.bookstore.domain.NoticeVO">
         SELECT idx, title, writer, content, reg_date, org_file_name, save_file_name, fix_state
         FROM tbl_bbs_notice
         ORDER BY idx DESC
@@ -64,6 +64,12 @@
              , forever_yn, point, mileage, member_state, join_state, option, reg_date, leave_date
         FROM tbl_member
         ORDER BY member_idx DESC
+    </select>
+
+    <select id="deliveryList" resultType="org.fullstack4.bookstore.domain.DeliveryVO">
+        SELECT pay_idx, delivery_company, company_tel, tracking_num, delivery_state, start_date, arrive_date
+        FROM tbl_delivery
+        ORDER BY pay_idx DESC
     </select>
 
     <select id="deliveryView" resultType="org.fullstack4.bookstore.domain.DeliveryVO">
