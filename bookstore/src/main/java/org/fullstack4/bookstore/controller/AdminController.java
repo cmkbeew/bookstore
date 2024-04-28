@@ -63,7 +63,7 @@ public class AdminController {
     ) {
         log.info("===============================");
         log.info("AdminController >> bbsViewGET()");
-        NoticeDTO2 noticeDTO = adminService.noticeView(idx);
+        NoticeDTO noticeDTO = adminService.noticeView(idx);
 //        int totalCount = adminService.noticeTotalCount(pageRequestDTO);
 //        NoticeDTO2 noticeDTO2 = adminService.prevNotice(idx);
 
@@ -83,7 +83,7 @@ public class AdminController {
     ) {
         log.info("===============================");
         log.info("AdminController >> faqViewGET()");
-        FaqDTO2 faqDTO = adminService.faqView(idx);
+        FaqDTO faqDTO = adminService.faqView(idx);
         model.addAttribute("faqDTO", faqDTO);
 
         log.info("===============================");
@@ -96,7 +96,7 @@ public class AdminController {
     ) {
         log.info("===============================");
         log.info("AdminController >> qnaViewGET()");
-        QnaDTO2 qnaDTO = adminService.qnaView(idx);
+        QnaDTO qnaDTO = adminService.qnaView(idx);
         model.addAttribute("qnaDTO", qnaDTO);
 
         log.info("===============================");

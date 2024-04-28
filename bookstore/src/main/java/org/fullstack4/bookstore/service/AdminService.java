@@ -12,14 +12,8 @@ public interface AdminService {
 //    int faqTotalCount(PageRequestDTO pageRequestDTO);
 
     // 공지사항
-<<<<<<< HEAD
-    List<NoticeDTO2> noticeList();
-    NoticeDTO2 noticeView(int idx);
-//    NoticeDTO2 prevNotice(int idx);
-=======
     List<NoticeDTO> noticeList();
     NoticeDTO noticeView(int idx);
->>>>>>> hk
 
     // FAQ
     List<FaqDTO> faqList();

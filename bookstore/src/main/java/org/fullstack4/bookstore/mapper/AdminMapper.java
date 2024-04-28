@@ -13,16 +13,8 @@ public interface AdminMapper {
 //    int faqTotalCount(PageRequestDTO pageRequestDTO);
 
     // 공지사항
-<<<<<<< HEAD
-    List<NoticeVO2> noticeList();
-    NoticeVO2 noticeView(int idx);
-//    NoticeVO2 prevNotice(int idx);
-
-
-=======
     List<NoticeVO> noticeList();
     NoticeVO noticeView(int idx);
->>>>>>> hk
 
     // FAQ
     List<FaqVO> faqList();
