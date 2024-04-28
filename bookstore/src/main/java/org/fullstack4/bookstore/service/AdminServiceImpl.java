@@ -22,6 +22,7 @@ public class AdminServiceImpl implements AdminService {
     private final AdminMapper adminMapper;
     private final ModelMapper modelMapper;
 
+
 //    @Override
 //    public int noticeTotalCount(PageRequestDTO pageRequestDTO) {
 //        return adminMapper.noticeTotalCount(pageRequestDTO);
@@ -110,6 +111,15 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    public List<ProductDTO> productList() {
+        List<ProductDTO> dtoList = adminMapper.productList().stream()
+                .map(vo -> modelMapper.map(vo, ProductDTO.class))
+                .collect(Collectors.toList());
+
+        return dtoList;
+    }
+
+    @Override
     public List<DeliveryDTO> deliveryList() {
         List<DeliveryDTO> dtoList = adminMapper.deliveryList().stream()
                 .map(vo -> modelMapper.map(vo, DeliveryDTO.class))
@@ -119,12 +129,25 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public DeliveryDTO deliveryView(int idx) {
-        DeliveryVO deliveryVO = adminMapper.deliveryView(idx);
+    public DeliveryDTO deliveryView(int pay_idx) {
+        DeliveryVO deliveryVO = adminMapper.deliveryView(pay_idx);
 
         DeliveryDTO deliveryDTO = modelMapper.map(deliveryVO, DeliveryDTO.class);
 
         return deliveryDTO;
+    }
+
+    @Override
+    public int deliveryModify(DeliveryDTO deliveryDTO) {
+        log.info("====================================");
+        DeliveryVO deliveryVO = modelMapper.map(deliveryDTO, DeliveryVO.class);
+        int result = adminMapper.deliveryModify(deliveryVO);
+
+        log.info("DeliveryServiceImpl >> modify(deliveryDTO : " + deliveryDTO.toString());
+        log.info("BbsServiceImpl >> result : " + result);
+        log.info("====================================");
+
+        return result;
     }
 
 

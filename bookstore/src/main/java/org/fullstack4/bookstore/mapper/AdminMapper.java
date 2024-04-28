@@ -27,8 +27,10 @@ public interface AdminMapper {
     List<MemberVO> memberList();
 
     // 도서
+    List<ProductVO> productList();
 
     // 배송
     List<DeliveryVO> deliveryList();
     DeliveryVO deliveryView(int pay_idx);
+    int deliveryModify(DeliveryVO deliveryVO);
 }

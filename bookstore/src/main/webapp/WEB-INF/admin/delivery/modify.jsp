@@ -59,11 +59,53 @@
                             <div id="content" class="full-width site-content col-md-12">
                                 <div>
                                     <div>
+                                        <form name="frmDelivery" id="frmDelivery" action="/admin/delivery/modify" method="post">
+                                            <div class="form-floating form-group first">
+                                                <label for="pay_idx">번호</label>
+                                                <input type="text" class="form-control" name="pay_idx" id="pay_idx" value="${deliveryDTO.pay_idx}">
+                                            </div>
+                                            <div class="form-floating form-group first">
+                                                <label for="delivery_company">배송회사</label>
+                                                <input type="text" class="form-control" name="delivery_company" id="delivery_company" value="${deliveryDTO.delivery_company}">
+                                            </div>
+
+<%--                                            배송회사</th>--%>
+<%--                                            전화번호</th>--%>
+<%--                                            운송장번호</th>--%>
+<%--                                            배송상태</th>--%>
+<%--                                            배송시작일</th>--%>
+<%--                                            배송도착일</th>--%>
+
+<%--                                            <td><a href="/admin/delivery/modify?idx=${list.pay_idx}">${list.delivery_company}</a></td>--%>
+<%--                                            <td><a href="/admin/delivery/modify?idx=${list.pay_idx}">${list.company_tel}</a></td>--%>
+<%--                                            <td><a href="/admin/delivery/modify?idx=${list.pay_idx}">${list.tracking_num}</a></td>--%>
+<%--                                            <td><a href="/admin/delivery/modify?idx=${list.pay_idx}">${list.delivery_state}</a></td>--%>
+<%--                                            <td><a href="/admin/delivery/modify?idx=${list.pay_idx}">${list.start_date}</a></td>--%>
+<%--                                            <td><a href="/admin/delivery/modify?idx=${list.pay_idx}">${list.arrive_date}</a></td>--%>
+                                            <button type="reset" class="btn btn-pill text-white btn-block btn-dark">초기화</button>
+                                            <button type="submit" class="btn btn-pill text-white btn-block btn-dark">수정</button>
+                                        </form>
+
                                         <table class="table no-wrap user-table mb-0 text-lg-start">
                                             <tr>
-                                                <td>${deliveryDTO}</td>
+                                                <th style="width: 120px;">제목 <i class="fa fa-pencil" aria-hidden="true"></i></th>
+                                                <td>${deliveryDTO.title}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>작성자 <i class="fa fa-user"></i></th>
+                                                <td>${faqDTO.writer}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>작성일 <i class="fa fa-calendar"></i></th>
+                                                <td>${faqDTO.reg_date}</td>
                                             </tr>
                                         </table>
+                                        <div class="mt-md-2">
+                                            <div>
+                                                <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2" onclick="location.href='${referer}';"><i class="fa fa-list"></i></button>
+                                                <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2" onclick="location.href='admin/delivery/modify';"><i class="fa fa-edit"></i></button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -74,7 +116,7 @@
             <div class="mt-md-2">
                 <div>
                     <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2" onclick="location.href='${referer}';"><i class="fa fa-list"></i></button>
-                    <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2" onclick="location.href='admin/delivery/modify?${deliverDTO.pay_idx}';"><i class="fa fa-edit"></i></button>
+                    <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2"><i class="fa fa-edit"></i></button>
                     <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2"><i class="fa fa-trash"></i></button>
                 </div>
             </div>

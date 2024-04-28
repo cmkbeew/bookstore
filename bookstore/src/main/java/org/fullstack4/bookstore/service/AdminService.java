@@ -27,10 +27,14 @@ public interface AdminService {
 
 
     // 도서
-
+    List<ProductDTO> productList();
 
     // 배송
     List<DeliveryDTO> deliveryList();
-    DeliveryDTO deliveryView(int idx);
+    DeliveryDTO deliveryView(int pay_idx);
+
+    int deliveryModify(DeliveryDTO deliveryDTO);
+
+
 
 }

@@ -36,9 +36,9 @@
             <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/list?bbsName=notice">공지사항</a>
             <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/list?bbsName=faq">FAQ</a>
             <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/list?bbsName=qna">QnA</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/list?bbsName=member">회원내역</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/list?bbsName=product">도서(교재)</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/list?bbsName=delivery">배송관리</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/member/list">회원관리</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/product/list">도서</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/delivery/list">배송관리</a>
         </div>
     </div>
     <!-- Page content wrapper-->
