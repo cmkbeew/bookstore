@@ -14,11 +14,6 @@ public interface AdminMapper {
     // 공지사항
     List<NoticeVO> noticeList();
     NoticeVO noticeView(int idx);
-<<<<<<< HEAD
-=======
-//    NoticeVO2 prevNotice(int idx);
-
->>>>>>> yh
 
     // FAQ
     List<FaqVO> faqList();

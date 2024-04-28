@@ -13,10 +13,6 @@ public interface AdminService {
     // 공지사항
     List<NoticeDTO> noticeList();
     NoticeDTO noticeView(int idx);
-<<<<<<< HEAD
-=======
-//    NoticeDTO2 prevNotice(int idx);
->>>>>>> yh
 
     // FAQ
     List<FaqDTO> faqList();
@@ -25,8 +21,6 @@ public interface AdminService {
     // QnA
     List<QnaDTO> qnaList();
     QnaDTO qnaView(int idx);
-<<<<<<< HEAD
-=======
 
     // 회원
     List<MemberDTO> memberList();
@@ -37,5 +31,4 @@ public interface AdminService {
 
     // 배송
     List<DeliveryDTO> deliveryList();
->>>>>>> yh
 }

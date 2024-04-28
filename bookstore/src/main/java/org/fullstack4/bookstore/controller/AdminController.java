@@ -99,15 +99,11 @@ public class AdminController {
     ) {
         log.info("===============================");
         log.info("AdminController >> faqViewGET()");
-<<<<<<< HEAD
         FaqDTO faqDTO = adminService.faqView(idx);
-=======
 
-        FaqDTO faqDTO = adminService.faqView(idx);
         String referer = req.getHeader("Referer");
 
         model.addAttribute("referer", referer);
->>>>>>> yh
         model.addAttribute("faqDTO", faqDTO);
 
         log.info("===============================");
@@ -123,15 +119,11 @@ public class AdminController {
     ) {
         log.info("===============================");
         log.info("AdminController >> qnaViewGET()");
-<<<<<<< HEAD
-        QnaDTO qnaDTO = adminService.qnaView(idx);
-=======
 
         QnaDTO qnaDTO = adminService.qnaView(idx);
         String referer = req.getHeader("Referer");
 
         model.addAttribute("referer", referer);
->>>>>>> yh
         model.addAttribute("qnaDTO", qnaDTO);
 
         log.info("===============================");

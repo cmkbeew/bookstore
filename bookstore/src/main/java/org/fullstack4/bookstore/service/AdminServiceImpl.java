@@ -5,9 +5,7 @@ import lombok.extern.log4j.Log4j2;
 import org.fullstack4.bookstore.domain.FaqVO;
 import org.fullstack4.bookstore.domain.NoticeVO;
 import org.fullstack4.bookstore.domain.QnaVO;
-import org.fullstack4.bookstore.dto.FaqDTO;
-import org.fullstack4.bookstore.dto.NoticeDTO;
-import org.fullstack4.bookstore.dto.QnaDTO;
+import org.fullstack4.bookstore.dto.*;
 import org.fullstack4.bookstore.mapper.AdminMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -35,20 +33,9 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public List<NoticeDTO> noticeList() {
-<<<<<<< HEAD
         List<NoticeVO> voList = adminMapper.noticeList();
 
-        List<NoticeDTO> dtoList = voList.stream()
-=======
-//        List<NoticeVO2> voList = adminMapper.noticeList();
-//
-//        List<NoticeDTO2> dtoList = voList.stream()
-//                .map(vo -> modelMapper.map(vo, NoticeDTO2.class))
-//                .collect(Collectors.toList());
-//
-//        return dtoList;
         List<NoticeDTO> dtoList = adminMapper.noticeList().stream()
->>>>>>> yh
                 .map(vo -> modelMapper.map(vo, NoticeDTO.class))
                 .collect(Collectors.toList());
 
