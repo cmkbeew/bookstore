@@ -29,30 +29,37 @@ public class AdminController {
 
     @GetMapping(path="/list", params = "bbsName")
     public void bbsListGET(
+            @Valid PageRequestDTO pageRequestDTO,
+            BindingResult bindingResult,
+            RedirectAttributes redirectAttributes,
             @RequestParam String bbsName,
             Model model
     ) {
         log.info("===============================");
         log.info("AdminController >> bbsListGET()");
-        log.info(bbsName);
+
+        if (bindingResult.hasErrors()){
+            log.info("AdminController >> list Error");
+            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+        }
 
         if (bbsName.equals("notice")) {
-            List<NoticeDTO> noticeList = adminService.noticeList();
-            model.addAttribute("bbsList", noticeList);
+            PageResponseDTO<NoticeDTO> bbsPagingList = adminService.noticeListByPage(pageRequestDTO);
+            model.addAttribute("bbsPagingList", bbsPagingList);
             model.addAttribute("bbsTitle", "공지사항");
             model.addAttribute("bbsName", "notice");
         }
 
         if (bbsName.equals("faq")) {
-            List<FaqDTO> faqList = adminService.faqList();
-            model.addAttribute("bbsList", faqList);
+            PageResponseDTO<FaqDTO> bbsPagingList = adminService.faqListByPage(pageRequestDTO);
+            model.addAttribute("bbsPagingList", bbsPagingList);
             model.addAttribute("bbsTitle", "FAQ");
             model.addAttribute("bbsName", "faq");
         }
 
         if (bbsName.equals("qna")) {
-            List<QnaDTO> qnaList = adminService.qnaList();
-            model.addAttribute("bbsList", qnaList);
+            PageResponseDTO<QnaDTO> bbsPagingList = adminService.qnaListByPage(pageRequestDTO);
+            model.addAttribute("bbsPagingList", bbsPagingList);
             model.addAttribute("bbsTitle", "QnA");
             model.addAttribute("bbsName", "qna");
         }
@@ -90,6 +97,34 @@ public class AdminController {
         log.info("===============================");
         log.info("AdminController >> noticeRegistGET()");
         log.info("===============================");
+    }
+
+    @PostMapping("/notice/regist")
+    public String noticeRegistPOST(
+            @Valid NoticeDTO noticeDTO,
+            BindingResult bindingResult,
+            RedirectAttributes redirectAttributes
+    ) {
+        log.info("===============================");
+        log.info("AdminController >> noticeRegistPOST()");
+        log.info("===============================");
+
+
+        if(bindingResult.hasErrors()) {
+            log.info("Errors");
+            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+            redirectAttributes.addFlashAttribute("noticeDTO", noticeDTO);
+            return "redirect:/admin/notice/regist";
+        }
+
+        int result = adminService.noticeRegist(noticeDTO);
+
+        if (result > 0) {
+            return "redirect:/admin/list?bbsName=notice";
+        }
+        else {
+            return "/admin/notice/regist";
+        }
     }
 
 
@@ -130,6 +165,7 @@ public class AdminController {
         model.addAttribute("referer", referer);
         model.addAttribute("qnaDTO", qnaDTO);
 
+        log.info("qnaDTO : " + qnaDTO.toString());
         log.info("===============================");
     }
 
@@ -143,7 +179,6 @@ public class AdminController {
         List<MemberDTO> memberList = adminService.memberList();
         model.addAttribute("memberList", memberList);
 
-        log.info("memberList : " + memberList.toString());
         log.info("===============================");
     }
 

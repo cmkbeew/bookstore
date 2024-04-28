@@ -71,6 +71,8 @@ public class PageResponseDTO<E> {
 
         this.linkParams = "?page_size=" + this.page_size + sb;
 
+
+        log.info("page_block_end : " + page_block_end);
         log.info("PageResponseDTO END");
         log.info("=======================");
     }

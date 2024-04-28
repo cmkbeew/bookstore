@@ -3,19 +3,72 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.fullstack4.bookstore.mapper.AdminMapper">
-<!--    <select id="noticeTotalCount" resultType="int">-->
-<!--        SELECT COUNT(*) FROM tbl_bbs_notice2-->
-<!--    </select>-->
+    <sql id="whereCondition">
+        <trim prefix="where" prefixOverrides="AND">
+            <if test="search_type != null">
+                <if test="search_type == 'title'">
+                    AND title LIKE concat('%', #{search_word}, '%')
+                </if>
+                <if test="search_type == 'writer'">
+                    AND writer LIKE concat('%', #{search_word}, '%')
+                </if>
+            </if>
+            <if test="search_date != null">
+                <if test="search_date == 'day'">
+                    AND reg_date <![CDATA[>=]]> ADDDATE(NOW(), INTERVAL -1 day)
+                </if>
+                <if test="search_date == 'week'">
+                    AND reg_date <![CDATA[>=]]> ADDDATE(NOW(), INTERVAL -1 week)
+                </if>
+                <if test="search_date == 'month'">
+                    AND reg_date <![CDATA[>=]]> ADDDATE(NOW(), INTERVAL -1 month)
+                </if>
+            </if>
+        </trim>
+    </sql>
+    <!--  페이징  -->
+    <select id="noticeTotalCount" resultType="int">
+        SELECT COUNT(*) FROM tbl_bbs_notice
+    </select>
 
-<!--    <select id="faqTotalCount" resultType="int">-->
-<!--        SELECT COUNT(*) FROM tbl_bbs_faq2-->
-<!--    </select>-->
+    <select id="faqTotalCount" resultType="int">
+    SELECT COUNT(*) FROM tbl_bbs_faq
+    </select>
+
+    <select id="qnaTotalCount" resultType="int">
+    SELECT COUNT(*) FROM tbl_bbs_qna
+    </select>
+
+    <select id="noticeListByPage" resultType="org.fullstack4.bookstore.domain.NoticeVO">
+        SELECT idx, title, writer, reg_date, content, org_file_name, save_file_name, fix_state
+        FROM tbl_bbs_notice
+        <include refid="whereCondition"></include>
+        ORDER BY idx DESC
+        LIMIT #{page_skip_count}, #{page_size}
+    </select>
+
+    <select id="faqListByPage" resultType="org.fullstack4.bookstore.domain.FaqVO">
+        SELECT idx, title, content, writer, reg_date, modify_date
+        FROM tbl_bbs_faq
+        <include refid="whereCondition"></include>
+        ORDER BY idx DESC
+        LIMIT #{page_skip_count}, #{page_size}
+    </select>
+
+    <select id="qnaListByPage" resultType="org.fullstack4.bookstore.domain.QnaVO">
+        SELECT idx, title, content, writer, read_cnt, reg_date, modify_date, reply_state
+        FROM tbl_bbs_qna
+        <include refid="whereCondition"></include>
+        ORDER BY idx DESC
+        LIMIT #{page_skip_count}, #{page_size}
+    </select>
+
 
     <!-- 공지사항 -->
     <select id="noticeList" resultType="org.fullstack4.bookstore.domain.NoticeVO">
         SELECT idx, title, writer, content, reg_date, org_file_name, save_file_name, fix_state
         FROM tbl_bbs_notice
-        ORDER BY idx DESC
+        ORDER BY fix_state DESC, idx DESC
     </select>
 
     <select id="noticeView" resultType="org.fullstack4.bookstore.domain.NoticeVO">
@@ -24,13 +77,10 @@
         WHERE idx = #{idx}
     </select>
 
-<!--    <select id="prevNotice" resultType="org.fullstack4.bookstore.domain.NoticeVO2">-->
-<!--        SELECT idx, title, save_file_name-->
-<!--        FROM tbl_bbs_notice2-->
-<!--        WHERE idx < #{idx}-->
-<!--        ORDER BY idx DESC-->
-<!--        LIMIT 1-->
-<!--    </select>-->
+    <insert id="noticeRegist">
+        INSERT INTO tbl_bbs_notice (title, writer, reg_date, content, org_file_name, save_file_name, fix_state)
+        VALUES (#{title}, #{writer}, NOW(), #{content}, #{org_file_name}, #{save_file_name}, #{fix_state})
+    </insert>
 
     <!-- FAQ -->
     <select id="faqList" resultType="org.fullstack4.bookstore.domain.FaqVO">

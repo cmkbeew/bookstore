@@ -30,18 +30,7 @@
 <body>
     <%@ include file="/WEB-INF/common/header.jsp"%>
     <div class="d-flex py-h" id="wrapper">
-        <!-- Sidebar-->
-        <div class="border-end bg-white" id="sidebar-wrapper">
-            <div class="sidebar-heading border-bottom bg-light">관리자 페이지</div>
-            <div class="list-group list-group-flush">
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/list?bbsName=notice">공지사항</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/list?bbsName=faq">FAQ</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/list?bbsName=qna">QnA</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/member/list">회원관리</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/product/list">도서</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/delivery/list">배송관리</a>
-            </div>
-        </div>
+    <%@ include file="/WEB-INF/common/adminSidebar.jsp"%>
         <!-- Page content wrapper-->
         <div id="page-content-wrapper">
             <button class="btn btn-primary" id="sidebarToggle">
@@ -50,6 +39,34 @@
             </button>
             <!-- Page content-->
             <div class="container py-h">
+                <!-- 검색 -->
+                <form id="frmSearch" name="frmSearch" method="get" action="/admin/list?bbsName=${bbsName}">
+                    <input type="hidden" name="bbsName" value="${bbsName}"/>
+<%--                    <input type="hidden" name="page_block_end" value="${bbsPagingList.page_block_end}">--%>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <div class="mx-2 my-3">
+                            <select class="form-select form-select-lg" name="search_date" id="search_date">
+                                <option value="all">전체</option>
+                                <option value="day" <c:if test="${bbsPagingList.search_date == 'day'}">selected</c:if>>하루</option>
+                                <option value="week" <c:if test="${bbsPagingList.search_date == 'week'}">selected</c:if>>일주일</option>
+                                <option value="month"<c:if test="${bbsPagingList.search_date == 'month'}">selected</c:if>>한달</option>
+                            </select>
+                        </div>
+                        <div class="mx-2 my-3">
+                            <select class="form-select form-select-lg" name="search_type" id="search_type">
+                                <option value="">전체</option>
+                                <option value="title" <c:if test="${bbsPagingList.search_type == 'title'}">selected</c:if>>제목</option>
+                                <option value="writer"<c:if test="${bbsPagingList.search_type == 'writer'}">selected</c:if>>작성자</option>
+                            </select>
+                        </div>
+                        <div class="me-2">
+                            <input class="form-control form-control-lg me-2" type="search" placeholder="Search" aria-label="Search" name="search_word" id="search_word" value="${bbsPagingList.search_word}">
+                        </div>
+                        <button class="btn btn-primary me-2" type="submit" id="btn_search">검색</button>
+                        <button class="btn btn-outline-danger" type="reset">초기화</button>
+                    </div>
+                </form>
+                <!-- 검색 끝 -->
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
@@ -60,7 +77,12 @@
                                 <table class="table no-wrap user-table mb-0">
                                     <thead>
                                     <tr>
-                                        <th scope="col" class="border-0 text-uppercase font-medium pl-4">삭제</th>
+                                        <th scope="col" class="border-0 text-uppercase font-medium pl-4" style="vertical-align: middle;">
+                                            <label class="control control--checkbox">
+                                                <input type="checkbox" name="select" id="selectAll" value="">
+                                                <div class="control__indicator"></div>
+                                            </label>
+                                        </th>
                                         <th scope="col" class="border-0 text-uppercase font-medium pl-4">번호</th>
                                         <th scope="col" class="border-0 text-uppercase font-medium">제목</th>
                                         <th scope="col" class="border-0 text-uppercase font-medium">작성자</th>
@@ -69,17 +91,30 @@
                                     </thead>
                                     <tbody>
                                     <c:choose>
-                                        <c:when test="${!empty bbsList}">
-                                            <c:forEach items="${bbsList}" var="list">
+                                        <c:when test="${!empty bbsPagingList}">
+                                            <c:forEach items="${bbsPagingList.dtoList}" var="list">
                                                 <tr>
                                                     <td class="pl-4" style="width: 80px;">
                                                         <label class="control control--checkbox">
-                                                            <input type="checkbox" name="select" id="select" value="">
+                                                            <input type="checkbox" name="select" id="select+${list.idx}" value="">
                                                             <div class="control__indicator"></div>
                                                         </label>
                                                     </td>
                                                     <td class="pl-4"><a href="/admin/${bbsName}/view?idx=${list.idx}">${list.idx}</a></td>
-                                                    <td style="max-width: 300px;"><a href="/admin/${bbsName}/view?idx=${list.idx}" style="max-width: 100%; display: block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">${list.title}</a></td>
+                                                    <td style="max-width: 300px;">
+                                                        <a href="/admin/${bbsName}/view?idx=${list.idx}" style="max-width: 100%; display: block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
+                                                            <span>${list.title}</span>
+<%--                                                            <c:choose>--%>
+<%--                                                                <c:when test="${list.fix_state eq 'Y'}">--%>
+<%--                                                                    <i class="fa fa-thumb-tack" aria-hidden="true"></i>--%>
+<%--                                                                    <span style="font-weight: bold">${list.title}</span>--%>
+<%--                                                                </c:when>--%>
+<%--                                                                <c:otherwise>--%>
+<%--                                                                    <span>${list.title}</span>--%>
+<%--                                                                </c:otherwise>--%>
+<%--                                                            </c:choose>--%>
+                                                        </a>
+                                                    </td>
                                                     <td><a href="/admin/${bbsName}/view?idx=${list.idx}">${list.writer}</a></td>
                                                     <td><a href="/admin/${bbsName}/view?idx=${list.idx}">${list.reg_date}</a></td>
                                                 </tr>
@@ -97,15 +132,62 @@
                         </div>
                         <div style="display: flex; justify-content: space-between; margin-top: 4px;">
                             <div>
-                                <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2"><i class="fa fa-trash"></i></button>
-                                <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2" onclick="location.href='/admin/notice/regist'"><i class="fa fa-upload"></i></button>
+                                <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                                <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2" onclick="location.href='/admin/${bbsName}/regist'">
+                                    <i class="fa fa-upload"></i>
+                                </button>
                             </div>
                         </div>
+                        <nav aria-label="Page navigation example pagination">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item
+                                    <c:if test="${bbsPagingList.prev_page_flag ne true}"> disabled</c:if>">
+                                    <a class="page-link"
+                                       data-num="<c:choose><c:when test="${bbsPagingList.prev_page_flag}">${bbsPagingList.page_block_start-1}</c:when><c:otherwise>1</c:otherwise></c:choose>"
+                                       href="<c:choose><c:when test="${bbsPagingList.prev_page_flag}">${bbsPagingList.linkParams}&page=${bbsPagingList.page_block_start-1}&bbsName=${bbsName}</c:when><c:otherwise>#</c:otherwise></c:choose>" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                    <c:forEach begin="${bbsPagingList.page_block_start}" end="${bbsPagingList.page_block_end}" var="page_num">
+                                        <li class="page-item<c:if test="${bbsPagingList.page == page_num}"> active</c:if> ">
+                                            <a class="page-link" data-num="${page_num}"
+                                               href="<c:choose><c:when test="${bbsPagingList.page == page_num}">#</c:when><c:otherwise>${bbsPagingList.linkParams}&page=${page_num}&bbsName=${bbsName}</c:otherwise></c:choose>">${page_num}</a>
+                                        </li>
+                                    </c:forEach>
+                                <li class="page-item
+                                    <c:if test="${bbsPagingList.next_page_flag ne true}"> disabled</c:if>">
+                                    <a class="page-link"
+                                       data-num="<c:choose><c:when test="${bbsPagingList.next_page_flag}">${bbsPagingList.page_block_end+1}</c:when><c:otherwise>${bbsPagingList.page_block_end}</c:otherwise></c:choose>"
+                                       href="<c:choose><c:when test="${bbsPagingList.next_page_flag}">${bbsPagingList.linkParams}&page=${bbsPagingList.page_block_end+1}&bbsName=${bbsName}</c:when><c:otherwise>#</c:otherwise></c:choose>" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <%@ include file="/WEB-INF/common/footer.jsp"%>
+<script>
+    const selectAllDOM = document.querySelector("#selectAll");
+    const allCheckboxDOM = document.querySelectorAll(".control--checkbox");
+    selectAllDOM.addEventListener("click", function(e) {
+        if (selectAllDOM.checked) {
+            for (let i = 0; i < allCheckboxDOM.length; i++) {
+                allCheckboxDOM[i].children[0].checked = true;
+            }
+        } else {
+            for (let i = 0; i < allCheckboxDOM.length; i++) {
+                allCheckboxDOM[i].children[0].checked = false;
+            }
+        }
+
+    }, false)
+
+</script>
 </body>
 </html>
