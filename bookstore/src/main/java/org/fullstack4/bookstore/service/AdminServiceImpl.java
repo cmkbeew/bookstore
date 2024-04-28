@@ -22,16 +22,75 @@ public class AdminServiceImpl implements AdminService {
     private final AdminMapper adminMapper;
     private final ModelMapper modelMapper;
 
+    // 공지사항
+    @Override
+    public int noticeTotalCount(PageRequestDTO pageRequestDTO) {
+        return adminMapper.noticeTotalCount(pageRequestDTO);
+    }
 
-//    @Override
-//    public int noticeTotalCount(PageRequestDTO pageRequestDTO) {
-//        return adminMapper.noticeTotalCount(pageRequestDTO);
-//    }
-//
-//    @Override
-//    public int faqTotalCount(PageRequestDTO pageRequestDTO) {
-//        return adminMapper.faqTotalCount(pageRequestDTO);
-//    }
+    @Override
+    public int faqTotalCount(PageRequestDTO pageRequestDTO) {
+        return adminMapper.faqTotalCount(pageRequestDTO);
+    }
+
+    @Override
+    public int qnaTotalCount(PageRequestDTO pageRequestDTO) {
+        return adminMapper.qnaTotalCount(pageRequestDTO);
+    }
+
+    @Override
+    public PageResponseDTO<NoticeDTO> noticeListByPage(PageRequestDTO pageRequestDTO) {
+        List<NoticeVO> voList = adminMapper.noticeListByPage(pageRequestDTO);
+        List<NoticeDTO> dtoList = voList.stream()
+                .map(vo -> modelMapper.map(vo, NoticeDTO.class))
+                .collect(Collectors.toList());
+
+        int total_count = adminMapper.noticeTotalCount(pageRequestDTO);
+
+        PageResponseDTO<NoticeDTO> pageResponseDTO = PageResponseDTO.<NoticeDTO>withAll()
+                .requestDTO(pageRequestDTO)
+                .dtoList(dtoList)
+                .total_count(total_count)
+                .build();
+
+        return pageResponseDTO;
+    }
+
+    @Override
+    public PageResponseDTO<FaqDTO> faqListByPage(PageRequestDTO pageRequestDTO) {
+        List<FaqVO> voList = adminMapper.faqListByPage(pageRequestDTO);
+        List<FaqDTO> dtoList = voList.stream()
+                .map(vo -> modelMapper.map(vo, FaqDTO.class))
+                .collect(Collectors.toList());
+
+        int total_count = adminMapper.faqTotalCount(pageRequestDTO);
+
+        PageResponseDTO<FaqDTO> pageResponseDTO = PageResponseDTO.<FaqDTO>withAll()
+                .requestDTO(pageRequestDTO)
+                .dtoList(dtoList)
+                .total_count(total_count)
+                .build();
+
+        return pageResponseDTO;
+    }
+
+    @Override
+    public PageResponseDTO<QnaDTO> qnaListByPage(PageRequestDTO pageRequestDTO) {
+        List<QnaVO> voList = adminMapper.qnaListByPage(pageRequestDTO);
+        List<QnaDTO> dtoList = voList.stream()
+                .map(vo -> modelMapper.map(vo, QnaDTO.class))
+                .collect(Collectors.toList());
+
+        int total_count = adminMapper.noticeTotalCount(pageRequestDTO);
+
+        PageResponseDTO<QnaDTO> pageResponseDTO = PageResponseDTO.<QnaDTO>withAll()
+                .requestDTO(pageRequestDTO)
+                .dtoList(dtoList)
+                .total_count(total_count)
+                .build();
+
+        return pageResponseDTO;
+    }
 
     @Override
     public List<NoticeDTO> noticeList() {
@@ -53,6 +112,16 @@ public class AdminServiceImpl implements AdminService {
         return noticeDTO;
     }
 
+    @Override
+    public int noticeRegist(NoticeDTO noticeDTO) {
+        NoticeVO noticeVO = modelMapper.map(noticeDTO, NoticeVO.class);
+        int result = adminMapper.noticeRegist(noticeVO);
+        return result;
+    }
+
+
+
+
 //    @Override
 //    public NoticeDTO2 prevNotice(int idx) {
 //        NoticeVO2 noticeVO = adminMapper.prevNotice(idx);
@@ -61,6 +130,14 @@ public class AdminServiceImpl implements AdminService {
 //        return noticeDTO;
 //    }
 
+
+    //    @Override
+//    public int faqTotalCount(PageRequestDTO pageRequestDTO) {
+//        return adminMapper.faqTotalCount(pageRequestDTO);
+//    }
+
+
+    // FAQ
     @Override
     public List<FaqDTO> faqList() {
         List<FaqVO> voList = adminMapper.faqList();
@@ -81,6 +158,10 @@ public class AdminServiceImpl implements AdminService {
         return faqDTO;
     }
 
+
+
+
+    // QnA
     @Override
     public List<QnaDTO> qnaList() {
         List<QnaVO> voList = adminMapper.qnaList();
@@ -101,6 +182,8 @@ public class AdminServiceImpl implements AdminService {
         return qnaDTO;
     }
 
+    
+    // 회원관리
     @Override
     public List<MemberDTO> memberList() {
         List<MemberDTO> dtoList = adminMapper.memberList().stream()
@@ -110,6 +193,8 @@ public class AdminServiceImpl implements AdminService {
         return dtoList;
     }
 
+    
+    // 도서
     @Override
     public List<ProductDTO> productList() {
         List<ProductDTO> dtoList = adminMapper.productList().stream()
@@ -119,6 +204,8 @@ public class AdminServiceImpl implements AdminService {
         return dtoList;
     }
 
+    
+    // 배송관리
     @Override
     public List<DeliveryDTO> deliveryList() {
         List<DeliveryDTO> dtoList = adminMapper.deliveryList().stream()

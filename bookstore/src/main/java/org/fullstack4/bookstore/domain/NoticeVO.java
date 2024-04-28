@@ -2,6 +2,7 @@ package org.fullstack4.bookstore.domain;
 
 import lombok.*;
 
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 
 @ToString

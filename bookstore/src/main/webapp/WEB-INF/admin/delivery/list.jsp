@@ -30,18 +30,7 @@
 <body>
 <%@ include file="/WEB-INF/common/header.jsp"%>
 <div class="d-flex py-h" id="wrapper">
-    <!-- Sidebar-->
-    <div class="border-end bg-white" id="sidebar-wrapper">
-        <div class="sidebar-heading border-bottom bg-light">관리자 페이지</div>
-        <div class="list-group list-group-flush">
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/list?bbsName=notice">공지사항</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/list?bbsName=faq">FAQ</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/list?bbsName=qna">QnA</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/member/list">회원관리</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/list?bbsName=product">도서</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/list?bbsName=delivery">배송관리</a>
-        </div>
-    </div>
+    <%@ include file="/WEB-INF/common/adminSidebar.jsp"%>
     <!-- Page content wrapper-->
     <div id="page-content-wrapper">
         <button class="btn btn-primary" id="sidebarToggle">
