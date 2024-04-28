@@ -40,18 +40,20 @@ public class CommunityController {
         }
 
         log.info("type : " + type);
+        model.addAttribute("type", type);
+
         if(type.equals("notice")) {
             PageResponseDTO<NoticeDTO> noticeList = communityService.noticeList(pageRequestDTO);
 
-            model.addAttribute("noticeList", noticeList);
+            model.addAttribute("communityList", noticeList);
         } else if(type.equals("faq")) {
             PageResponseDTO<FaqDTO> faqList = communityService.faqList(pageRequestDTO);
 
-            model.addAttribute("faqList", faqList);
+            model.addAttribute("communityList", faqList);
         } else if(type.equals("qna")) {
             PageResponseDTO<QnaDTO> qnaList = communityService.qnaList(pageRequestDTO);
 
-            model.addAttribute("qnaList", qnaList);
+            model.addAttribute("communityList", qnaList);
         } else {
 
         }

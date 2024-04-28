@@ -2,6 +2,7 @@ package org.fullstack4.bookstore.mapper;
 
 import lombok.extern.log4j.Log4j2;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -19,7 +20,6 @@ public class AdminMapperTests {
     @Autowired(required = false)
     AdminMapper adminMapper;
 
-<<<<<<< HEAD
 //    @Test
 //    public void testPrev() {
 //        NoticeVO2 noticeVO = NoticeVO2.builder()
@@ -31,12 +31,10 @@ public class AdminMapperTests {
 //
 //        log.info("prev : " + noticeVO2);
 //    }
-=======
     @Test
     public void testGetJSON() {
 //        Map<String, Object> json = adminMapper.getJSON();
 
 //        log.info("json : " + json.get("member_id"));
     }
->>>>>>> hk
 }

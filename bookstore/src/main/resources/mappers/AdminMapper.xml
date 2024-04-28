@@ -12,17 +12,6 @@
 <!--    </select>-->
 
     <!-- 공지사항 -->
-<<<<<<< HEAD
-    <select id="noticeList" resultType="org.fullstack4.bookstore.domain.NoticeVO2">
-        SELECT idx, title, writer, content, reg_date, org_file_name, save_file_name, fix_state
-        FROM tbl_bbs_notice2
-        ORDER BY idx DESC
-    </select>
-
-    <select id="noticeView" resultType="org.fullstack4.bookstore.domain.NoticeVO2">
-        SELECT idx, title, writer, content, reg_date, org_file_name, save_file_name, fix_state
-        FROM tbl_bbs_notice2
-=======
     <select id="noticeList" resultType="org.fullstack4.bookstore.domain.NoticeVO">
         SELECT idx, title, writer, content, reg_date, org_file_name, save_file_name, fix_state
         FROM tbl_bbs_notice
@@ -32,7 +21,6 @@
     <select id="noticeView" resultType="org.fullstack4.bookstore.domain.NoticeVO">
         SELECT idx, title, writer, content, reg_date, org_file_name, save_file_name, fix_state
         FROM tbl_bbs_notice
->>>>>>> hk
         WHERE idx = #{idx}
     </select>
 
