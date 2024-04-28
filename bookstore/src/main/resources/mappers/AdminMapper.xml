@@ -21,12 +21,6 @@
     <select id="noticeView" resultType="org.fullstack4.bookstore.domain.NoticeVO">
         SELECT idx, title, writer, content, reg_date, org_file_name, save_file_name, fix_state
         FROM tbl_bbs_notice
-        ORDER BY idx DESC
-    </select>
-
-    <select id="noticeView" resultType="org.fullstack4.bookstore.domain.NoticeVO">
-        SELECT idx, title, writer, content, reg_date, org_file_name, save_file_name, fix_state
-        FROM tbl_bbs_notice
         WHERE idx = #{idx}
     </select>
 

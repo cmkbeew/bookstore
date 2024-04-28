@@ -35,7 +35,7 @@ public class AdminServiceImpl implements AdminService {
     public List<NoticeDTO> noticeList() {
         List<NoticeVO> voList = adminMapper.noticeList();
 
-        List<NoticeDTO> dtoList = adminMapper.noticeList().stream()
+        List<NoticeDTO> dtoList = voList.stream()
                 .map(vo -> modelMapper.map(vo, NoticeDTO.class))
                 .collect(Collectors.toList());
 
