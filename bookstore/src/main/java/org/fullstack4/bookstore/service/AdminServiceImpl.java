@@ -117,5 +117,14 @@ public class AdminServiceImpl implements AdminService {
         return dtoList;
     }
 
+    @Override
+    public DeliveryDTO deliveryView(int idx) {
+        DeliveryVO deliveryVO = adminMapper.deliveryView(idx);
+
+        DeliveryDTO deliveryDTO = modelMapper.map(deliveryVO, DeliveryDTO.class);
+
+        return deliveryDTO;
+    }
+
 
 }
