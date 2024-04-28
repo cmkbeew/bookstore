@@ -1,6 +1,5 @@
 package org.fullstack4.bookstore.service;
 
-import org.fullstack4.bookstore.domain.NoticeVO2;
 import org.fullstack4.bookstore.dto.*;
 
 import java.util.List;
@@ -12,15 +11,25 @@ public interface AdminService {
 //    int faqTotalCount(PageRequestDTO pageRequestDTO);
 
     // 공지사항
-    List<NoticeDTO2> noticeList();
-    NoticeDTO2 noticeView(int idx);
+    List<NoticeDTO> noticeList();
+    NoticeDTO noticeView(int idx);
 //    NoticeDTO2 prevNotice(int idx);
 
     // FAQ
-    List<FaqDTO2> faqList();
-    FaqDTO2 faqView(int idx);
+    List<FaqDTO> faqList();
+    FaqDTO faqView(int idx);
 
     // QnA
-    List<QnaDTO2> qnaList();
-    QnaDTO2 qnaView(int idx);
+    List<QnaDTO> qnaList();
+    QnaDTO qnaView(int idx);
+
+    // 회원
+    List<MemberDTO> memberList();
+
+
+    // 도서
+
+
+    // 배송
+    List<DeliveryDTO> deliveryList();
 }

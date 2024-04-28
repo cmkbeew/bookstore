@@ -31,21 +31,26 @@ public class AdminServiceImpl implements AdminService {
 //    }
 
     @Override
-    public List<NoticeDTO2> noticeList() {
-        List<NoticeVO2> voList = adminMapper.noticeList();
-
-        List<NoticeDTO2> dtoList = voList.stream()
-                .map(vo -> modelMapper.map(vo, NoticeDTO2.class))
+    public List<NoticeDTO> noticeList() {
+//        List<NoticeVO2> voList = adminMapper.noticeList();
+//
+//        List<NoticeDTO2> dtoList = voList.stream()
+//                .map(vo -> modelMapper.map(vo, NoticeDTO2.class))
+//                .collect(Collectors.toList());
+//
+//        return dtoList;
+        List<NoticeDTO> dtoList = adminMapper.noticeList().stream()
+                .map(vo -> modelMapper.map(vo, NoticeDTO.class))
                 .collect(Collectors.toList());
 
         return dtoList;
     }
 
     @Override
-    public NoticeDTO2 noticeView(int idx) {
-        NoticeVO2 noticeVO = adminMapper.noticeView(idx);
+    public NoticeDTO noticeView(int idx) {
+        NoticeVO noticeVO = adminMapper.noticeView(idx);
 
-        NoticeDTO2 noticeDTO = modelMapper.map(noticeVO, NoticeDTO2.class);
+        NoticeDTO noticeDTO = modelMapper.map(noticeVO, NoticeDTO.class);
 
         return noticeDTO;
     }
@@ -59,42 +64,62 @@ public class AdminServiceImpl implements AdminService {
 //    }
 
     @Override
-    public List<FaqDTO2> faqList() {
-        List<FaqVO2> voList = adminMapper.faqList();
+    public List<FaqDTO> faqList() {
+        List<FaqVO> voList = adminMapper.faqList();
 
-        List<FaqDTO2> dtoList = voList.stream()
-                .map(vo -> modelMapper.map(vo, FaqDTO2.class))
+        List<FaqDTO> dtoList = voList.stream()
+                .map(vo -> modelMapper.map(vo, FaqDTO.class))
                 .collect(Collectors.toList());
 
         return dtoList;
     }
 
     @Override
-    public FaqDTO2 faqView(int idx) {
-        FaqVO2 faqVO = adminMapper.faqView(idx);
+    public FaqDTO faqView(int idx) {
+        FaqVO faqVO = adminMapper.faqView(idx);
 
-        FaqDTO2 faqDTO = modelMapper.map(faqVO, FaqDTO2.class);
+        FaqDTO faqDTO = modelMapper.map(faqVO, FaqDTO.class);
 
         return faqDTO;
     }
 
     @Override
-    public List<QnaDTO2> qnaList() {
-        List<QnaVO2> voList = adminMapper.qnaList();
+    public List<QnaDTO> qnaList() {
+        List<QnaVO> voList = adminMapper.qnaList();
 
-        List<QnaDTO2> dtoList = voList.stream()
-                .map(vo -> modelMapper.map(vo, QnaDTO2.class))
+        List<QnaDTO> dtoList = voList.stream()
+                .map(vo -> modelMapper.map(vo, QnaDTO.class))
                 .collect(Collectors.toList());
 
         return dtoList;
     }
 
     @Override
-    public QnaDTO2 qnaView(int idx) {
-        QnaVO2 qnaVO = adminMapper.qnaView(idx);
+    public QnaDTO qnaView(int idx) {
+        QnaVO qnaVO = adminMapper.qnaView(idx);
 
-        QnaDTO2 qnaDTO = modelMapper.map(qnaVO, QnaDTO2.class);
+        QnaDTO qnaDTO = modelMapper.map(qnaVO, QnaDTO.class);
 
         return qnaDTO;
     }
+
+    @Override
+    public List<MemberDTO> memberList() {
+        List<MemberDTO> dtoList = adminMapper.memberList().stream()
+                .map(vo -> modelMapper.map(vo, MemberDTO.class))
+                .collect(Collectors.toList());
+
+        return dtoList;
+    }
+
+    @Override
+    public List<DeliveryDTO> deliveryList() {
+        List<DeliveryDTO> dtoList = adminMapper.deliveryList().stream()
+                .map(vo -> modelMapper.map(vo, DeliveryDTO.class))
+                .collect(Collectors.toList());
+
+        return dtoList;
+    }
+
+
 }

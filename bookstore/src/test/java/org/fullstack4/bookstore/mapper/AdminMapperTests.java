@@ -2,6 +2,9 @@ package org.fullstack4.bookstore.mapper;
 
 import lombok.extern.log4j.Log4j2;
 
+import org.fullstack4.bookstore.domain.MemberVO;
+import org.fullstack4.bookstore.dto.MemberDTO;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -30,4 +33,16 @@ public class AdminMapperTests {
 //
 //        log.info("prev : " + noticeVO2);
 //    }
+
+    @Test
+    public void testMember() {
+
+        MemberDTO memberDTO = MemberDTO.builder()
+                .member_idx(2)
+                .build();
+
+        List<MemberVO> memberVO2 = adminMapper.memberList();
+
+    log.info("member : " + memberDTO);
+    }
 }

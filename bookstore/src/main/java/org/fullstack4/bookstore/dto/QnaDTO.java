@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Builder
 public class QnaDTO {
-    private int qna_idx;
+    private int idx;
     private String title;
     private String content;
     private String writer;

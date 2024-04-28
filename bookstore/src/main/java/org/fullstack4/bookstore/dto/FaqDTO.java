@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FaqDTO {
-    private int faq_idx;
+    private int idx;
     private String title;
     private String content;
     private String writer;

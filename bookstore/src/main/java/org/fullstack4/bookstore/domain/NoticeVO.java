@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class NoticeVO {
-    private int notice_idx;
+    private int idx;
     private String title;
     private String content;
     private String writer;

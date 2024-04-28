@@ -87,12 +87,12 @@
                     </div>
                 </div>
             </div>
-            <div style="display: flex; justify-content: space-between; margin-top: 4px;">
+            <div class="mt-md-2">
                 <div>
-                    <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle"><i class="fa fa-edit"></i></button>
+                    <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2" onclick="location.href='${referer}';"><i class="fa fa-list"></i></button>
+                    <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2"><i class="fa fa-edit"></i></button>
                     <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2"><i class="fa fa-trash"></i></button>
                 </div>
-                <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2"><i class="fa fa-upload"></i></button>
             </div>
         </div>
     </div>

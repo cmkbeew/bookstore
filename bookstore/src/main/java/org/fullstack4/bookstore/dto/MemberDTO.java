@@ -15,7 +15,6 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Builder
 public class MemberDTO {
-    @PositiveOrZero
     private int member_idx;
     private String member_id;
     private String pwd;

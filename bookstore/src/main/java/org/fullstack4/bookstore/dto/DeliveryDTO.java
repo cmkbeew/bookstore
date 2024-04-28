@@ -1,15 +1,14 @@
-package org.fullstack4.bookstore.domain;
+package org.fullstack4.bookstore.dto;
 
 import lombok.*;
 
 import java.time.LocalDate;
 
-@ToString
-@Getter
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DeliveryVO {
+public class DeliveryDTO {
     private int pay_idx;
     private String delivery_company;
     private String company_tel;
