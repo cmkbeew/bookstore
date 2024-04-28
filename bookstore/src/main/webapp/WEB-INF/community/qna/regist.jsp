@@ -3,8 +3,10 @@
 <html>
 <head>
     <title>QnA 등록</title>
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.3.1/classic/ckeditor.js"></script>
 </head>
 <body>
+
 <%--<form id="frmRegist" name="frmRegist" action="/qna/regist" method="post" enctype="multipart/form-data">--%>
 <form id="frmRegist" name="frmRegist" action="/community/qna/regist" method="post">
     <label for="title">제목</label>
@@ -18,8 +20,16 @@
 
 <%--    <label>파일</label>--%>
 <%--    <input type="file" name="file" id="file" />--%>
+    <textarea id="editor" name="content"></textarea>
 
     <button type="submit">등록</button>
 </form>
+<script>
+    ClassicEditor
+        .create(document.getElementById("editor"))
+        .catch( error => {console.error(error)}), {
+            language: "ko"
+        };
+</script>
 </body>
 </html>

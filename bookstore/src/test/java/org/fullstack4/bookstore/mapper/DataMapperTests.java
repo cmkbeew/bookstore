@@ -26,6 +26,6 @@ public class DataMapperTests {
                 .save_file_name("save file name")
                 .build();
 
-        int result = dataMapper.regist_data(dataVO);
+        int result = dataMapper.dataRegist(dataVO);
     }
 }

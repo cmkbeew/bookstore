@@ -32,21 +32,21 @@ public class AdminController {
         log.info(bbsName);
 
         if (bbsName.equals("notice")) {
-            List<NoticeDTO2> noticeList = adminService.noticeList();
+            List<NoticeDTO> noticeList = adminService.noticeList();
             model.addAttribute("bbsList", noticeList);
             model.addAttribute("bbsTitle", "공지사항");
             model.addAttribute("bbsName", "notice");
         }
 
         if (bbsName.equals("faq")) {
-            List<FaqDTO2> faqList = adminService.faqList();
+            List<FaqDTO> faqList = adminService.faqList();
             model.addAttribute("bbsList", faqList);
             model.addAttribute("bbsTitle", "FAQ");
             model.addAttribute("bbsName", "faq");
         }
 
         if (bbsName.equals("qna")) {
-            List<QnaDTO2> qnaList = adminService.qnaList();
+            List<QnaDTO> qnaList = adminService.qnaList();
             model.addAttribute("bbsList", qnaList);
             model.addAttribute("bbsTitle", "QnA");
             model.addAttribute("bbsName", "qna");

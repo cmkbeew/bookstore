@@ -18,10 +18,13 @@ public interface CommunityMapper {
     List<FaqVO> faqList(PageRequestDTO pageRequestDTO);
     int faqTotalCount(PageRequestDTO requestDTO);
     FaqVO faqView(int faq_idx);
-    // QnA
+    FaqVO faqPrev(int faq_idx);
+    FaqVO faqNext(int faq_idx);
 
+    // QnA
     List<QnaVO> qnaList(PageRequestDTO pageRequestDTO);
     int qnaTotalCount(PageRequestDTO requestDTO);
     QnaVO qnaView(int qna_idx);
     int qnaRegist(QnaVO qnaVO);
+
 }
