@@ -19,6 +19,7 @@ import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
 
 @Log4j2
 @Controller
@@ -28,20 +29,32 @@ public class CommunityController {
 
     private final CommunityService communityService;
 
-    @GetMapping("/notice/list")
-    public String noticeList(@Valid PageRequestDTO pageRequestDTO,
+    @GetMapping("/list")
+    public void communityList(@Valid PageRequestDTO pageRequestDTO,
                            BindingResult bindingResult,
+                           @RequestParam String type,
                            RedirectAttributes redirectAttributes,
                            Model model) {
         if(bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
         }
 
-        PageResponseDTO<NoticeDTO> noticeList = communityService.noticeList(pageRequestDTO);
+        log.info("type : " + type);
+        if(type.equals("notice")) {
+            PageResponseDTO<NoticeDTO> noticeList = communityService.noticeList(pageRequestDTO);
 
-        model.addAttribute("noticeList", noticeList);
+            model.addAttribute("noticeList", noticeList);
+        } else if(type.equals("faq")) {
+            PageResponseDTO<FaqDTO> faqList = communityService.faqList(pageRequestDTO);
 
-        return "/community/notice/list";
+            model.addAttribute("faqList", faqList);
+        } else if(type.equals("qna")) {
+            PageResponseDTO<QnaDTO> qnaList = communityService.qnaList(pageRequestDTO);
+
+            model.addAttribute("qnaList", qnaList);
+        } else {
+
+        }
     }
 
     @GetMapping("/notice/view")
@@ -69,9 +82,18 @@ public class CommunityController {
 
     @GetMapping("/faq/view")
     public void faqView(@RequestParam int faq_idx, Model model) {
-        FaqDTO faqDTO = communityService.faqView(faq_idx);
+//        FaqDTO faqDTO = communityService.faqView(faq_idx);
+//        faqDTO.setContent(faqDTO.getContent().replace("\r\n", "<br>"));
+//        model.addAttribute("faqDTO", faqDTO);
 
-        model.addAttribute("faqDTO", faqDTO);
+        Map<String, FaqDTO> faqMap = communityService.faqView(faq_idx);
+
+        log.info("faqMap : " + faqMap);
+        faqMap.get("faqDTO").setContent(faqMap.get("faqDTO").getContent().replace("\r\n", "<br>"));
+
+        model.addAttribute("faqDTO", faqMap.get("faqDTO"));
+        model.addAttribute("faqPrevDTO", faqMap.get("faqPrevDTO"));
+        model.addAttribute("faqNextDTO", faqMap.get("faqNextDTO"));
     }
 
     @GetMapping("/qna/list")

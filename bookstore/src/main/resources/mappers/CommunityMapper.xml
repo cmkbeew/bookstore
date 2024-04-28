@@ -31,10 +31,10 @@
 
     <!-- 공지사항 -->
     <select id="noticeList" resultType="org.fullstack4.bookstore.domain.NoticeVO">
-        SELECT notice_idx, title, writer, content, reg_date, org_file_name, save_file_name, fix_state
+        SELECT idx, title, writer, content, reg_date, org_file_name, save_file_name, fix_state
         FROM tbl_bbs_notice
         <include refid="whereCondition"></include>
-        ORDER BY notice_idx DESC
+        ORDER BY idx DESC
         LIMIT #{page_skip_count}, #{page_size}
     </select>
 
@@ -45,17 +45,17 @@
     </select>
 
     <select id="noticeView" resultType="org.fullstack4.bookstore.domain.NoticeVO">
-        SELECT notice_idx, title, writer, content, reg_date, org_file_name, save_file_name, fix_state
+        SELECT idx, title, writer, content, reg_date, org_file_name, save_file_name, fix_state
         FROM tbl_bbs_notice
-        WHERE notice_idx = #{notice_idx}
+        WHERE idx = #{idx}
     </select>
 
     <!-- FAQ -->
     <select id="faqList" resultType="org.fullstack4.bookstore.domain.FaqVO">
-        SELECT faq_idx, title, content, writer, reg_date, modify_date
+        SELECT idx, title, content, writer, reg_date, modify_date
         FROM tbl_bbs_faq
         <include refid="whereCondition"></include>
-        ORDER BY faq_idx DESC
+        ORDER BY idx DESC
         LIMIT #{page_skip_count}, #{page_size}
     </select>
 
@@ -66,17 +66,33 @@
     </select>
 
     <select id="faqView" resultType="org.fullstack4.bookstore.domain.FaqVO">
-        SELECT faq_idx, title, content, writer, reg_date, modify_date
+        SELECT idx, title, content, writer, reg_date, modify_date
         FROM tbl_bbs_faq
-        WHERE faq_idx = #{faq_idx}
+        WHERE idx = #{idx}
+    </select>
+
+    <select id="faqPrev" resultType="org.fullstack4.bookstore.domain.FaqVO">
+        SELECT idx, title
+        FROM tbl_bbs_faq
+        WHERE idx <![CDATA[<]]> #{idx}
+        ORDER BY idx DESC
+        LIMIT 1
+    </select>
+
+    <select id="faqNext" resultType="org.fullstack4.bookstore.domain.FaqVO">
+        SELECT idx, title
+        FROM tbl_bbs_faq
+        WHERE idx <![CDATA[>]]> #{idx}
+        ORDER BY idx
+        LIMIT 1
     </select>
 
     <!-- QnA -->
     <select id="qnaList" resultType="org.fullstack4.bookstore.domain.QnaVO">
-        SELECT qna_idx, title, content, writer, read_cnt, reg_date, modify_date, reply_state
+        SELECT idx, title, content, writer, read_cnt, reg_date, modify_date, reply_state
         FROM tbl_bbs_qna
         <include refid="whereCondition"></include>
-        ORDER BY qna_idx DESC
+        ORDER BY idx DESC
         LIMIT #{page_skip_count}, #{page_size}
     </select>
 
@@ -87,9 +103,9 @@
     </select>
 
     <select id="qnaView" resultType="org.fullstack4.bookstore.domain.QnaVO">
-        SELECT qna_idx, title, content, writer, read_cnt, reg_date, modify_date, reply_state
+        SELECT idx, title, content, writer, read_cnt, reg_date, modify_date, reply_state
         FROM tbl_bbs_qna
-        WHERE qna_idx = #{qna_idx}
+        WHERE idx = #{idx}
     </select>
 
     <insert id="qnaRegist">

@@ -5,41 +5,41 @@
 <mapper namespace="org.fullstack4.bookstore.mapper.AdminMapper">
 
     <!-- 공지사항 -->
-    <select id="noticeList" resultType="org.fullstack4.bookstore.domain.NoticeVO2">
-        SELECT idx, title, member_id, content, reg_date, org_file_name, save_file_name, fix_state
-        FROM tbl_bbs_notice2
+    <select id="noticeList" resultType="org.fullstack4.bookstore.domain.NoticeVO">
+        SELECT idx, title, writer, content, reg_date, org_file_name, save_file_name, fix_state
+        FROM tbl_bbs_notice
         ORDER BY idx DESC
     </select>
 
-    <select id="noticeView" resultType="org.fullstack4.bookstore.domain.NoticeVO2">
-        SELECT idx, title, member_id, content, reg_date, org_file_name, save_file_name, fix_state
-        FROM tbl_bbs_notice2
+    <select id="noticeView" resultType="org.fullstack4.bookstore.domain.NoticeVO">
+        SELECT idx, title, writer, content, reg_date, org_file_name, save_file_name, fix_state
+        FROM tbl_bbs_notice
         WHERE idx = #{idx}
     </select>
 
     <!-- FAQ -->
-    <select id="faqList" resultType="org.fullstack4.bookstore.domain.FaqVO2">
+    <select id="faqList" resultType="org.fullstack4.bookstore.domain.FaqVO">
         SELECT idx, title, content, writer, reg_date, modify_date
-        FROM tbl_bbs_faq2
+        FROM tbl_bbs_faq
         ORDER BY idx DESC
     </select>
 
-    <select id="faqView" resultType="org.fullstack4.bookstore.domain.FaqVO2">
+    <select id="faqView" resultType="org.fullstack4.bookstore.domain.FaqVO">
         SELECT idx, title, content, writer, reg_date, modify_date
-        FROM tbl_bbs_faq2
+        FROM tbl_bbs_faq
         WHERE idx = #{idx}
     </select>
 
     <!-- QnA -->
-    <select id="qnaList" resultType="org.fullstack4.bookstore.domain.QnaVO2">
+    <select id="qnaList" resultType="org.fullstack4.bookstore.domain.QnaVO">
         SELECT idx, title, content, writer, read_cnt, reg_date, modify_date, reply_state
-        FROM tbl_bbs_qna2
+        FROM tbl_bbs_qna
         ORDER BY idx DESC
     </select>
 
-    <select id="qnaView" resultType="org.fullstack4.bookstore.domain.QnaVO2">
+    <select id="qnaView" resultType="org.fullstack4.bookstore.domain.QnaVO">
         SELECT idx, title, content, writer, read_cnt, reg_date, modify_date, reply_state
-        FROM tbl_bbs_qna2
+        FROM tbl_bbs_qna
         WHERE idx = #{idx}
     </select>
 </mapper>

@@ -10,7 +10,9 @@ import org.fullstack4.bookstore.mapper.CommunityMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Log4j2
@@ -62,6 +64,14 @@ public class CommunityServiceImpl implements CommunityService {
                 .map(vo -> modelMapper.map(vo, FaqDTO.class))
                 .collect(Collectors.toList());
 
+        // 보여지는 내용 길이 설정
+        for(FaqDTO dto : dtoList) {
+            dto.setContent(dto.getContent().replace("\r\n", " "));
+            if(dto.getContent().length() >= 20) {
+                dto.setContent(dto.getContent().substring(0, 20) + ".....");
+            }
+        }
+
         int total_count = communityMapper.faqTotalCount(pageRequestDTO);
 
         PageResponseDTO<FaqDTO> responseDTO = PageResponseDTO.<FaqDTO>withAll()
@@ -78,13 +88,45 @@ public class CommunityServiceImpl implements CommunityService {
         return communityMapper.faqTotalCount(requestDTO);
     }
 
+//    @Override
+//    public FaqDTO faqView(int faq_idx) {
+//        FaqVO faqVO = communityMapper.faqView(faq_idx);
+//
+//        FaqVO faqPrev = communityMapper.faqPrev(faq_idx);
+//        FaqVO faqNext = communityMapper.faqNext(faq_idx);
+//
+//        FaqDTO faqDTO = modelMapper.map(faqVO, FaqDTO.class);
+//        FaqDTO faqPrevDTO = modelMapper.map(faqPrev, FaqDTO.class);
+//        FaqDTO faqNextDTO = modelMapper.map(faqNext, FaqDTO.class);
+//
+//        log.info("faqPrevDTO : " + faqPrevDTO);
+//        log.info("faqNextDTO : " + faqNextDTO);
+//
+//        return faqDTO;
+//    }
+
+
     @Override
-    public FaqDTO faqView(int faq_idx) {
+    public Map<String, FaqDTO> faqView(int faq_idx) {
+        Map<String, FaqDTO> maps = new HashMap<>();
+
         FaqVO faqVO = communityMapper.faqView(faq_idx);
+        FaqVO faqPrevVO = communityMapper.faqPrev(faq_idx);
+        FaqVO faqNextVO = communityMapper.faqNext(faq_idx);
 
         FaqDTO faqDTO = modelMapper.map(faqVO, FaqDTO.class);
+        maps.put("faqDTO", faqDTO);
 
-        return faqDTO;
+        if(faqPrevVO != null) {
+            FaqDTO faqPrevDTO = modelMapper.map(faqPrevVO, FaqDTO.class);
+            maps.put("faqPrevDTO", faqPrevDTO);
+        }
+        if(faqNextVO != null) {
+            FaqDTO faqNextDTO = modelMapper.map(faqNextVO, FaqDTO.class);
+            maps.put("faqNextDTO", faqNextDTO);
+        }
+
+        return maps;
     }
 
     @Override
@@ -128,4 +170,5 @@ public class CommunityServiceImpl implements CommunityService {
 
         return result;
     }
+
 }

@@ -5,6 +5,7 @@ import org.fullstack4.bookstore.domain.QnaVO;
 import org.fullstack4.bookstore.dto.*;
 
 import java.util.List;
+import java.util.Map;
 
 public interface CommunityService {
 
@@ -16,11 +17,13 @@ public interface CommunityService {
     // FAQ
     PageResponseDTO<FaqDTO> faqList(PageRequestDTO pageRequestDTO);
     int faqTotalCount(PageRequestDTO requestDTO);
-    FaqDTO faqView(int faq_idx);
+//    FaqDTO faqView(int faq_idx);
+    Map<String, FaqDTO> faqView(int faq_idx);
 
     // QnA
     PageResponseDTO<QnaDTO> qnaList(PageRequestDTO pageRequestDTO);
     int qnaTotalCount(PageRequestDTO requestDTO);
     QnaDTO qnaView(int qna_idx);
     int qnaRegist(QnaDTO qnaDTO);
+
 }

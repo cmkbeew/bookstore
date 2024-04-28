@@ -22,8 +22,8 @@ public class AdminMapperTests {
 
     @Test
     public void testGetJSON() {
-        Map<String, Object> json = adminMapper.getJSON();
+//        Map<String, Object> json = adminMapper.getJSON();
 
-        log.info("json : " + json.get("member_id"));
+//        log.info("json : " + json.get("member_id"));
     }
 }

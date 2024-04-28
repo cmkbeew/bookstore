@@ -60,17 +60,17 @@ public class AdminController {
         log.info(bbsName);
 
         if (bbsName.equals("notice")) {
-            List<NoticeDTO2> noticeList = adminService.noticeList();
+            List<NoticeDTO> noticeList = adminService.noticeList();
             model.addAttribute("bbsList", noticeList);
         }
 
         if (bbsName.equals("faq")) {
-            List<FaqDTO2> faqList = adminService.faqList();
+            List<FaqDTO> faqList = adminService.faqList();
             model.addAttribute("bbsList", faqList);
         }
 
         if (bbsName.equals("qna")) {
-            List<QnaDTO2> qnaList = adminService.qnaList();
+            List<QnaDTO> qnaList = adminService.qnaList();
             model.addAttribute("bbsList", qnaList);
         }
 

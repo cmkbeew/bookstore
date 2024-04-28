@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class QnaVO {
-    private int qna_idx;
+    private int idx;
     private String title;
     private String content;
     private String writer;

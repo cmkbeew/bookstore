@@ -34,11 +34,12 @@
                             <tbody>
 
                             <c:choose>
-                                <c:when test="${faqList != null}">
-                                    <c:forEach items="${faqList.dtoList}" var="list">
+
+                                <c:when test="${noticeList != null}">
+                                    <c:forEach items="${noticeList.dtoList}" var="list">
                                         <tr class="align-middle">
                                             <td>
-                                                <a href="/community/faq/view?faq_idx=${list.faq_idx}">
+                                                <a href="/community/notice/view?faq_idx=${list.idx}">
                                                     <div class="d-flex align-items-center">
                                                         <div class="h6 mb-0 lh-1">${list.title}</div>
                                                     </div>
@@ -50,27 +51,29 @@
                                         </tr>
                                     </c:forEach>
                                 </c:when>
-                                <c:when test="${noticeList != null}">
-                                    <c:forEach items="${noticeList}" var="list">
+
+                                <c:when test="${faqList != null}">
+                                    <c:forEach items="${faqList.dtoList}" var="list">
                                         <tr class="align-middle">
                                             <td>
-                                                <a href="/community/notice/view?faq_idx=${list.notice_idx}">
+                                                <a href="/community/faq/view?faq_idx=${list.idx}">
                                                     <div class="d-flex align-items-center">
                                                         <div class="h6 mb-0 lh-1">${list.title}</div>
                                                     </div>
                                                 </a>
                                             </td>
                                             <td>${list.content}</td>
-                                            <td class="text-end">${list.member_id}</td>
+                                            <td class="text-end">${list.writer}</td>
                                             <td class="text-end">${list.reg_date}</td>
                                         </tr>
                                     </c:forEach>
                                 </c:when>
+
                                 <c:when test="${qnaList != null}">
-                                    <c:forEach items="${qnaList}" var="list">
+                                    <c:forEach items="${qnaList.dtoList}" var="list">
                                         <tr class="align-middle">
                                             <td>
-                                                <a href="/community/qna/view?faq_idx=${list.qna_idx}">
+                                                <a href="/community/qna/view?faq_idx=${list.idx}">
                                                     <div class="d-flex align-items-center">
                                                         <div class="h6 mb-0 lh-1">${list.title}</div>
                                                     </div>
@@ -96,70 +99,85 @@
             </div>
         </div>
     </div>
-    <nav aria-label="Page navigation example">
-        <ul class="pagination" style="justify-content: center">
-            <li class="page-item <c:if test="${faqList.prev_page_flag ne true}">disabled</c:if> ">
-                <a class="page-link"
-                   href="<c:choose>
-                            <c:when test="${faqList.prev_page_flag}">
-                                ${faqList.linkParams}&page=${faqList.page_block_start - 1}
-                            </c:when>
-                            <c:otherwise>
-                                ${faqList.linkParams}&page=1
-                            </c:otherwise>
-                        </c:choose>"
-                   aria-label="Previous"
-                   data-num="<c:choose>
-                                <c:when test="${faqList.prev_page_flag}">
-                                    ${faqList.page_block_start - 1}
-                                </c:when>
-                                <c:otherwise>
-                                    1
-                                </c:otherwise>
-                            </c:choose>"
-                >
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
+    <c:if test="${noticeList != null}">
+        <jsp:include page="../common/paging.jsp">
+            <jsp:param name="list" value="${noticeList}"/>
+        </jsp:include>
+    </c:if>
+    <c:if test="${faqList != null}">
+        <jsp:include page="../common/paging.jsp">
+            <jsp:param name="list" value="${faqList}"/>
+        </jsp:include>
+    </c:if>
+    <c:if test="${qnaList != null}">
+        <jsp:include page="../common/paging.jsp">
+            <jsp:param name="list" value="${qnaList}"/>
+        </jsp:include>
+    </c:if>
+<%--    <nav aria-label="Page navigation example">--%>
+<%--        <ul class="pagination" style="justify-content: center">--%>
+<%--            <li class="page-item <c:if test="${faqList.prev_page_flag ne true}">disabled</c:if> ">--%>
+<%--                <a class="page-link"--%>
+<%--                   href="<c:choose>--%>
+<%--                            <c:when test="${faqList.prev_page_flag}">--%>
+<%--                                ${faqList.linkParams}&page=${faqList.page_block_start - 1}--%>
+<%--                            </c:when>--%>
+<%--                            <c:otherwise>--%>
+<%--                                ${faqList.linkParams}&page=1--%>
+<%--                            </c:otherwise>--%>
+<%--                        </c:choose>"--%>
+<%--                   aria-label="Previous"--%>
+<%--                   data-num="<c:choose>--%>
+<%--                                <c:when test="${faqList.prev_page_flag}">--%>
+<%--                                    ${faqList.page_block_start - 1}--%>
+<%--                                </c:when>--%>
+<%--                                <c:otherwise>--%>
+<%--                                    1--%>
+<%--                                </c:otherwise>--%>
+<%--                            </c:choose>"--%>
+<%--                >--%>
+<%--                    <span aria-hidden="true">&laquo;</span>--%>
+<%--                </a>--%>
+<%--            </li>--%>
 
-            <c:forEach begin="${faqList.page_block_start}" end="${faqList.page_block_end}" var="page_num">
-                <li class="page-item <c:if test="${faqList.page == page_num}">active</c:if>" >
-                    <a class="page-link" data-num="${page_num}"
-                       href="<c:choose>
-                                <c:when test="${faqList.page == page_num}">#</c:when>
-                                <c:otherwise>
-                                    ${faqList.linkParams}&page=${page_num}
-                                </c:otherwise>
-                            </c:choose>">
-                            ${page_num}
-                    </a>
-                </li>
-            </c:forEach>
+<%--            <c:forEach begin="${faqList.page_block_start}" end="${faqList.page_block_end}" var="page_num">--%>
+<%--                <li class="page-item <c:if test="${faqList.page == page_num}">active</c:if>" >--%>
+<%--                    <a class="page-link" data-num="${page_num}"--%>
+<%--                       href="<c:choose>--%>
+<%--                                <c:when test="${faqList.page == page_num}">#</c:when>--%>
+<%--                                <c:otherwise>--%>
+<%--                                    ${faqList.linkParams}&page=${page_num}--%>
+<%--                                </c:otherwise>--%>
+<%--                            </c:choose>">--%>
+<%--                            ${page_num}--%>
+<%--                    </a>--%>
+<%--                </li>--%>
+<%--            </c:forEach>--%>
 
-            <li class="page-item <c:if test="${faqList.next_page_flag ne true}">disabled</c:if>" >
-                <a class="page-link"
-                   href="<c:choose>
-                            <c:when test="${faqList.next_page_flag}">
-                                ${faqList.linkParams}&page=${faqList.page_block_end + 1}
-                            </c:when>
-                            <c:otherwise>
-                                ${faqList.page_block_end}
-                            </c:otherwise>
-                        </c:choose>"
-                   aria-label="Next"
-                   data-num="<c:choose>
-                                 <c:when test="${faqList.next_page_flag}">
-                                    ${faqList.page_block_end + 1}
-                                 </c:when>
-                                 <c:otherwise>
-                                    ${faqList.page_block_end}
-                                 </c:otherwise>
-                             </c:choose>">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
+<%--            <li class="page-item <c:if test="${faqList.next_page_flag ne true}">disabled</c:if>" >--%>
+<%--                <a class="page-link"--%>
+<%--                   href="<c:choose>--%>
+<%--                            <c:when test="${faqList.next_page_flag}">--%>
+<%--                                ${faqList.linkParams}&page=${faqList.page_block_end + 1}--%>
+<%--                            </c:when>--%>
+<%--                            <c:otherwise>--%>
+<%--                                ${faqList.page_block_end}--%>
+<%--                            </c:otherwise>--%>
+<%--                        </c:choose>"--%>
+<%--                   aria-label="Next"--%>
+<%--                   data-num="<c:choose>--%>
+<%--                                 <c:when test="${faqList.next_page_flag}">--%>
+<%--                                    ${faqList.page_block_end + 1}--%>
+<%--                                 </c:when>--%>
+<%--                                 <c:otherwise>--%>
+<%--                                    ${faqList.page_block_end}--%>
+<%--                                 </c:otherwise>--%>
+<%--                             </c:choose>">--%>
+<%--                    <span aria-hidden="true">&raquo;</span>--%>
+<%--                </a>--%>
+<%--            </li>--%>
+<%--        </ul>--%>
+<%--    </nav>--%>
 
     <style type="text/css">
         body{

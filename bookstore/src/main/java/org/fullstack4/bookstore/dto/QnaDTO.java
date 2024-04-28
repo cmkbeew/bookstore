@@ -8,11 +8,11 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 public class QnaDTO {
-    private int qna_idx;
+    private int idx;
     private String title;
     private String content;
     private String writer;
