@@ -24,6 +24,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/minty/bootstrap.min.css" integrity="sha384-H4X+4tKc7b8s4GoMrylmy2ssQYpDHoqzPa9aKXbDwPoPUA3Ra8PA5dGzijN+ePnH" crossorigin="anonymous">
 
     <%-- bbsList 부트스트랩   --%>
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: '#textarea',
+
+        });
+    </script>
 </head>
 <body>
 <%@ include file="/WEB-INF/common/header.jsp"%>
@@ -32,7 +39,13 @@
     <li>${noticeDTO}</li>
 </ul>
 
+<%--<h1>TinyMCE Quick Start Guide</h1>--%>
+<%--<form method="post">--%>
+<%--    <textarea id="textarea">Hello, World!</textarea>--%>
+<%--</form>--%>
+
 
 <%@ include file="/WEB-INF/common/footer.jsp"%>
+
 </body>
 </html>

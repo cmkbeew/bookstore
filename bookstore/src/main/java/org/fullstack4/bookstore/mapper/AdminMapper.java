@@ -1,7 +1,6 @@
 package org.fullstack4.bookstore.mapper;
 
 import org.fullstack4.bookstore.domain.*;
-import org.fullstack4.bookstore.dto.PageRequestDTO;
 
 import java.util.List;
 import java.util.Map;
@@ -15,6 +14,11 @@ public interface AdminMapper {
     // 공지사항
     List<NoticeVO> noticeList();
     NoticeVO noticeView(int idx);
+<<<<<<< HEAD
+=======
+//    NoticeVO2 prevNotice(int idx);
+
+>>>>>>> yh
 
     // FAQ
     List<FaqVO> faqList();
@@ -25,8 +29,11 @@ public interface AdminMapper {
     QnaVO qnaView(int idx);
 
     // 회원
+    List<MemberVO> memberList();
 
     // 도서
 
     // 배송
+    List<DeliveryVO> deliveryList();
+    DeliveryVO deliveryView(int pay_idx);
 }

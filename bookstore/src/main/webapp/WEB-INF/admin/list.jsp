@@ -37,9 +37,9 @@
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/list?bbsName=notice">공지사항</a>
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/list?bbsName=faq">FAQ</a>
                 <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/list?bbsName=qna">QnA</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/list?bbsName=member">회원내역</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/list?bbsName=product">도서</a>
-                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/list?bbsName=delivery">배송관리</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/member/list">회원관리</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/product/list">도서</a>
+                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/delivery/list">배송관리</a>
             </div>
         </div>
         <!-- Page content wrapper-->
@@ -78,26 +78,10 @@
                                                             <div class="control__indicator"></div>
                                                         </label>
                                                     </td>
-                                                    <td class="pl-4">
-                                                        <a href="/admin/${bbsName}/view?idx=${list.idx}">
-                                                            <h5 class="font-medium mb-0">${list.idx}</h5>
-                                                        </a>
-                                                    </td>
-                                                    <td style="max-width: 300px;">
-                                                        <a href="/admin/${bbsName}/view?idx=${list.idx}">
-                                                            <h5 class="font-medium mb-0" style="max-width: 100%; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">${list.title}</h5>
-                                                        </a>
-                                                    </td>
-                                                    <td>
-                                                        <a href="/admin/${bbsName}/view?idx=${list.idx}">
-                                                            <h5 class="font-medium mb-0">${list.writer}</h5>
-                                                        </a>
-                                                    </td>
-                                                    <td>
-                                                        <a href="/admin/${bbsName}/view?idx=${list.idx}">
-                                                            <h5 class="font-medium mb-0">${list.reg_date}</h5>
-                                                        </a>
-                                                    </td>
+                                                    <td class="pl-4"><a href="/admin/${bbsName}/view?idx=${list.idx}">${list.idx}</a></td>
+                                                    <td style="max-width: 300px;"><a href="/admin/${bbsName}/view?idx=${list.idx}" style="max-width: 100%; display: block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">${list.title}</a></td>
+                                                    <td><a href="/admin/${bbsName}/view?idx=${list.idx}">${list.writer}</a></td>
+                                                    <td><a href="/admin/${bbsName}/view?idx=${list.idx}">${list.reg_date}</a></td>
                                                 </tr>
                                             </c:forEach>
                                         </c:when>
@@ -113,12 +97,10 @@
                         </div>
                         <div style="display: flex; justify-content: space-between; margin-top: 4px;">
                             <div>
-                                <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle"><i class="fa fa-edit"></i></button>
                                 <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2"><i class="fa fa-trash"></i></button>
+                                <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2" onclick="location.href='/admin/notice/regist'"><i class="fa fa-upload"></i></button>
                             </div>
-                            <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2"><i class="fa fa-upload"></i></button>
                         </div>
-
                     </div>
                 </div>
             </div>

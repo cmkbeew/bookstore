@@ -35,9 +35,20 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public List<NoticeDTO> noticeList() {
+<<<<<<< HEAD
         List<NoticeVO> voList = adminMapper.noticeList();
 
         List<NoticeDTO> dtoList = voList.stream()
+=======
+//        List<NoticeVO2> voList = adminMapper.noticeList();
+//
+//        List<NoticeDTO2> dtoList = voList.stream()
+//                .map(vo -> modelMapper.map(vo, NoticeDTO2.class))
+//                .collect(Collectors.toList());
+//
+//        return dtoList;
+        List<NoticeDTO> dtoList = adminMapper.noticeList().stream()
+>>>>>>> yh
                 .map(vo -> modelMapper.map(vo, NoticeDTO.class))
                 .collect(Collectors.toList());
 
@@ -100,4 +111,24 @@ public class AdminServiceImpl implements AdminService {
 
         return qnaDTO;
     }
+
+    @Override
+    public List<MemberDTO> memberList() {
+        List<MemberDTO> dtoList = adminMapper.memberList().stream()
+                .map(vo -> modelMapper.map(vo, MemberDTO.class))
+                .collect(Collectors.toList());
+
+        return dtoList;
+    }
+
+    @Override
+    public List<DeliveryDTO> deliveryList() {
+        List<DeliveryDTO> dtoList = adminMapper.deliveryList().stream()
+                .map(vo -> modelMapper.map(vo, DeliveryDTO.class))
+                .collect(Collectors.toList());
+
+        return dtoList;
+    }
+
+
 }

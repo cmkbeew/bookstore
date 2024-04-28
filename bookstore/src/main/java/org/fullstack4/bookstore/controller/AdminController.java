@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Log4j2
@@ -55,9 +56,11 @@ public class AdminController {
     }
 
 
+    // 공지사항
     @GetMapping(path="/notice/view", params="idx")
     public void noticeViewGET(
             @RequestParam int idx,
+            HttpServletRequest req,
             PageRequestDTO pageRequestDTO,
             Model model
     ) {
@@ -69,48 +72,99 @@ public class AdminController {
 
 //        log.info("prev!! : " + noticeDTO2);
 
+        String referer = req.getHeader("Referer");
+
+        model.addAttribute("referer", referer);
         model.addAttribute("noticeDTO", noticeDTO);
         model.addAttribute("idx", idx);
 //        model.addAttribute("totalCount", totalCount);
 
         log.info("===============================");
     }
+    @GetMapping("/notice/regist")
+    public void noticeRegistGET() {
+        log.info("===============================");
+        log.info("AdminController >> noticeRegistGET()");
+        log.info("===============================");
+    }
 
+
+
+    // FAQ
     @GetMapping(path="/faq/view", params="idx")
     public void faqViewGET(
             @RequestParam int idx,
+            HttpServletRequest req,
             Model model
     ) {
         log.info("===============================");
         log.info("AdminController >> faqViewGET()");
+<<<<<<< HEAD
         FaqDTO faqDTO = adminService.faqView(idx);
+=======
+
+        FaqDTO faqDTO = adminService.faqView(idx);
+        String referer = req.getHeader("Referer");
+
+        model.addAttribute("referer", referer);
+>>>>>>> yh
         model.addAttribute("faqDTO", faqDTO);
 
         log.info("===============================");
     }
 
+
+    // QnA
     @GetMapping(path="/qna/view", params="idx")
     public void qnaViewGET(
             @RequestParam int idx,
+            HttpServletRequest req,
             Model model
     ) {
         log.info("===============================");
         log.info("AdminController >> qnaViewGET()");
+<<<<<<< HEAD
         QnaDTO qnaDTO = adminService.qnaView(idx);
+=======
+
+        QnaDTO qnaDTO = adminService.qnaView(idx);
+        String referer = req.getHeader("Referer");
+
+        model.addAttribute("referer", referer);
+>>>>>>> yh
         model.addAttribute("qnaDTO", qnaDTO);
 
         log.info("===============================");
     }
 
 
-
+    // 회원
     @GetMapping("/member/list")
-    public void memberListGET() {
+    public void memberListGET(Model model) {
         log.info("===============================");
         log.info("AdminController >> memberListGET()");
+
+        List<MemberDTO> memberList = adminService.memberList();
+        model.addAttribute("memberList", memberList);
+
+        log.info("memberList : " + memberList.toString());
         log.info("===============================");
     }
 
+    // 도서
 
+
+    // 배송
+    @GetMapping("/delivery/list")
+    public void deliveryListGET(Model model) {
+        log.info("===============================");
+        log.info("AdminController >> deliveryListGET()");
+
+        List<DeliveryDTO> deliveryList = adminService.deliveryList();
+        model.addAttribute("deliveryList", deliveryList);
+
+        log.info("deliveryList : " + deliveryList.toString());
+        log.info("===============================");
+    }
 
 }
