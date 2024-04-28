@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="/resources/css/mintybootstrap.css">
 </head>
 <body>
-<%@ include file="/WEB-INF/common/header.jsp"%>
+<%@ include file="/WEB-INF/common/header.jsp" %>
 <div class="content">
     <div class="container">
         <div class="row justify-content-center">
@@ -41,15 +41,18 @@
                                     <div class="card border-primary mb-3 w-100">
                                         <div class="card-body" style="height: 6rem;">
                                             <h4 class="card-title text-dark text-center align-items-center">${requestScope['member_id']}</h4>
-<%--                                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>--%>
+                                            <%--                                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>--%>
                                         </div>
+                                    </div>
+                                    <button type="button"
+                                            class="btn btn-pill text-white btn-block btn-dark w-100 mt-3 mb-4"
+                                            onclick="location.href='/login/login'">로그인 하러 가기
+                                    </button>
+                                    <button type="button"
+                                            class="btn btn-pill text-dark btn-block btn-outline-primary  w-100"
+                                            onclick="location.href='/login/findPwd'">비밀번호 찾기
+                                    </button>
                                 </div>
-                                <button type="button" class="btn btn-pill text-white btn-block btn-dark w-100 mt-3 mb-4"
-                                        onclick="location.href='/login/login'">로그인 하러 가기
-                                </button>
-                                <button type="button" class="btn btn-pill text-dark btn-block btn-outline-primary  w-100"
-                                        onclick="location.href='/login/findPwd'">비밀번호 찾기
-                                </button>
                             </div>
                         </div>
                     </div>
@@ -58,8 +61,7 @@
         </div>
     </div>
 </div>
-</div>
-<%@ include file="/WEB-INF/common/footer.jsp"%>
+<%@ include file="/WEB-INF/common/footer.jsp" %>
 <script src="/resources/js/form-validation.js"></script>
 <script src="/resources/js/jquery-3.3.1.min.js"></script>
 <script src="/resources/js/popper.min.js"></script>

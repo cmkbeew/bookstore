@@ -32,4 +32,23 @@ public class LoginServiceTests {
                 .build();
         log.info(loginServiceIf.search_id(memberDTO.getName(), memberDTO.getEmail()));
     }
+
+    @Test
+    public void search_pwdTests() {
+        MemberDTO memberDTO = MemberDTO.builder()
+                .name("test")
+                .email("jjj@jjj.ddd")
+                .member_id("test")
+                .build();
+        log.info(loginServiceIf.search_pwd(memberDTO.getName(), memberDTO.getEmail(), memberDTO.getMember_id()));
+    }
+
+    @Test
+    public void change_pwdTests() {
+        MemberDTO memberDTO = MemberDTO.builder()
+                .member_id("test")
+                .pwd("13")
+                .build();
+        log.info(loginServiceIf.change_pwd(memberDTO.getMember_id(), memberDTO.getPwd()));
+    }
 }

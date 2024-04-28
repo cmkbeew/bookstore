@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="/resources/css/mintybootstrap.css">
 </head>
 <body>
-<%@ include file="/WEB-INF/common/header.jsp"%>
+<%@ include file="/WEB-INF/common/header.jsp" %>
 <div class="content">
     <div class="container">
         <div class="row justify-content-center">
@@ -29,16 +29,29 @@
                                 <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel"
                                      aria-labelledby="home-tab" tabindex="0">
                                     <div class="mb-4 text-center">
-                                        <h3><strong>비밀번호 찾기 결과</strong></h3>
+                                        <h3><strong>비밀번호 변경</strong></h3>
+                                        <p class="mt-4 mb-4">새로 변경하실 비밀번호를 입력해주세요.</p>
                                     </div>
-                                    <div class="card border-primary mb-3 w-100">
-                                        <div class="card-body" style="height: 6rem;">
-                                            <h4 class="card-title text-center align-items-center">Primary card title</h4>
-                                        </div>
+                                    <main class="form-signin">
+                                        <form name="frmLogin" id="frmLogin" action="/login/findPwdResult" method="post">
+                                            <input type="hidden" name="member_id" id="member_id" value="${requestScope['member_id']}">
+                                            <div class="form-floating form-group last mb-4">
+                                                <label for="pwd">비밀번호</label>
+                                                <input type="password" class="form-control" name="pwd" id="pwd">
+                                            </div>
+                                            <div class="form-floating form-group last mb-4">
+                                                <label for="pwd2">비밀번호 재입력</label>
+                                                <input type="password" class="form-control" name="pwd2" id="pwd2">
+                                            </div>
+                                            <div class="invalid-feedback" style="display: block">
+                                                비밀번호와 재입력 비밀번호가 다릅니다.
+                                            </div>
+                                            <input type="submit" value="비밀번호 변경하기"
+                                                   class="btn btn-pill text-white btn-block btn-primary w-100 mt-3 mb-4">
+                                        </form>
+                                    </main>
+
                                 </div>
-                                <button type="button" class="btn btn-pill text-white btn-block btn-dark w-100 mt-3 mb-4"
-                                        onclick="location.href='/login/login'">로그인 하러 가기
-                                </button>
                             </div>
                         </div>
                     </div>
@@ -47,8 +60,7 @@
         </div>
     </div>
 </div>
-</div>
-<%@ include file="/WEB-INF/common/footer.jsp"%>
+<%@ include file="/WEB-INF/common/footer.jsp" %>
 <script src="/resources/js/form-validation.js"></script>
 <script src="/resources/js/jquery-3.3.1.min.js"></script>
 <script src="/resources/js/popper.min.js"></script>

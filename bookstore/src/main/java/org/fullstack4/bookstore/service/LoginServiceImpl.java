@@ -43,5 +43,25 @@ public class LoginServiceImpl implements LoginServiceIf{
         return loginXmlMapper.search_id(name, email);
     }
 
+    @Override
+    public int search_pwd(String name, String email, String member_id) {
+        log.info("===============================");
+        log.info("name, email, member_id: " + name, email, member_id);
+        log.info("===============================");
+         loginXmlMapper.search_pwd(name, email, member_id);
+        log.info("memberid : "+loginXmlMapper.search_pwd(name, email, member_id));
+        return loginXmlMapper.search_pwd(name, email, member_id);
+    }
+
+    @Override
+    public int change_pwd(String member_id, String pwd) {
+        log.info("===============================");
+        log.info("member_id, pwd: " +member_id,  pwd);
+        log.info("===============================");
+        loginXmlMapper.change_pwd(member_id, pwd);
+        log.info("memberid : "+loginXmlMapper.change_pwd(member_id, pwd));
+        return loginXmlMapper.change_pwd(member_id, pwd);
+    }
+
 
 }

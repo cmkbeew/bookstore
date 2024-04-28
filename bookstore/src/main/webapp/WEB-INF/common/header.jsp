@@ -56,7 +56,7 @@
                                     onclick="location.href='/login/logout'">로그아웃
                             </button>
                             <button type="button" class="btn btn-primary"
-                                    onclick="location.href='/member/view?user_id=${sessionScope.member_id}'">마이페이지
+                                    onclick="location.href='/member/view?member_id=${sessionScope.member_id}'">마이페이지
                             </button>
                             <button type="button" class="btn btn-outline-dark" onclick="location.href='/member/join'">
                                 <i class="bi-cart-fill me-1"></i>

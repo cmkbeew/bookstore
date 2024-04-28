@@ -18,6 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 
 @Log4j2
@@ -29,9 +31,7 @@ public class LoginController {
 
     @GetMapping("/login")
     public void loginGet(
-            Model model,
-            HttpServletRequest req,
-            HttpSession session
+            HttpServletRequest req
     ) {
         log.info("로그인 겟");
         String id = CookieUtil.getCookieInfo(req, "id");
@@ -94,17 +94,11 @@ public class LoginController {
             return "/login/login";
         }
     }
-
     @PostMapping("/guest")
     public String guestPost(
-            @Valid MemberDTO memberDTO,
-            BindingResult bindingResult,
             @RequestParam(name = "member_id", defaultValue = "") String member_id,
             @RequestParam(name = "pwd", defaultValue = "") String pwd,
-            Model model,
-            RedirectAttributes redirectAttributes,
-            HttpServletResponse resp,
-            HttpServletRequest req) {
+            Model model) {
         log.info("로그인 포스트");
 
         MemberDTO loginMemberDTO = loginServiceIf.login_info(member_id, pwd);
@@ -115,15 +109,13 @@ public class LoginController {
 
     @GetMapping("/logout")
     public String logout(HttpSession session,
-                       HttpServletResponse resp,
-                       HttpServletRequest req
+                       HttpServletResponse resp
     ) {
         log.info("로그아웃");
         session.invalidate();
         CookieUtil.setCookies(resp, "auto_login", "", 0, "", "/");
         return "redirect:/";
     }
-
     @GetMapping("/find")
     public void findGet() {
         log.info("계정찾기 페이지");
@@ -134,16 +126,14 @@ public class LoginController {
     }
     @PostMapping("/findId")
     public String findIdPost(
-            @Valid MemberDTO memberDTO,
             @RequestParam(name = "name", defaultValue = "") String name,
             @RequestParam(name = "email", defaultValue = "") String email,
             RedirectAttributes redirectAttributes
     ) {
-        log.info("아이디 찾기 나와냐>??????????");
         String member_id = loginServiceIf.search_id(name,email);
         log.info(member_id);
+
         redirectAttributes.addFlashAttribute("member_id", member_id);
-        //model.addAttribute("member_id", member_id);
         return "redirect:/login/findIdResult";
     }
     @GetMapping("/findIdResult")
@@ -151,7 +141,7 @@ public class LoginController {
             HttpServletRequest req,
             @RequestParam(name = "member_id", defaultValue = "") String member_id
             ) {
-        req.setAttribute("member_id",member_id);
+        req.setAttribute("member_id", member_id);
         log.info(member_id);
     }
     @GetMapping("/findPwd")
@@ -159,16 +149,45 @@ public class LoginController {
         log.info("비밀번호 찾기");
     }
     @PostMapping("/findPwd")
-    public void findPwdPost() {
-        log.info("비밀번호 찾기");
+    public String findPwdPost(
+                            @RequestParam(name = "name", defaultValue = "") String name,
+                            @RequestParam(name = "email", defaultValue = "") String email,
+                            @RequestParam(name = "member_id", defaultValue = "") String member_id,
+                            RedirectAttributes redirectAttributes) {
+        log.info("=========================");
+        int result = loginServiceIf.search_pwd(name, email, member_id);
+        if (result > 0) {
+            redirectAttributes.addAttribute("member_id", member_id);
+            return "redirect:/login/findPwdResult";
+        } else {
+            return "/login/findPwd";
+        }
     }
     @GetMapping("/findPwdResult")
-    public void findPwdResult() {
+    public void findPwdResult(HttpServletRequest req,
+                              @RequestParam(name = "member_id", defaultValue = "") String member_id
+    ) {
+        req.setAttribute("member_id", member_id);
         log.info("비밀번호 찾기 결과");
     }
     @PostMapping("/findPwdResult")
-    public void findPwdResultPost() {
-        log.info("비밀번호 찾기 결과");
-    }
+    public String findPwdResultPost(
+                                    @RequestParam(name = "member_id", defaultValue = "") String member_id,
+                                    @RequestParam(name = "pwd", defaultValue = "") String pwd,
+                                    HttpServletResponse resp) throws IOException {
+        log.info("=========================");
+        log.info("member_id: " + member_id);
+        log.info("pwd: " + pwd);
+        log.info("=========================");
 
+        int result = loginServiceIf.change_pwd(member_id, pwd);
+
+        if (result > 0) {
+            PrintWriter out = resp.getWriter();
+            out.println("<script>alert('비밀번호가 변경되었습니다.\\n로그인 페이지로 이동합니다.');</script>");
+            return "redirect:/login/login";
+        } else {
+            return "/login/findPwd";
+        }
+    }
 }

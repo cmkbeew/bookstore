@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.fullstack4.bookstore.mapper.MemberMapper">
+    <insert id="join">
+        INSERT INTO tbl_member ( member_id, name, pwd, email, phone_num, addr1, addr2, zipcode, forever_yn, option,member_state, join_state, reg_date)
+        VALUES (#{member_id}
+               , #{name}
+               , #{pwd}
+               , #{email}
+               , #{phone_num}
+               , #{addr1}
+               , #{addr2}
+               , #{zipcode}
+               , #{forever_yn}
+               , #{option}
+               , 'Y'
+               , 'Y'
+               , now()
+               )
+    </insert>
+<!-- 개인정보 확인-->
+    <select id="info_view" resultType="org.fullstack4.bookstore.domain.MemberVO">
+        SELECT * from tbl_member where member_id=#{member_id}
+    </select>
+    <!--    개인정보 수정-->
+    <update id="info_modify">
+        UPDATE tbl_member SET  addr1=#{addr1}, addr2=#{addr2}, zipcode=#{zipcode},
+                              phone_num=#{phone_num}, email=#{email}
+        where member_id = #{member_id}
+    </update>
+    <select id="curr_pwd">
+        select pwd from tbl_member where member_id = #{member_id}
+    </select>
+    <delete id="delete_member">
+        delete from tbl_member where member_id=#{member_id}
+    </delete>
+</mapper>

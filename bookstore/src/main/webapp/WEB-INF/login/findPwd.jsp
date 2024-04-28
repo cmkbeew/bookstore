@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: juyoun
-  Date: 2024-04-26
-  Time: 오전 1:36
-  To change this template use File | Settings | File Templates.
---%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ page trimDirectiveWhitespaces="true" %>
@@ -40,14 +33,14 @@
                                         <p class="mt-4 mb-4">이름과 가입할 때 작성한 이메일를 적어주세요.</p>
                                     </div>
                                     <main class="form-signin">
-                                        <form name="frmLogin" id="frmLogin" action="/login/findPwdResult" method="post">
+                                        <form name="frmLogin" id="frmLogin" action="/login/findPwd" method="post">
                                             <div class="form-floating form-group first mb-3">
                                                 <label for="name">이름</label>
                                                 <input type="text" class="form-control" name="name" id="name">
                                             </div>
                                             <div class="form-floating form-group last mb-4">
-                                                <label for="id">아이디</label>
-                                                <input type="text" class="form-control" name="id" id="id">
+                                                <label for="member_id">아이디</label>
+                                                <input type="text" class="form-control" name="member_id" id="member_id">
                                             </div>
                                             <div class="form-floating form-group last mb-4">
                                                 <label for="email">이메일</label>

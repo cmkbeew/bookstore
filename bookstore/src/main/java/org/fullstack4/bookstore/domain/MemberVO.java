@@ -16,7 +16,7 @@ public class MemberVO {
     private String name;
     private String addr1;
     private String addr2;
-    private int zipcode;
+    private String zipcode;
     private String phone_num;
     private String email;
     private String forever_yn;
