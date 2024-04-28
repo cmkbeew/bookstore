@@ -39,9 +39,6 @@ public class CommunityController {
             redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
         }
 
-        log.info("type : " + type);
-        model.addAttribute("type", type);
-
         if(type.equals("notice")) {
             PageResponseDTO<NoticeDTO> noticeList = communityService.noticeList(pageRequestDTO);
 
@@ -59,91 +56,56 @@ public class CommunityController {
         }
     }
 
-    @GetMapping("/notice/view")
-    public void noticeView(@RequestParam int notice_idx, Model model) {
-        NoticeDTO noticeDTO = communityService.noticeView(notice_idx);
+    @GetMapping("/view")
+    public void communityView(@RequestParam int idx, @RequestParam String type, Model model) {
 
-        model.addAttribute("noticeDTO", noticeDTO);
-    }
+        model.addAttribute("type", type);
 
-    @GetMapping("/faq/list")
-    public String faqList(@Valid PageRequestDTO pageRequestDTO,
-                        BindingResult bindingResult,
-                        RedirectAttributes redirectAttributes,
-                        Model model) {
-        if(bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+        if(type.equals("notice")) {
+            Map<String, NoticeDTO> noticeMap = communityService.noticeView(idx);
+
+            noticeMap.get("noticeDTO").setContent(noticeMap.get("noticeDTO").getContent().replace("\r\n", "<br>"));
+
+            model.addAttribute("dto", noticeMap.get("noticeDTO"));
+            model.addAttribute("prevDTO", noticeMap.get("noticePrevDTO"));
+            model.addAttribute("nextDTO", noticeMap.get("noticeNextDTO"));
+        } else if(type.equals("faq")) {
+            Map<String, FaqDTO> faqMap = communityService.faqView(idx);
+
+            faqMap.get("faqDTO").setContent(faqMap.get("faqDTO").getContent().replace("\r\n", "<br>"));
+
+            model.addAttribute("dto", faqMap.get("faqDTO"));
+            model.addAttribute("prevDTO", faqMap.get("faqPrevDTO"));
+            model.addAttribute("nextDTO", faqMap.get("faqNextDTO"));
+        } else if(type.equals("qna")) {
+            Map<String, QnaDTO> qnaMap = communityService.qnaView(idx);
+
+            model.addAttribute("dto", qnaMap.get("qnaDTO"));
+            model.addAttribute("prevDTO", qnaMap.get("qnaPrevDTO"));
+            model.addAttribute("nextDTO", qnaMap.get("qnaNextDTO"));
         }
-
-        PageResponseDTO<FaqDTO> faqList = communityService.faqList(pageRequestDTO);
-
-        model.addAttribute("faqList", faqList);
-
-        return "/community/faq/list";
-    }
-
-    @GetMapping("/faq/view")
-    public void faqView(@RequestParam int faq_idx, Model model) {
-//        FaqDTO faqDTO = communityService.faqView(faq_idx);
-//        faqDTO.setContent(faqDTO.getContent().replace("\r\n", "<br>"));
-//        model.addAttribute("faqDTO", faqDTO);
-
-        Map<String, FaqDTO> faqMap = communityService.faqView(faq_idx);
-
-        log.info("faqMap : " + faqMap);
-        faqMap.get("faqDTO").setContent(faqMap.get("faqDTO").getContent().replace("\r\n", "<br>"));
-
-        model.addAttribute("faqDTO", faqMap.get("faqDTO"));
-        model.addAttribute("faqPrevDTO", faqMap.get("faqPrevDTO"));
-        model.addAttribute("faqNextDTO", faqMap.get("faqNextDTO"));
-    }
-
-    @GetMapping("/qna/list")
-    public String qnaList(@Valid PageRequestDTO pageRequestDTO,
-                          BindingResult bindingResult,
-                          RedirectAttributes redirectAttributes,
-                          Model model) {
-        if(bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
-        }
-
-        PageResponseDTO<QnaDTO> qnaList = communityService.qnaList(pageRequestDTO);
-
-        model.addAttribute("qnaList", qnaList);
-
-        return "/community/qna/list";
-    }
-
-    @GetMapping("/qna/view")
-    public void qnaView(@RequestParam int qna_idx, Model model) {
-        QnaDTO qnaDTO = communityService.qnaView(qna_idx);
-
-        model.addAttribute("qnaDTO", qnaDTO);
     }
 
     @GetMapping("/qna/regist")
-    public void qna_regist() {
+    public void qnaRegist() {
 
     }
 
     @PostMapping("/qna/regist")
-    public String qna_regist(
-            //@RequestParam("file") MultipartFile multipartFile,
-                              QnaDTO qnaDTO,
-                              RedirectAttributes redirectAttributes) {
-//        String save_file_name = "";
+    public String qnaRegist(@Valid QnaDTO qnaDTO,
+                            BindingResult bindingResult,
+                            RedirectAttributes redirectAttributes) {
+        if(bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+            redirectAttributes.addFlashAttribute("qnaDTO", qnaDTO);
 
-//        if(!multipartFile.isEmpty()) {
-//            save_file_name = FileUploadUtil.saveFile(multipartFile);
-//        }
-
-//        dataDTO.setOrg_file_name(multipartFile.getOriginalFilename());
-//        dataDTO.setSave_file_name(save_file_name);
+            return "redirect:/community/qna/regist";
+        }
 
         int result = communityService.qnaRegist(qnaDTO);
 
         if(result > 0) {
-            return "redirect:/community/qna/list";
+            return "redirect:/community/list?type=qna";
         } else {
             redirectAttributes.addFlashAttribute("qnaDTO", qnaDTO);
 
@@ -151,49 +113,42 @@ public class CommunityController {
         }
     }
 
-//    @GetMapping("/modify")
-//    public void data_modify(int data_idx, Model model) {
-//        DataDTO dataDTO = dataService.view_data(data_idx);
-//
-//        model.addAttribute("dataDTO", dataDTO);
-//    }
-//
-//    @PostMapping("/modify")
-//    public String data_modify(@RequestParam("file") MultipartFile multipartFile,
-//                              DataDTO dataDTO,
-//                              RedirectAttributes redirectAttributes) {
-//        DataDTO dto = dataService.view_data(dataDTO.getData_idx());
-//
-//        String save_file_name = "";
-//
-//        if(!multipartFile.isEmpty()) {
-//            save_file_name = FileUploadUtil.saveFile(multipartFile);
-//
-//            FileUploadUtil.deleteFile(dto.getSave_file_name());
-//        }
-//
-//        dataDTO.setOrg_file_name(multipartFile.getOriginalFilename());
-//        dataDTO.setSave_file_name(save_file_name);
-//
-//        int result = dataService.modify_data(dataDTO);
-//
-//        if(result > 0) {
-//            return "redirect:/data/view?data_idx=" + dataDTO.getData_idx();
-//        } else {
-//            redirectAttributes.addFlashAttribute("dataDTO", dataDTO);
-//
-//            return "redirect:/data/modify?data_idx=" + dataDTO.getData_idx();
-//        }
-//    }
-//
-//    @PostMapping("/delete")
-//    public String data_delete(int data_idx, RedirectAttributes redirectAttributes) {
-//        int result = dataService.delete_data(data_idx);
-//
-//        if(result > 0) {
-//            return "redirect:/data/list";
-//        } else {
-//            return "redirect:/data/view?data_idx=" + data_idx;
-//        }
-//    }
+    @GetMapping("/qna/modify")
+    public void qnaModifyGet(int idx, Model model) {
+        QnaDTO qnaDTO = communityService.qnaModifyGet(idx);
+
+        model.addAttribute("qnaDTO", qnaDTO);
+    }
+    @PostMapping("/qna/modify")
+    public String qnaModify(@Valid QnaDTO qnaDTO,
+                            BindingResult bindingResult,
+                            RedirectAttributes redirectAttributes) {
+        if(bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+            redirectAttributes.addFlashAttribute("qnaDTO", qnaDTO);
+
+            return "redirect:/community/qna/modify?idx=" + qnaDTO.getIdx();
+        }
+
+        int result = communityService.qnaModify(qnaDTO);
+
+        if(result > 0) {
+            return "redirect:/community/view?type=qna&idx=" + qnaDTO.getIdx();
+        } else {
+            redirectAttributes.addFlashAttribute("qnaDTO", qnaDTO);
+
+            return "redirect:/community/view?type=qna&idx=" + qnaDTO.getIdx();
+        }
+    }
+
+    @PostMapping("/qna/delete")
+    public String qnaDelete(@RequestParam(name = "idx") int qna_idx, RedirectAttributes redirectAttributes) {
+        int result = communityService.qnaDelete(qna_idx);
+
+        if(result > 0) {
+            return "redirect:/community/list?type=qna";
+        } else {
+            return "redirect:/community/view?type=qna&idx=" + qna_idx;
+        }
+    }
 }

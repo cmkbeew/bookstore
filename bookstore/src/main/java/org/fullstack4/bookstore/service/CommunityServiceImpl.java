@@ -48,12 +48,26 @@ public class CommunityServiceImpl implements CommunityService {
     }
 
     @Override
-    public NoticeDTO noticeView(int notice_idx) {
+    public Map<String, NoticeDTO> noticeView(int notice_idx) {
+        Map<String, NoticeDTO> maps = new HashMap<>();
+
         NoticeVO noticeVO = communityMapper.noticeView(notice_idx);
+        NoticeVO noticePrevVO = communityMapper.noticePrev(notice_idx);
+        NoticeVO noticeNextVO = communityMapper.noticeNext(notice_idx);
 
         NoticeDTO noticeDTO = modelMapper.map(noticeVO, NoticeDTO.class);
+        maps.put("noticeDTO", noticeDTO);
 
-        return noticeDTO;
+        if(noticePrevVO != null) {
+            NoticeDTO noticePrevDTO = modelMapper.map(noticePrevVO, NoticeDTO.class);
+            maps.put("noticePrevDTO", noticePrevDTO);
+        }
+        if(noticeNextVO != null) {
+            NoticeDTO noticeNextDTO = modelMapper.map(noticeNextVO, NoticeDTO.class);
+            maps.put("noticeNextDTO", noticeNextDTO);
+        }
+
+        return maps;
     }
 
     @Override
@@ -87,24 +101,6 @@ public class CommunityServiceImpl implements CommunityService {
     public int faqTotalCount(PageRequestDTO requestDTO) {
         return communityMapper.faqTotalCount(requestDTO);
     }
-
-//    @Override
-//    public FaqDTO faqView(int faq_idx) {
-//        FaqVO faqVO = communityMapper.faqView(faq_idx);
-//
-//        FaqVO faqPrev = communityMapper.faqPrev(faq_idx);
-//        FaqVO faqNext = communityMapper.faqNext(faq_idx);
-//
-//        FaqDTO faqDTO = modelMapper.map(faqVO, FaqDTO.class);
-//        FaqDTO faqPrevDTO = modelMapper.map(faqPrev, FaqDTO.class);
-//        FaqDTO faqNextDTO = modelMapper.map(faqNext, FaqDTO.class);
-//
-//        log.info("faqPrevDTO : " + faqPrevDTO);
-//        log.info("faqNextDTO : " + faqNextDTO);
-//
-//        return faqDTO;
-//    }
-
 
     @Override
     public Map<String, FaqDTO> faqView(int faq_idx) {
@@ -154,12 +150,28 @@ public class CommunityServiceImpl implements CommunityService {
     }
 
     @Override
-    public QnaDTO qnaView(int qna_idx) {
+    public Map<String, QnaDTO> qnaView(int qna_idx) {
+        Map<String, QnaDTO> maps = new HashMap<>();
+
         QnaVO qnaVO = communityMapper.qnaView(qna_idx);
+        QnaVO qnaPrevVO = communityMapper.qnaPrev(qna_idx);
+        QnaVO qnaNextVO = communityMapper.qnaNext(qna_idx);
 
         QnaDTO qnaDTO = modelMapper.map(qnaVO, QnaDTO.class);
+        log.info("qnaDTO : " + qnaDTO);
 
-        return qnaDTO;
+        maps.put("qnaDTO", qnaDTO);
+
+        if(qnaPrevVO != null) {
+            QnaDTO qnaPrevDTO = modelMapper.map(qnaPrevVO, QnaDTO.class);
+            maps.put("qnaPrevDTO", qnaPrevDTO);
+        }
+        if(qnaNextVO != null) {
+            QnaDTO qnaNextDTO = modelMapper.map(qnaNextVO, QnaDTO.class);
+            maps.put("qnaNextDTO", qnaNextDTO);
+        }
+
+        return maps;
     }
 
     @Override
@@ -171,4 +183,28 @@ public class CommunityServiceImpl implements CommunityService {
         return result;
     }
 
+    @Override
+    public QnaDTO qnaModifyGet(int qna_idx) {
+        QnaVO qnaVO = communityMapper.qnaView(qna_idx);
+
+        QnaDTO qnaDTO = modelMapper.map(qnaVO, QnaDTO.class);
+
+        return qnaDTO;
+    }
+
+    @Override
+    public int qnaModify(QnaDTO qnaDTO) {
+        QnaVO qnaVO = modelMapper.map(qnaDTO, QnaVO.class);
+
+        int result = communityMapper.qnaModify(qnaVO);
+
+        return result;
+    }
+
+    @Override
+    public int qnaDelete(int qna_idx) {
+        int result = communityMapper.qnaDelete(qna_idx);
+
+        return result;
+    }
 }

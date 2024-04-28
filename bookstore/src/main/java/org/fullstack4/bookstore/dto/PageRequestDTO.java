@@ -53,6 +53,9 @@ public class PageRequestDTO {
     @Min(value=1)
     private int page_block_end=1;
 
+    // 게시판 종류
+    private String type;
+
     // 검색 조건
     private String search_date;
     private String search_type;

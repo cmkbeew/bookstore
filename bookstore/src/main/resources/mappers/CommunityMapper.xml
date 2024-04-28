@@ -50,6 +50,22 @@
         WHERE idx = #{idx}
     </select>
 
+    <select id="noticePrev" resultType="org.fullstack4.bookstore.domain.NoticeVO">
+        SELECT idx, title
+        FROM tbl_bbs_notice
+        WHERE idx <![CDATA[<]]> #{idx}
+        ORDER BY idx DESC
+        LIMIT 1
+    </select>
+
+    <select id="noticeNext" resultType="org.fullstack4.bookstore.domain.NoticeVO">
+        SELECT idx, title
+        FROM tbl_bbs_notice
+        WHERE idx <![CDATA[>]]> #{idx}
+        ORDER BY idx
+        LIMIT 1
+    </select>
+
     <!-- FAQ -->
     <select id="faqList" resultType="org.fullstack4.bookstore.domain.FaqVO">
         SELECT idx, title, content, writer, reg_date, modify_date
@@ -108,9 +124,37 @@
         WHERE idx = #{idx}
     </select>
 
+    <select id="qnaPrev" resultType="org.fullstack4.bookstore.domain.QnaVO">
+        SELECT idx, title
+        FROM tbl_bbs_qna
+        WHERE idx <![CDATA[<]]> #{idx}
+        ORDER BY idx DESC
+        LIMIT 1
+    </select>
+
+    <select id="qnaNext" resultType="org.fullstack4.bookstore.domain.QnaVO">
+        SELECT idx, title
+        FROM tbl_bbs_qna
+        WHERE idx <![CDATA[>]]> #{idx}
+        ORDER BY idx
+        LIMIT 1
+    </select>
+
     <insert id="qnaRegist">
         INSERT INTO tbl_bbs_qna(title, content, writer)
         VALUES (#{title}, #{content}, #{writer})
     </insert>
 
+    <update id="qnaModify">
+        UPDATE tbl_bbs_qna SET
+        title = #{title},
+        content = #{content},
+        modify_date = NOW()
+        WHERE idx = #{idx}
+    </update>
+
+    <delete id="qnaDelete">
+        DELETE FROM tbl_bbs_qna
+        WHERE idx = #{idx}
+    </delete>
 </mapper>

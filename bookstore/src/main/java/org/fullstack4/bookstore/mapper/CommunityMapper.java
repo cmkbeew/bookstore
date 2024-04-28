@@ -13,6 +13,8 @@ public interface CommunityMapper {
     List<NoticeVO> noticeList(PageRequestDTO pageRequestDTO);
     int noticeTotalCount(PageRequestDTO pageRequestDTO);
     NoticeVO noticeView(int notice_idx);
+    NoticeVO noticePrev(int notice_idx);
+    NoticeVO noticeNext(int notice_idx);
 
     // FAQ
     List<FaqVO> faqList(PageRequestDTO pageRequestDTO);
@@ -25,6 +27,9 @@ public interface CommunityMapper {
     List<QnaVO> qnaList(PageRequestDTO pageRequestDTO);
     int qnaTotalCount(PageRequestDTO requestDTO);
     QnaVO qnaView(int qna_idx);
+    QnaVO qnaPrev(int qna_idx);
+    QnaVO qnaNext(int qna_idx);
     int qnaRegist(QnaVO qnaVO);
-
+    int qnaModify(QnaVO qnaVO);
+    int qnaDelete(int qna_idx);
 }

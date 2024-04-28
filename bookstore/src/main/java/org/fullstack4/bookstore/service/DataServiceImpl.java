@@ -3,6 +3,7 @@ package org.fullstack4.bookstore.service;
 import lombok.RequiredArgsConstructor;
 import org.fullstack4.bookstore.domain.DataVO;
 import org.fullstack4.bookstore.dto.DataDTO;
+import org.fullstack4.bookstore.dto.FaqDTO;
 import org.fullstack4.bookstore.mapper.DataMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -29,9 +30,18 @@ public class DataServiceImpl implements DataService {
     @Override
     public List<DataDTO> dataList() {
         List<DataVO> voList = dataMapper.dataList();
+
         List<DataDTO> dtoList = voList.stream()
                                       .map(vo -> modelMapper.map(vo, DataDTO.class))
                                       .collect(Collectors.toList());
+
+        // 보여지는 내용 길이 설정
+        for(DataDTO dto : dtoList) {
+            dto.setContent(dto.getContent().replace("\r\n", " "));
+            if(dto.getContent().length() >= 20) {
+                dto.setContent(dto.getContent().substring(0, 20) + ".....");
+            }
+        }
 
         return dtoList;
     }

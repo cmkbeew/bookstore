@@ -25,6 +25,9 @@ public class PageResponseDTO<E> {
 
     List<E> dtoList;
 
+    // 게시판 종류
+    private String type;
+
     // 검색 조건
     private String search_date;
     private String search_type;
@@ -53,6 +56,8 @@ public class PageResponseDTO<E> {
 
         this.dtoList = dtoList;
 
+        this.type = requestDTO.getType();
+
         this.search_date = requestDTO.getSearch_date();
         this.search_type = requestDTO.getSearch_type();
         this.search_word = requestDTO.getSearch_word();
@@ -69,7 +74,7 @@ public class PageResponseDTO<E> {
             sb.append("&search_word=" + search_word);
         }
 
-        this.linkParams = "?page_size=" + this.page_size + sb;
+        this.linkParams = "?type=" + this.type + "&page_size=" + this.page_size + sb;
 
         log.info("PageResponseDTO END");
         log.info("=======================");
