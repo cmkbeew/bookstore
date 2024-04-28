@@ -12,23 +12,7 @@
 <!--    </select>-->
 
     <!-- 공지사항 -->
-<<<<<<< HEAD
-<<<<<<< HEAD
     <select id="noticeList" resultType="org.fullstack4.bookstore.domain.NoticeVO2">
-=======
-    <select id="noticeList" resultType="org.fullstack4.bookstore.domain.NoticeVO">
->>>>>>> yh
-        SELECT idx, title, writer, content, reg_date, org_file_name, save_file_name, fix_state
-        FROM tbl_bbs_notice
-        ORDER BY idx DESC
-    </select>
-
-    <select id="noticeView" resultType="org.fullstack4.bookstore.domain.NoticeVO">
-        SELECT idx, title, writer, content, reg_date, org_file_name, save_file_name, fix_state
-<<<<<<< HEAD
-        FROM tbl_bbs_notice2
-=======
-    <select id="noticeList" resultType="org.fullstack4.bookstore.domain.NoticeVO">
         SELECT idx, title, writer, content, reg_date, org_file_name, save_file_name, fix_state
         FROM tbl_bbs_notice
         ORDER BY idx DESC
@@ -37,10 +21,12 @@
     <select id="noticeView" resultType="org.fullstack4.bookstore.domain.NoticeVO">
         SELECT idx, title, writer, content, reg_date, org_file_name, save_file_name, fix_state
         FROM tbl_bbs_notice
->>>>>>> hk
-=======
+        ORDER BY idx DESC
+    </select>
+
+    <select id="noticeView" resultType="org.fullstack4.bookstore.domain.NoticeVO">
+        SELECT idx, title, writer, content, reg_date, org_file_name, save_file_name, fix_state
         FROM tbl_bbs_notice
->>>>>>> yh
         WHERE idx = #{idx}
     </select>
 

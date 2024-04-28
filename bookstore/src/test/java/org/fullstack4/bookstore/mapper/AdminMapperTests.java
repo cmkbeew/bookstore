@@ -22,7 +22,6 @@ public class AdminMapperTests {
     @Autowired(required = false)
     AdminMapper adminMapper;
 
-<<<<<<< HEAD
 //    @Test
 //    public void testPrev() {
 //        NoticeVO2 noticeVO = NoticeVO2.builder()
@@ -34,16 +33,12 @@ public class AdminMapperTests {
 //
 //        log.info("prev : " + noticeVO2);
 //    }
-<<<<<<< HEAD
-=======
     @Test
     public void testGetJSON() {
 //        Map<String, Object> json = adminMapper.getJSON();
 
 //        log.info("json : " + json.get("member_id"));
     }
->>>>>>> hk
-=======
 
     @Test
     public void testMember() {
@@ -56,5 +51,4 @@ public class AdminMapperTests {
 
     log.info("member : " + memberDTO);
     }
->>>>>>> yh
 }
