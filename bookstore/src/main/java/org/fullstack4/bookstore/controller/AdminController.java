@@ -159,4 +159,21 @@ public class AdminController {
         log.info("===============================");
     }
 
+    @GetMapping(path="/delivery/list", params="idx")
+    public void deliveryViewGET(
+            @RequestParam int pay_idx,
+            HttpServletRequest req,
+            Model model
+    ) {
+        log.info("===============================");
+        log.info("AdminController >> qnaViewGET()");
+        DeliveryDTO deliveryDTO = adminService.deliveryView(pay_idx);
+        String referer = req.getHeader("Referer");
+
+        model.addAttribute("referer", referer);
+        model.addAttribute("deliveryDTO", deliveryDTO);
+
+        log.info("===============================");
+    }
+
 }
