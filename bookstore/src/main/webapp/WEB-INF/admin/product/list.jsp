@@ -54,7 +54,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title text-uppercase mb-0 text-center">회원관리</h5>
+                            <h5 class="card-title text-uppercase mb-0 text-center">도서</h5>
                         </div>
                         <div class="table-responsive">
                             <table class="table no-wrap user-table mb-0">
@@ -64,10 +64,6 @@
                                     <th scope="col" class="border-0">번호</th>
                                     <th scope="col" class="border-0">아이디</th>
                                     <th scope="col" class="border-0">이름</th>
-<%--                                    <th scope="col" class="border-0 text-uppercase font-medium">주소</th>--%>
-<%--                                    <th scope="col" class="border-0 text-uppercase font-medium">상세주소</th>--%>
-<%--                                    <th scope="col" class="border-0 text-uppercase font-medium">우편번호</th>--%>
-<%--                                    <th scope="col" class="border-0 text-uppercase font-medium">휴대폰번호</th>--%>
                                     <th scope="col" class="border-0" >이메일</th>
                                     <th scope="col" class="border-0">평생회원</th>
                                     <th scope="col" class="border-0">선택사항</th>
@@ -75,12 +71,14 @@
                                     <th scope="col" class="border-0">회원상태</th>
                                     <th scope="col" class="border-0">가입일</th>
                                     <th scope="col" class="border-0">탈퇴일</th>
+                                    <th scope="col" class="border-0">탈퇴일</th>
+                                    <th scope="col" class="border-0">탈퇴일</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <c:choose>
-                                    <c:when test="${!empty memberList}">
-                                        <c:forEach items="${memberList}" var="list">
+                                    <c:when test="${!empty productList}">
+                                        <c:forEach items="${productList}" var="list">
                                             <tr>
                                                 <td class="pl-4">
                                                     <label class="control control--checkbox">
@@ -88,20 +86,18 @@
                                                         <div class="control__indicator"></div>
                                                     </label>
                                                 </td>
-                                                <td class="pl-4">${list.member_idx}</td>
-                                                <td>${list.member_id}</td>
-                                                <td>${list.name}</td>
-<%--                                                <td>${list.addr1}</td>--%>
-<%--                                                <td>${list.addr2}</td>--%>
-<%--                                                <td>${list.zipcode}</td>--%>
-<%--                                                <td>${list.phone_num}</td>--%>
-                                                <td>${list.email}</td>
-                                                <td>${list.forever_yn}</td>
-                                                <td>${list.option}</td>
-                                                <td>${list.point}</td>
-                                                <td>${list.member_state}</td>
+                                                <td class="pl-4">${list.product_idx}</td>
+                                                <td>${list.product_name}</td>
+                                                <td>${list.publisher}</td>
+                                                <td>${list.author}</td>
                                                 <td>${list.reg_date}</td>
-                                                <td>${list.leave_date}</td>
+                                                <td>${list.page_cnt}</td>
+                                                <td>${list.price}</td>
+                                                <td>${list.tax_yn}</td>
+                                                <td>${list.publish_date}</td>
+                                                <td>${list.category1}</td>
+                                                <td>${list.category2}</td>
+                                                <td>${list.discount}</td>
                                             </tr>
                                         </c:forEach>
                                     </c:when>

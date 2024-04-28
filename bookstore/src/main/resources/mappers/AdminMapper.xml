@@ -58,6 +58,14 @@
         WHERE idx = #{idx}
     </select>
 
+    <!-- 도서   -->
+    <select id="productList" resultType="org.fullstack4.bookstore.domain.ProductVO">
+        SELECT product_idx, reg_date, product_name, publisher, author, page_cnt, price, tax_yn
+        , publish_date, category1, category2, discount
+        FROM tbl_product
+        ORDER BY product_idx DESC
+    </select>
+
     <!-- 회원  -->
     <select id="memberList" resultType="org.fullstack4.bookstore.domain.MemberVO">
         SELECT member_idx, member_id, name, addr1, addr2, zipcode, phone_num, email
@@ -77,4 +85,13 @@
         FROM tbl_delivery
         WHERE pay_idx = #{pay_idx}
     </select>
+
+    <update id="deliveryModify">
+        UPDATE tbl_delivery SET delivery_company = #{delivery_company},
+                                company_tel = #{company_tel},
+                                delivery_state = #{delivery_state},
+                                start_date = #{start_date},
+                                arrive_date = #{arrive_date}
+        WHERE pay_idx = #{pay_idx}
+    </update>
 </mapper>

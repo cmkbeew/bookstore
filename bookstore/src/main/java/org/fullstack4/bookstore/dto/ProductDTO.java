@@ -13,7 +13,7 @@ public class ProductDTO {
     private int product_idx;
     private String product_name;
     private String publisher;
-    private String writer;
+    private String author;
     private int page_cnt;
     private int price;
     private LocalDate publish_date;

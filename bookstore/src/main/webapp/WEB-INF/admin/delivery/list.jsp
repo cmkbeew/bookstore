@@ -74,13 +74,13 @@
                                     <c:when test="${!empty deliveryList}">
                                         <c:forEach items="${deliveryList}" var="list">
                                             <tr>
-                                                <td class="pl-4"><a href="/admin/delivery/view?idx=${list.pay_idx}">${list.pay_idx}</a></td>
-                                                <td><a href="/admin/delivery/view?idx=${list.pay_idx}">${list.delivery_company}</a></td>
-                                                <td><a href="/admin/delivery/view?idx=${list.pay_idx}">${list.company_tel}</a></td>
-                                                <td><a href="/admin/delivery/view?idx=${list.pay_idx}">${list.tracking_num}</a></td>
-                                                <td><a href="/admin/delivery/view?idx=${list.pay_idx}">${list.delivery_state}</a></td>
-                                                <td><a href="/admin/delivery/view?idx=${list.pay_idx}">${list.start_date}</a></td>
-                                                <td><a href="/admin/delivery/view?idx=${list.pay_idx}">${list.arrive_date}</a></td>
+                                                <td class="pl-4"><a href="/admin/delivery/modify?idx=${list.pay_idx}">${list.pay_idx}</a></td>
+                                                <td><a href="/admin/delivery/modify?idx=${list.pay_idx}">${list.delivery_company}</a></td>
+                                                <td><a href="/admin/delivery/modify?idx=${list.pay_idx}">${list.company_tel}</a></td>
+                                                <td><a href="/admin/delivery/modify?idx=${list.pay_idx}">${list.tracking_num}</a></td>
+                                                <td><a href="/admin/delivery/modify?idx=${list.pay_idx}">${list.delivery_state}</a></td>
+                                                <td><a href="/admin/delivery/modify?idx=${list.pay_idx}">${list.start_date}</a></td>
+                                                <td><a href="/admin/delivery/modify?idx=${list.pay_idx}">${list.arrive_date}</a></td>
                                             </tr>
                                         </c:forEach>
                                     </c:when>
@@ -92,12 +92,6 @@
                                 </c:choose>
                                 </tbody>
                             </table>
-                        </div>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; margin-top: 4px;">
-                        <div>
-                            <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2"><i class="fa fa-envelope" aria-hidden="true"></i></button>
-                            <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2"><i class="fa fa-credit-card" aria-hidden="true"></i></button>
                         </div>
                     </div>
                 </div>
