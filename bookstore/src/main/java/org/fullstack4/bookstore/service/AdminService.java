@@ -37,5 +37,5 @@ public interface AdminService {
 
     // 배송
     List<DeliveryDTO> deliveryList();
->>>>>>> yh
+    DeliveryDTO deliveryView(int idx);
 }
