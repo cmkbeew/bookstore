@@ -2,9 +2,11 @@ package org.fullstack4.bookstore.mapper;
 
 import lombok.extern.log4j.Log4j2;
 
+import org.fullstack4.bookstore.domain.DataVO;
 import org.fullstack4.bookstore.domain.MemberVO;
 import org.fullstack4.bookstore.domain.NoticeVO;
 import org.fullstack4.bookstore.dto.MemberDTO;
+import org.fullstack4.bookstore.dto.NoticeDTO;
 import org.fullstack4.bookstore.dto.PageRequestDTO;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -48,6 +50,18 @@ public class AdminMapperTests {
         log.info("=====================================================");
         bbsList.forEach(list -> log.info(list));
         log.info("=====================================================");
+    }
+
+    @Test
+    public void testNoticeRegist() {
+        NoticeVO noticeVO = NoticeVO.builder()
+                .content("공지사항 내용")
+                .title("mapper test 중")
+                .org_file_name("file.pdf")
+                .save_file_name("save.pdf")
+                .build();
+
+        int result = adminMapper.noticeRegist(noticeVO);
     }
 
 

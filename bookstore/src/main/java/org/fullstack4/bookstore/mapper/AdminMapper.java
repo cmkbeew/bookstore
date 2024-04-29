@@ -26,6 +26,10 @@ public interface AdminMapper {
     // FAQ
     List<FaqVO> faqList();
     FaqVO faqView(int idx);
+    int faqRegist(FaqVO faqVO);
+    int faqDelete(int idx);
+
+
 
     // QnA
     List<QnaVO> qnaList();

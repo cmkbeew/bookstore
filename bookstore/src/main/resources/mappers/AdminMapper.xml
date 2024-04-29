@@ -105,6 +105,16 @@
         WHERE idx = #{idx}
     </select>
 
+    <insert id="faqRegist">
+        INSERT INTO tbl_bbs_faq (title, content, writer, reg_date)
+        VALUES (#{title}, #{content}, #{writer}, NOW())
+    </insert>
+
+    <delete id="faqDelete">
+        DELETE FROM tbl_bbs_faq
+        WHERE idx = #{idx}
+    </delete>
+
     <!-- QnA -->
     <select id="qnaList" resultType="org.fullstack4.bookstore.domain.QnaVO">
         SELECT idx, title, content, writer, read_cnt, reg_date, modify_date, reply_state

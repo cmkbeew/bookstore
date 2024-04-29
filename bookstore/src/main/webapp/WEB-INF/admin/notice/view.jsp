@@ -73,7 +73,7 @@
                                         <div class="p-3" style="min-height: 20vh;">
                                             ${noticeDTO.content}
                                         </div>
-                                        <c:if test="${noticeDTO.org_file_name != null}">
+                                        <c:if test="${noticeDTO.org_file_name != null && noticeDTO.org_file_name != ''}">
                                             <table class="table no-wrap user-table mb-0 text-lg-start">
                                                 <tr>
                                                     <th style="width: 120px; vertical-align: middle;">첨부파일</th>

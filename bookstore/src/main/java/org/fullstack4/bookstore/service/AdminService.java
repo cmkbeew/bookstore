@@ -26,6 +26,8 @@ public interface AdminService {
     // FAQ
     List<FaqDTO> faqList();
     FaqDTO faqView(int idx);
+    int faqRegist(FaqDTO faqDTO);
+    int faqDelete(int idx);
 
     // QnA
     List<QnaDTO> qnaList();
