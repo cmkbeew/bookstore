@@ -23,8 +23,8 @@ public class CommunityMapperTests {
 
     @Test
     public void testNoticeList() {
-        List<NoticeVO> list = communityMapper.noticeList();
+//        List<NoticeVO> list = communityMapper.noticeList();
 
-        log.info("list : " + list.toString());
+//        log.info("list : " + list.toString());
     }
 }

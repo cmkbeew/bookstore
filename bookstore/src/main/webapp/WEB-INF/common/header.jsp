@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <html>
-<nav class="navbar navbar-expand-lg navbar-light bg-light" style="position: fixed; width:100%; z-index: 10000;">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="position: fixed; top:0; width:100%; z-index: 10000;">
     <div class="container px-4 px-lg-5">
         <a class="navbar-brand" href="/">Ddoi Story</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -35,15 +35,15 @@
                     <a class="nav-link dropdown-toggle" id="boards" href="#" role="button" data-bs-toggle="dropdown"
                        aria-expanded="false">커뮤니티</a>
                     <ul class="dropdown-menu" aria-labelledby="boards">
-                        <li><a class="dropdown-item" href="/community/notice/list">공지사항</a></li>
+                        <li><a class="dropdown-item" href="/community/list?type=notice">공지사항</a></li>
                         <li>
                             <hr class="dropdown-divider"/>
                         </li>
-                        <li><a class="dropdown-item" href="/community/faq/list">FAQ</a></li>
+                        <li><a class="dropdown-item" href="/community/list?type=faq">FAQ</a></li>
                         <li>
                             <hr class="dropdown-divider"/>
                         </li>
-                        <li><a class="dropdown-item" href="/community/qna/list">QnA</a></li>
+                        <li><a class="dropdown-item" href="/community/list?type=qna">QnA</a></li>
                     </ul>
                 </li>
                 <li class="nav-item"><a class="nav-link" href="/data/list">자료실</a></li>
@@ -69,7 +69,7 @@
                                     onclick="location.href='/login/logout'">로그아웃
                             </button>
                             <button type="button" class="btn btn-primary"
-                                    onclick="location.href='/member/view?user_id=${sessionScope.member_id}'">관리자페이지
+                                    onclick="location.href='/admin/list?bbsName=notice'">관리자페이지
                             </button>
                         </c:if>
                     </c:when>

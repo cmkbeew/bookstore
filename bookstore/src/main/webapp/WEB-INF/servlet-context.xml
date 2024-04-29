@@ -20,6 +20,16 @@
 
     <context:component-scan base-package="org.fullstack4.bookstore.controller" />
 
+    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="formatters">
+            <set>
+                <bean class="org.fullstack4.bookstore.controller.formatter.LocalDateFormatter" />
+            </set>
+        </property>
+    </bean>
+
+    <mvc:annotation-driven conversion-service="conversionService" />
+
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize" value="10240000" />
         <property name="defaultEncoding" value="utf-8" />

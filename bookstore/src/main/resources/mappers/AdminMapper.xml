@@ -3,11 +3,145 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.fullstack4.bookstore.mapper.AdminMapper">
-
-    <select id="getJSON" resultType="map">
-        SELECT JSON_OBJECT('notice_idx', notice_idx, 'title', title, 'member_id', member_id, 'content', content
-                   , 'reg_date', reg_date, 'org_file_name', org_file_name, 'save_file_name', save_file_name)
-        from tbl_bbs_notice
-        where notice_idx = 1
+    <sql id="whereCondition">
+        <trim prefix="where" prefixOverrides="AND">
+            <if test="search_type != null">
+                <if test="search_type == 'title'">
+                    AND title LIKE concat('%', #{search_word}, '%')
+                </if>
+                <if test="search_type == 'writer'">
+                    AND writer LIKE concat('%', #{search_word}, '%')
+                </if>
+            </if>
+            <if test="search_date != null">
+                <if test="search_date == 'day'">
+                    AND reg_date <![CDATA[>=]]> ADDDATE(NOW(), INTERVAL -1 day)
+                </if>
+                <if test="search_date == 'week'">
+                    AND reg_date <![CDATA[>=]]> ADDDATE(NOW(), INTERVAL -1 week)
+                </if>
+                <if test="search_date == 'month'">
+                    AND reg_date <![CDATA[>=]]> ADDDATE(NOW(), INTERVAL -1 month)
+                </if>
+            </if>
+        </trim>
+    </sql>
+    <!--  페이징  -->
+    <select id="noticeTotalCount" resultType="int">
+        SELECT COUNT(*) FROM tbl_bbs_notice
     </select>
+
+    <select id="faqTotalCount" resultType="int">
+    SELECT COUNT(*) FROM tbl_bbs_faq
+    </select>
+
+    <select id="qnaTotalCount" resultType="int">
+    SELECT COUNT(*) FROM tbl_bbs_qna
+    </select>
+
+    <select id="noticeListByPage" resultType="org.fullstack4.bookstore.domain.NoticeVO">
+        SELECT idx, title, writer, reg_date, content, org_file_name, save_file_name, fix_state
+        FROM tbl_bbs_notice
+        <include refid="whereCondition"></include>
+        ORDER BY idx DESC
+        LIMIT #{page_skip_count}, #{page_size}
+    </select>
+
+    <select id="faqListByPage" resultType="org.fullstack4.bookstore.domain.FaqVO">
+        SELECT idx, title, content, writer, reg_date, modify_date
+        FROM tbl_bbs_faq
+        <include refid="whereCondition"></include>
+        ORDER BY idx DESC
+        LIMIT #{page_skip_count}, #{page_size}
+    </select>
+
+    <select id="qnaListByPage" resultType="org.fullstack4.bookstore.domain.QnaVO">
+        SELECT idx, title, content, writer, read_cnt, reg_date, modify_date, reply_state
+        FROM tbl_bbs_qna
+        <include refid="whereCondition"></include>
+        ORDER BY idx DESC
+        LIMIT #{page_skip_count}, #{page_size}
+    </select>
+
+
+    <!-- 공지사항 -->
+    <select id="noticeList" resultType="org.fullstack4.bookstore.domain.NoticeVO">
+        SELECT idx, title, writer, content, reg_date, org_file_name, save_file_name, fix_state
+        FROM tbl_bbs_notice
+        ORDER BY fix_state DESC, idx DESC
+    </select>
+
+    <select id="noticeView" resultType="org.fullstack4.bookstore.domain.NoticeVO">
+        SELECT idx, title, writer, content, reg_date, org_file_name, save_file_name, fix_state
+        FROM tbl_bbs_notice
+        WHERE idx = #{idx}
+    </select>
+
+    <insert id="noticeRegist">
+        INSERT INTO tbl_bbs_notice (title, writer, reg_date, content, org_file_name, save_file_name, fix_state)
+        VALUES (#{title}, #{writer}, NOW(), #{content}, #{org_file_name}, #{save_file_name}, #{fix_state})
+    </insert>
+
+    <!-- FAQ -->
+    <select id="faqList" resultType="org.fullstack4.bookstore.domain.FaqVO">
+        SELECT idx, title, content, writer, reg_date, modify_date
+        FROM tbl_bbs_faq
+        ORDER BY idx DESC
+    </select>
+
+    <select id="faqView" resultType="org.fullstack4.bookstore.domain.FaqVO">
+        SELECT idx, title, content, writer, reg_date, modify_date
+        FROM tbl_bbs_faq
+        WHERE idx = #{idx}
+    </select>
+
+    <!-- QnA -->
+    <select id="qnaList" resultType="org.fullstack4.bookstore.domain.QnaVO">
+        SELECT idx, title, content, writer, read_cnt, reg_date, modify_date, reply_state
+        FROM tbl_bbs_qna
+        ORDER BY idx DESC
+    </select>
+
+    <select id="qnaView" resultType="org.fullstack4.bookstore.domain.QnaVO">
+        SELECT idx, title, content, writer, read_cnt, reg_date, modify_date, reply_state
+        FROM tbl_bbs_qna
+        WHERE idx = #{idx}
+    </select>
+
+    <!-- 도서   -->
+    <select id="productList" resultType="org.fullstack4.bookstore.domain.ProductVO">
+        SELECT product_idx, reg_date, product_name, publisher, author, page_cnt, price, tax_yn
+        , publish_date, category1, category2, discount
+        FROM tbl_product
+        ORDER BY product_idx DESC
+    </select>
+
+    <!-- 회원  -->
+    <select id="memberList" resultType="org.fullstack4.bookstore.domain.MemberVO">
+        SELECT member_idx, member_id, name, addr1, addr2, zipcode, phone_num, email
+             , forever_yn, point, mileage, member_state, join_state, option, reg_date, leave_date
+        FROM tbl_member
+        ORDER BY member_idx DESC
+    </select>
+
+    <select id="deliveryList" resultType="org.fullstack4.bookstore.domain.DeliveryVO">
+        SELECT pay_idx, delivery_company, company_tel, tracking_num, delivery_state, start_date, arrive_date
+        FROM tbl_delivery
+        ORDER BY pay_idx DESC
+    </select>
+
+    <select id="deliveryView" resultType="org.fullstack4.bookstore.domain.DeliveryVO">
+        SELECT pay_idx, delivery_company, company_tel, tracking_num, delivery_state, start_date, arrive_date
+        FROM tbl_delivery
+        WHERE pay_idx = #{pay_idx}
+    </select>
+
+    <update id="deliveryModify">
+        UPDATE tbl_delivery SET delivery_company = #{delivery_company},
+                                company_tel = #{company_tel},
+                                delivery_state = #{delivery_state},
+                                start_date = #{start_date},
+                                arrive_date = #{arrive_date}
+        WHERE pay_idx = #{pay_idx}
+    </update>
 </mapper>

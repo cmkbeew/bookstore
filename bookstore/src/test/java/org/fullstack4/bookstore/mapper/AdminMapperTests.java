@@ -1,13 +1,17 @@
 package org.fullstack4.bookstore.mapper;
 
-//import jdk.nashorn.internal.parser.JSONParser;
 import lombok.extern.log4j.Log4j2;
-//import org.fullstack4.bookstore.domain.NoticeVO;
+
+import org.fullstack4.bookstore.domain.MemberVO;
+import org.fullstack4.bookstore.domain.NoticeVO;
+import org.fullstack4.bookstore.dto.MemberDTO;
+import org.fullstack4.bookstore.dto.PageRequestDTO;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
 
 import java.util.List;
 import java.util.Map;
@@ -20,10 +24,31 @@ public class AdminMapperTests {
     @Autowired(required = false)
     AdminMapper adminMapper;
 
-    @Test
-    public void testGetJSON() {
-        Map<String, Object> json = adminMapper.getJSON();
 
-        log.info("json : " + json.get("member_id"));
+//    @Test
+//    public void testMember() {
+//
+//        MemberDTO memberDTO = MemberDTO.builder()
+//                .member_idx(2)
+//                .build();
+//
+//        List<MemberVO> memberVO2 = adminMapper.memberList();
+//
+//    log.info("member : " + memberDTO);
+//    }
+
+    @Test
+    public void testBbsListByPage() {
+        PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
+                .page(1)
+                .page_size(10)
+                .build();
+
+        List<NoticeVO> bbsList = adminMapper.noticeListByPage(pageRequestDTO);
+        log.info("=====================================================");
+        bbsList.forEach(list -> log.info(list));
+        log.info("=====================================================");
     }
+
+
 }

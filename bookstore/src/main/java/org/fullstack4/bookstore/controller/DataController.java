@@ -6,6 +6,7 @@ import org.fullstack4.bookstore.service.DataService;
 import org.fullstack4.bookstore.util.FileUploadUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.io.File;
 import java.util.List;
 import java.util.UUID;
@@ -25,15 +27,15 @@ public class DataController {
     private final DataService dataService;
 
     @GetMapping("/list")
-    public void data_list(Model model) {
-        List<DataDTO> dataList = dataService.list_data();
+    public void dataList(Model model) {
+        List<DataDTO> dataList = dataService.dataList();
 
         model.addAttribute("dataList", dataList);
     }
 
     @GetMapping("/view")
-    public void data_view(int data_idx, Model model) {
-        DataDTO dataDTO = dataService.view_data(data_idx);
+    public void dataView(int data_idx, Model model) {
+        DataDTO dataDTO = dataService.dataView(data_idx);
 
         model.addAttribute("dataDTO", dataDTO);
     }
@@ -44,9 +46,17 @@ public class DataController {
     }
 
     @PostMapping("regist")
-    public String data_regist(@RequestParam("file") MultipartFile multipartFile,
-                              DataDTO dataDTO,
-                              RedirectAttributes redirectAttributes) {
+    public String dataRegist(@RequestParam("file") MultipartFile multipartFile,
+                             @Valid DataDTO dataDTO,
+                             BindingResult bindingResult,
+                             RedirectAttributes redirectAttributes) {
+        if(bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+            redirectAttributes.addFlashAttribute("dataDTO", dataDTO);
+
+            return "redirect:/data/regist";
+        }
+
         String save_file_name = "";
 
         if(!multipartFile.isEmpty()) {
@@ -56,7 +66,7 @@ public class DataController {
         dataDTO.setOrg_file_name(multipartFile.getOriginalFilename());
         dataDTO.setSave_file_name(save_file_name);
 
-        int result = dataService.regist_data(dataDTO);
+        int result = dataService.dataRegist(dataDTO);
 
         if(result > 0) {
             return "redirect:/data/list";
@@ -68,20 +78,34 @@ public class DataController {
     }
 
     @GetMapping("/modify")
-    public void data_modify(int data_idx, Model model) {
-        DataDTO dataDTO = dataService.view_data(data_idx);
+    public void dataModify(int data_idx, Model model) {
+        DataDTO dataDTO = dataService.dataView(data_idx);
 
         model.addAttribute("dataDTO", dataDTO);
     }
 
     @PostMapping("/modify")
     public String data_modify(@RequestParam("file") MultipartFile multipartFile,
-                              DataDTO dataDTO,
+                              @Valid DataDTO dataDTO,
+                              BindingResult bindingResult,
                               RedirectAttributes redirectAttributes) {
-        DataDTO dto = dataService.view_data(dataDTO.getData_idx());
+        if(bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+            redirectAttributes.addFlashAttribute("dataDTO", dataDTO);
+
+            return "redirect:/data/modify?data_idx=" + dataDTO.getData_idx();
+        }
+
+        DataDTO dto = dataService.dataView(dataDTO.getData_idx());
+
+        // 수정 파일 없을 때 기존 파일 삭제
+        if(dto.getSave_file_name() != null) {
+            FileUploadUtil.deleteFile(dto.getSave_file_name());
+        }
 
         String save_file_name = "";
 
+        // 수정 파일 있을 때 저장 및 기존 파일 삭제
         if(!multipartFile.isEmpty()) {
             save_file_name = FileUploadUtil.saveFile(multipartFile);
 
@@ -91,7 +115,7 @@ public class DataController {
         dataDTO.setOrg_file_name(multipartFile.getOriginalFilename());
         dataDTO.setSave_file_name(save_file_name);
 
-        int result = dataService.modify_data(dataDTO);
+        int result = dataService.dataModify(dataDTO);
 
         if(result > 0) {
             return "redirect:/data/view?data_idx=" + dataDTO.getData_idx();
@@ -104,7 +128,13 @@ public class DataController {
 
     @PostMapping("/delete")
     public String data_delete(int data_idx, RedirectAttributes redirectAttributes) {
-        int result = dataService.delete_data(data_idx);
+        DataDTO dataDTO = dataService.dataView(data_idx);
+
+        if(dataDTO != null && dataDTO.getSave_file_name() != null) {
+            FileUploadUtil.deleteFile(dataDTO.getSave_file_name());
+        }
+
+        int result = dataService.dataDelete(data_idx);
 
         if(result > 0) {
             return "redirect:/data/list";

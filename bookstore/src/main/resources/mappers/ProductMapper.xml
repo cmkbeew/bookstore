@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fullstack4.bookstore.mapper.ProductMapper">
+
+    <select id="productList" resultType="org.fullstack4.bookstore.domain.ProductVO">
+        SELECT product_idx, product_name, publisher, writer, page_cnt, price, publish_date, category1, category2, discount, tax_yn, reg_date
+        FROM tbl_product
+        WHERE category1 = #{param2}
+        ORDER BY product_idx DESC
+    </select>
+
+    <select id="productTotalCount" resultType="int">
+        SELECT COUNT(*)
+        FROM tbl_product
+    </select>
+
+    <select id="productView" resultType="org.fullstack4.bookstore.domain.ProductVO">
+        SELECT product_idx, product_name, publisher, writer, page_cnt, price, publish_date, category1, category2, discount, tax_yn, reg_date
+        FROM tbl_product
+        WHERE product_idx = #{param1} AND category1 = #{param2}
+    </select>
+
+</mapper>

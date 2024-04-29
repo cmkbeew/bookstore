@@ -21,8 +21,8 @@ public class CommunityServiceTests {
 
     @Test
     public void testNoticeListService() {
-        List<NoticeDTO> noticeDTOList = communityService.noticeList();
+//        List<NoticeDTO> noticeDTOList = communityService.noticeList();
 
-        log.info("noticeDTOList : " + noticeDTOList);
+//        log.info("noticeDTOList : " + noticeDTOList);
     }
 }

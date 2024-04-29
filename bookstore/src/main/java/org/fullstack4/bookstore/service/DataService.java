@@ -6,9 +6,9 @@ import org.fullstack4.bookstore.dto.DataDTO;
 import java.util.List;
 
 public interface DataService {
-    int regist_data(DataDTO dataDTO);
-    List<DataDTO> list_data();
-    DataDTO view_data(int data_idx);
-    int modify_data(DataDTO dataDTO);
-    int delete_data(int data_idx);
+    int dataRegist(DataDTO dataDTO);
+    List<DataDTO> dataList();
+    DataDTO dataView(int data_idx);
+    int dataModify(DataDTO dataDTO);
+    int dataDelete(int data_idx);
 }
