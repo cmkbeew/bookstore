@@ -2,10 +2,7 @@ package org.fullstack4.bookstore.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.fullstack4.bookstore.domain.DeliveryVO;
-import org.fullstack4.bookstore.domain.FaqVO;
-import org.fullstack4.bookstore.domain.NoticeVO;
-import org.fullstack4.bookstore.domain.QnaVO;
+import org.fullstack4.bookstore.domain.*;
 import org.fullstack4.bookstore.dto.*;
 import org.fullstack4.bookstore.mapper.AdminMapper;
 import org.modelmapper.ModelMapper;
@@ -162,13 +159,23 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public FaqDTO faqView(int idx) {
         FaqVO faqVO = adminMapper.faqView(idx);
-
         FaqDTO faqDTO = modelMapper.map(faqVO, FaqDTO.class);
 
         return faqDTO;
     }
 
+    @Override
+    public int faqRegist(FaqDTO faqDTO) {
+        FaqVO faqVO = modelMapper.map(faqDTO, FaqVO.class);
+        int result = adminMapper.faqRegist(faqVO);
+        return result;
+    }
 
+    @Override
+    public int faqDelete(int idx) {
+        int result = adminMapper.faqDelete(idx);
+        return result;
+    }
 
 
     // QnA

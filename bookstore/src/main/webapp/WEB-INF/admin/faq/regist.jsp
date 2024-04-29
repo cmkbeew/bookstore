@@ -42,10 +42,10 @@
         <div class="container py-h" style="margin-bottom: 5rem;">
             <div class="row">
                 <div class="col-md-12">
-                    <form name="registFrm" id="registFrm" method="post" action="/admin/notice/regist" enctype="multipart/form-data">
+                    <form name="registFrm" id="registFrm" method="post" action="/admin/faq/regist">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title text-uppercase mb-0" style="text-align: center;">공지사항 등록</h5>
+                                <h5 class="card-title text-uppercase mb-0" style="text-align: center;">FAQ 등록</h5>
                             </div>
                             <div class="row text-left">
                                 <div class="full-width site-content col-md-12">
@@ -54,7 +54,7 @@
                                             <tr>
                                                 <th style="width: 120px; vertical-align: middle">제목 <i class="fa fa-pencil" aria-hidden="true"></i></th>
                                                 <td>
-                                                    <input type="text" name="title" id="title" class="form-control" value="${noticeDTO.title}" placeholder="제목"/>
+                                                    <input type="text" name="title" id="title" class="form-control" value="${faqDTO.title}" placeholder="제목"/>
                                                     <div id="div_err_title" style="display: none"></div>
                                                 </td>
 
@@ -63,29 +63,12 @@
                                                 <th style="vertical-align: middle;">작성자 <i class="fa fa-user" ></i></th>
                                                 <td><input type="text" name="writer" id="writer" class="form-control" value="${member_id}" readonly/></td>
                                             </tr>
-                                            <tr>
-                                                <th style="vertical-align: middle;">고정여부 <i class="fa fa-thumb-tack" aria-hidden="true"></i></th>
-                                                <td>
-                                                    <label class="control control--checkbox">
-                                                        <input type="checkbox" name="fix_state" id="fix_state" value="-1">
-                                                        <div class="control__indicator"></div>
-                                                    </label>
-                                                </td>
-                                            </tr>
                                         </table>
                                     </div>
                                     <div class="p-3" style="min-height: 20vh;">
-                                        <textarea name="content" id="content" placeholder="내용을 입력하세요.">${noticeDTO.content}</textarea>
+                                        <textarea name="content" id="content" placeholder="내용을 입력하세요.">${faqDTO.content}</textarea>
                                         <div id="div_err_content" style="display: none"></div>
                                     </div>
-                                    <table class="table no-wrap user-table mb-0 text-lg-start">
-                                        <tr>
-                                            <th style="width: 120px; vertical-align: middle;">첨부파일</th>
-                                            <td>
-                                                <input type="file" name="file" class="form-control" />
-                                            </td>
-                                        </tr>
-                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -93,7 +76,7 @@
                             <div>
                                 <button type="reset" class="btn btn-outline-primary me-2">초기화</button>
                                 <button type="submit" class="btn btn-primary me-2">완료</button>
-                                <button type="button" class="btn btn-outline-danger me-2" onclick="location.href='/admin/list?type=notice'">취소</button>
+                                <button type="button" class="btn btn-outline-danger me-2" onclick="location.href='/admin/list?type=faq'">취소</button>
                             </div>
                         </div>
                     </form>
@@ -119,4 +102,3 @@
 </script>
 </body>
 </html>
-

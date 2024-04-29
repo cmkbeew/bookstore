@@ -16,6 +16,7 @@ public class NoticeVO {
     private String content;
     private String writer;
     private LocalDate reg_date;
+    private LocalDate modify_date;
     private String org_file_name;
     private String save_file_name;
     private int fix_state;

@@ -6,6 +6,7 @@ import org.fullstack4.bookstore.domain.NoticeVO;
 import org.fullstack4.bookstore.dto.*;
 import org.fullstack4.bookstore.service.AdminService;
 import org.fullstack4.bookstore.service.CommunityService;
+import org.fullstack4.bookstore.util.FileUploadUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -73,13 +75,29 @@ public class AdminController {
     ) {
         String referer = req.getHeader("Referer");
         log.info("bbsDeleteGET >> " + type);
-        int result = adminService.noticeDelete(idx);
 
-        if (result > 0) {
-            return "redirect:/admin/list?type=notice";
-        } else {
-            return "referer";
+        if (type.equals("notice")) {
+            int result = adminService.noticeDelete(idx);
+
+            if (result > 0) {
+                return "redirect:/admin/list?type=notice";
+            } else {
+                return "referer";
+            }
         }
+
+        if (type.equals("faq")) {
+            int result = adminService.faqDelete(idx);
+
+            if (result > 0) {
+                return "redirect:/admin/list?type=faq";
+            } else {
+                return "referer";
+            }
+        }
+
+        return "referer";
+
     }
 
     @PostMapping (path="/delete")
@@ -102,19 +120,32 @@ public class AdminController {
             }
             if (result > 0) {
                 return "redirect:" + referer;
+            } else {
+                return "redirect:/admin/list?type=notice&err=deleteErr";
             }
         }
 
-//        if (type.equals("faq")) {
-//
-//        }
+        if (type.equals("faq")) {
+            int result = 0;
+
+            for (int i = 0; i < delete_idx.length; i++) {
+                int intIdx = Integer.parseInt(delete_idx[i]);
+                result = adminService.faqDelete(intIdx);
+            }
+            if (result > 0) {
+                return "redirect:" + referer;
+            } else {
+                return "redirect:/admin/list?type=notice&err=deleteErr";
+            }
+        }
+
 //
 //        if (type.equals("qna")) {
 //
 //        }
         log.info("===============================");
 //        return "redirect:/admin/list?type=notice";
-        return "redirect:/admin/list?type=notice&err=fixErr";
+        return "redirect:/admin/list?type=notice";
 
     }
 
@@ -182,6 +213,7 @@ public class AdminController {
 
     @PostMapping("/notice/regist")
     public String noticeRegistPOST(
+            @RequestParam("file") MultipartFile multipartFile,
             @Valid NoticeDTO noticeDTO,
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes
@@ -198,12 +230,23 @@ public class AdminController {
             return "redirect:/admin/notice/regist";
         }
 
+        // 파일 등록
+        String save_file_name = "";
+
+        if (!multipartFile.isEmpty()) {
+            save_file_name = FileUploadUtil.saveFile(multipartFile);
+        }
+        noticeDTO.setOrg_file_name(multipartFile.getOriginalFilename());
+        noticeDTO.setSave_file_name(save_file_name);
+
+
         int result = adminService.noticeRegist(noticeDTO);
 
         if (result > 0) {
             return "redirect:/admin/list?type=notice";
         }
         else {
+            redirectAttributes.addFlashAttribute("noticeDTO", noticeDTO);
             return "redirect:/admin/notice/regist";
         }
     }
@@ -236,6 +279,42 @@ public class AdminController {
         model.addAttribute("nextDTO", faqMap.get("faqNextDTO"));
 
         log.info("===============================");
+    }
+
+    @GetMapping("/faq/regist")
+    public void faqRegistGET() {
+        log.info("===============================");
+        log.info("AdminController >> faqRegistGET()");
+        log.info("===============================");
+    }
+
+    @PostMapping("/faq/regist")
+    public String faqRegistPOST(
+            @Valid FaqDTO faqDTO,
+            BindingResult bindingResult,
+            RedirectAttributes redirectAttributes
+    ) {
+        log.info("===============================");
+        log.info("AdminController >> faqRegistPOST()");
+        log.info("===============================");
+
+        log.info("errors: " + bindingResult.getAllErrors());
+        if(bindingResult.hasErrors()) {
+            log.info("Errors");
+            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+            redirectAttributes.addFlashAttribute("faqDTO", faqDTO);
+            return "redirect:/admin/faq/regist";
+        }
+
+        int result = adminService.faqRegist(faqDTO);
+
+        if (result > 0) {
+            return "redirect:/admin/list?type=faq";
+        }
+        else {
+            redirectAttributes.addFlashAttribute("faqDTO", faqDTO);
+            return "redirect:/admin/faq/regist";
+        }
     }
 
 

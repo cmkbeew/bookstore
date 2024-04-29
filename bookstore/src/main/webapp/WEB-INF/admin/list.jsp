@@ -116,7 +116,7 @@
                                                                                 <span>${list.title}</span>
                                                                             </c:otherwise>
                                                                         </c:choose>
-                                                                        <c:if test="${list.org_file_name != null}">
+                                                                        <c:if test="${list.org_file_name != null && list.org_file_name != ''}">
                                                                             <span class="material-symbols-outlined" style="vertical-align: center; transform: translateY(15%)">attach_file</span>
                                                                         </c:if>
                                                                     </c:when>
@@ -164,21 +164,21 @@
                                     <c:if test="${communityList.prev_page_flag ne true}"> disabled</c:if>">
                                     <a class="page-link"
                                        data-num="<c:choose><c:when test="${communityList.prev_page_flag}">${communityList.page_block_start-1}</c:when><c:otherwise>1</c:otherwise></c:choose>"
-                                       href="<c:choose><c:when test="${communityList.prev_page_flag}">${communityList.linkParams}&page=${communityList.page_block_start-1}&bbsName=${communityList.type}</c:when><c:otherwise>#</c:otherwise></c:choose>" aria-label="Previous">
+                                       href="<c:choose><c:when test="${communityList.prev_page_flag}">${communityList.linkParams}&page=${communityList.page_block_start-1}</c:when><c:otherwise>#</c:otherwise></c:choose>" aria-label="Previous">
                                         <span aria-hidden="true">&laquo;</span>
                                     </a>
                                 </li>
                                     <c:forEach begin="${communityList.page_block_start}" end="${communityList.page_block_end}" var="page_num">
                                         <li class="page-item<c:if test="${communityList.page == page_num}"> active</c:if> ">
                                             <a class="page-link" data-num="${page_num}"
-                                               href="<c:choose><c:when test="${communityList.page == page_num}">#</c:when><c:otherwise>${communityList.linkParams}&page=${page_num}&bbsName=${communityList.type}</c:otherwise></c:choose>">${page_num}</a>
+                                               href="<c:choose><c:when test="${communityList.page == page_num}">#</c:when><c:otherwise>${communityList.linkParams}&page=${page_num}</c:otherwise></c:choose>">${page_num}</a>
                                         </li>
                                     </c:forEach>
                                 <li class="page-item
                                     <c:if test="${communityList.next_page_flag ne true}"> disabled</c:if>">
                                     <a class="page-link"
                                        data-num="<c:choose><c:when test="${communityList.next_page_flag}">${communityList.page_block_end+1}</c:when><c:otherwise>${communityList.page_block_end}</c:otherwise></c:choose>"
-                                       href="<c:choose><c:when test="${communityList.next_page_flag}">${communityList.linkParams}&page=${communityList.page_block_end+1}&bbsName=${communityList.type}</c:when><c:otherwise>#</c:otherwise></c:choose>" aria-label="Next">
+                                       href="<c:choose><c:when test="${communityList.next_page_flag}">${communityList.linkParams}&page=${communityList.page_block_end+1}</c:when><c:otherwise>#</c:otherwise></c:choose>" aria-label="Next">
                                         <span aria-hidden="true">&raquo;</span>
                                     </a>
                                 </li>
