@@ -29,18 +29,7 @@
 <body>
 <%@ include file="/WEB-INF/common/header.jsp"%>
 <div class="d-flex py-h" id="wrapper">
-    <!-- Sidebar-->
-    <div class="border-end bg-white" id="sidebar-wrapper">
-        <div class="sidebar-heading border-bottom bg-light">관리자 페이지</div>
-        <div class="list-group list-group-flush">
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/list?bbsName=notice">공지사항</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/list?bbsName=faq">FAQ</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/list?bbsName=qna">QnA</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/member/list">회원관리</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/product/list">도서</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/delivery/list">배송관리</a>
-        </div>
-    </div>
+    <%@ include file="/WEB-INF/common/adminSidebar.jsp"%>
     <!-- Page content wrapper-->
     <div id="page-content-wrapper">
         <button class="btn btn-primary" id="sidebarToggle">
@@ -53,7 +42,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title text-uppercase mb-0" style="text-align: center;">공지사항</h5>
+                            <h5 class="card-title text-uppercase mb-0" style="text-align: center;">QnA</h5>
                         </div>
                         <div class="row text-left">
                             <div id="content" class="full-width site-content col-md-12">
@@ -93,6 +82,34 @@
                     <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2"><i class="fa fa-edit"></i></button>
                     <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2"><i class="fa fa-trash"></i></button>
                 </div>
+            </div>
+            <div class="card my-5">
+                <table class="table no-wrap user-table mb-0 text-lg-start">
+                    <tr>
+                        <th style="width: 120px;">
+                            <span class="material-symbols-outlined" style="vertical-align: middle;">expand_less</span>
+                            <span>이전글</span>
+                        </th>
+                        <c:if test="${prevDTO != null}">
+                            <td><a href="/admin/qna/view?idx=${prevDTO.idx}">${prevDTO.title}</a></td>
+                        </c:if>
+                        <c:if test="${prevDTO == null}">
+                            <td>이전글이 없습니다.</td>
+                        </c:if>
+                    </tr>
+                    <tr>
+                        <th style="width: 120px;">
+                            <span class="material-symbols-outlined" style="vertical-align: middle;">expand_more</span>
+                            <span>다음글</span>
+                        </th>
+                        <c:if test="${nextDTO != null}">
+                            <td><a href="/admin/qna/view?idx=${nextDTO.idx}">${nextDTO.title}</a></td>
+                        </c:if>
+                        <c:if test="${nextDTO == null}">
+                            <td>다음글이 없습니다.</td>
+                        </c:if>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>

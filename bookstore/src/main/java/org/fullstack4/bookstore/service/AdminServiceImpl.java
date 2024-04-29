@@ -119,7 +119,17 @@ public class AdminServiceImpl implements AdminService {
         return result;
     }
 
+    @Override
+    public int noticeDelete(int idx) {
+        int result = adminMapper.noticeDelete(idx);
+        return result;
+    }
 
+    @Override
+    public int noticeFix(int idx) {
+        int result = adminMapper.noticeFix(idx);
+        return result;
+    }
 
 
 //    @Override

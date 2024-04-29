@@ -31,10 +31,10 @@
 
     <!-- 공지사항 -->
     <select id="noticeList" resultType="org.fullstack4.bookstore.domain.NoticeVO">
-        SELECT idx, title, writer, content, reg_date, org_file_name, save_file_name, fix_state
+        SELECT idx, title, writer, reg_date, content, org_file_name, save_file_name, fix_state
         FROM tbl_bbs_notice
         <include refid="whereCondition"></include>
-        ORDER BY idx DESC
+        ORDER BY fix_state ASC, idx DESC
         LIMIT #{page_skip_count}, #{page_size}
     </select>
 

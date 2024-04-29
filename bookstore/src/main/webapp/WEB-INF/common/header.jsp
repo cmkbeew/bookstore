@@ -69,7 +69,7 @@
                                     onclick="location.href='/login/logout'">로그아웃
                             </button>
                             <button type="button" class="btn btn-primary"
-                                    onclick="location.href='/admin/list?bbsName=notice'">관리자페이지
+                                    onclick="location.href='/admin/list?type=notice'">관리자페이지
                             </button>
                         </c:if>
                     </c:when>

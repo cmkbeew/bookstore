@@ -16,5 +16,5 @@ public class NoticeDTO {
     private LocalDate reg_date;
     private String org_file_name;
     private String save_file_name;
-    private String fix_state;
+    private int fix_state;
 }

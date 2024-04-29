@@ -10,9 +10,9 @@
 <div class="border-end bg-white" id="sidebar-wrapper">
     <div class="sidebar-heading border-bottom bg-light">관리자 페이지</div>
     <div class="list-group list-group-flush">
-        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/list?bbsName=notice">공지사항</a>
-        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/list?bbsName=faq">FAQ</a>
-        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/list?bbsName=qna">QnA</a>
+        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/list?type=notice">공지사항</a>
+        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/list?type=faq">FAQ</a>
+        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/list?type=qna">QnA</a>
         <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/member/list">회원관리</a>
         <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/product/list">도서</a>
         <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/delivery/list">배송관리</a>
