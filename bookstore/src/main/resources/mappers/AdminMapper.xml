@@ -43,7 +43,7 @@
         SELECT idx, title, writer, reg_date, content, org_file_name, save_file_name, fix_state
         FROM tbl_bbs_notice
         <include refid="whereCondition"></include>
-        ORDER BY idx DESC
+        ORDER BY fix_state ASC, idx DESC
         LIMIT #{page_skip_count}, #{page_size}
     </select>
 
@@ -81,6 +81,16 @@
         INSERT INTO tbl_bbs_notice (title, writer, reg_date, content, org_file_name, save_file_name, fix_state)
         VALUES (#{title}, #{writer}, NOW(), #{content}, #{org_file_name}, #{save_file_name}, #{fix_state})
     </insert>
+
+    <delete id="noticeDelete">
+        DELETE FROM tbl_bbs_notice
+        WHERE idx = #{idx}
+    </delete>
+
+    <update id="noticeFix">
+        UPDATE tbl_bbs_notice SET fix_state = -1
+        WHERE idx = #{idx}
+    </update>
 
     <!-- FAQ -->
     <select id="faqList" resultType="org.fullstack4.bookstore.domain.FaqVO">

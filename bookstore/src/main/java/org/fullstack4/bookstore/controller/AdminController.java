@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 @Log4j2
 @Controller
@@ -26,13 +27,14 @@ import java.util.List;
 public class AdminController {
 
     private final AdminService adminService;
+    private final CommunityService communityService;
 
-    @GetMapping(path="/list", params = "bbsName")
+    @GetMapping(path="/list")
     public void bbsListGET(
             @Valid PageRequestDTO pageRequestDTO,
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes,
-            @RequestParam String bbsName,
+            @RequestParam String type,
             Model model
     ) {
         log.info("===============================");
@@ -43,29 +45,78 @@ public class AdminController {
             redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
         }
 
-        if (bbsName.equals("notice")) {
-            PageResponseDTO<NoticeDTO> bbsPagingList = adminService.noticeListByPage(pageRequestDTO);
-            model.addAttribute("bbsPagingList", bbsPagingList);
+        if (type.equals("notice")) {
+            PageResponseDTO<NoticeDTO> noticeList = adminService.noticeListByPage(pageRequestDTO);
+            model.addAttribute("communityList", noticeList);
             model.addAttribute("bbsTitle", "공지사항");
-            model.addAttribute("bbsName", "notice");
         }
 
-        if (bbsName.equals("faq")) {
-            PageResponseDTO<FaqDTO> bbsPagingList = adminService.faqListByPage(pageRequestDTO);
-            model.addAttribute("bbsPagingList", bbsPagingList);
+        if (type.equals("faq")) {
+            PageResponseDTO<FaqDTO> faqList = adminService.faqListByPage(pageRequestDTO);
+            model.addAttribute("communityList", faqList);
             model.addAttribute("bbsTitle", "FAQ");
-            model.addAttribute("bbsName", "faq");
         }
 
-        if (bbsName.equals("qna")) {
-            PageResponseDTO<QnaDTO> bbsPagingList = adminService.qnaListByPage(pageRequestDTO);
-            model.addAttribute("bbsPagingList", bbsPagingList);
+        if (type.equals("qna")) {
+            PageResponseDTO<QnaDTO> qnaList = adminService.qnaListByPage(pageRequestDTO);
+            model.addAttribute("communityList", qnaList);
             model.addAttribute("bbsTitle", "QnA");
-            model.addAttribute("bbsName", "qna");
         }
         log.info("===============================");
     }
 
+    @GetMapping(path="/delete")
+    public String bbsDeleteGET(
+            @RequestParam (name="idx", defaultValue = "0") int idx,
+            @RequestParam (name="type") String type,
+            HttpServletRequest req
+    ) {
+        String referer = req.getHeader("Referer");
+        log.info("bbsDeleteGET >> " + type);
+        int result = adminService.noticeDelete(idx);
+
+        if (result > 0) {
+            return "redirect:/admin/list?type=notice";
+        } else {
+            return "referer";
+        }
+    }
+
+    @PostMapping (path="/delete")
+    public String bbsDeletePOST(
+            @RequestParam (name="idx", defaultValue = "0") int idx,
+            HttpServletRequest req,
+            @RequestParam String type
+    ) {
+            log.info("===============================");
+            log.info("AdminController >> bbsDeletePOST()");
+            String referer = req.getHeader("Referer");
+            String[] delete_idx = req.getParameterValues("select");
+
+        if (type.equals("notice")) {
+            int result = 0;
+
+            for (int i = 0; i < delete_idx.length; i++) {
+                int intIdx = Integer.parseInt(delete_idx[i]);
+                result = adminService.noticeDelete(intIdx);
+            }
+            if (result > 0) {
+                return "redirect:" + referer;
+            }
+        }
+
+//        if (type.equals("faq")) {
+//
+//        }
+//
+//        if (type.equals("qna")) {
+//
+//        }
+        log.info("===============================");
+//        return "redirect:/admin/list?type=notice";
+        return "redirect:/admin/list?type=notice&err=fixErr";
+
+    }
 
     // 공지사항
     @GetMapping(path="/notice/view", params="idx")
@@ -81,17 +132,47 @@ public class AdminController {
 //        int totalCount = adminService.noticeTotalCount(pageRequestDTO);
 //        NoticeDTO2 noticeDTO2 = adminService.prevNotice(idx);
 
-//        log.info("prev!! : " + noticeDTO2);
-
         String referer = req.getHeader("Referer");
 
+        PageResponseDTO<NoticeDTO> noticeList = adminService.noticeListByPage(pageRequestDTO);
+        model.addAttribute("communityList", noticeList);
         model.addAttribute("referer", referer);
         model.addAttribute("noticeDTO", noticeDTO);
         model.addAttribute("idx", idx);
 //        model.addAttribute("totalCount", totalCount);
 
+
+        // 이전글 다음글
+        Map<String, NoticeDTO> noticeMap = communityService.noticeView(idx);
+
+        noticeMap.get("noticeDTO").setContent(noticeMap.get("noticeDTO").getContent().replace("\r\n", "<br>"));
+
+        model.addAttribute("dto", noticeMap.get("noticeDTO"));
+        model.addAttribute("prevDTO", noticeMap.get("noticePrevDTO"));
+        model.addAttribute("nextDTO", noticeMap.get("noticeNextDTO"));
+
         log.info("===============================");
     }
+
+    @GetMapping(path="/notice/fix", params="idx")
+    public String noticeFixGET(
+            @RequestParam (name="idx", defaultValue = "0") int idx
+    ) {
+        log.info("===============================");
+        log.info("AdminController >> noticeFixGET()");
+
+        int result = adminService.noticeFix(idx);;
+
+        if (result > 0) {
+            log.info("===============================");
+            return "redirect:/admin/list?type=notice";
+        } else {
+            return "redirect:/admin/list?type=notice&err=fixErr";
+        }
+
+    }
+
+
     @GetMapping("/notice/regist")
     public void noticeRegistGET() {
         log.info("===============================");
@@ -109,7 +190,7 @@ public class AdminController {
         log.info("AdminController >> noticeRegistPOST()");
         log.info("===============================");
 
-
+        log.info("errors: " + bindingResult.getAllErrors());
         if(bindingResult.hasErrors()) {
             log.info("Errors");
             redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
@@ -120,10 +201,10 @@ public class AdminController {
         int result = adminService.noticeRegist(noticeDTO);
 
         if (result > 0) {
-            return "redirect:/admin/list?bbsName=notice";
+            return "redirect:/admin/list?type=notice";
         }
         else {
-            return "/admin/notice/regist";
+            return "redirect:/admin/notice/regist";
         }
     }
 
@@ -145,6 +226,15 @@ public class AdminController {
         model.addAttribute("referer", referer);
         model.addAttribute("faqDTO", faqDTO);
 
+        // 이전글 다음글
+        Map<String, FaqDTO> faqMap = communityService.faqView(idx);
+
+        faqMap.get("faqDTO").setContent(faqMap.get("faqDTO").getContent().replace("\r\n", "<br>"));
+
+        model.addAttribute("dto", faqMap.get("faqDTO"));
+        model.addAttribute("prevDTO", faqMap.get("faqPrevDTO"));
+        model.addAttribute("nextDTO", faqMap.get("faqNextDTO"));
+
         log.info("===============================");
     }
 
@@ -165,7 +255,13 @@ public class AdminController {
         model.addAttribute("referer", referer);
         model.addAttribute("qnaDTO", qnaDTO);
 
-        log.info("qnaDTO : " + qnaDTO.toString());
+        // 이전글 다음글
+        Map<String, QnaDTO> qnaMap = communityService.qnaView(idx);
+
+        model.addAttribute("dto", qnaMap.get("qnaDTO"));
+        model.addAttribute("prevDTO", qnaMap.get("qnaPrevDTO"));
+        model.addAttribute("nextDTO", qnaMap.get("qnaNextDTO"));
+
         log.info("===============================");
     }
 

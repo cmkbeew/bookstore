@@ -19,6 +19,8 @@ public interface AdminService {
     List<NoticeDTO> noticeList();
     NoticeDTO noticeView(int idx);
     int noticeRegist(NoticeDTO noticeDTO);
+    int noticeDelete(int idx);
+    int noticeFix(int idx);
 
 
     // FAQ

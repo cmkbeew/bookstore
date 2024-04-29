@@ -67,12 +67,24 @@
                                             <tr class="align-middle">
                                                 <td>
                                                     <a href="/community/view?type=${communityList.type}&idx=${list.idx}">
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="h6 mb-0 lh-1">${list.title}
+                                                        <c:choose>
+                                                            <c:when test="${communityList.type == 'notice'}">
+                                                                <c:choose>
+                                                                    <c:when test="${list.fix_state < 0}">
+                                                                        <span style="font-weight: bold">${list.title}</span>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <span>${list.title}</span>
+                                                                    </c:otherwise>
+                                                                </c:choose>
                                                                 <c:if test="${list.org_file_name != null}">
-                                                                    <span class="material-symbols-outlined">attach_file</span>
-                                                                </c:if></div>
-                                                        </div>
+                                                                    <span class="material-symbols-outlined" style="vertical-align: center; transform: translateY(15%)">attach_file</span>
+                                                                </c:if>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <span>${list.title}</span>
+                                                            </c:otherwise>
+                                                        </c:choose>
                                                     </a>
                                                 </td>
                                                 <td>${list.content}</td>

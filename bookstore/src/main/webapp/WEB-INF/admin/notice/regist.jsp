@@ -42,7 +42,7 @@
         <div class="container py-h" style="margin-bottom: 5rem;">
             <div class="row">
                 <div class="col-md-12">
-                    <form name="registFrm" id="registFrm" method="post" action="/admin/notice/regist">
+                    <form name="registFrm" id="registFrm" method="post" action="/admin/notice/regist" enctype="multipart/form-data">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title text-uppercase mb-0" style="text-align: center;">공지사항 등록</h5>
@@ -57,13 +57,13 @@
                                             </tr>
                                             <tr>
                                                 <th style="vertical-align: middle;">작성자 <i class="fa fa-user" ></i></th>
-                                                <td><input type="text" name="writer" id="writer" class="form-control"  value="${member_id}" readonly/></td>
+                                                <td><input type="text" name="writer" id="writer" class="form-control" value="${member_id}" readonly/></td>
                                             </tr>
                                             <tr>
                                                 <th style="vertical-align: middle;">고정여부 <i class="fa fa-thumb-tack" aria-hidden="true"></i></th>
                                                 <td>
                                                     <label class="control control--checkbox">
-                                                        <input type="checkbox" name="fix_state" id="fix_state" value="Y">
+                                                        <input type="checkbox" name="fix_state" id="fix_state" value="-1">
                                                         <div class="control__indicator"></div>
                                                     </label>
                                                 </td>
@@ -77,8 +77,7 @@
                                         <tr>
                                             <th style="width: 120px; vertical-align: middle;">첨부파일</th>
                                             <td>
-                                                <span class="material-symbols-outlined">attach_file</span>
-                                                <span style="vertical-align: middle;"></span>
+                                                <input type="file" name="file" class="form-control" />
                                             </td>
                                         </tr>
                                     </table>
@@ -89,7 +88,7 @@
                             <div>
                                 <button type="reset" class="btn btn-outline-primary me-2">초기화</button>
                                 <button type="submit" class="btn btn-primary me-2">완료</button>
-                                <button type="button" class="btn btn-outline-danger me-2" onclick="location.href='/admin/list?bbsName=notice'">취소</button>
+                                <button type="button" class="btn btn-outline-danger me-2" onclick="location.href='/admin/list?type=notice'">취소</button>
                             </div>
                         </div>
                     </form>

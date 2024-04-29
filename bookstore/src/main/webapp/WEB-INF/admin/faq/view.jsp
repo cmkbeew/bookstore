@@ -42,7 +42,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title text-uppercase mb-0" style="text-align: center;">공지사항</h5>
+                            <h5 class="card-title text-uppercase mb-0" style="text-align: center;">FAQ</h5>
                         </div>
                         <div class="row text-left">
                             <div id="content" class="full-width site-content col-md-12">
@@ -85,21 +85,31 @@
                     <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2"><i class="fa fa-trash"></i></button>
                 </div>
             </div>
-            <div class="card mt-5">
+            <div class="card my-5">
                 <table class="table no-wrap user-table mb-0 text-lg-start">
                     <tr>
                         <th style="width: 120px;">
-                            <span class="material-symbols-outlined">expand_less</span>
+                            <span class="material-symbols-outlined" style="vertical-align: middle;">expand_less</span>
                             <span>이전글</span>
                         </th>
-                        <td><a href="#">이전글 타이틀</a></td>
+                        <c:if test="${prevDTO != null}">
+                            <td><a href="/admin/faq/view?idx=${prevDTO.idx}">${prevDTO.title}</a></td>
+                        </c:if>
+                        <c:if test="${prevDTO == null}">
+                            <td>이전글이 없습니다.</td>
+                        </c:if>
                     </tr>
                     <tr>
                         <th style="width: 120px;">
-                            <span class="material-symbols-outlined">expand_more</span>
+                            <span class="material-symbols-outlined" style="vertical-align: middle;">expand_more</span>
                             <span>다음글</span>
                         </th>
-                        <td><a href="#">다음글 타이틀</a></td>
+                        <c:if test="${nextDTO != null}">
+                            <td><a href="/admin/faq/view?idx=${nextDTO.idx}">${nextDTO.title}</a></td>
+                        </c:if>
+                        <c:if test="${nextDTO == null}">
+                            <td>다음글이 없습니다.</td>
+                        </c:if>
                     </tr>
                 </table>
             </div>

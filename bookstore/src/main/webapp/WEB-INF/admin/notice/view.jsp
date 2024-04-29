@@ -38,75 +38,91 @@
         </button>
         <!-- Page content-->
         <div class="container py-h">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title text-uppercase mb-0" style="text-align: center;">공지사항</h5>
-                        </div>
-                        <div class="row text-left">
-                            <div id="content" class="full-width site-content col-md-12">
-                                <div>
+            <form name="deleteFrm" id="deleteFrm" method="get" action="/admin/delete?type=${communityList.type}">
+                <input type="hidden" name="type" value="${communityList.type}"/>
+                <input type="hidden" name="idx" value="${noticeDTO.idx}"/>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title text-uppercase mb-0" style="text-align: center;">공지사항</h5>
+                            </div>
+                            <div class="row text-left">
+                                <div id="content" class="full-width site-content col-md-12">
                                     <div>
-                                        <table class="table no-wrap user-table mb-0 text-lg-start">
-                                            <tr>
-                                                <th style="width: 120px;">제목 <i class="fa fa-pencil" aria-hidden="true"></i></th>
-                                                <td>${noticeDTO.title}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>작성자 <i class="fa fa-user"></i></th>
-                                                <td>${noticeDTO.writer}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>작성일 <i class="fa fa-calendar"></i></th>
-                                                <td>${noticeDTO.reg_date}</td>
-                                            </tr>
-<%--                                            <tr>--%>
-<%--                                                <th>조회수 <i class="fa fa-eye" aria-hidden="true"></i></th>--%>
-<%--                                                <td>${noticeDTO.read_cnt}</td>--%>
-<%--                                            </tr>--%>
-                                        </table>
+                                        <div>
+                                            <table class="table no-wrap user-table mb-0 text-lg-start">
+                                                <tr>
+                                                    <th style="width: 120px;">제목 <i class="fa fa-pencil" aria-hidden="true"></i></th>
+                                                    <td>${noticeDTO.title}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>작성자 <i class="fa fa-user"></i></th>
+                                                    <td>${noticeDTO.writer}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>작성일 <i class="fa fa-calendar"></i></th>
+                                                    <td>${noticeDTO.reg_date}</td>
+                                                </tr>
+    <%--                                            <tr>--%>
+    <%--                                                <th>조회수 <i class="fa fa-eye" aria-hidden="true"></i></th>--%>
+    <%--                                                <td>${noticeDTO.read_cnt}</td>--%>
+    <%--                                            </tr>--%>
+                                            </table>
+                                        </div>
+                                        <div class="p-3" style="min-height: 20vh;">
+                                            ${noticeDTO.content}
+                                        </div>
+                                        <c:if test="${noticeDTO.org_file_name != null}">
+                                            <table class="table no-wrap user-table mb-0 text-lg-start">
+                                                <tr>
+                                                    <th style="width: 120px; vertical-align: middle;">첨부파일</th>
+                                                    <td>
+                                                        <span class="material-symbols-outlined">attach_file</span>
+                                                        <span style="vertical-align: middle;">${noticeDTO.org_file_name}</span>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </c:if>
                                     </div>
-                                    <div class="p-3" style="min-height: 20vh;">
-                                        ${noticeDTO.content}
-                                    </div>
-                                    <table class="table no-wrap user-table mb-0 text-lg-start">
-                                        <tr>
-                                            <th style="width: 120px; vertical-align: middle;">첨부파일</th>
-                                            <td>
-                                                <span class="material-symbols-outlined">attach_file</span>
-                                                <span style="vertical-align: middle;">${noticeDTO.org_file_name}</span>
-                                            </td>
-                                        </tr>
-                                    </table>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="mt-md-2">
-                <div>
-                    <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2" onclick="location.href='${referer}';"><i class="fa fa-list"></i></button>
-                    <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2"><i class="fa fa-edit"></i></button>
-                    <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2"><i class="fa fa-trash"></i></button>
+                <div class="mt-md-2">
+                    <div>
+                        <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2" onclick="location.href='${referer}';"><i class="fa fa-list"></i></button>
+                        <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2"><i class="fa fa-edit"></i></button>
+                        <button type="submit" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2"><i class="fa fa-trash"></i></button>
+                    </div>
                 </div>
-            </div>
-            <div class="card mt-5">
+            </form>
+            <div class="card my-5">
                 <table class="table no-wrap user-table mb-0 text-lg-start">
                     <tr>
                         <th style="width: 120px;">
-                            <span class="material-symbols-outlined">expand_less</span>
+                            <span class="material-symbols-outlined" style="vertical-align: middle;">expand_less</span>
                             <span>이전글</span>
                         </th>
-                        <td><a href="/admin/notice/view?idx=${idx -1}">${totalCount}</a></td>
+                        <c:if test="${prevDTO != null}">
+                            <td><a href="/admin/notice/view?idx=${prevDTO.idx}">${prevDTO.title}</a></td>
+                        </c:if>
+                        <c:if test="${prevDTO == null}">
+                            <td>이전글이 없습니다.</td>
+                        </c:if>
                     </tr>
                     <tr>
                         <th style="width: 120px;">
-                            <span class="material-symbols-outlined">expand_more</span>
+                            <span class="material-symbols-outlined" style="vertical-align: middle;">expand_more</span>
                             <span>다음글</span>
                         </th>
-                        <td><a href="/admin/notice/view?idx=${idx +1}">다음글 타이틀</a></td>
+                        <c:if test="${nextDTO != null}">
+                            <td><a href="/admin/notice/view?idx=${nextDTO.idx}">${nextDTO.title}</a></td>
+                        </c:if>
+                        <c:if test="${nextDTO == null}">
+                            <td>다음글이 없습니다.</td>
+                        </c:if>
                     </tr>
                 </table>
             </div>
