@@ -56,31 +56,38 @@
                                 <h4 class="mb-3">정보 입력</h4>
                                 <form class="needs-validation" novalidate method="post" action="/member/join">
                                     <div class="row g-3">
-                                        <div class="col-12">
+                                        <div class="col-12 col-sm-12">
                                             <label for="member_id" class="small ifta-label">아이디</label>
                                             <input type="text" class="ifta-field" id="member_id" name="member_id"
-                                                   placeholder="" value="" required>
+                                                   placeholder="" value="${dto.member_id}" required>
                                             <div class="invalid-feedback">
                                                 사용할 아이디를 입력해주세요.
                                             </div>
-                                        </div>
-                                        <div class="col-12">
+                                            <div id="feedbackId" style="display:none;width:100%;margin-top:.15rem;font-size:.875em;color:#dc3545"></div>
+                                            <div class="idCk1" style="display:none;width:100%;margin-top:.15rem;font-size:.875em;color:#dc3545">사용 중인 아이디 입니다.</div>
+                                            <div class="idCk2" style="display:none;width:100%;margin-top:.15rem;font-size:.875em;color:#56c2ff">사용 가능한 아이디 입니다.</div>
+                                            <div id="div_err_display_member_id" style="display: none"></div>
+                                        <div class="col-12 mt-3">
                                             <label for="name" class="small ifta-label">이름</label>
                                             <input type="text" class="ifta-field" id="name" name="name" placeholder=""
-                                                   value="" required>
+                                                   value="${dto.name}" required>
                                             <div class="invalid-feedback">
                                                 이름을 입력해주세요.
                                             </div>
                                         </div>
-                                        <div class="col-12">
+                                        <div class="col-12 mt-3">
                                             <label for="pwd" class="small ifta-label">비밀번호</label>
                                             <input type="password" class="ifta-field" id="pwd" name="pwd" placeholder=""
                                                    value="" required>
+                                            <div class="mb-4" style="display:block;width:100%;margin-top:.25rem;font-size:.875em;color:#9a9a9a">
+                                                영어 대문자 / 영어 소문자 / 특수문자 (@#$%^&~!) / 숫자 8~16자만 사용 가능합니다.
+                                            </div>
                                             <div class="invalid-feedback">
                                                 사용할 비밀번호를 입력해주세요.
                                             </div>
+                                            <div id="feedbackPwd" style="display:none;width:100%;margin-top:.15rem;font-size:.875em;color:#dc3545"></div>
                                         </div>
-                                        <div class="col-12">
+                                        <div class="col-12 mt-3">
                                             <label for="pwd2" class="small ifta-label">비밀번호 재입력</label>
                                             <input type="password" class="ifta-field" id="pwd2" name="pwd2"
                                                    placeholder="" value="" required>
@@ -90,31 +97,32 @@
                                             <div id="pwdck" style="display: none;">
                                                 비밀번호와 입력 비밀번호가 다릅니다.
                                             </div>
+                                            <div id="div_err_display_pwd" style="display: none"></div>
                                         </div>
-                                        <div class="col-12">
+                                        <div class="col-12 mt-3">
                                             <label for="email" class="small ifta-label">이메일</label>
-                                            <input type="email" class="ifta-field" id="email" name="email" value=""
+                                            <input type="email" class="ifta-field" id="email" name="email" value="${dto.email}"
                                                    placeholder="you@example.com" required>
                                             <div class="invalid-feedback">
                                                 이메일을 형식에 맞게 입력해주세요.
                                             </div>
                                         </div>
-                                        <div class="col-12">
+                                        <div class="col-12 mt-3">
                                             <div class="row mt-3 mb-4 align-items-center justify-content-center">
                                                 <div class="col-3"><label for="phone_num1" class="small ifta-label">전화번호</label>
-                                                    <input type="tel" class="ifta-field" id="phone_num1" name="phone_num1"
+                                                    <input type="tel" class="ifta-field" id="phone_num1" name="phone_num1" value="${dto.phone_num1}"
                                                            placeholder="010" maxlength="3" required>
                                                 </div>
                                                 <div class="col-1 align-middle">
                                                     <div class="py-2 fw-bold" style="padding:35px 20px 15px;width:100%;"><p style="font-size: 20px"><span class="material-symbols-outlined">remove</span></p></div> </div>
                                                 <div class="col-3"><label for="phone_num2" class="small ifta-label">&nbsp;</label>
-                                                    <input type="tel" class="ifta-field" id="phone_num2" name="phone_num2"
+                                                    <input type="tel" class="ifta-field" id="phone_num2" name="phone_num2" value="${dto.phone_num2}"
                                                            placeholder="1111" maxlength="4" required>
                                                 </div>
                                                 <div class="col-1">
                                                     <div class="py-2 fw-bold" style="padding:35px 20px 15px;width:100%;"><p style="font-size: 20px"><span class="material-symbols-outlined">remove</span></p></p></div> </div>
                                                 <div class="col-3"><label for="phone_num3" class="small ifta-label">&nbsp;</label>
-                                                    <input type="tel" class="ifta-field" id="phone_num3" name="phone_num3"
+                                                    <input type="tel" class="ifta-field" id="phone_num3" name="phone_num3" value="${dto.phone_num3}"
                                                            placeholder="1111" maxlength="4" required>
                                                 </div>
                                                 <div class="invalid-feedback">
@@ -122,65 +130,42 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-8">
-                                            <label for="zipcode" class="small ifta-label">우편번호</label>
-                                            <input type="text" class="ifta-field" name="zipcode" id="zipcode"
-                                                   placeholder="" required readonly>
-                                            <div class="invalid-feedback">
-                                                주소를 작성해주세요.
+                                            <div class="row" style="align-items: center">
+                                            <div class="col-md-8 mt-3">
+                                                <label for="zipcode" class="small ifta-label">우편번호</label>
+                                                <input type="text" class="ifta-field" name="zipcode" id="zipcode"
+                                                       placeholder="" value="${dto.zipcode}" required readonly>
+                                                <div class="invalid-feedback">
+                                                    주소를 작성해주세요.
+                                                </div>
+                                                <div id="div_err_display_zipcode" style="display: none"></div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <%--                                            <label for="zipcodebtn" class="form-label">우편번호</label>--%>
-                                            <input type="button" class="btn btn-outline-primary col-12" value="주소 찾기" name="zipcodebtn"
-                                                    id="zipcodebtn" onclick="addr()">
-
-                                        </div>
-                                        <div class="col-12">
+                                            <div class="col-md-4">
+                                                <%--                                            <label for="zipcodebtn" class="form-label">우편번호</label>--%>
+                                                <input type="button" class="btn btn-outline-primary col-12 mb-2" style="height: 70px" value="주소 찾기" name="zipcodebtn"
+                                                       id="zipcodebtn" onclick="addr()">
+                                            </div>
+                                            </div>
+                                        <div class="col-12 mt-3">
                                             <label for="addr1" class="small ifta-label">주소1</label>
-                                            <input type="text" class="ifta-field mb-0" name="addr1" id="addr1" placeholder=""
+                                            <input type="text" class="ifta-field mb-0" name="addr1" id="addr1" placeholder="" value="${dto.addr1}"
                                                    required readonly>
                                             <small class="text-muted" >우편번호 찾기를 통해 주소를 입력해주세요.</small>
                                             <div class="invalid-feedback">
                                                 우편번호 찾기를 통해 주소를 입력해주세요.
                                             </div>
+                                            <div id="div_err_display_addr1" style="display: none"></div>
                                         </div>
-                                        <div class="col-12">
+                                        <div class="col-12 mt-3">
                                             <label for="addr2" class="small ifta-label">주소2</label>
                                             <!--<span class="text-muted">(선택사항)</span>-->
-                                            <input type="text" class="ifta-field mb-0" name="addr2" id="addr2" placeholder=""
+                                            <input type="text" class="ifta-field mb-0" name="addr2" id="addr2" placeholder="" value="${dto.addr2}"
                                                    required>
                                             <small class="text-muted">상세 주소를 입력해주세요.</small>
                                             <div class="invalid-feedback">
                                                 주소를 작성해주세요.
                                             </div>
                                         </div>
-                                        <div class="row mt-3 mb-4">
-<%--                                            <div class="col-md-4">--%>
-<%--                                                <select class="form-select" id="b_year" name="b_year" required>--%>
-<%--                                                    <option value="">년도</option>--%>
-<%--                                                </select>--%>
-<%--                                                <div class="invalid-feedback">--%>
-<%--                                                    년도를 선택해주세요.--%>
-<%--                                                </div>--%>
-<%--                                            </div>--%>
-
-<%--                                            <div class="col-md-4">--%>
-<%--                                                <select class="form-select" id="b_month" name="b_month" required>--%>
-<%--                                                    <option value="">월</option>--%>
-<%--                                                </select>--%>
-<%--                                                <div class="invalid-feedback">--%>
-<%--                                                    월을 선택해주세요.--%>
-<%--                                                </div>--%>
-<%--                                            </div>--%>
-<%--                                            <div class="col-md-4">--%>
-<%--                                                <select class="form-select" id="b_day" name="b_day" required>--%>
-<%--                                                    <option value="">일</option>--%>
-<%--                                                </select>--%>
-<%--                                                <div class="invalid-feedback">--%>
-<%--                                                    일을 선택해주세요.--%>
-<%--                                                </div>--%>
-<%--                                            </div>--%>
                                             <hr class="my-2">
                                             <div class="col-12 mt-3">
                                                 <p>평생회원 선택</p>
@@ -204,7 +189,7 @@
                                                 </p>
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="checkbox" name="optionsCheck"
-                                                           id="valueOptions1" value="Y">
+                                                           id="valueOptions1" value="Y" required >
                                                     <label class="form-check-label" for="optionsRadios1">동의함</label>
                                                 </div>
                                             </div>
@@ -382,7 +367,7 @@
                                                 </p>
                                                 <div class="form-check form-check-inline col-6">
                                                     <input class="form-check-input" type="checkbox" name="optionsCheck"
-                                                           id="secOp" value="secOp">
+                                                           id="secOp" value="secOp" required>
                                                     <label class="form-check-label" for="optionsRadios1">동의함</label>
                                                 </div>
 
@@ -453,9 +438,10 @@ SNS 계정 가입   [필수 – 네이버] 이름, 이메일주소, 휴대폰번
                                                 </p>
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="checkbox" name="option"
-                                                           id="option" value="N">
+                                                           id="option" value="${dto.option}" <c:if test="${not empty dto.option && dto.option eq 'Y'}">checked</c:if>>
                                                     <label class="form-check-label" for="option">동의함</label>
                                                 </div>
+                                                <div id="div_err_display_option" style="display: none"></div>
                                             </div>
                                             <div>
                                                 <label for="firstEx3" class="form-label mt-4"></label>
@@ -471,6 +457,7 @@ SNS 계정 가입   [필수 – 네이버] 이름, 이메일주소, 휴대폰번
                                         </div>
                                         <hr class="my-2">
                                     </div>
+                                    <div id="div_err"></div>
                                     <button class="w-100 btn btn-primary btn-lg mt-3" type="submit">가입하기</button>
                                 </form>
                             </div>
@@ -482,8 +469,9 @@ SNS 계정 가입   [필수 – 네이버] 이름, 이메일주소, 휴대폰번
     </div>
 </div>
 <%@ include file="/WEB-INF/common/footer.jsp" %>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="/resources/js/form-validation.js"></script>
-<script src="/resources/js/jquery-3.3.1.min.js"></script>
+<%--<script src="/resources/js/jquery-3.3.1.min.js"></script>--%>
 <script src="/resources/js/popper.min.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>
 <script src="/resources/js/main.js"></script>
@@ -492,9 +480,9 @@ SNS 계정 가입   [필수 – 네이버] 이름, 이메일주소, 휴대폰번
         data-cf-beacon='{"rayId":"879d448bbc1a29e5","version":"2024.4.0","token":"cd0b4b3a733644fc843ef0b185f98241"}'
         crossorigin="anonymous"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-        crossorigin="anonymous"></script>
+<%--<script src="https://code.jquery.com/jquery-3.4.1.min.js"--%>
+<%--        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"--%>
+<%--        crossorigin="anonymous"></script>--%>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
         crossorigin="anonymous"></script>
@@ -525,77 +513,57 @@ SNS 계정 가입   [필수 – 네이버] 이름, 이메일주소, 휴대폰번
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 -->
 <script>
-    let bYear = document.getElementById("b_year");
-    let bMonth = document.getElementById("b_month");
-    let monthOption;
-    let bDay = document.getElementById("b_day");
+    let member_id = document.getElementById("member_id");
     let pwd1 = document.getElementById("pwd");
     let pwd2 = document.getElementById("pwd2");
     let optBtn = document.getElementById("option")
-    const mon_J = ['1', '3', '5', '7', '8', '10', '12'];
-    const mon_H = ['4', '6', '9', '11'];
-    let dateLimit;
+    let p1 = document.getElementById("phone_num1");
+    let p2 = document.getElementById("phone_num2");
+    let p3 = document.getElementById("phone_num3");
+    let idCk = document.getElementById("idCk");
 
-    pwd1.addEventListener("change", (e) => {
-        console.log("chang2")
+    const idcheck = /^[a-z0-9_]{4,20}$/;
+    const pwdCheck = /^.*(?=^.{8,16}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[@#$%^&~!]).*$/;
+    //validator 체크
+    member_id.addEventListener("input", (e) => {
+        if (!(idcheck).test(member_id.value)) {
+            e.preventDefault();
+            e.stopPropagation();
+            document.getElementById("feedbackId").style.display = "block";
+            document.getElementById("feedbackId").innerText = "규칙에 맞는 아이디를 입력해주세요."
+        }
+        if (member_id.value.length < 1 || (idcheck).test(member_id.value)) {
+            document.getElementById("feedbackId").style.display = "none";
+        }
+    })
+    pwd1.addEventListener("input", (e) => {
+        if (!(pwdCheck).test(pwd1.value)) {
+            e.preventDefault();
+            e.stopPropagation();
+            document.getElementById("feedbackPwd").style.display = "block";
+            document.getElementById("feedbackPwd").innerText = "규칙에 맞는 비밀번호를 입력해주세요."
+        }
+        if (pwd1.value.length < 1 || (pwdCheck).test(pwd1.value)) {
+            document.getElementById("feedbackPwd").style.display = "none";
+        }
+    })
+    // 비밀번호 동일 체크
+    pwd1.addEventListener("input", (e) => {
         if (pwd1.value == pwd2.value) {
             document.getElementById("pwdck").style.display = "none";
         }
     });
-    pwd2.addEventListener("change", (e) => {
+    pwd2.addEventListener("input", (e) => {
         console.log("chang2")
         if (pwd1.value != pwd2.value) {
             document.getElementById("pwdck").style = "display:block;width:100%;margin-top:.25rem;font-size:.875em;color:#dc3545";
             console.log("chang2222")
         }
-        if (pwd2.value === "") {
+        if (pwd2.value === "" || pwd1.value == pwd2.value) {
             document.getElementById("pwdck").style.display = "none";
         }
     });
-
-    // bYear.addEventListener("click", (e) => {
-    //     bDay.length=1;
-    //     if (bYear.length === 1) {
-    //         for (let i = 2024; i >= 1950; i--) {
-    //             let yearOpt = document.createElement("option");
-    //             yearOpt.innerText = i;
-    //             bYear.append(yearOpt);
-    //         }
-    //     }
-    // });
-    // bMonth.addEventListener("click", (e) => {
-    //     bDay.length = 1;
-    //     if (bMonth.length === 1) {
-    //         for (let i = 1; i <= 12; i++) {
-    //             let monthOpt = document.createElement("option");
-    //             monthOpt.innerText = i;
-    //             bMonth.append(monthOpt);
-    //         }
-    //     }
-    //     monthOption = bMonth.options[bMonth.selectedIndex].value;
-    // });
-    // bDay.addEventListener("click", (e) => {
-    //     if (mon_J.includes(monthOption)) {
-    //         dateLimit = 31;
-    //     } else if (mon_H.includes(monthOption)) {
-    //         dateLimit = 30;
-    //     } else {
-    //         if(parseInt(bYear.value)%4==0 && parseInt(bYear.value)%100!=0 || parseInt(bYear.value)%400==0){
-    //             dateLimit = 29;
-    //         } else {
-    //             dateLimit = 28;
-    //         }
-    //     }
-    //     console.log(bMonth.value +"===="+ bDay.value)
-    //     if (bMonth.value && bDay.length == 1) {
-    //         for (let i = 1; i <= dateLimit; i++) {
-    //             let dayOpt = document.createElement("option");
-    //             dayOpt.innerText = i;
-    //             bDay.append(dayOpt);
-    //         }
-    //     }
-    // });
-
+    // 옵션 선택 여부 체크
     optBtn.addEventListener("click", (e) => {
         if (optBtn.value == "N") {
             optBtn.value = "Y"
@@ -605,10 +573,7 @@ SNS 계정 가입   [필수 – 네이버] 이름, 이메일주소, 휴대폰번
             console.log(optBtn.value);
         }
     });
-
-        let p1 = document.getElementById("phone_num1");
-        let p2 = document.getElementById("phone_num2");
-        let p3 = document.getElementById("phone_num3");
+    // 전화번호 다음 칸 이동
     p1.addEventListener("input", () => {
         if (p1.value.length === 3) {
             p2.focus();
@@ -618,7 +583,38 @@ SNS 계정 가입   [필수 – 네이버] 이름, 이메일주소, 휴대폰번
         if (p2.value.length === 4) {
             p3.focus();
         }
-    })
+    });
+    const serverValidResult = {};
+    <c:forEach items="${errors}" var="err">
+    if (document.getElementById("div_err_${err.getField()}") != null) {
+        document.getElementById("div_err_${err.getField()}").innerHTML = "<div style='width:100%;margin-bottom:.25rem;font-size:.875em;color:#dc3545'>${err.getField()}필드는 공백일 수 없습니다.</div>";
+        document.getElementById("div_err_${err.getField()}").style.display = "block";
+    }
+    serverValidResult['${err.getField()}'] = '${err.defaultMessage}';
+    </c:forEach>
+    console.log(serverValidResult);
+    // member_id.addEventListener("input" ,(e)=>{
+    //     let id = $('#member_id').val();
+    //     $.ajax({
+    //         url:'/member/idCheck',
+    //         type:'post',
+    //         data:{id : id},
+    //         success:function(cnt){
+    //             if(cnt == 0){
+    //                 $('.idCk1').css("dispaly","none");
+    //                 $('.idCk2').css("display","block");
+    //
+    //             } else {
+    //                 $('.idCk2').css("dispaly","none");
+    //                 $('.idCk1').css("display","block");
+    //                 $('#member_id').val('');
+    //             }
+    //         },
+    //         error:function(){
+    //             alert("에러입니다");
+    //         }
+    //     });
+    // });
 </script>
 
 

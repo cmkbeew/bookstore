@@ -2,6 +2,7 @@ package org.fullstack4.bookstore.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.core.config.plugins.validation.constraints.Required;
 import org.fullstack4.bookstore.dto.MemberDTO;
 import org.fullstack4.bookstore.service.LoginServiceIf;
 import org.fullstack4.bookstore.service.MemberServiceIf;
@@ -9,12 +10,11 @@ import org.fullstack4.bookstore.util.CookieUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -40,9 +40,16 @@ public class MemberController {
 
     @PostMapping("/join")
     public String joinPost(@Valid MemberDTO memberDTO,
+                           BindingResult bindingResult,
                            Model model, RedirectAttributes redirectAttributes) {
         log.info("=========================");
         log.info("member_option" + memberDTO.getOption());
+        if(bindingResult.hasErrors()) {
+            log.info("Errors");
+            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+            redirectAttributes.addFlashAttribute("dto", memberDTO);
+            return "redirect:/member/join";
+        }
         memberDTO.setPhoneNum(memberDTO.getPhone_num1(), memberDTO.getPhone_num2(), memberDTO.getPhone_num3());
         int result = memberServiceIf.join(memberDTO);
         if (result > 0) {
@@ -50,6 +57,15 @@ public class MemberController {
         } else {
             return "/";
         }
+    }
+    @PostMapping("/idCheck")
+    @ResponseBody
+    public int idCheck(
+            HttpServletResponse resp,
+            @RequestParam(name = "member_id", defaultValue = "") String member_id
+    ) {
+        int result = memberServiceIf.idCheck(member_id);
+        return result;
     }
 
     @GetMapping("/view")
@@ -82,9 +98,8 @@ public class MemberController {
     }
 
     @PostMapping("/modify")
-    public String modifyPost(@Valid MemberDTO memberDTO,
-                             HttpServletRequest req,
-                             Model model, RedirectAttributes redirectAttributes) {
+    public String modifyPost(MemberDTO memberDTO,
+                             HttpServletRequest req) {
         HttpSession session = req.getSession();
         String member_id = session.getAttribute("member_id").toString();
         session.getAttribute("user_id");
@@ -97,7 +112,7 @@ public class MemberController {
         if (result > 0) {
             return "redirect:/member/view?member_id="+member_id;
         } else {
-            return "/member/modify";
+            return "/member/modify?member_id="+member_id;
         }
     }
     @GetMapping("/modifyPwd")
@@ -136,6 +151,7 @@ public class MemberController {
     public String deletePost(@RequestParam(name="member_id", defaultValue = "0") String member_id,
                            HttpSession session,
                            HttpServletResponse resp,
+                           HttpServletRequest req,
                            Model model) {
         log.info("=========================");
         log.info("MemberController >> deletePost()");
@@ -144,9 +160,12 @@ public class MemberController {
         log.info("=========================");
         if(result > 0 ){
             session.invalidate();
-//            CookieUtil.setDeleteCookie(resp,"save_id","",0,"/","/");
-//            CookieUtil.setDeleteCookie(resp,"auto_login","",0,"/","/");
-//            CookieUtil.setDeleteCookie(resp,"id","",0,"/","/");
+            Cookie[] cookies = req.getCookies();
+            if(cookies != null) {
+                CookieUtil.setDeleteCookie(resp, "save_id", "", 0, "", "/");
+                CookieUtil.setDeleteCookie(resp, "auto_login", "", 0, "", "/");
+                CookieUtil.setDeleteCookie(resp, "id", "", 0, "", "/");
+            }
             return "redirect:/";
         } else {
             return "/member/view?member_id="+member_id;

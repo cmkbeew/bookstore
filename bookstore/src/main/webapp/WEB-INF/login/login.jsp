@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/resources/css/owl.carousel.min.css">
 
     <link rel="stylesheet" href="/resources/css/mintybootstrap.min.css">
-
+    <link rel="stylesheet" href="/resources/css/ifta.css">
     <link rel="stylesheet" href="/resources/css/login/style.css">
     <title>Login</title>
     <%--    <script nonce="527f5118-0b83-4ded-83c4-52d880cabcd3">try {--%>
@@ -101,36 +101,37 @@
                                     <main class="form-signin">
                                         <form name="frmLogin" id="frmLogin" action="/login/login" method="post">
                                             <div class="form-floating form-group first">
-                                                <label for="member_id">ID</label>
-                                                <input type="text" class="form-control" name="member_id" id="member_id"
-                                                       value="${requestScope.id}">
+                                                <label for="member_id" class="small ifta-label">ID</label>
+                                                <input type="text" class="ifta-field" style="border:none" name="member_id" id="member_id"
+                                                       <c:if test="${not empty requestScope.id}">value="${requestScope.id}"</c:if>
+                                                       <c:if test="${not empty dto.member_id}">value="${dto.member_id}"</c:if>>
                                             </div>
+
                                             <div class="form-floating form-group last mb-4 mt-4">
-                                                <label for="pwd">비밀번호</label>
-                                                <input type="password" class="form-control" name="pwd" id="pwd">
+                                                <label for="pwd"  class="small ifta-label">비밀번호</label>
+                                                <input type="password" class="ifta-field" style="border:none" name="pwd" id="pwd">
                                             </div>
-                                            <div class="invalid-feedback mb-3" id="div_err">
+                                            <div id="div_err">
                                             </div>
                                             <div class="d-flex mb-5 align-items-center mt-4 justify-content-between">
                                                 <div class="d-flex">
                                                     <label class="control control--checkbox mb-0 mx-2"><span
                                                             class="caption">아이디 저장</span>
-                                                        <input type="checkbox" name="save_id" id="save_id" value=""
+                                                        <input type="checkbox" name="save_id" id="save_id" value="${requestScope.save_id}"
                                                                <c:if test="${not empty requestScope.save_id}">checked="checked"</c:if>>
                                                         <div class="control__indicator"></div>
                                                     </label>
                                                     <label class="control control--checkbox ml-2 mb-0 mx-2"><span
                                                             class="caption">자동 로그인</span>
                                                         <input type="checkbox" name="auto_login" id="auto_login"
-                                                               value=""
+                                                               value="${requestScope.auto_login}"
                                                                <c:if test="${not empty requestScope.auto_login}">checked="checked"</c:if>>
                                                         <div class="control__indicator"></div>
                                                     </label>
                                                 </div>
-                                                <span class="ml-auto"><a href="/login/find"
-                                                                         class="forgot-pass">계정 찾기</a></span>
+                                                <span class="ml-auto"><a href="/login/find" class="forgot-pass">계정 찾기</a></span>
                                             </div>
-                                            <input type="submit" value="로그인"
+                                            <input type="submit" value="로그인" id="loginBtn"
                                                    class="btn btn-pill text-white btn-block btn-primary w-100">
                                             <span class="d-block text-center my-4 text-muted"> or </span>
                                             <button type="button"
@@ -149,16 +150,16 @@
                                     <main class="form-signin">
                                         <form name="frmLoginGuest" id="frmLoginGuest" action="/my/order" method="post">
                                             <div class="form-floating form-group first mt-4">
-                                                <label for="name">이름</label>
-                                                <input type="text" class="form-control" name="name" id="name">
+                                                <label for="name" class="small ifta-label">이름</label>
+                                                <input type="text" class="ifta-field" style="border:none" name="name" id="name">
                                             </div>
                                             <div class="form-floating form-group last mb-4 mt-4">
-                                                <label for="order_no">주문번호</label>
-                                                <input type="text" class="form-control" name="order_no" id="order_no">
+                                                <label for="order_no" class="small ifta-label">주문번호</label>
+                                                <input type="text" class="ifta-field" style="border:none" name="order_no" id="order_no">
                                             </div>
                                             <div class="form-floating form-group last mb-4 mt-4">
-                                                <label for="pwdGuest">비밀번호</label>
-                                                <input type="password" class="form-control" name="pwd" id="pwdGuest">
+                                                <label for="pwdGuest" class="small ifta-label" >비밀번호</label>
+                                                <input type="password" class="ifta-field" style="border:none" name="pwd" id="pwdGuest">
                                             </div>
                                             <div class="invalid-feedback mb-3">
                                             </div>
@@ -220,15 +221,11 @@
             tabTrigger.show()
         })
     })
-    const serverValidResult = {};
-    <c:forEach items="${errors}" var="err">
-    if (document.getElementById("div_err") != null) {
-        document.getElementById("div_err").innerHTML = "<div style='width:100%;margin-bottom:.25rem;font-size:.875em;color:#dc3545'>${err.getField()}필드는 공백일 수 없습니다.</div>";
+
+    <c:if test="${ not empty errors}">
+        document.getElementById("div_err").innerHTML = "<div style='width:100%;margin-bottom:.25rem;font-size:.875em;color:#dc3545'>${errors}</div>";
         document.getElementById("div_err").style.display = "block";
-    }
-    serverValidResult['${err.getField()}'] = '${err.defaultMessage}';
-    </c:forEach>
-    console.log(serverValidResult);
+    </c:if>
     let member_tab = document.getElementById("member-tab");
     let guest_tab = document.getElementById("guest-tab");
     member_tab.addEventListener("click", (e) => {
@@ -242,6 +239,20 @@
             document.getElementById("pwd").value = '';
             document.getElementById("save_id").checked = false;
         }
+    });
+
+    let member_id = document.getElementById("member_id");
+    let pwd = document.getElementById("pwd");
+
+    document.getElementById("loginBtn").addEventListener("click", (e)=>{
+       if(member_id.value.length <1 || pwd.value.length <1) {
+           e.preventDefault();
+           document.getElementById("div_err").innerHTML = "<div style='width:100%;margin-bottom:.25rem;font-size:.875em;color:#dc3545'>칸을 모두 입력해주세요.</div>";
+           document.getElementById("div_err").style.display = "block";
+       }
+       else {
+           document.getElementById("frmLogin").submit;
+       }
     });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"

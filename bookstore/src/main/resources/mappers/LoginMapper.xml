@@ -7,7 +7,7 @@
     <select id="login_info" resultType="org.fullstack4.bookstore.domain.MemberVO">
             SELECT member_idx, member_id, pwd, name, addr1, addr2, zipcode, phone_num, email, point, mileage, reg_date
             FROM tbl_member
-            WHERE member_id = #{member_id}
+            WHERE member_id = #{member_id} and join_state = "Y"
     </select>
 <!--아이디 찾기-->
     <select id="search_id" resultType="String">

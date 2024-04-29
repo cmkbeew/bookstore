@@ -8,6 +8,7 @@ import org.fullstack4.bookstore.mapper.MemberMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Log4j2
@@ -31,6 +32,16 @@ public class MemberServiceImpl implements MemberServiceIf{
 
         log.info("MemberServiceImpl >> memberVO : " + memberVO.toString());
         log.info("MemberServiceImpl >> result : " + result);
+        return result;
+    }
+
+
+    @Override
+    public int idCheck(String member_id) {
+        log.info("===============================");
+        int result = memberMapper.idCheck(member_id);
+        log.info("member_id: " +  result);
+        log.info("===============================");
         return result;
     }
 
@@ -75,6 +86,7 @@ public class MemberServiceImpl implements MemberServiceIf{
         log.info("MemberServiceImpl >> delete_member(member_id) : ");
         log.info("====================================================");
         int result = memberMapper.delete_member(member_id);
+        log.info("delete_member " + result);
         return result;
     }
 

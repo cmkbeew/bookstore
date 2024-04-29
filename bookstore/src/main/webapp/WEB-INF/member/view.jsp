@@ -48,9 +48,7 @@
                         <div class="p-4">
                             <h4 class="fst-italic">Elsewhere</h4>
                             <ol class="list-unstyled">
-                                <li><a href="#">GitHub</a></li>
-                                <li><a href="#">Twitter</a></li>
-                                <li><a href="#">Facebook</a></li>
+                                <li><a href="#">문의내역</a></li>
                             </ol>
                         </div>
                 </div>
@@ -101,7 +99,7 @@
                                             <div class="row justify-content-between">
                                             <div class="col"><span class="material-symbols-outlined align-middle">lock</span>
                                                 비밀번호 변경</div>
-                                        <button class="col-2 text-center btn btn-outline-success h-25 w-25" style="font-size: 1rem; "
+                                            <button class="col-2 text-center btn btn-outline-success h-25 w-25" style="font-size: 1rem; "
                                                 onclick="window.location='/member/modifyPwd?member_id=${memberDTO.member_id}'">수정</button>
                                             </div>
                                         </li>
@@ -113,7 +111,14 @@
                     <hr class="my-2">
                     <div class="col-md-12">
                         <div class="py-3 px-4 align-items-center">
-                            <a href="member/delete"><p><span class="material-symbols-outlined align-middle">exit_to_app</span> 회원탈퇴</p></a>
+                            <form name="delFrm" id="delFrm" action="/member/delete" method="post">
+                                <input type="hidden" name="member_id" id="member_id" value="${sessionScope.member_id}">
+                                <div class="row justify-content-between">
+                                    <div class="col">
+                                        <p><span class="material-symbols-outlined align-middle">exit_to_app</span> 회원탈퇴</p></div>
+                                    <button class="col-2 text-center btn btn-outline-danger h-25 w-25" id="delBtn" style="font-size: 1rem; ">회원 탈퇴</button>
+                                </div>
+                            </form>
                         </div>
                         </div>
                     </div>
@@ -143,6 +148,18 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 -->
+<script>
+document.getElementById("delBtn").addEventListener("click", (e)=>{
+   if(confirm('정말 탈퇴하시겠습니까?')) {
+       alert("탈퇴되었습니다.")
+        document.getElementById("delFrm").submit();
+   }
+   else {
+       e.preventDefault();
+       return false;
+   }
+});
+</script>
 </body>
 </html>
 

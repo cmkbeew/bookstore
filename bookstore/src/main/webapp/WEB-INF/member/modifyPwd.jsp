@@ -80,6 +80,7 @@
                                             <div id="pwdck" style="display: none;">
                                                 비밀번호와 입력 비밀번호가 다릅니다.
                                             </div>
+                                            <div id="feedbackPwd" style="display:none;width:100%;margin-top:.15rem;font-size:.875em;color:#dc3545"></div>
                                         </div>
                                         </div>
                                     <button class="w-100 btn btn-primary btn-lg mt-3" id="submitBtn" type="submit">수정하기</button>
@@ -140,6 +141,19 @@
     let pwd1 = document.getElementById("pwd");
     let pwd2 = document.getElementById("pwd2");
     let submitBtn = document.getElementById("submitBtn");
+    const pwdCheck = /^.*(?=^.{8,16}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[@#$%^&~!]).*$/;
+    //validator 체크
+    pwd1.addEventListener("input", (e) => {
+        if (!(pwdCheck).test(pwd1.value)) {
+            e.preventDefault();
+            e.stopPropagation();
+            document.getElementById("feedbackPwd").style.display = "block";
+            document.getElementById("feedbackPwd").innerText = "규칙에 맞는 비밀번호를 입력해주세요."
+        }
+        if (pwd1.value.length < 1 || (pwdCheck).test(pwd1.value)) {
+            document.getElementById("feedbackPwd").style.display = "none";
+        }
+    })
 
     old_pwd.addEventListener("input", (e)=> {
         if('${nowPwd}' !== old_pwd.value) {
@@ -172,11 +186,20 @@
         }
     });
     submitBtn.addEventListener("click", (e)=>{
-        if(pwdck.style.display == "block" || document.getElementById("oldPwdMsg").style.display=="block") {
+        if(pwdck.style.display == "block" || document.getElementById("oldPwdMsg").style.display=="block" || document.getElementById("feedbackPwd").style.display=="block") {
             e.preventDefault();
             e.stopPropagation();
         }
     })
+    const serverValidResult = {};
+    <c:forEach items="${errors}" var="err">
+    if (document.getElementById("div_err_${err.getField()}") != null) {
+        document.getElementById("div_err_${err.getField()}").innerHTML = "<div style='width:100%;margin-bottom:.25rem;font-size:.875em;color:#dc3545'>${err.getField()}필드는 공백일 수 없습니다.</div>";
+        document.getElementById("div_err_${err.getField()}").style.display = "block";
+    }
+    serverValidResult['${err.getField()}'] = '${err.defaultMessage}';
+    </c:forEach>
+    console.log(serverValidResult);
 
 </script>
 

@@ -31,7 +31,9 @@ public class LoginController {
 
     @GetMapping("/login")
     public void loginGet(
-            HttpServletRequest req
+            HttpServletRequest req,
+            @RequestParam(name = "error", defaultValue = "") String error,
+            Model model
     ) {
         log.info("로그인 겟");
         String id = CookieUtil.getCookieInfo(req, "id");
@@ -40,6 +42,7 @@ public class LoginController {
         req.setAttribute("id", id);
         req.setAttribute("save_id", save_id);
         req.setAttribute("auto_login", auto_login);
+        req.setAttribute("error", error);
     }
 
     @PostMapping("/login")
@@ -57,17 +60,10 @@ public class LoginController {
             HttpServletRequest req,
             HttpSession session) {
         log.info("로그인 포스트");
-        log.info("pwd" + pwd);
-        log.info("member_id" + member_id);
-        System.out.println("save_id"+save_id);
-        System.out.println("auto_login"+auto_login);
         MemberDTO loginMemberDTO = loginServiceIf.login_info(member_id, pwd);
-        System.out.println("loginMemberDTO"+loginMemberDTO);
+            log.info("에러 출력 ========="+bindingResult.hasErrors());
+        System.out.println("loginMemberDTO" + loginMemberDTO);
 
-        if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
-            return "redirect:/login/login";
-        }
         session = req.getSession();
         if (loginMemberDTO != null) {
 //            암호화 복호화 고도화 시 추가
@@ -91,7 +87,9 @@ public class LoginController {
         model.addAttribute("member_id", member_id);
         return "redirect:/";
         } else {
-            return "/login/login";
+            redirectAttributes.addFlashAttribute("errors", "비밀번호 아이디를 다시 체크 해주세요.");
+            redirectAttributes.addFlashAttribute("dto", memberDTO);
+            return "redirect:/login/login";
         }
     }
     @PostMapping("/guest")
@@ -128,11 +126,19 @@ public class LoginController {
     public String findIdPost(
             @RequestParam(name = "name", defaultValue = "") String name,
             @RequestParam(name = "email", defaultValue = "") String email,
-            RedirectAttributes redirectAttributes
-    ) {
-        String member_id = loginServiceIf.search_id(name,email);
-        log.info(member_id);
+            RedirectAttributes redirectAttributes,
+            HttpServletResponse resp,
+            PrintWriter out) throws IOException {
 
+        out = resp.getWriter();
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("text/html; charset=UTF-8");
+
+        String member_id = loginServiceIf.search_id(name,email);
+        if(member_id == null) {
+            out.println("<script>alert('조건에 맞는 회원정보가 없습니다.'); window.location.href='/login/findId'</script>");
+            out.close();
+        }
         redirectAttributes.addFlashAttribute("member_id", member_id);
         return "redirect:/login/findIdResult";
     }
@@ -174,17 +180,21 @@ public class LoginController {
     public String findPwdResultPost(
                                     @RequestParam(name = "member_id", defaultValue = "") String member_id,
                                     @RequestParam(name = "pwd", defaultValue = "") String pwd,
-                                    HttpServletResponse resp) throws IOException {
+                                    HttpServletResponse resp,
+                                    PrintWriter out) throws IOException {
         log.info("=========================");
         log.info("member_id: " + member_id);
         log.info("pwd: " + pwd);
         log.info("=========================");
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("text/html; charset=UTF-8");
+        out = resp.getWriter();
 
         int result = loginServiceIf.change_pwd(member_id, pwd);
 
         if (result > 0) {
-            PrintWriter out = resp.getWriter();
-            out.println("<script>alert('비밀번호가 변경되었습니다.\\n로그인 페이지로 이동합니다.');</script>");
+            out.println("<script>alert('비밀번호가 변경되었습니다.\\n로그인 페이지로 이동합니다.'); window.location.href='/login/login'</script>");
+            out.close();
             return "redirect:/login/login";
         } else {
             return "/login/findPwd";

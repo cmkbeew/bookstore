@@ -20,6 +20,10 @@
                , now()
                )
     </insert>
+<!--    아이디 중복체크-->
+    <select id="idCheck">
+        SELECT COUNT(member_id) from tbl_member where member_id = #{member_id}
+    </select>
 <!-- 개인정보 확인-->
     <select id="info_view" resultType="org.fullstack4.bookstore.domain.MemberVO">
         SELECT * from tbl_member where member_id=#{member_id}
@@ -33,7 +37,9 @@
     <select id="curr_pwd">
         select pwd from tbl_member where member_id = #{member_id}
     </select>
-    <delete id="delete_member">
-        delete from tbl_member where member_id=#{member_id}
-    </delete>
+    <update id="delete_member">
+        UPDATE tbl_member SET  leave_date = now(), join_state = "N"
+        where member_id = #{member_id}
+--         delete from tbl_member where member_id=#{member_id}
+    </update>
 </mapper>

@@ -12,7 +12,8 @@
 
 
     <link rel="stylesheet" href="/resources/css/login/style.css">
-    <title>findID</title>
+    <link rel="stylesheet" href="/resources/css/ifta.css">
+    <title>findPwdResult</title>
     <link rel="stylesheet" href="/resources/css/mintybootstrap.min.css">
     <link rel="stylesheet" href="/resources/css/mintybootstrap.css">
 </head>
@@ -36,17 +37,19 @@
                                         <form name="frmLogin" id="frmLogin" action="/login/findPwdResult" method="post">
                                             <input type="hidden" name="member_id" id="member_id" value="${requestScope['member_id']}">
                                             <div class="form-floating form-group last mb-4">
-                                                <label for="pwd">비밀번호</label>
-                                                <input type="password" class="form-control" name="pwd" id="pwd">
+                                                <label for="pwd" class="small ifta-label">비밀번호</label>
+                                                <input type="password" class="ifta-field" style="border:none;" name="pwd" id="pwd">
                                             </div>
                                             <div class="form-floating form-group last mb-4">
-                                                <label for="pwd2">비밀번호 재입력</label>
-                                                <input type="password" class="form-control" name="pwd2" id="pwd2">
+                                                <label for="pwd2" class="small ifta-label">비밀번호 재입력</label>
+                                                <input type="password" class="ifta-field" style="border:none;" name="pwd2" id="pwd2">
                                             </div>
-                                            <div class="invalid-feedback" style="display: block">
-                                                비밀번호와 재입력 비밀번호가 다릅니다.
+                                            <div class="invalid-feedback">
+                                                비밀번호를 재입력해주세요.
                                             </div>
-                                            <input type="submit" value="비밀번호 변경하기"
+                                            <div id="pwdck" style="display: none;">비밀번호와 입력 비밀번호가 다릅니다.
+                                            </div>
+                                            <input type="submit" value="비밀번호 변경하기" id="submitBtn"
                                                    class="btn btn-pill text-white btn-block btn-primary w-100 mt-3 mb-4">
                                         </form>
                                     </main>
@@ -73,5 +76,39 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
+<script>
+    let pwd1 = document.getElementById("pwd");
+    let pwd2 = document.getElementById("pwd2");
+    let submitBtn = document.getElementById("submitBtn");
+
+    pwd1.addEventListener("input", (e) => {
+        if (pwd1.value == pwd2.value) {
+            document.getElementById("pwdck").style.display = "none";
+        }
+        if (pwd2.value === "") {
+            document.getElementById("pwdck").style.display = "none";
+        }
+        if (pwd1.value != pwd2.value){
+            document.getElementById("pwdck").style = "display:block;width:100%;margin-top:.25rem;font-size:.875em;color:#dc3545";
+        }
+    });
+    pwd2.addEventListener("input", (e) => {
+        if (pwd1.value != pwd2.value) {
+            document.getElementById("pwdck").style = "display:block;width:100%;margin-top:.25rem;font-size:.875em;color:#dc3545";
+        }
+        if (pwd2.value === "") {
+            document.getElementById("pwdck").style.display = "none";
+        }
+        if(pwd1.value == pwd2.value) {
+            document.getElementById("pwdck").style.display = "none"
+        }
+    });
+    submitBtn.addEventListener("click", (e)=>{
+        if(pwdck.style.display == "block") {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+    })
+</script>
 </body>
 </html>

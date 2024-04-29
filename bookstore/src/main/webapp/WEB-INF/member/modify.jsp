@@ -130,37 +130,12 @@
                                             <small class="text-muted">상세 주소를 입력해주세요.</small>
                                         </div>
                                         <div class="row mt-3 mb-4">
-                                            <%--                                            <div class="col-md-4">--%>
-                                            <%--                                                <select class="form-select" id="b_year" name="b_year" required>--%>
-                                            <%--                                                    <option value="">년도</option>--%>
-                                            <%--                                                </select>--%>
-                                            <%--                                                <div class="invalid-feedback">--%>
-                                            <%--                                                    년도를 선택해주세요.--%>
-                                            <%--                                                </div>--%>
-                                            <%--                                            </div>--%>
-
-                                            <%--                                            <div class="col-md-4">--%>
-                                            <%--                                                <select class="form-select" id="b_month" name="b_month" required>--%>
-                                            <%--                                                    <option value="">월</option>--%>
-                                            <%--                                                </select>--%>
-                                            <%--                                                <div class="invalid-feedback">--%>
-                                            <%--                                                    월을 선택해주세요.--%>
-                                            <%--                                                </div>--%>
-                                            <%--                                            </div>--%>
-                                            <%--                                            <div class="col-md-4">--%>
-                                            <%--                                                <select class="form-select" id="b_day" name="b_day" required>--%>
-                                            <%--                                                    <option value="">일</option>--%>
-                                            <%--                                                </select>--%>
-                                            <%--                                                <div class="invalid-feedback">--%>
-                                            <%--                                                    일을 선택해주세요.--%>
-                                            <%--                                                </div>--%>
-                                            <%--                                            </div>--%>
                                             <hr class="my-2">
                                             <div class="col-12 mt-3">
                                                 <p>평생회원 선택</p>
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="radio" name="forever_yn"
-                                                           id="optionsRadios1" value="Y" <c:if test="${memberDTO.forever_yn eq 'Y'}">checked</c:if>
+                                                           id="optionsRadios1" value="Y" <c:if test="${memberDTO.forever_yn eq 'Y'}">checked</c:if>>
                                                     <label class="form-check-label" for="optionsRadios1">동의함</label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
@@ -217,16 +192,16 @@
         integrity="sha512-FIKRFRxgD20moAo96hkZQy/5QojZDAbyx0mQ17jEGHCJc/vi0G2HXLtofwD7Q3NmivvP9at5EVgbRqOaOQb+Rg=="
         data-cf-beacon='{"rayId":"879d448bbc1a29e5","version":"2024.4.0","token":"cd0b4b3a733644fc843ef0b185f98241"}'
         crossorigin="anonymous"></script>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
+<%--<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>--%>
+<%--<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"--%>
+<%--        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"--%>
+<%--        crossorigin="anonymous"></script>--%>
+<%--<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"--%>
+<%--        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"--%>
+<%--        crossorigin="anonymous"></script>--%>
+<%--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"--%>
+<%--        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"--%>
+<%--        crossorigin="anonymous"></script>--%>
 
 <script>
     function addr() {
@@ -237,73 +212,8 @@
             }
         }).open();
     }
-</script>
 
-
-<%--<script src="/resources/js/bootstrap.bundle.min.js"></script>--%>
-
-<%--<script src="/resources/js/form-validation.js"></script>--%>
-<%--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"--%>
-<%--        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"--%>
-<%--        crossorigin="anonymous"></script>--%>
-<!--
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
--->
-<script>
-    let bYear = document.getElementById("b_year");
-    let bMonth = document.getElementById("b_month");
-    let monthOption;
-    let bDay = document.getElementById("b_day");
-    let addr1 = document.getElementById('addr1');
     let optBtn = document.getElementById("option")
-    const mon_J = ['1', '3', '5', '7', '8', '10', '12'];
-    const mon_H = ['4', '6', '9', '11'];
-    let dateLimit;
-
-
-    // bYear.addEventListener("click", (e) => {
-    //     bDay.length=1;
-    //     if (bYear.length === 1) {
-    //         for (let i = 2024; i >= 1950; i--) {
-    //             let yearOpt = document.createElement("option");
-    //             yearOpt.innerText = i;
-    //             bYear.append(yearOpt);
-    //         }
-    //     }
-    // });
-    // bMonth.addEventListener("click", (e) => {
-    //     bDay.length = 1;
-    //     if (bMonth.length === 1) {
-    //         for (let i = 1; i <= 12; i++) {
-    //             let monthOpt = document.createElement("option");
-    //             monthOpt.innerText = i;
-    //             bMonth.append(monthOpt);
-    //         }
-    //     }
-    //     monthOption = bMonth.options[bMonth.selectedIndex].value;
-    // });
-    // bDay.addEventListener("click", (e) => {
-    //     if (mon_J.includes(monthOption)) {
-    //         dateLimit = 31;
-    //     } else if (mon_H.includes(monthOption)) {
-    //         dateLimit = 30;
-    //     } else {
-    //         if(parseInt(bYear.value)%4==0 && parseInt(bYear.value)%100!=0 || parseInt(bYear.value)%400==0){
-    //             dateLimit = 29;
-    //         } else {
-    //             dateLimit = 28;
-    //         }
-    //     }
-    //     console.log(bMonth.value +"===="+ bDay.value)
-    //     if (bMonth.value && bDay.length == 1) {
-    //         for (let i = 1; i <= dateLimit; i++) {
-    //             let dayOpt = document.createElement("option");
-    //             dayOpt.innerText = i;
-    //             bDay.append(dayOpt);
-    //         }
-    //     }
-    // });
 
     optBtn.addEventListener("click", (e) => {
         if (optBtn.value == "N") {

@@ -12,7 +12,8 @@
 
 
     <link rel="stylesheet" href="/resources/css/login/style.css">
-    <title>findID</title>
+    <link rel="stylesheet" href="/resources/css/ifta.css">
+    <title>finPwd</title>
     <link rel="stylesheet" href="/resources/css/mintybootstrap.min.css">
     <link rel="stylesheet" href="/resources/css/mintybootstrap.css">
 </head>
@@ -35,18 +36,18 @@
                                     <main class="form-signin">
                                         <form name="frmLogin" id="frmLogin" action="/login/findPwd" method="post">
                                             <div class="form-floating form-group first mb-3">
-                                                <label for="name">이름</label>
-                                                <input type="text" class="form-control" name="name" id="name">
+                                                <label for="name" class="small ifta-label">이름</label>
+                                                <input type="text" class="ifta-field" style="border:none;" name="name" id="name">
                                             </div>
                                             <div class="form-floating form-group last mb-4">
-                                                <label for="member_id">아이디</label>
-                                                <input type="text" class="form-control" name="member_id" id="member_id">
+                                                <label for="member_id" class="small ifta-label">아이디</label>
+                                                <input type="text" class="ifta-field" style="border:none;" name="member_id" id="member_id">
                                             </div>
                                             <div class="form-floating form-group last mb-4">
-                                                <label for="email">이메일</label>
-                                                <input type="email" class="form-control" name="email" id="email">
+                                                <label for="email" class="small ifta-label">이메일</label>
+                                                <input type="email" class="ifta-field" style="border:none;" name="email" id="email">
                                             </div>
-                                            <input type="submit" value="아이디 찾기"
+                                            <input type="submit" value="비밀번호 찾기"
                                                    class="btn btn-pill text-white btn-block btn-primary w-100">
                                         </form>
                                     </main>
