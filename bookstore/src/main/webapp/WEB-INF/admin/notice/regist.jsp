@@ -15,7 +15,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
 
-    <title>admin >> noticeView</title>
+    <title>admin >> noticeRegist</title>
 
     <%--  header 부트스트랩  --%>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />

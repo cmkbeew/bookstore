@@ -19,6 +19,7 @@ public interface AdminService {
     List<NoticeDTO> noticeList();
     NoticeDTO noticeView(int idx);
     int noticeRegist(NoticeDTO noticeDTO);
+    int noticeModify(NoticeDTO noticeDTO);
     int noticeDelete(int idx);
     int noticeFix(int idx);
 
@@ -27,6 +28,7 @@ public interface AdminService {
     List<FaqDTO> faqList();
     FaqDTO faqView(int idx);
     int faqRegist(FaqDTO faqDTO);
+    int faqModify(FaqDTO faqDTO);
     int faqDelete(int idx);
 
     // QnA

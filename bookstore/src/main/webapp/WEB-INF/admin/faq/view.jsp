@@ -38,8 +38,7 @@
         </button>
         <!-- Page content-->
         <div class="container py-h">
-            <form name="deleteFrm" id="deleteFrm" method="get" action="/admin/delete?type=${communityList.type}">
-                <input type="hidden" name="type" value="${communityList.type}"/>
+            <form name="deleteFrm" id="deleteFrm" method="post" action="/admin/faq/delete">
                 <input type="hidden" name="idx" value="${faqDTO.idx}"/>
                 <div class="row">
                     <div class="col-md-12">
@@ -77,9 +76,9 @@
                 </div>
                 <div class="mt-md-2">
                     <div>
-                        <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2" onclick="location.href='${referer}';"><i class="fa fa-list"></i></button>
-                        <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2"><i class="fa fa-edit"></i></button>
-                        <button type="submit" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2"><i class="fa fa-trash"></i></button>
+                        <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2" onclick="location.href='/admin/list?type=faq';"><i class="fa fa-list"></i></button>
+                        <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2" onclick="location.href='/admin/faq/modify?idx=${faqDTO.idx}';"><i class="fa fa-edit"></i></button>
+                        <button type="submit" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2" onclick="goDelete()"><i class="fa fa-trash"></i></button>
                     </div>
                 </div>
             </form>
@@ -115,5 +114,15 @@
     </div>
 </div>
 <%@ include file="/WEB-INF/common/footer.jsp"%>
+<script>
+    function goDelete() {
+        const frm = document.getElementById("deleteFrm");
+        let confirm_flag = confirm("해당 게시글을 삭제하시겠습니까?");
+
+        if (confirm_flag) {
+            frm.submit();
+        }
+    }
+</script>
 </body>
 </html>

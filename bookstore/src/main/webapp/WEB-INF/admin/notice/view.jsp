@@ -38,8 +38,7 @@
         </button>
         <!-- Page content-->
         <div class="container py-h">
-            <form name="deleteFrm" id="deleteFrm" method="get" action="/admin/delete?type=${communityList.type}">
-                <input type="hidden" name="type" value="${communityList.type}"/>
+            <form name="deleteFrm" id="deleteFrm" method="post" action="/admin/notice/delete">
                 <input type="hidden" name="idx" value="${noticeDTO.idx}"/>
                 <div class="row">
                     <div class="col-md-12">
@@ -64,10 +63,6 @@
                                                     <th>작성일 <i class="fa fa-calendar"></i></th>
                                                     <td>${noticeDTO.reg_date}</td>
                                                 </tr>
-    <%--                                            <tr>--%>
-    <%--                                                <th>조회수 <i class="fa fa-eye" aria-hidden="true"></i></th>--%>
-    <%--                                                <td>${noticeDTO.read_cnt}</td>--%>
-    <%--                                            </tr>--%>
                                             </table>
                                         </div>
                                         <div class="p-3" style="min-height: 20vh;">
@@ -78,7 +73,7 @@
                                                 <tr>
                                                     <th style="width: 120px; vertical-align: middle;">첨부파일</th>
                                                     <td>
-                                                        <span class="material-symbols-outlined">attach_file</span>
+                                                        <span class="material-symbols-outlined" style="vertical-align: middle;">attach_file</span>
                                                         <span style="vertical-align: middle;">${noticeDTO.org_file_name}</span>
                                                     </td>
                                                 </tr>
@@ -92,9 +87,9 @@
                 </div>
                 <div class="mt-md-2">
                     <div>
-                        <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2" onclick="location.href='${referer}';"><i class="fa fa-list"></i></button>
-                        <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2"><i class="fa fa-edit"></i></button>
-                        <button type="submit" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2"><i class="fa fa-trash"></i></button>
+                        <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2" onclick="location.href='/admin/list?type=notice';"><i class="fa fa-list"></i></button>
+                        <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2" onclick="location.href='/admin/notice/modify?idx=${noticeDTO.idx}';"><i class="fa fa-edit"></i></button>
+                        <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2" onclick="goDelete()"><i class="fa fa-trash"></i></button>
                     </div>
                 </div>
             </form>
@@ -130,5 +125,15 @@
     </div>
 </div>
 <%@ include file="/WEB-INF/common/footer.jsp"%>
+<script>
+    function goDelete() {
+        const frm = document.getElementById("deleteFrm");
+        let confirm_flag = confirm("해당 게시글을 삭제하시겠습니까?");
+
+        if (confirm_flag) {
+            frm.submit();
+        }
+    }
+</script>
 </body>
 </html>

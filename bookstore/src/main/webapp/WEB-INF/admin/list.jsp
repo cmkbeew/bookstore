@@ -15,7 +15,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
 
-    <title>admin >> noticeList</title>
+    <title>admin >> bbsList</title>
 
     <%--  header 부트스트랩  --%>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
@@ -143,7 +143,7 @@
                             </div>
                             <div style="display: flex; justify-content: space-between; margin-top: 4px;">
                                 <div>
-                                    <button type="submit" id="deleteBtn" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2">
+                                    <button type="button" id="deleteBtn" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2" onclick="goDelete()">
                                         <i class="fa fa-trash"></i>
                                     </button>
                                     <c:if test="${communityList.type == 'notice'}">
@@ -193,7 +193,7 @@
 <script>
     const selectAllDOM = document.querySelector("#selectAll");
     const allCheckboxDOM = document.querySelectorAll(".control--checkbox");
-    selectAllDOM.addEventListener("click", function(e) {
+    selectAllDOM.addEventListener("click", function (e) {
         if (selectAllDOM.checked) {
             for (let i = 0; i < allCheckboxDOM.length; i++) {
                 allCheckboxDOM[i].children[0].checked = true;
@@ -211,16 +211,13 @@
     let idx = [];
 
     for (let i = 0; i < control.length; i++) {
-        control[i].addEventListener("click", function(e) {
+        control[i].addEventListener("click", function (e) {
             console.log(e.target.parentNode.parentNode.parentNode.children[1].children[0].textContent);
             idx.push(e.target.parentNode.parentNode.parentNode.children[1].children[0].textContent);
         }, false)
     }
 
-    fixBtn.addEventListener("click", function(e) {
-        //
-        // console.log(allCheckboxDOM[4]);
-
+    fixBtn.addEventListener("click", function (e) {
         console.log(idx.length);
         let linkParam = idx[0];
 
@@ -228,17 +225,19 @@
             linkParam += '+' + idx[i]
         }
 
-        console.log(linkParam);
-
-        location.href="/admin/notice/fix?idx="+linkParam;
-
-
-        // location.href="/admin/notice/fix?idx=" + idx;
-
-        // location.href="/admin/notice/fix";
+        location.href = "/admin/notice/fix?idx=" + linkParam;
 
     }, false)
 
-</script>
+    function goDelete() {
+        const frm = document.getElementById("deleteFrm");
+        let confirm_flag = confirm("해당 게시글을 삭제하시겠습니까?");
+
+        if (confirm_flag) {
+            frm.submit();
+        }
+    }
+
+    </script>
 </body>
 </html>

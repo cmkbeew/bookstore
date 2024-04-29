@@ -3,6 +3,7 @@ package org.fullstack4.bookstore.dto;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PositiveOrZero;
 import java.time.LocalDate;
@@ -27,5 +28,7 @@ public class NoticeDTO {
     private LocalDate modify_date;
     private String org_file_name;
     private String save_file_name;
-    private int fix_state;
+
+    @Builder.Default
+    private int fix_state=0;
 }

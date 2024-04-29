@@ -19,6 +19,7 @@ public interface AdminMapper {
     List<NoticeVO> noticeList();
     NoticeVO noticeView(int idx);
     int noticeRegist(NoticeVO noticeVO);
+    int noticeModify(NoticeVO noticeVO);
     int noticeDelete(int idx);
     int noticeFix(int idx);
 
@@ -27,6 +28,7 @@ public interface AdminMapper {
     List<FaqVO> faqList();
     FaqVO faqView(int idx);
     int faqRegist(FaqVO faqVO);
+    int faqModify(FaqVO faqVO);
     int faqDelete(int idx);
 
 

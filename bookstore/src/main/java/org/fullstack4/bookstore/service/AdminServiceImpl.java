@@ -117,6 +117,21 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    public int noticeModify(NoticeDTO noticeDTO) {
+        log.info("====================================");
+        log.info("AdminServiceImpl >> noticeModify(noticeDTO : " + noticeDTO.toString());
+
+        NoticeVO noticeVO = modelMapper.map(noticeDTO, NoticeVO.class);
+        int result = adminMapper.noticeModify(noticeVO);
+
+        log.info("AdminServiceImpl >> noticeVO : " + noticeVO.toString());
+        log.info("AdminServiceImpl >> result : " + result);
+        log.info("====================================");
+
+        return result;
+    }
+
+    @Override
     public int noticeDelete(int idx) {
         int result = adminMapper.noticeDelete(idx);
         return result;
@@ -127,22 +142,6 @@ public class AdminServiceImpl implements AdminService {
         int result = adminMapper.noticeFix(idx);
         return result;
     }
-
-
-//    @Override
-//    public NoticeDTO2 prevNotice(int idx) {
-//        NoticeVO2 noticeVO = adminMapper.prevNotice(idx);
-//        NoticeDTO2 noticeDTO = modelMapper.map(noticeVO, NoticeDTO2.class);
-//
-//        return noticeDTO;
-//    }
-
-
-    //    @Override
-//    public int faqTotalCount(PageRequestDTO pageRequestDTO) {
-//        return adminMapper.faqTotalCount(pageRequestDTO);
-//    }
-
 
     // FAQ
     @Override
@@ -168,6 +167,21 @@ public class AdminServiceImpl implements AdminService {
     public int faqRegist(FaqDTO faqDTO) {
         FaqVO faqVO = modelMapper.map(faqDTO, FaqVO.class);
         int result = adminMapper.faqRegist(faqVO);
+        return result;
+    }
+
+    @Override
+    public int faqModify(FaqDTO faqDTO) {
+        log.info("====================================");
+        log.info("AdminServiceImpl >> faqModify(faqDTO : " + faqDTO.toString());
+
+        FaqVO faqVO = modelMapper.map(faqDTO, FaqVO.class);
+        int result = adminMapper.faqModify(faqVO);
+
+        log.info("AdminServiceImpl >> faqVO : " + faqVO.toString());
+        log.info("AdminServiceImpl >> result : " + result);
+        log.info("====================================");
+
         return result;
     }
 

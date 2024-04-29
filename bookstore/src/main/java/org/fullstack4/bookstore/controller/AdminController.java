@@ -67,39 +67,7 @@ public class AdminController {
         log.info("===============================");
     }
 
-    @GetMapping(path="/delete")
-    public String bbsDeleteGET(
-            @RequestParam (name="idx", defaultValue = "0") int idx,
-            @RequestParam (name="type") String type,
-            HttpServletRequest req
-    ) {
-        String referer = req.getHeader("Referer");
-        log.info("bbsDeleteGET >> " + type);
-
-        if (type.equals("notice")) {
-            int result = adminService.noticeDelete(idx);
-
-            if (result > 0) {
-                return "redirect:/admin/list?type=notice";
-            } else {
-                return "referer";
-            }
-        }
-
-        if (type.equals("faq")) {
-            int result = adminService.faqDelete(idx);
-
-            if (result > 0) {
-                return "redirect:/admin/list?type=faq";
-            } else {
-                return "referer";
-            }
-        }
-
-        return "referer";
-
-    }
-
+    // list 페이지에서 체크 박스 활용한 삭제
     @PostMapping (path="/delete")
     public String bbsDeletePOST(
             @RequestParam (name="idx", defaultValue = "0") int idx,
@@ -108,7 +76,6 @@ public class AdminController {
     ) {
             log.info("===============================");
             log.info("AdminController >> bbsDeletePOST()");
-            String referer = req.getHeader("Referer");
             String[] delete_idx = req.getParameterValues("select");
 
         if (type.equals("notice")) {
@@ -119,7 +86,7 @@ public class AdminController {
                 result = adminService.noticeDelete(intIdx);
             }
             if (result > 0) {
-                return "redirect:" + referer;
+                return "redirect:/admin/list?type=notice";
             } else {
                 return "redirect:/admin/list?type=notice&err=deleteErr";
             }
@@ -133,9 +100,9 @@ public class AdminController {
                 result = adminService.faqDelete(intIdx);
             }
             if (result > 0) {
-                return "redirect:" + referer;
+                return "redirect:/admin/list?type=faq";
             } else {
-                return "redirect:/admin/list?type=notice&err=deleteErr";
+                return "redirect:/admin/list?type=faq&err=deleteErr";
             }
         }
 
@@ -153,24 +120,17 @@ public class AdminController {
     @GetMapping(path="/notice/view", params="idx")
     public void noticeViewGET(
             @RequestParam int idx,
-            HttpServletRequest req,
             PageRequestDTO pageRequestDTO,
             Model model
     ) {
         log.info("===============================");
         log.info("AdminController >> bbsViewGET()");
         NoticeDTO noticeDTO = adminService.noticeView(idx);
-//        int totalCount = adminService.noticeTotalCount(pageRequestDTO);
-//        NoticeDTO2 noticeDTO2 = adminService.prevNotice(idx);
-
-        String referer = req.getHeader("Referer");
 
         PageResponseDTO<NoticeDTO> noticeList = adminService.noticeListByPage(pageRequestDTO);
         model.addAttribute("communityList", noticeList);
-        model.addAttribute("referer", referer);
         model.addAttribute("noticeDTO", noticeDTO);
         model.addAttribute("idx", idx);
-//        model.addAttribute("totalCount", totalCount);
 
 
         // 이전글 다음글
@@ -185,6 +145,7 @@ public class AdminController {
         log.info("===============================");
     }
 
+    // 공지사항 상단 고정
     @GetMapping(path="/notice/fix", params="idx")
     public String noticeFixGET(
             @RequestParam (name="idx", defaultValue = "0") int idx
@@ -202,7 +163,6 @@ public class AdminController {
         }
 
     }
-
 
     @GetMapping("/notice/regist")
     public void noticeRegistGET() {
@@ -251,23 +211,83 @@ public class AdminController {
         }
     }
 
+    @GetMapping(path="/notice/modify")
+    public void noticeModifyGET(
+            @RequestParam(name="idx", defaultValue = "0") int idx,
+            Model model
+    ) {
+        log.info("===============================");
+        log.info("AdminController >> noticeModifyGET()");
+
+        NoticeDTO noticeDTO = adminService.noticeView(idx);
+        model.addAttribute("noticeDTO", noticeDTO);
+
+        log.info("===============================");
+    }
+
+    @PostMapping("/notice/modify")
+    public String noticeModifyPOST(
+            @Valid NoticeDTO noticeDTO,
+            BindingResult bindingResult,
+            RedirectAttributes redirectAttributes
+    ) {
+        log.info("===============================");
+        log.info("AdminController >> noticeModifyPOST()");
+        log.info("noticeDTO : " + noticeDTO.toString());
+        log.info("===============================");
+
+        if(bindingResult.hasErrors()) {
+            log.info("Errors");
+            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+            redirectAttributes.addFlashAttribute("noticeDTO", noticeDTO);
+            return "redirect:/bbs/modify?idx="+noticeDTO.getIdx();
+        }
+
+        int result = adminService.noticeModify(noticeDTO);
+        log.info("result : " + result);
+        log.info("===============================");
+
+        if (result > 0) {
+            return "redirect:/admin/notice/view?idx="+noticeDTO.getIdx();
+        }
+        else {
+            return "redirect:/admin/notice/modify?err=modifyErr";
+        }
+    }
+
+    @PostMapping (path="/notice/delete")
+    public String noticeDeletePOST(
+            @RequestParam (name="idx", defaultValue = "0") int idx,
+            HttpServletRequest req
+    ) {
+        log.info("===============================");
+        log.info("AdminController >> noticeDeletePOST()");
+
+            int result = adminService.noticeDelete(idx);
+
+            if (result > 0) {
+                return "redirect:/admin/list?type=notice";
+            } else {
+                return "redirect:/admin/list?type=notice&err=deleteErr";
+            }
+    }
 
 
     // FAQ
     @GetMapping(path="/faq/view", params="idx")
     public void faqViewGET(
             @RequestParam int idx,
-            HttpServletRequest req,
+            PageRequestDTO pageRequestDTO,
             Model model
     ) {
         log.info("===============================");
         log.info("AdminController >> faqViewGET()");
         FaqDTO faqDTO = adminService.faqView(idx);
+        PageResponseDTO<FaqDTO> faqList = adminService.faqListByPage(pageRequestDTO);
 
-        String referer = req.getHeader("Referer");
-
-        model.addAttribute("referer", referer);
+        model.addAttribute("communityList", faqList);
         model.addAttribute("faqDTO", faqDTO);
+        model.addAttribute("idx", idx);
 
         // 이전글 다음글
         Map<String, FaqDTO> faqMap = communityService.faqView(idx);
@@ -317,21 +337,76 @@ public class AdminController {
         }
     }
 
+    @GetMapping(path="/faq/modify")
+    public void faqModifyGET(
+            @RequestParam(name="idx", defaultValue = "0") int idx,
+            Model model
+    ) {
+        log.info("===============================");
+        log.info("AdminController >> faqModifyGET()");
+
+        FaqDTO faqDTO = adminService.faqView(idx);
+        model.addAttribute("faqDTO", faqDTO);
+
+        log.info("===============================");
+    }
+
+    @PostMapping("/faq/modify")
+    public String faqModifyPOST(
+            @Valid FaqDTO faqDTO,
+            BindingResult bindingResult,
+            RedirectAttributes redirectAttributes
+    ) {
+        log.info("===============================");
+        log.info("AdminController >> faqModifyPOST()");
+        log.info("faqDTO : " + faqDTO.toString());
+
+        if(bindingResult.hasErrors()) {
+            log.info("Errors");
+            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+            redirectAttributes.addFlashAttribute("faqDTO", faqDTO);
+            return "redirect:/admin/faq/modify?idx="+faqDTO.getIdx();
+        }
+
+        int result = adminService.faqModify(faqDTO);
+        log.info("result : " + result);
+        log.info("===============================");
+
+        if (result > 0) {
+            return "redirect:/admin/faq/view?idx="+faqDTO.getIdx();
+        }
+        else {
+            return "redirect:/admin/faq/modify?err=modifyErr";
+        }
+    }
+    @PostMapping (path="/faq/delete")
+    public String faqDeletePOST(
+            @RequestParam (name="idx", defaultValue = "0") int idx,
+            HttpServletRequest req
+    ) {
+        log.info("===============================");
+        log.info("AdminController >> faqDeletePOST()");
+
+        int result = adminService.faqDelete(idx);
+
+        if (result > 0) {
+            return "redirect:/admin/list?type=faq";
+        } else {
+            return "redirect:/admin/list?type=faq&err=deleteErr";
+        }
+    }
 
     // QnA
     @GetMapping(path="/qna/view", params="idx")
     public void qnaViewGET(
             @RequestParam int idx,
-            HttpServletRequest req,
             Model model
     ) {
         log.info("===============================");
         log.info("AdminController >> qnaViewGET()");
 
         QnaDTO qnaDTO = adminService.qnaView(idx);
-        String referer = req.getHeader("Referer");
 
-        model.addAttribute("referer", referer);
         model.addAttribute("qnaDTO", qnaDTO);
 
         // 이전글 다음글

@@ -82,6 +82,17 @@
         VALUES (#{title}, #{writer}, NOW(), #{content}, #{org_file_name}, #{save_file_name}, #{fix_state})
     </insert>
 
+    <update id="noticeModify">
+        UPDATE tbl_bbs_notice
+        SET title = #{title},
+        modify_date = NOW(),
+        content = #{content},
+        org_file_name = #{org_file_name},
+        save_file_name = #{save_file_name},
+        fix_state = #{fix_state}
+        WHERE idx = #{idx}
+    </update>
+
     <delete id="noticeDelete">
         DELETE FROM tbl_bbs_notice
         WHERE idx = #{idx}
@@ -109,6 +120,14 @@
         INSERT INTO tbl_bbs_faq (title, content, writer, reg_date)
         VALUES (#{title}, #{content}, #{writer}, NOW())
     </insert>
+
+    <update id="faqModify">
+        UPDATE tbl_bbs_faq
+        SET title = #{title},
+        content = #{content},
+        modify_date = NOW()
+        WHERE idx = #{idx}
+    </update>
 
     <delete id="faqDelete">
         DELETE FROM tbl_bbs_faq
@@ -144,6 +163,7 @@
         ORDER BY member_idx DESC
     </select>
 
+    <!-- 배송   -->
     <select id="deliveryList" resultType="org.fullstack4.bookstore.domain.DeliveryVO">
         SELECT pay_idx, delivery_company, company_tel, tracking_num, delivery_state, start_date, arrive_date
         FROM tbl_delivery

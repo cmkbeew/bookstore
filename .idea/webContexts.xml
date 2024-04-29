@@ -5,6 +5,7 @@
       <map>
         <entry key="file://$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/list.jsp" value="file://$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin" />
         <entry key="file://$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/notice/view.jsp" value="file://$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/notice" />
+        <entry key="file://$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/community/view.jsp" value="file://$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/community" />
       </map>
     </option>
   </component>

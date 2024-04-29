@@ -64,5 +64,15 @@ public class AdminMapperTests {
         int result = adminMapper.noticeRegist(noticeVO);
     }
 
+    @Test
+    public void testNoticeModify() {
+        NoticeVO noticeVO = NoticeVO.builder()
+                .title("공지사항 (수정)")
+                .idx(31)
+                .build();
+
+        int result = adminMapper.noticeModify(noticeVO);
+    }
+
 
 }
