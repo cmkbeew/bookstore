@@ -17,8 +17,9 @@ public class ProductVO {
     private int page_cnt;
     private int price;
     private LocalDate publish_date;
-    private String category1;
-    private String category2;
+    private String type;
+    private String grade;
+    private String subject;
     private int discount;
     private String tax_yn;
     private LocalDate reg_date;

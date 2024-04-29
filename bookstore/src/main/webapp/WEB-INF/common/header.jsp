@@ -16,19 +16,19 @@
                     <a class="nav-link dropdown-toggle" id="bookstore" href="#" role="button" data-bs-toggle="dropdown"
                        aria-expanded="false">도서</a>
                     <ul class="dropdown-menu" aria-labelledby="bookstore">
-                        <li><a class="dropdown-item" href="/product/list?type=child">유아</a></li>
+                        <li><a class="dropdown-item" href="/product/list?type=유아">유아</a></li>
                         <li>
                             <hr class="dropdown-divider"/>
                         </li>
-                        <li><a class="dropdown-item" href="/product/list?type=element">초등</a></li>
+                        <li><a class="dropdown-item" href="/product/list?type=초등">초등</a></li>
                         <li>
                             <hr class="dropdown-divider"/>
                         </li>
-                        <li><a class="dropdown-item" href="/product/list?type=middle">중등</a></li>
+                        <li><a class="dropdown-item" href="/product/list?type=중등">중등</a></li>
                         <li>
                             <hr class="dropdown-divider"/>
                         </li>
-                        <li><a class="dropdown-item" href="/product/list?type=high">고등</a></li>
+                        <li><a class="dropdown-item" href="/product/list?type=고등">고등</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">

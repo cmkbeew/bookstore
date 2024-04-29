@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -78,6 +80,7 @@ public class CommunityController {
             model.addAttribute("prevDTO", faqMap.get("faqPrevDTO"));
             model.addAttribute("nextDTO", faqMap.get("faqNextDTO"));
         } else if(type.equals("qna")) {
+            communityService.qnaUpdateReadCnt(idx);
             Map<String, QnaDTO> qnaMap = communityService.qnaView(idx);
 
             model.addAttribute("dto", qnaMap.get("qnaDTO"));
