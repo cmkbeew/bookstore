@@ -2,10 +2,9 @@ package org.fullstack4.bookstore.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.fullstack4.bookstore.dto.PageRequestDTO;
-import org.fullstack4.bookstore.dto.PageResponseDTO;
 import org.fullstack4.bookstore.dto.ProductDTO;
-import org.fullstack4.bookstore.dto.QnaDTO;
+import org.fullstack4.bookstore.dto.ProductPageRequestDTO;
+import org.fullstack4.bookstore.dto.ProductPageResponseDTO;
 import org.fullstack4.bookstore.service.ProductService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,19 +20,14 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping("/list")
-    public void productList(PageRequestDTO pageRequestDTO, String type, Model model) {
-        log.info("pageRequestDTO : " + pageRequestDTO);
-        log.info("type : " + type);
+    public void productList(ProductPageRequestDTO productPageRequestDTO, Model model) {
+        ProductPageResponseDTO<ProductDTO> productList = productService.productList(productPageRequestDTO);
 
-        PageResponseDTO<ProductDTO> productList = productService.productList(pageRequestDTO, type);
-        log.info("productList : " + productList);
-
-        model.addAttribute("type", type);
         model.addAttribute("productList", productList);
     }
 
     @GetMapping("/view")
-    public void productView(int product_idx, String type, Model model) {
+    public void productView(String type, int product_idx, Model model) {
         ProductDTO productDTO = productService.productView(product_idx, type);
 
         model.addAttribute("productDTO", productDTO);

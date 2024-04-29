@@ -17,9 +17,16 @@ public class ProductDTO {
     private int page_cnt;
     private int price;
     private LocalDate publish_date;
-    private String category1;
-    private String category2;
+    private String type;
+    private String grade;
+    private String subject;
     private int discount;
     private String tax_yn;
     private LocalDate reg_date;
+
+    public int getPrice() {
+        this.price = price * (100-discount) / 100;
+
+        return price;
+    }
 }

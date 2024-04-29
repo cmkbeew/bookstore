@@ -10,6 +10,9 @@ import org.fullstack4.bookstore.mapper.CommunityMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -206,5 +209,40 @@ public class CommunityServiceImpl implements CommunityService {
         int result = communityMapper.qnaDelete(qna_idx);
 
         return result;
+    }
+
+    @Override
+    public void qnaUpdateReadCnt(int qna_idx) {
+        // 조회 수 중복 방지 ( 쿠키 1분 설정 )
+        // 지정한 이름으로 저장된 쿠키가 있는지 확인
+//        Cookie oldCookie = null;
+//        Cookie[] cookies = req.getCookies();
+//        if (cookies != null) {
+//            for (Cookie cookie : cookies) {
+//                if (cookie.getName().equals("qnaView")) {
+//                    oldCookie = cookie;
+//                }
+//            }
+//        }
+//
+//        // 지정한 이름의 쿠키가 있을 때
+//        if (oldCookie != null) {
+//            // 해당 게시글에 대한 쿠키값이 없을 때
+//            if (!oldCookie.getValue().contains("[" + qna_idx + "]")) {
+//                communityMapper.qnaUpdateReadCnt(qna_idx);
+//                oldCookie.setValue(oldCookie.getValue() + "_[" + qna_idx + "]");
+//                oldCookie.setPath("/");
+//                oldCookie.setMaxAge(60 * 60);
+//                res.addCookie(oldCookie);
+//            }
+//        } else { // 지정한 이름의 쿠키가 없을 때
+//            communityMapper.qnaUpdateReadCnt(qna_idx);
+//            Cookie newCookie = new Cookie("qnaView","[" + qna_idx + "]");
+//            newCookie.setPath("/");
+//            newCookie.setMaxAge(60 * 60);
+//            res.addCookie(newCookie);
+//        }
+
+        communityMapper.qnaUpdateReadCnt(qna_idx);
     }
 }

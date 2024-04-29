@@ -23,7 +23,7 @@
                 <table>
                     <tr>
                         <th>대상</th>
-                        <td>${productDTO.category2}</td>
+                        <td>${productDTO.type}</td>
                     </tr>
                     <tr>
                         <th>출간일</th>
@@ -35,11 +35,11 @@
                     </tr>
                     <tr>
                         <th>정가</th>
-                        <td>${productDTO.price}</td>
+                        <td id="price">${productDTO.price}</td>
                     </tr>
                     <tr>
-                        <th>할인가</th>
-                        <td>${productDTO.discount}</td>
+                        <th>판매가</th>
+                        <td id="sell_price"></td>
                     </tr>
                     <tr>
                         <th>적립금</th>
@@ -184,6 +184,12 @@
     </div>
 </section>
 <script src="js/scripts.js"></script>
+<script>
+    if("${productDTO.discount != 0}") {
+        document.getElementById("price").style.textDecoration = "line-through";
+        document.getElementById("sell_price").innerText = "${productDTO.price}"
+    }
+</script>
 <%@ include file="/WEB-INF/common/footer.jsp"%>
 </body>
 </html>

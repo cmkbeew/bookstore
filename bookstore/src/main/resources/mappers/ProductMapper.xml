@@ -3,23 +3,59 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.fullstack4.bookstore.mapper.ProductMapper">
+    <sql id="whereCondition">
+        <if test="grade != null and !grade.equals('')">
+            AND grade = #{grade}
+        </if>
+        <if test="subject != null and !subject.equals('')">
+            AND subject = #{subject}
+        </if>
+        <if test="search_word != null and !search_word.equals('')">
+            AND product_name LIKE CONCAT('%', #{search_word}, '%')
+        </if>
+    </sql>
+
+    <sql id="orderCondition">
+        <if test="sort_type != null and !sort_type.equals('')">
+            <if test="sort_type == 1">
+                ORDER BY product_idx DESC
+            </if>
+            <if test="sort_type == 2">
+                ORDER BY price DESC
+            </if>
+            <if test="sort_type == 3">
+                ORDER BY price
+            </if>
+<!--            <if test="sort_type.equals('4')">-->
+<!--                ORDER BY product_idx DESC-->
+<!--            </if>-->
+            <if test="sort_type == 5">
+                ORDER BY publish_date DESC
+            </if>
+        </if>
+    </sql>
 
     <select id="productList" resultType="org.fullstack4.bookstore.domain.ProductVO">
-        SELECT product_idx, product_name, publisher, writer, page_cnt, price, publish_date, category1, category2, discount, tax_yn, reg_date
+        SELECT product_idx, product_name, publisher, author, page_cnt, price, publish_date, type, grade, subject, discount, tax_yn, reg_date
         FROM tbl_product
-        WHERE category1 = #{param2}
-        ORDER BY product_idx DESC
+        WHERE type = #{type}
+        <include refid="whereCondition"></include>
+--         ORDER BY product_idx DESC
+        <include refid="orderCondition"></include>
+        LIMIT #{page_skip_count}, #{page_size}
     </select>
 
     <select id="productTotalCount" resultType="int">
         SELECT COUNT(*)
         FROM tbl_product
+        WHERE type = #{type}
+        <include refid="whereCondition"></include>
     </select>
 
     <select id="productView" resultType="org.fullstack4.bookstore.domain.ProductVO">
-        SELECT product_idx, product_name, publisher, writer, page_cnt, price, publish_date, category1, category2, discount, tax_yn, reg_date
+        SELECT product_idx, product_name, publisher, author, page_cnt, price, publish_date, type, grade, subject, discount, tax_yn, reg_date
         FROM tbl_product
-        WHERE product_idx = #{param1} AND category1 = #{param2}
+        WHERE product_idx = #{param1} AND type = #{param2}
     </select>
 
 </mapper>

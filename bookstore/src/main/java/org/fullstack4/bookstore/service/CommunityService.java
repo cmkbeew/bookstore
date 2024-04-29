@@ -4,6 +4,8 @@ import org.fullstack4.bookstore.domain.FaqVO;
 import org.fullstack4.bookstore.domain.QnaVO;
 import org.fullstack4.bookstore.dto.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 
@@ -27,4 +29,5 @@ public interface CommunityService {
     QnaDTO qnaModifyGet(int qna_idx);
     int qnaModify(QnaDTO qnaDTO);
     int qnaDelete(int qna_idx);
+    void qnaUpdateReadCnt(int qna_idx);
 }
