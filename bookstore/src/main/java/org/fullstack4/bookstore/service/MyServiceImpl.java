@@ -32,13 +32,8 @@ public class MyServiceImpl implements MyServiceIf{
     }
 
     @Override
-    public void update_cnt(String cart_idx) {
-
-    }
-
-    @Override
-    public void update_plus_cnt(String cart_idx) {
-
+    public void update_cnt(String cart_idx, int product_count, String or_member_id) {
+        myMapper.update_cnt(cart_idx, product_count, or_member_id);
     }
 
     @Override

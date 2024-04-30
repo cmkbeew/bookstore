@@ -29,13 +29,18 @@
         product_cnt = product_cnt + #{product_cnt}
         WHERE product_idx = #{product_idx} AND or_member_id = #{or_member_id}
     </update>
+
     <update id="update_cnt">
-        update tbl_cart set product_cnt =product_cnt-1 where cart_idx = #{cart_idx}
+        update tbl_cart set
+        product_cnt = #{product_count}
+        where cart_idx = #{cart_idx} and or_member_id = #{or_member_id}
     </update>
 
-    <update id="update_plus_cnt">
-        update tbl_cart set product_cnt =product_cnt+1 where cart_idx = #{cart_idx}
-    </update>
+<!--    <update id="update_plus_cnt">-->
+<!--        update tbl_cart set product_cnt =product_cnt+1 where cart_idx = #{cart_idx}-->
+<!--    </update>-->
+
+
 
     <delete id="deleteCart" parameterType="java.util.Arrays">
         DELETE FROM tbl_cart

@@ -9,8 +9,8 @@ import java.util.List;
 
 public interface MyMapper {
     List<CartListVO> cart_list(String member_id);
-    void update_cnt(String cart_idx);
-    void update_plus_cnt(String cart_idx);
+    void update_cnt(@Param("cart_idx") String cart_idx, @Param("product_count") int product_count, @Param("or_member_id") String or_member_id);
+//    void update_plus_cnt(String cart_idx);
     int deleteCart (int idx);
 
 
