@@ -107,5 +107,13 @@ public class MyController {
     public void qnaGet() {
         log.info("질문 목록");
     }
-    
+
+
+    @GetMapping("/payment")
+    public void cartPay(@RequestParam(name="member_id") String member_id,
+                        Model model) {
+        // 장바구니 전체 리스트
+        List<CartListDTO> cartList = myServiceIf.cart_list(member_id);
+        model.addAttribute("cartList", cartList);
+    }
 }

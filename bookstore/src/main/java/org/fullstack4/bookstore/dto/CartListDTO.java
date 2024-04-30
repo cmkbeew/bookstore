@@ -27,4 +27,8 @@ public class CartListDTO {
     public void setDisplay_price (int price, int discount) {
         this.display_price = (int)(price * ((double)(100-discount)/100));
     }
+
+    public int getDisplay_price() {
+        return display_price * product_cnt;
+    }
 }

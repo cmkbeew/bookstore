@@ -87,9 +87,17 @@ public class LoginController {
                 CookieUtil.setCookies(resp, "save_id","" , 0, "", "/");
                 CookieUtil.setCookies(resp, "auto_login", "", 0, "", "/");
             }
-        session.setAttribute("member_id", loginDTO.getMember_id());
+
+            session.setAttribute("member_id", loginDTO.getMember_id());
+            session.setAttribute("name", loginMemberDTO.getName());
+            session.setAttribute("phone_num", loginMemberDTO.getPhone_num());
+            session.setAttribute("email", loginMemberDTO.getEmail());
+            session.setAttribute("zipcode", loginMemberDTO.getZipcode());
+            session.setAttribute("addr1", loginMemberDTO.getAddr1());
+            session.setAttribute("addr2", loginMemberDTO.getAddr2());
+
 //        model.addAttribute("member_id", member_id);
-        return "redirect:/";
+            return "redirect:/";
         } else {
             redirectAttributes.addFlashAttribute("errors", "비밀번호 아이디를 다시 체크 해주세요.");
             redirectAttributes.addFlashAttribute("dto", loginDTO);
