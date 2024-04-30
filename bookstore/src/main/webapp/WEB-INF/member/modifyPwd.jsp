@@ -11,6 +11,10 @@
     <link rel="stylesheet" href="/resources/css/owl.carousel.min.css">
     <meta name="description" content="">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/checkout/">
+    <%--    헤더 css--%>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/minty/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/resources/css/styles.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="/resources/css/login/style.css">
     <link rel="stylesheet" href="/resources/css/mintybootstrap.min.css">

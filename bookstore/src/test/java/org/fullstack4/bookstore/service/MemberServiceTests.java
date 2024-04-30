@@ -62,4 +62,12 @@ public class MemberServiceTests {
                 .build();
         log.info(memberServiceIf.curr_pwd(memberDTO.getMember_id()));
     }
+
+    @Test
+    public void cnt_pwd() {
+        MemberDTO memberDTO = MemberDTO.builder()
+                .member_id("jy")
+                .build();
+        log.info(memberServiceIf.idCheck(memberDTO.getMember_id()));
+    }
 }

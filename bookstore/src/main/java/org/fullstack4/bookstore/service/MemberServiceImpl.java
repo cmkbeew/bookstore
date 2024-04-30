@@ -39,6 +39,7 @@ public class MemberServiceImpl implements MemberServiceIf{
     @Override
     public int idCheck(String member_id) {
         log.info("===============================");
+        log.info("member I d : "+member_id);
         int result = memberMapper.idCheck(member_id);
         log.info("member_id: " +  result);
         log.info("===============================");

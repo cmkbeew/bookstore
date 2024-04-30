@@ -11,6 +11,11 @@
     <link rel="stylesheet" href="/resources/css/owl.carousel.min.css">
     <meta name="description" content="">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/checkout/">
+    <%--    헤더 css--%>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="/resources/css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/minty/bootstrap.min.css" integrity="sha384-H4X+4tKc7b8s4GoMrylmy2ssQYpDHoqzPa9aKXbDwPoPUA3Ra8PA5dGzijN+ePnH" crossorigin="anonymous">
+
 
     <link rel="stylesheet" href="/resources/css/login/style.css">
     <link rel="stylesheet" href="/resources/css/mintybootstrap.min.css">
@@ -186,13 +191,13 @@
 <script src="/resources/js/form-validation.js"></script>
 <script src="/resources/js/jquery-3.3.1.min.js"></script>
 <script src="/resources/js/popper.min.js"></script>
-<script src="/resources/js/bootstrap.min.js"></script>
-<script src="/resources/js/main.js"></script>
+<%--<script src="/resources/js/bootstrap.min.js"></script>--%>
+<%--<script src="/resources/js/main.js"></script>--%>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v55bfa2fee65d44688e90c00735ed189a1713218998793"
         integrity="sha512-FIKRFRxgD20moAo96hkZQy/5QojZDAbyx0mQ17jEGHCJc/vi0G2HXLtofwD7Q3NmivvP9at5EVgbRqOaOQb+Rg=="
         data-cf-beacon='{"rayId":"879d448bbc1a29e5","version":"2024.4.0","token":"cd0b4b3a733644fc843ef0b185f98241"}'
         crossorigin="anonymous"></script>
-<%--<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>--%>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <%--<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"--%>
 <%--        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"--%>
 <%--        crossorigin="anonymous"></script>--%>
