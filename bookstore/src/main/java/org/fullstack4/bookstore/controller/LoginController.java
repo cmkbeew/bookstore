@@ -66,18 +66,18 @@ public class LoginController {
             redirectAttributes.addFlashAttribute("errors", "비밀번호 아이디를 다시 체크 해주세요.");
             return "redirect:/login/login";
         }
-        LoginDTO loginMemberDTO = loginServiceIf.login_info(loginDTO);
+        MemberDTO loginMemberDTO = loginServiceIf.login_info(loginDTO);
         System.out.println("loginMemberDTO" + loginMemberDTO);
 
         session = req.getSession();
         if (loginMemberDTO != null) {
-//            암호화 복호화 고도화 시 추가
-            if(loginMemberDTO.getSave_id().equals("on")) {
+            // TODO :암호화 복호화 고도화 시 추가
+            if(loginDTO.getSave_id().equals("on")) {
                 System.out.println("save_id.equals");
                 CookieUtil.setCookies(resp, "id", loginDTO.getMember_id(), 60 * 60 * 24, "", "/");
                 CookieUtil.setCookies(resp, "save_id", loginDTO.getSave_id(), 60 * 60 * 24, "", "/");
             }
-            if(loginMemberDTO.getAuto_login().equals("on")) {
+            if(loginDTO.getAuto_login().equals("on")) {
                 System.out.println("auto_login.equals");
                 CookieUtil.setCookies(resp, "id",loginDTO.getMember_id(), 60 * 60 * 24, "", "/");
                 CookieUtil.setCookies(resp, "auto_login", loginDTO.getSave_id(), 60 * 60 * 24, "", "/");
