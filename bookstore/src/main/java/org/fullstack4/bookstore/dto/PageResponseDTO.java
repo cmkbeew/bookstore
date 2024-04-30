@@ -78,6 +78,7 @@ public class PageResponseDTO<E> {
 
 
         log.info("page_block_end : " + page_block_end);
+        log.info("total_count : " + total_count);
         log.info("PageResponseDTO END");
         log.info("=======================");
     }

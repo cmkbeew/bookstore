@@ -1,8 +1,10 @@
 package org.fullstack4.bookstore.service;
 
 import lombok.extern.log4j.Log4j2;
+import org.fullstack4.bookstore.dto.FaqDTO;
 import org.fullstack4.bookstore.dto.MemberDTO;
 import org.fullstack4.bookstore.dto.NoticeDTO;
+import org.fullstack4.bookstore.dto.QnaDTO;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,4 +30,13 @@ public class AdminServiceTests {
 
         int result = adminService.noticeRegist(noticeDTO);
     }
+
+    @Test
+    public void testReplyDelete() {
+        QnaDTO qnaDTO = QnaDTO.builder()
+                .idx(12)
+                .build();
+        int result = adminService.qnaDelete(qnaDTO.getIdx());
+    }
+
 }

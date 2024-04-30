@@ -5,6 +5,7 @@ import lombok.extern.log4j.Log4j2;
 import org.fullstack4.bookstore.domain.DataVO;
 import org.fullstack4.bookstore.domain.MemberVO;
 import org.fullstack4.bookstore.domain.NoticeVO;
+import org.fullstack4.bookstore.domain.QnaVO;
 import org.fullstack4.bookstore.dto.MemberDTO;
 import org.fullstack4.bookstore.dto.NoticeDTO;
 import org.fullstack4.bookstore.dto.PageRequestDTO;
@@ -74,5 +75,12 @@ public class AdminMapperTests {
         int result = adminMapper.noticeModify(noticeVO);
     }
 
+    @Test
+    public void testReplyDelete() {
+        QnaVO qnaVO = QnaVO.builder()
+                .idx(14)
+                .build();
+        int result = adminMapper.qnaReplyDelete(qnaVO.getIdx());
+    }
 
 }

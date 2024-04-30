@@ -11,6 +11,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class QnaVO {
     private int idx;
+    private int ref;
     private String title;
     private String content;
     private String writer;

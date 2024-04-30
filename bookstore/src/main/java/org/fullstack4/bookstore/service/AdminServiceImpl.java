@@ -24,12 +24,10 @@ public class AdminServiceImpl implements AdminService {
     public int noticeTotalCount(PageRequestDTO pageRequestDTO) {
         return adminMapper.noticeTotalCount(pageRequestDTO);
     }
-
     @Override
     public int faqTotalCount(PageRequestDTO pageRequestDTO) {
         return adminMapper.faqTotalCount(pageRequestDTO);
     }
-
     @Override
     public int qnaTotalCount(PageRequestDTO pageRequestDTO) {
         return adminMapper.qnaTotalCount(pageRequestDTO);
@@ -78,7 +76,7 @@ public class AdminServiceImpl implements AdminService {
                 .map(vo -> modelMapper.map(vo, QnaDTO.class))
                 .collect(Collectors.toList());
 
-        int total_count = adminMapper.noticeTotalCount(pageRequestDTO);
+        int total_count = adminMapper.qnaTotalCount(pageRequestDTO);
 
         PageResponseDTO<QnaDTO> pageResponseDTO = PageResponseDTO.<QnaDTO>withAll()
                 .requestDTO(pageRequestDTO)
@@ -118,16 +116,8 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public int noticeModify(NoticeDTO noticeDTO) {
-        log.info("====================================");
-        log.info("AdminServiceImpl >> noticeModify(noticeDTO : " + noticeDTO.toString());
-
         NoticeVO noticeVO = modelMapper.map(noticeDTO, NoticeVO.class);
         int result = adminMapper.noticeModify(noticeVO);
-
-        log.info("AdminServiceImpl >> noticeVO : " + noticeVO.toString());
-        log.info("AdminServiceImpl >> result : " + result);
-        log.info("====================================");
-
         return result;
     }
 
@@ -172,16 +162,8 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public int faqModify(FaqDTO faqDTO) {
-        log.info("====================================");
-        log.info("AdminServiceImpl >> faqModify(faqDTO : " + faqDTO.toString());
-
         FaqVO faqVO = modelMapper.map(faqDTO, FaqVO.class);
         int result = adminMapper.faqModify(faqVO);
-
-        log.info("AdminServiceImpl >> faqVO : " + faqVO.toString());
-        log.info("AdminServiceImpl >> result : " + result);
-        log.info("====================================");
-
         return result;
     }
 
@@ -213,7 +195,52 @@ public class AdminServiceImpl implements AdminService {
         return qnaDTO;
     }
 
-    
+    @Override
+    public int qnaDelete(int idx) {
+        int result = adminMapper.qnaDelete(idx);
+        return result;
+    }
+
+    @Override
+    public int qnaReplyRegist(QnaDTO qnaDTO) {
+        QnaVO qnaVO = modelMapper.map(qnaDTO, QnaVO.class);
+        int result = adminMapper.qnaReplyRegist(qnaVO);
+
+//        qnaDTO.setIndent(qnaVO.getIndent() + 1);
+//
+//        QnaVO qnaVO2 = modelMapper.map(qnaDTO, QnaVO.class);
+//        int result2 = adminMapper.qnaReplyRegist(qnaVO2);
+
+        return result;
+    }
+
+    @Override
+    public int qnaReplyModify(QnaDTO qnaDTO) {
+        QnaVO qnaVO = modelMapper.map(qnaDTO, QnaVO.class);
+        int result = adminMapper.qnaReplyModify(qnaVO);
+        return result;
+    }
+
+    @Override
+    public int qnaReplyDelete(int idx) {
+        int result = adminMapper.qnaReplyDelete(idx);
+        return result;
+    }
+
+    @Override
+    public int qnaReplyTotalCount(QnaDTO qnaDTO) {
+        QnaVO qnaVO = modelMapper.map(qnaDTO, QnaVO.class);
+        return adminMapper.qnaReplyTotalCount(qnaVO);
+    }
+
+    @Override
+    public int qnaReplyStateUpdate(QnaDTO qnaDTO) {
+        QnaVO qnaVO = modelMapper.map(qnaDTO, QnaVO.class);
+        int result = adminMapper.qnaReplyStateUpdate(qnaVO);
+        return result;
+    }
+
+
     // 회원관리
     @Override
     public List<MemberDTO> memberList() {

@@ -105,10 +105,10 @@
 
     <!-- QnA -->
     <select id="qnaList" resultType="org.fullstack4.bookstore.domain.QnaVO">
-        SELECT idx, title, content, writer, read_cnt, reg_date, modify_date, reply_state
+        SELECT idx, ref, title, content, writer, read_cnt, reg_date, modify_date, reply_state
         FROM tbl_bbs_qna
         <include refid="whereCondition"></include>
-        ORDER BY idx DESC
+        ORDER BY ref DESC, idx ASC
         LIMIT #{page_skip_count}, #{page_size}
     </select>
 
@@ -119,7 +119,7 @@
     </select>
 
     <select id="qnaView" resultType="org.fullstack4.bookstore.domain.QnaVO">
-        SELECT idx, title, content, writer, read_cnt, reg_date, modify_date, reply_state
+        SELECT idx, ref, title, content, writer, read_cnt, reg_date, modify_date, reply_state
         FROM tbl_bbs_qna
         WHERE idx = #{idx}
     </select>

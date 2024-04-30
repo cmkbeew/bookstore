@@ -15,8 +15,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class QnaDTO {
-    @PositiveOrZero
     private int idx;
+    private int ref;
 
     @NotBlank(message = "제목을 입력하세요.")
     @Length(min = 1, max = 50, message = "1~50자 이내로 입력하세요.")
