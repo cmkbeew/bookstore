@@ -70,100 +70,100 @@
                                                     </div>
                                                 </div>
                                                 <c:choose>
-                                                    <c:when test="${not empty cartList }" >
-                                                        <c:forEach items="${cartList}" var="list" varStatus="status">
-                                                            <div class="card mb-3">
-                                                                <div class="card-body">
-                                                                    <div class="d-flex justify-content-between">
-                                                                        <div class="d-flex flex-row align-items-center">
-                                                                            <div><label class="control control--checkbox">
-                                                                                <input type="checkbox" name="select" id="${list.cart_idx}" value="">
-                                                                                <div class="control__indicator"></div>
-                                                                            </label></div>
-                                                                            <div>
-                                                                                <img
-                                                                                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp"
-                                                                                        class="img-fluid rounded-3" alt="Shopping item" style="width: 65px;">
-                                                                            </div>
-                                                                            <div class="ms-3">
-                                                                                <h5>${list.product_name}</h5>
-                                                                                <p class="small mb-0">${list.publisher}</p>
-                                                                            </div>
+                                                <c:when test="${not empty cartList }" >
+                                                    <c:forEach items="${cartList}" var="list" varStatus="status">
+                                                        <div class="card mb-3">
+                                                            <div class="card-body">
+                                                                <div class="d-flex justify-content-between">
+                                                                    <div class="d-flex flex-row align-items-center">
+                                                                        <div><label class="control control--checkbox">
+                                                                            <input type="checkbox" name="select" id="${list.cart_idx}" value="">
+                                                                            <div class="control__indicator"></div>
+                                                                        </label></div>
+                                                                        <div>
+                                                                            <img
+                                                                                    src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp"
+                                                                                    class="img-fluid rounded-3" alt="Shopping item" style="width: 65px;">
                                                                         </div>
-                                                                        <div class="d-flex flex-row align-items-center">
-                                                                            <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2" type="button"
-                                                                                    id="minus${list.cart_idx}" onclick="this.parentNode.querySelector('input[type=number]').stepDown(); bookCntUpdate(${list.cart_idx})"
-                                                                                    <c:out value="${list.product_cnt eq 1 ? 'disabled' : '' }"/>>
-                                                                                <span class="material-symbols-outlined">remove</span>
-                                                                            </button>
-
-                                                                            <input id="form${list.cart_idx}" min="1" name="quantity" value="${list.product_cnt}" type="number"
-                                                                                   class="form-control form-control-sm" style="width:50px; text-align: center" readonly/>
-                                                                            <input type="hidden" id="cart_${status.index}" name="cart_${status.index}" value="${list.cart_idx}"/>
-                                                                            <input type="hidden" id="product_${status.index}" name="product_${status.index}" value="${list.product_idx}"/>
-
-
-
-                                                                            <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2" type="button"
-                                                                                    id="plus${list.cart_idx}" onclick="this.parentNode.querySelector('input[type=number]').stepUp(); bookCntUpdate(${list.cart_idx})">
-                                                                                <span class="material-symbols-outlined">add</span>
-                                                                            </button>
-                                                                            <div style="width: 100px;">
-                                                                                <c:choose>
-                                                                                    <c:when test="${list.display_price eq list.price}">
-                                                                                        <p class="small mb-0">정가 : ${list.price}</p>
-                                                                                        <%--                                                                                    <p class="small mb-0">정가 : ${list.price}</p>--%>
-                                                                                    </c:when>
-                                                                                    <c:otherwise>
-                                                                                        <p class="small mb-0"><del>정가 : ${list.price}</del></p>
-                                                                                        <p class="small mb-0">판매가 : ${list.display_price}</p>
-                                                                                    </c:otherwise>
-                                                                                </c:choose>
-                                                                            </div>
-                                                                            <a href="#!" style="color: #cecece;"><i class="fas fa-trash-alt"></i></a>
+                                                                        <div class="ms-3">
+                                                                            <h5>${list.product_name}</h5>
+                                                                            <p class="small mb-0">${list.publisher}</p>
                                                                         </div>
+                                                                    </div>
+                                                                    <div class="d-flex flex-row align-items-center">
+                                                                        <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2" type="button"
+                                                                                id="minus${list.cart_idx}" onclick="this.parentNode.querySelector('input[type=number]').stepDown(); bookCntUpdate(${list.cart_idx})"
+                                                                                <c:out value="${list.product_cnt eq 1 ? 'disabled' : '' }"/>>
+                                                                            <span class="material-symbols-outlined">remove</span>
+                                                                        </button>
+
+                                                                        <input id="form${list.cart_idx}" min="1" name="quantity" value="${list.product_cnt}" type="number"
+                                                                               class="form-control form-control-sm" style="width:50px; text-align: center" readonly/>
+                                                                        <input type="hidden" id="cart_${status.index}" name="cart_${status.index}" value="${list.cart_idx}"/>
+                                                                        <input type="hidden" id="product_${status.index}" name="product_${status.index}" value="${list.product_idx}"/>
+
+
+
+                                                                        <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2" type="button"
+                                                                                id="plus${list.cart_idx}" onclick="this.parentNode.querySelector('input[type=number]').stepUp(); bookCntUpdate(${list.cart_idx})">
+                                                                            <span class="material-symbols-outlined">add</span>
+                                                                        </button>
+                                                                        <div style="width: 100px;">
+                                                                            <c:choose>
+                                                                                <c:when test="${list.display_price eq list.price}">
+                                                                                    <p class="small mb-0">정가 : ${list.price}</p>
+                                                                                    <%--                                                                                    <p class="small mb-0">정가 : ${list.price}</p>--%>
+                                                                                </c:when>
+                                                                                <c:otherwise>
+                                                                                    <p class="small mb-0"><del>정가 : ${list.price}</del></p>
+                                                                                    <p class="small mb-0">판매가 : ${list.display_price}</p>
+                                                                                </c:otherwise>
+                                                                            </c:choose>
+                                                                        </div>
+                                                                        <a href="#!" style="color: #cecece;"><i class="fas fa-trash-alt"></i></a>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </c:forEach>
-                                                        <div class="card mb-3">
-                                                            <div class="card-body">
-                                                                <div class="d-flex justify-content-center">
-                                                                    <input id="total_value" min="1" name="quantity" value="1" type="number"
-                                                                           class="form-control form-control-sm" style="width:50px; text-align: center"/>
-                                                                    <a href="#!" style="color: #cecece;"><i class="fas fa-trash-alt"></i></a>
-                                                                </div>
+                                                        </div>
+                                                    </c:forEach>
+                                                    <div class="card mb-3">
+                                                        <div class="card-body">
+                                                            <div class="d-flex justify-content-center">
+                                                                <input id="total_value" min="1" name="quantity" value="1" type="number"
+                                                                       class="form-control form-control-sm" style="width:50px; text-align: center"/>
+                                                                <a href="#!" style="color: #cecece;"><i class="fas fa-trash-alt"></i></a>
                                                             </div>
                                                         </div>
-                                                        <div class="row justify-content-around">
-                                                            <button type="button" id="delBtn" class="btn btn-outline-danger btn-circle btn-lg btn-circle col-3">삭제하기</button>
-                                                            <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle col-4">선택 상품 주문하기</button>
-                                                            <button type="button" class="btn btn-primary btn-circle btn-lg btn-circle col-4">전체 상품 주문하기</button>
-                                                        </div>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <div class="card mb-3">
-                                                            <div class="card-body">
-                                                                <div class="d-flex justify-content-center">
-                                                                    <p>장바구니가 비어있습니다.</p>
-                                                                </div>
+                                                    </div>
+                                                    <div class="row justify-content-around">
+                                                        <button type="button" id="delBtn" class="btn btn-outline-danger btn-circle btn-lg btn-circle col-3">삭제하기</button>
+                                                        <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle col-4" onclick="location.href='/cart/pay'">선택 상품 주문하기</button>
+                                                        <button type="button" class="btn btn-primary btn-circle btn-lg btn-circle col-4" onclick="location.href='/cart/pay'">전체 상품 주문하기</button>
+                                                    </div>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <div class="card mb-3">
+                                                        <div class="card-body">
+                                                            <div class="d-flex justify-content-center">
+                                                                <p>장바구니가 비어있습니다.</p>
                                                             </div>
                                                         </div>
-                                                    </c:otherwise>
-                                                </c:choose>
-                                            </div>
-                                        </form>
-                                    </div>
-
+                                                    </div>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </div>
+                                    </form>
                                 </div>
+
                             </div>
                         </div>
                     </div>
-
                 </div>
+
             </div>
         </div>
     </div>
+</div>
 </div>
 <%@ include file="/WEB-INF/common/footer.jsp"%>
 <script>
