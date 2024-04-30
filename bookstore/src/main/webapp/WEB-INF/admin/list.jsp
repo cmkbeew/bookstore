@@ -72,6 +72,7 @@
                     <div class="col-md-12">
                         <form name="deleteFrm" id="deleteFrm" method="post" action="/admin/delete">
                             <input type="hidden" name="type" value="${communityList.type}"/>
+                            <h5>총 <span class="text-primary">${communityList.total_count}</span>개</h5>
                             <div class="card">
                                 <div class="card-body">
                                     <h5 class="card-title text-uppercase mb-0 text-center">${bbsTitle}</h5>
@@ -90,24 +91,26 @@
                                             <th scope="col" class="border-0 text-uppercase font-medium">제목</th>
                                             <th scope="col" class="border-0 text-uppercase font-medium">작성자</th>
                                             <th scope="col" class="border-0 text-uppercase font-medium">작성일</th>
+                                            <c:if test="${communityList.type == 'qna'}">
+                                                <th scope="col" class="border-0 text-uppercase font-medium">답변여부</th>
+                                            </c:if>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <c:choose>
-                                            <c:when test="${!empty communityList}">
-                                                <c:forEach items="${communityList.dtoList}" var="list">
-                                                    <tr>
-                                                        <td class="pl-4" style="width: 80px;">
-                                                            <label class="control control--checkbox">
-                                                                <input type="checkbox" name="select" id="select+${list.idx}" value="${list.idx}">
-                                                                <div class="control__indicator"></div>
-                                                            </label>
-                                                        </td>
-                                                        <td class="pl-4"><a href="/admin/${communityList.type}/view?idx=${list.idx}">${list.idx}</a></td>
-                                                        <td style="max-width: 300px;">
-                                                            <a href="/admin/${communityList.type}/view?idx=${list.idx}" style="max-width: 100%; display: block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
-                                                                <c:choose>
-                                                                    <c:when test="${communityList.type == 'notice'}">
+                                            <c:choose>
+                                                <c:when test="${!empty communityList && communityList.total_count > 0}">
+                                                    <c:forEach items="${communityList.dtoList}" var="list">
+                                                        <tr>
+                                                            <td class="pl-4" style="width: 80px;">
+                                                                <label class="control control--checkbox">
+                                                                    <input type="checkbox" name="select" id="select+${list.idx}" value="${list.idx}">
+                                                                    <div class="control__indicator"></div>
+                                                                </label>
+                                                            </td>
+                                                            <td class="pl-4"><a href="/admin/${communityList.type}/view?idx=${list.idx}">${list.idx}</a></td>
+                                                            <td style="max-width: 300px;">
+                                                                <a href="/admin/${communityList.type}/view?idx=${list.idx}" style="max-width: 100%; display: block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
+                                                                    <c:if test="${communityList.type == 'notice'}">
                                                                         <c:choose>
                                                                             <c:when test="${list.fix_state < 0}">
                                                                                 <span style="font-weight: bold">${list.title}</span>
@@ -119,24 +122,37 @@
                                                                         <c:if test="${list.org_file_name != null && list.org_file_name != ''}">
                                                                             <span class="material-symbols-outlined" style="vertical-align: center; transform: translateY(15%)">attach_file</span>
                                                                         </c:if>
-                                                                    </c:when>
-                                                                    <c:otherwise>
+                                                                    </c:if>
+
+                                                                    <c:if test="${communityList.type == 'faq'}">
                                                                         <span>${list.title}</span>
-                                                                    </c:otherwise>
-                                                                </c:choose>
-                                                            </a>
-                                                        </td>
-                                                        <td><a href="/admin/${communityList.type}/view?idx=${list.idx}">${list.writer}</a></td>
-                                                        <td><a href="/admin/${communityList.type}/view?idx=${list.idx}">${list.reg_date}</a></td>
+                                                                    </c:if>
+
+                                                                    <c:if test="${communityList.type == 'qna'}">
+                                                                        <span>
+                                                                            <c:if test="${list.ref < list.idx}">
+                                                                                <i class="fa fa-reply" aria-hidden="true" style="transform: rotate(180deg)"></i>
+                                                                            </c:if>
+                                                                            ${list.title}
+                                                                        </span>
+                                                                    </c:if>
+                                                                </a>
+                                                            </td>
+                                                            <td><a href="/admin/${communityList.type}/view?idx=${list.idx}">${list.writer}</a></td>
+                                                            <td><a href="/admin/${communityList.type}/view?idx=${list.idx}">${list.reg_date}</a></td>
+                                                            <c:if test="${communityList.type == 'qna'}">
+                                                                <td style="width: 100px;"><a href="/admin/${communityList.type}/view?idx=${list.idx}">${list.reply_state}</a></td>
+                                                            </c:if>
+
+                                                        </tr>
+                                                    </c:forEach>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <tr>
+                                                        <td class="text-center" colspan="5">등록된 게시글이 없습니다.</td>
                                                     </tr>
-                                                </c:forEach>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <tr>
-                                                    <td class="text-center" colspan="5">등록된 게시글이 없습니다.</td>
-                                                </tr>
-                                            </c:otherwise>
-                                        </c:choose>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </tbody>
                                     </table>
                                 </div>
@@ -151,31 +167,32 @@
                                             <i class="fa fa-thumb-tack" aria-hidden="true"></i>
                                         </button>
                                     </c:if>
-                                    <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2" onclick="location.href='/admin/${communityList.type}/regist'">
-                                        <i class="fa fa-upload"></i>
-                                    </button>
+                                    <c:if test="${communityList.type != 'qna'}">
+                                        <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2" onclick="location.href='/admin/${communityList.type}/regist'">
+                                            <i class="fa fa-upload"></i>
+                                        </button>
+                                    </c:if>
                                 </div>
                             </div>
                         </form>
-
                         <nav aria-label="Page navigation example pagination">
                             <ul class="pagination justify-content-center">
                                 <li class="page-item
-                                    <c:if test="${communityList.prev_page_flag ne true}"> disabled</c:if>">
+                            <c:if test="${communityList.prev_page_flag ne true}"> disabled</c:if>">
                                     <a class="page-link"
                                        data-num="<c:choose><c:when test="${communityList.prev_page_flag}">${communityList.page_block_start-1}</c:when><c:otherwise>1</c:otherwise></c:choose>"
                                        href="<c:choose><c:when test="${communityList.prev_page_flag}">${communityList.linkParams}&page=${communityList.page_block_start-1}</c:when><c:otherwise>#</c:otherwise></c:choose>" aria-label="Previous">
                                         <span aria-hidden="true">&laquo;</span>
                                     </a>
                                 </li>
-                                    <c:forEach begin="${communityList.page_block_start}" end="${communityList.page_block_end}" var="page_num">
-                                        <li class="page-item<c:if test="${communityList.page == page_num}"> active</c:if> ">
-                                            <a class="page-link" data-num="${page_num}"
-                                               href="<c:choose><c:when test="${communityList.page == page_num}">#</c:when><c:otherwise>${communityList.linkParams}&page=${page_num}</c:otherwise></c:choose>">${page_num}</a>
-                                        </li>
-                                    </c:forEach>
+                                <c:forEach begin="${communityList.page_block_start}" end="${communityList.page_block_end}" var="page_num">
+                                    <li class="page-item<c:if test="${communityList.page == page_num}"> active</c:if> ">
+                                        <a class="page-link" data-num="${page_num}"
+                                           href="<c:choose><c:when test="${communityList.page == page_num}">#</c:when><c:otherwise>${communityList.linkParams}&page=${page_num}</c:otherwise></c:choose>">${page_num}</a>
+                                    </li>
+                                </c:forEach>
                                 <li class="page-item
-                                    <c:if test="${communityList.next_page_flag ne true}"> disabled</c:if>">
+                            <c:if test="${communityList.next_page_flag ne true}"> disabled</c:if>">
                                     <a class="page-link"
                                        data-num="<c:choose><c:when test="${communityList.next_page_flag}">${communityList.page_block_end+1}</c:when><c:otherwise>${communityList.page_block_end}</c:otherwise></c:choose>"
                                        href="<c:choose><c:when test="${communityList.next_page_flag}">${communityList.linkParams}&page=${communityList.page_block_end+1}</c:when><c:otherwise>#</c:otherwise></c:choose>" aria-label="Next">

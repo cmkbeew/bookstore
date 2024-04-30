@@ -38,7 +38,7 @@
         </button>
         <!-- Page content-->
         <div class="container py-h">
-            <form name="deleteFrm" id="deleteFrm" method="get" action="/admin/delete">
+            <form name="deleteFrm" id="deleteFrm" method="post" action="/admin/qna/delete">
                 <input type="hidden" name="type" value="${communityList.type}"/>
                 <input type="hidden" name="idx" value="${qnaDTO.idx}"/>
                 <div class="row">
@@ -53,6 +53,10 @@
                                         <div>
                                             <table class="table no-wrap user-table mb-0 text-lg-start">
                                                 <tr>
+                                                    <th style="width: 120px;">글번호</th>
+                                                    <td>${qnaDTO.idx}</td>
+                                                </tr>
+                                                <tr>
                                                     <th style="width: 120px;">제목 <i class="fa fa-pencil" aria-hidden="true"></i></th>
                                                     <td>${qnaDTO.title}</td>
                                                 </tr>
@@ -63,10 +67,6 @@
                                                 <tr>
                                                     <th>작성일 <i class="fa fa-calendar"></i></th>
                                                     <td>${qnaDTO.reg_date}</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>조회수 <i class="fa fa-eye" aria-hidden="true"></i></th>
-                                                    <td>${qnaDTO.read_cnt}</td>
                                                 </tr>
                                             </table>
                                         </div>
@@ -80,11 +80,20 @@
                     </div>
                 </div>
                 <div class="mt-md-2">
-                    <div>
-                        <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2" onclick="location.href='/admin/list?type=qna';"><i class="fa fa-list"></i></button>
-                        <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2"><i class="fa fa-edit"></i></button>
-                        <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2" onclick="goDelete()"><i class="fa fa-trash"></i></button>
-                    </div>
+                    <c:if test="${qnaDTO.idx eq qnaDTO.ref}">
+                        <div>
+                            <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2" onclick="location.href='/admin/list?type=qna';"><i class="fa fa-list"></i></button>
+                            <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2" onclick="goDelete()"><i class="fa fa-trash"></i></button>
+                            <button id="replyBtn" type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2" onclick="location.href='/admin/qna/replyRegist?idx=${qnaDTO.idx}'"><i class="fa fa-reply" aria-hidden="true" style="transform: rotate(180deg)"></i></button>
+                        </div>
+                    </c:if>
+                    <c:if test="${qnaDTO.idx ne qnaDTO.ref}">
+                        <div>
+                            <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2" onclick="location.href='/admin/list?type=qna';"><i class="fa fa-list"></i></button>
+                            <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2" onclick="location.href='/admin/qna/modify?idx=${qnaDTO.idx}';"><i class="fa fa-edit"></i></button>
+                            <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2" onclick="goDelete()"><i class="fa fa-trash"></i></button>
+                        </div>
+                    </c:if>
                 </div>
             </form>
             <div class="card my-5">
@@ -122,7 +131,7 @@
 <script>
     function goDelete() {
         const frm = document.getElementById("deleteFrm");
-        let confirm_flag = confirm("이 QnA 게시글을 삭제하시겠습니까?");
+        let confirm_flag = confirm("해당 게시글을 삭제하시겠습니까?");
 
         if(confirm_flag) {
             frm.submit();

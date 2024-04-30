@@ -52,6 +52,10 @@
                                         <div>
                                             <table class="table no-wrap user-table mb-0 text-lg-start">
                                                 <tr>
+                                                    <th style="width: 120px;">글번호</th>
+                                                    <td>${faqDTO.idx}</td>
+                                                </tr>
+                                                <tr>
                                                     <th style="width: 120px;">제목 <i class="fa fa-pencil" aria-hidden="true"></i></th>
                                                     <td>${faqDTO.title}</td>
                                                 </tr>

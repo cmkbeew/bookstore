@@ -1,6 +1,7 @@
 package org.fullstack4.bookstore.service;
 
 import org.fullstack4.bookstore.domain.NoticeVO;
+import org.fullstack4.bookstore.domain.QnaVO;
 import org.fullstack4.bookstore.dto.*;
 
 import java.util.List;
@@ -34,6 +35,19 @@ public interface AdminService {
     // QnA
     List<QnaDTO> qnaList();
     QnaDTO qnaView(int idx);
+
+    int qnaDelete(int idx);
+    int qnaReplyRegist(QnaDTO qnaDTO);
+    int qnaReplyModify(QnaDTO qnaDTO);
+    int qnaReplyDelete(int idx);
+
+    int qnaReplyTotalCount(QnaDTO qnaDTO);
+    int qnaReplyStateUpdate(QnaDTO qnaDTO);
+
+
+
+
+
 
     // 회원
     List<MemberDTO> memberList();

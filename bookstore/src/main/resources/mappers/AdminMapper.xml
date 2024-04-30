@@ -29,14 +29,17 @@
     <!--  페이징  -->
     <select id="noticeTotalCount" resultType="int">
         SELECT COUNT(*) FROM tbl_bbs_notice
+        <include refid="whereCondition"></include>
     </select>
 
     <select id="faqTotalCount" resultType="int">
-    SELECT COUNT(*) FROM tbl_bbs_faq
+        SELECT COUNT(*) FROM tbl_bbs_faq
+        <include refid="whereCondition"></include>
     </select>
 
     <select id="qnaTotalCount" resultType="int">
-    SELECT COUNT(*) FROM tbl_bbs_qna
+        SELECT COUNT(*) FROM tbl_bbs_qna
+        <include refid="whereCondition"></include>
     </select>
 
     <select id="noticeListByPage" resultType="org.fullstack4.bookstore.domain.NoticeVO">
@@ -56,10 +59,10 @@
     </select>
 
     <select id="qnaListByPage" resultType="org.fullstack4.bookstore.domain.QnaVO">
-        SELECT idx, title, content, writer, read_cnt, reg_date, modify_date, reply_state
+        SELECT idx, ref, title, content, writer, read_cnt, reg_date, modify_date, reply_state
         FROM tbl_bbs_qna
         <include refid="whereCondition"></include>
-        ORDER BY idx DESC
+        ORDER BY ref DESC, idx ASC
         LIMIT #{page_skip_count}, #{page_size}
     </select>
 
@@ -136,16 +139,55 @@
 
     <!-- QnA -->
     <select id="qnaList" resultType="org.fullstack4.bookstore.domain.QnaVO">
-        SELECT idx, title, content, writer, read_cnt, reg_date, modify_date, reply_state
+        SELECT idx, ref, title, content, writer, read_cnt, reg_date, modify_date, reply_state
         FROM tbl_bbs_qna
-        ORDER BY idx DESC
+        ORDER BY ref DESC, idx ASC
+        LIMIT #{page_skip_count}, #{page_size}
     </select>
 
     <select id="qnaView" resultType="org.fullstack4.bookstore.domain.QnaVO">
-        SELECT idx, title, content, writer, read_cnt, reg_date, modify_date, reply_state
+        SELECT idx, ref, title, content, writer, read_cnt, reg_date, modify_date, reply_state
         FROM tbl_bbs_qna
         WHERE idx = #{idx}
     </select>
+
+    <delete id="qnaDelete">
+        DELETE FROM tbl_bbs_qna
+        WHERE idx = #{idx} OR ref = #{idx}
+    </delete>
+
+<!--    <insert id="qnaReplyRegist" parameterType="org.fullstack4.bookstore.domain.QnaVO" useGeneratedKeys="true"  keyProperty="idx" keyColumn="idx">-->
+<!--        INSERT INTO tbl_bbs_qna (ref, title, content, writer, reg_date)-->
+<!--        VALUES (#{idx}, #{title}, #{content}, #{writer}, NOW())-->
+<!--    </insert>-->
+
+    <insert id="qnaReplyRegist">
+        INSERT INTO tbl_bbs_qna (ref, title, content, writer, reg_date)
+        VALUES (#{idx}, #{title}, #{content}, #{writer}, NOW())
+    </insert>
+
+    <update id="qnaReplyModify">
+        UPDATE tbl_bbs_qna
+        SET content = #{content},
+            modify_date = NOW()
+        WHERE idx = #{idx}
+    </update>
+
+    <delete id="qnaReplyDelete">
+        DELETE FROM tbl_bbs_qna
+        WHERE idx = #{idx}
+    </delete>
+
+    <select id="qnaReplyTotalCount" resultType="int">
+        SELECT COUNT(*) FROM tbl_bbs_qna
+        WHERE ref = #{ref} AND idx != #{idx}
+    </select>
+
+    <update id="qnaReplyStateUpdate">
+        UPDATE tbl_bbs_qna
+        SET reply_state = 'N'
+        WHERE idx = #{idx}
+    </update>
 
     <!-- 도서   -->
     <select id="productList" resultType="org.fullstack4.bookstore.domain.ProductVO">

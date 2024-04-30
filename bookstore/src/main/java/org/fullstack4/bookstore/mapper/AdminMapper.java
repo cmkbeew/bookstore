@@ -36,6 +36,14 @@ public interface AdminMapper {
     // QnA
     List<QnaVO> qnaList();
     QnaVO qnaView(int idx);
+    int qnaDelete(int idx);
+    int qnaReplyRegist(QnaVO qnaVO);
+    int qnaReplyModify(QnaVO qnaVO);
+    int qnaReplyDelete(int idx);
+
+    int qnaReplyTotalCount(QnaVO qnaVO);
+    int qnaReplyStateUpdate(QnaVO qnaVO);
+
 
     // 회원
     List<MemberVO> memberList();
