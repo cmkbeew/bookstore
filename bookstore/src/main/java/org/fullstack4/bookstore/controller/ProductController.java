@@ -122,8 +122,6 @@ public class ProductController {
 
         int result = productService.productReviewDelete(product_idx, review_idx);
 
-
-
         if(result > 0) {
             return "/product/view?type=" + type + "&product_idx=" + product_idx + "#bookReview";
         } else {
