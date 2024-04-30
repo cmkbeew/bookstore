@@ -90,7 +90,7 @@
                     <c:if test="${qnaDTO.idx ne qnaDTO.ref}">
                         <div>
                             <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2" onclick="location.href='/admin/list?type=qna';"><i class="fa fa-list"></i></button>
-                            <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2" onclick="location.href='/admin/qna/modify?idx=${qnaDTO.idx}';"><i class="fa fa-edit"></i></button>
+                            <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2" onclick="location.href='/admin/qna/replyModify?idx=${qnaDTO.idx}';"><i class="fa fa-edit"></i></button>
                             <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2" onclick="goDelete()"><i class="fa fa-trash"></i></button>
                         </div>
                     </c:if>

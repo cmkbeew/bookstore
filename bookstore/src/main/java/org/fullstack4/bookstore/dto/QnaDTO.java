@@ -8,7 +8,9 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PositiveOrZero;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 
 @Data
 @Builder
@@ -31,4 +33,12 @@ public class QnaDTO {
     private LocalDate reg_date;
     private LocalDate modify_date;
     private String reply_state;
+
+//    public void setModify_date(LocalDate modify_date) {
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        Date now = new Date();
+//        String nowTime = sdf.format(now);
+//
+//        this.modify_date = LocalDate.parse(nowTime);
+//    }
 }

@@ -454,7 +454,7 @@ public class AdminController {
     ) {
         log.info("===============================");
         log.info("AdminController >> qnaReplyRegistPOST()");
-//
+
         log.info("errors: " + bindingResult.getAllErrors());
         if (bindingResult.hasErrors()) {
             log.info("Errors");
@@ -464,7 +464,9 @@ public class AdminController {
         }
 
         int result = adminService.qnaReplyRegist(qnaDTO);
-//
+//        adminService.replyStateNtoY(qnaDTO.getIdx());
+//        adminService.replyStateNtoY(qnaDTO.getRef());
+
         if (result > 0) {
             return "redirect:/admin/list?type=qna";
         } else {
@@ -474,15 +476,65 @@ public class AdminController {
 
     }
 
+    @GetMapping(path = "/qna/replyModify")
+    public void qnaReplyModifyGET(
+            @RequestParam(name = "idx", defaultValue = "0") int idx,
+            Model model
+    ) {
+        log.info("===============================");
+        log.info("AdminController >> qnaReplyModifyGET()");
+
+        QnaDTO qnaDTO = adminService.qnaView(idx);
+        model.addAttribute("qnaDTO", qnaDTO);
+
+        log.info("===============================");
+    }
+
+    @PostMapping("/qna/replyModify")
+    public String qnaReplyModifyPOST(
+            @Valid QnaDTO qnaDTO,
+            BindingResult bindingResult,
+            RedirectAttributes redirectAttributes
+    ) {
+        log.info("===============================");
+        log.info("AdminController >> qnaReplyModifyPOST()");
+        log.info("qnaDTO : " + qnaDTO.toString());
+
+        if (bindingResult.hasErrors()) {
+            log.info("Errors");
+            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+            redirectAttributes.addFlashAttribute("qnaDTO", qnaDTO);
+            return "redirect:/admin/qna/replyModify?idx=" + qnaDTO.getIdx();
+        }
+
+        int result = adminService.qnaReplyModify(qnaDTO);
+
+        log.info("result : " + result);
+        log.info("===============================");
+
+        if (result > 0) {
+            return "redirect:/admin/qna/view?idx=" + qnaDTO.getIdx();
+        } else {
+            return "redirect:/admin/qna/replyModify?err=modifyErr";
+        }
+    }
+
+
+    // view 페이지에서 답변 삭제
     @PostMapping(path = "/qna/delete")
     public String qnaDeletePOST(
             @RequestParam(name = "idx", defaultValue = "0") int idx,
+            @Valid QnaDTO qnaDTO,
             HttpServletRequest req
     ) {
         log.info("===============================");
         log.info("AdminController >> noticeDeletePOST()");
 
         int result = adminService.qnaDelete(idx);
+//        int qnaReplyTotalCount = adminService.qnaReplyTotalCount(qnaDTO);
+//        if (qnaReplyTotalCount == 0) {
+//            adminService.replyStateYtoN(idx);
+//        }
 
         if (result > 0) {
             return "redirect:/admin/list?type=qna";

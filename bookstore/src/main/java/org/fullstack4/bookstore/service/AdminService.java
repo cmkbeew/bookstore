@@ -42,7 +42,8 @@ public interface AdminService {
     int qnaReplyDelete(int idx);
 
     int qnaReplyTotalCount(QnaDTO qnaDTO);
-    int qnaReplyStateUpdate(QnaDTO qnaDTO);
+    int replyStateYtoN(int idx);
+    int replyStateNtoY(int idx);
 
 
 

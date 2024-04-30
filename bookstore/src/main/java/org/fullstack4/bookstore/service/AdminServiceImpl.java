@@ -234,11 +234,17 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public int qnaReplyStateUpdate(QnaDTO qnaDTO) {
-        QnaVO qnaVO = modelMapper.map(qnaDTO, QnaVO.class);
-        int result = adminMapper.qnaReplyStateUpdate(qnaVO);
+    public int replyStateYtoN(int idx) {
+        int result = adminMapper.replyStateYtoN(idx);
         return result;
     }
+
+    @Override
+    public int replyStateNtoY(int idx) {
+        int result = adminMapper.replyStateNtoY(idx);
+        return result;
+    }
+
 
 
     // 회원관리
