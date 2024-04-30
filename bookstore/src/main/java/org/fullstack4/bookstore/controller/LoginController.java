@@ -2,6 +2,7 @@ package org.fullstack4.bookstore.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.fullstack4.bookstore.dto.LoginDTO;
 import org.fullstack4.bookstore.dto.MemberDTO;
 import org.fullstack4.bookstore.service.LoginServiceIf;
 import org.fullstack4.bookstore.util.CookieUtil;
@@ -47,61 +48,64 @@ public class LoginController {
 
     @PostMapping("/login")
     public String loginPost(
-            @Valid MemberDTO memberDTO,
+            @Valid LoginDTO loginDTO,
             BindingResult bindingResult,
-            @RequestParam(name = "member_id", defaultValue = "") String member_id,
-            @RequestParam(name = "pwd", defaultValue = "") String pwd,
-            @RequestParam(name = "save_id", defaultValue = "") String save_id,
-            @RequestParam(name = "auto_login", defaultValue = "") String auto_login,
-//            @RequestParam(name = "return_url", defaultValue = "/", required = false) String return_url,
-            Model model,
+            @RequestParam(name = "return_url", defaultValue = "/", required = false) String return_url,
             RedirectAttributes redirectAttributes,
             HttpServletResponse resp,
             HttpServletRequest req,
             HttpSession session) {
         log.info("로그인 포스트");
-        MemberDTO loginMemberDTO = loginServiceIf.login_info(member_id, pwd);
-            log.info("에러 출력 ========="+bindingResult.hasErrors());
+        if(loginDTO.getSave_id() == null) {
+            loginDTO.setSave_id("");
+        }
+        if(loginDTO.getAuto_login() == null) {
+            loginDTO.setAuto_login("");
+        }
+        if(bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("errors", "비밀번호 아이디를 다시 체크 해주세요.");
+            return "redirect:/login/login";
+        }
+        LoginDTO loginMemberDTO = loginServiceIf.login_info(loginDTO);
         System.out.println("loginMemberDTO" + loginMemberDTO);
 
         session = req.getSession();
         if (loginMemberDTO != null) {
 //            암호화 복호화 고도화 시 추가
-            if(save_id.equals("on")) {
+            if(loginMemberDTO.getSave_id().equals("on")) {
                 System.out.println("save_id.equals");
-                CookieUtil.setCookies(resp, "id", member_id, 60 * 60 * 24, "", "/");
-                CookieUtil.setCookies(resp, "save_id", save_id, 60 * 60 * 24, "", "/");
+                CookieUtil.setCookies(resp, "id", loginDTO.getMember_id(), 60 * 60 * 24, "", "/");
+                CookieUtil.setCookies(resp, "save_id", loginDTO.getSave_id(), 60 * 60 * 24, "", "/");
             }
-            if(auto_login.equals("on")) {
+            if(loginMemberDTO.getAuto_login().equals("on")) {
                 System.out.println("auto_login.equals");
-                CookieUtil.setCookies(resp, "id", member_id, 60 * 60 * 24, "", "/");
-                CookieUtil.setCookies(resp, "auto_login", auto_login, 60 * 60 * 24, "", "/");
+                CookieUtil.setCookies(resp, "id",loginDTO.getMember_id(), 60 * 60 * 24, "", "/");
+                CookieUtil.setCookies(resp, "auto_login", loginDTO.getSave_id(), 60 * 60 * 24, "", "/");
             }
-//            (member_id.isEmpty() || member_id == null) &&
-            if((save_id.isEmpty() || !save_id.equals("on")) &&  (auto_login.isEmpty() || !auto_login.equals("on"))) {
+            if((loginDTO.getSave_id().isEmpty() || !loginDTO.getSave_id().equals("on")) &&  (loginDTO.getAuto_login().isEmpty() || !loginDTO.getAuto_login().equals("on"))) {
                 CookieUtil.setCookies(resp, "id","" , 0, "", "/");
                 CookieUtil.setCookies(resp, "save_id","" , 0, "", "/");
                 CookieUtil.setCookies(resp, "auto_login", "", 0, "", "/");
             }
-        session.setAttribute("member_id", member_id);
-        model.addAttribute("member_id", member_id);
+        session.setAttribute("member_id", loginDTO.getMember_id());
+//        model.addAttribute("member_id", member_id);
         return "redirect:/";
         } else {
             redirectAttributes.addFlashAttribute("errors", "비밀번호 아이디를 다시 체크 해주세요.");
-            redirectAttributes.addFlashAttribute("dto", memberDTO);
+            redirectAttributes.addFlashAttribute("dto", loginDTO);
             return "redirect:/login/login";
         }
     }
     @PostMapping("/guest")
-    public String guestPost(
-            @RequestParam(name = "member_id", defaultValue = "") String member_id,
-            @RequestParam(name = "pwd", defaultValue = "") String pwd,
-            Model model) {
-        log.info("로그인 포스트");
-
-        MemberDTO loginMemberDTO = loginServiceIf.login_info(member_id, pwd);
-
-        model.addAttribute("member_id", member_id);
+    public String guestPost(){
+//            @RequestParam(name = "member_id", defaultValue = "") String member_id,
+//            @RequestParam(name = "pwd", defaultValue = "") String pwd,
+//            Model model) {
+//        log.info("로그인 포스트");
+//
+//        MemberDTO loginMemberDTO = loginServiceIf.login_info(member_id, pwd);
+//
+//        model.addAttribute("member_id", member_id);
         return "redirect:/";
     }
 

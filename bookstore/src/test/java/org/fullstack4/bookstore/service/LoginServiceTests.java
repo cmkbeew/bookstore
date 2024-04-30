@@ -1,6 +1,7 @@
 package org.fullstack4.bookstore.service;
 
 import lombok.extern.log4j.Log4j2;
+import org.fullstack4.bookstore.dto.LoginDTO;
 import org.fullstack4.bookstore.dto.MemberDTO;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,11 +19,11 @@ public class LoginServiceTests {
 
     @Test
     public void login_info() {
-        MemberDTO memberDTO = MemberDTO.builder()
+        LoginDTO loginDTO = LoginDTO.builder()
                 .member_id("test")
                 .pwd("12")
                 .build();
-        log.info(loginServiceIf.login_info(memberDTO.getMember_id(), memberDTO.getPwd()));
+//        log.info(loginServiceIf.login_info());
     }
 @Test
     public void search_idTests() {

@@ -92,6 +92,9 @@
                                             <label for="name" class="small ifta-label">이름</label>
                                             <input type="text" class="ifta-field" id="name" name="name" placeholder=""
                                                    value="${dto.name}" required>
+                                            <div class="mb-4" style="display:block;width:100%;margin-top:.25rem;font-size:.875em;color:#9a9a9a">
+                                                영어/숫자 포함 4~16자만 사용 가능합니다.
+                                            </div>
                                             <div class="invalid-feedback">
                                                 이름을 입력해주세요.
                                             </div>
@@ -101,7 +104,7 @@
                                             <input type="password" class="ifta-field" id="pwd" name="pwd" placeholder=""
                                                    value="" required>
                                             <div class="mb-4" style="display:block;width:100%;margin-top:.25rem;font-size:.875em;color:#9a9a9a">
-                                                영어 대문자 / 영어 소문자 / 특수문자 (@#$%^&~!) / 숫자 8~16자만 사용 가능합니다.
+                                                영어 대문자 / 영어 소문자 / 특수문자 (@#$%^&~!) / 숫자 포함 8~16자만 사용 가능합니다.
                                             </div>
                                             <div class="invalid-feedback">
                                                 사용할 비밀번호를 입력해주세요.
