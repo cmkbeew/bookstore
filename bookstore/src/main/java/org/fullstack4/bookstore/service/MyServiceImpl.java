@@ -32,6 +32,21 @@ public class MyServiceImpl implements MyServiceIf{
     }
 
     @Override
+    public void update_cnt(String cart_idx) {
+
+    }
+
+    @Override
+    public void update_plus_cnt(String cart_idx) {
+
+    }
+
+    @Override
+    public int deleteCart(int idx) {
+        return 0;
+    }
+
+    @Override
     public int cart_add(CartDTO cartDTO) {
         CartVO cartVO = modelMapper.map(cartDTO, CartVO.class);
 
