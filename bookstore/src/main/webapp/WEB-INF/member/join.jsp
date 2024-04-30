@@ -13,9 +13,13 @@
     <%--          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">--%>
     <meta name="description" content="">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/checkout/">
+    <%--    헤더 css--%>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/minty/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/resources/css/styles.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="/resources/css/login/style.css">
-    <link rel="stylesheet" href="/resources/css/mintybootstrap.min.css">
+<%--    <link rel="stylesheet" href="/resources/css/mintybootstrap.min.css">--%>
     <link rel="stylesheet" href="/resources/css/mintybootstrap.css">
     <link rel="stylesheet" href="/resources/css/ifta.css">
     <title>회원가입</title>
@@ -53,17 +57,34 @@
                                 <p class="lead">회원가입을 위해 작성해주세요!</p>
                             </div>
                             <div>
-                                <h4 class="mb-3">정보 입력</h4>
+                                <h4 class="mb-5">정보 입력</h4>
                                 <form class="needs-validation" novalidate method="post" action="/member/join">
                                     <div class="row g-3">
-                                        <div class="col-12 col-sm-12">
-                                            <label for="member_id" class="small ifta-label">아이디</label>
-                                            <input type="text" class="ifta-field" id="member_id" name="member_id"
-                                                   placeholder="" value="${dto.member_id}" required>
+                                        <div class="row" style="align-items: center">
+                                            <div class="col-md-8 col-sm-12">
+                                                <label for="member_id" class="small ifta-label">아이디</label>
+                                                <input type="text" class="ifta-field" id="member_id" name="member_id"
+                                                       placeholder="" value="${dto.member_id}" required>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <%--                                            <label for="zipcodebtn" class="form-label">우편번호</label>--%>
+                                                <input type="button" class="btn btn-outline-primary col-12 mb-2" style="height: 70px" value="주소 찾기" name="idBtn"
+                                                       id="idBtn" onclick="idbtnChek()">
+                                            </div>
                                             <div class="invalid-feedback">
                                                 사용할 아이디를 입력해주세요.
                                             </div>
                                             <div id="feedbackId" style="display:none;width:100%;margin-top:.15rem;font-size:.875em;color:#dc3545"></div>
+                                        </div>
+<%--                                        <div class="col-12 col-sm-12">--%>
+<%--                                            <label for="member_id" class="small ifta-label">아이디</label>--%>
+<%--                                            <input type="text" class="ifta-field" id="member_id" name="member_id"--%>
+<%--                                                   placeholder="" value="${dto.member_id}" required>--%>
+<%--                                        </div>--%>
+<%--                                            <div class="invalid-feedback">--%>
+<%--                                                사용할 아이디를 입력해주세요.--%>
+<%--                                            </div>--%>
+<%--                                            <div id="feedbackId" style="display:none;width:100%;margin-top:.15rem;font-size:.875em;color:#dc3545"></div>--%>
                                             <div class="idCk1" style="display:none;width:100%;margin-top:.15rem;font-size:.875em;color:#dc3545">사용 중인 아이디 입니다.</div>
                                             <div class="idCk2" style="display:none;width:100%;margin-top:.15rem;font-size:.875em;color:#56c2ff">사용 가능한 아이디 입니다.</div>
                                             <div id="div_err_display_member_id" style="display: none"></div>
@@ -593,6 +614,30 @@ SNS 계정 가입   [필수 – 네이버] 이름, 이메일주소, 휴대폰번
     serverValidResult['${err.getField()}'] = '${err.defaultMessage}';
     </c:forEach>
     console.log(serverValidResult);
+
+
+    function idbtnChek() {
+        let id = $('#member_id').val();
+        $.ajax({
+            url:'/member/idCheck',
+            type:'post',
+            data:{member_id : id},
+            success:function(cnt){
+                if(cnt == 0){
+                    $('.idCk1').css("dispaly","none");
+                    $('.idCk2').css("display","block");
+                } else {
+                    $('.idCk2').css("dispaly","none");
+                    $('.idCk1').css("display","block");
+                    $('#member_id').val('');
+                }
+            },
+            error:function(){
+                alert("에러입니다");
+            }
+        });
+    }
+
     // member_id.addEventListener("input" ,(e)=>{
     //     let id = $('#member_id').val();
     //     $.ajax({

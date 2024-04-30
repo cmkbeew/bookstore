@@ -1,166 +1,124 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%--
+  Created by IntelliJ IDEA.
+  User: 82108
+  Date: 2024-04-25
+  Time: 오후 2:38
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page trimDirectiveWhitespaces="true" %>
-<!doctype html>
-<html lang="en">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
-<meta name="description" content="">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
 
-    <link rel="stylesheet" href="/resources/css/login/style.css">
-    <link rel="stylesheet" href="/resources/css/mintybootstrap.min.css">
-    <link rel="stylesheet" href="/resources/css/mintybootstrap.css">
-    <link rel="stylesheet" href="/resources/css/ifta.css">
-<%--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">--%>
-<%--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>--%>
+    <title>admin >> noticeList</title>
 
-    <title>회원가입</title>
-    <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            user-select: none;
-        }
-
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-    </style>
+    <%--  header 부트스트랩  --%>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/minty/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/resources/css/admin/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/minty/bootstrap.min.css" integrity="sha384-H4X+4tKc7b8s4GoMrylmy2ssQYpDHoqzPa9aKXbDwPoPUA3Ra8PA5dGzijN+ePnH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <%-- list 부트스트랩   --%>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/resources/fonts/icomoon/style.css">
+
+
 </head>
-<body style="background-color:#fdfdfd ">
-<%@ include file="/WEB-INF/common/header.jsp" %>
-<div class="content">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-3 col-sm-8 bg-primary-subtle">
-                <div class="position-sticky my-2" style="top: 2rem;">
-                    <div class="p-4 mb-3 border-primary bg-light-subtle rounded text-center">
-                        <h4 class="fst-italic">${sessionScope.member_id}</h4>
-                        <p class="mb-0">${memberDTO.email}</p>
-                    </div>
-                        <div class="p-4">
-                            <h4 class="fst-italic">Elsewhere</h4>
-                            <ol class="list-unstyled">
-                                <li><a href="#">문의내역</a></li>
-                            </ol>
-                        </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-6 contents">
-                <div class="row justify-content-center">
-                    <div class="col-md-12">
-
-                            <div class="py-3 align-items-center">
-                                <div class="card border-primary m-2 mx-auto" style="width: 38rem; height: auto">
-                                    <div class="card-body">
-                                        <h4 class="card-title px-3 fw-bold">기본 정보</h4>
-                                        <hr class="my-1">
-<%--                                        <h5 class="card-title px-3 py-1 fw-bold">${memberDTO.name}</h5>--%>
-<%--                                        <h6 class="card-subtitle mb-2 text-body-secondary px-3"><span class="material-symbols-outlined align-middle">mail</span> ${memberDTO.email}</h6>--%>
-                                        <ul class="list-group list-group-flush px-3 my-2">
-                                            <li class="list-group-item" style="border:none;"><h5 class="card-title fw-bold">${memberDTO.name}</h5></li>
-                                            <li class="list-group-item" style="border:none;"><h6 class="card-subtitle mb-2 text-body-secondary"><span class="material-symbols-outlined align-middle">mail</span> ${memberDTO.email}</h6></li>
-                                            <li class="list-group-item"><span class="material-symbols-outlined align-middle" >phone_iphone</span>${memberDTO.phone_num}</li>
-                                            <li class="list-group-item"><span class="material-symbols-outlined align-middle">home</span>${memberDTO.addr1}&nbsp;${memberDTO.addr2}</li>
-                                            <li class="list-group-item"><span class="material-symbols-outlined align-middle">assignment_turned_in</span> 평생 회원 : ${memberDTO.forever_yn}</li>
-                                            <li class="list-group-item"><span class="material-symbols-outlined align-middle">confirmation_number</span> 선택 사항 : ${memberDTO.option}</li>
-                                            <li class="list-group-item"><span class="material-symbols-outlined align-middle">how_to_reg</span>${memberDTO.reg_date}</li>
-                                            <li class="list-group-item">
-                                            <div class="row justify-content-between">
-                                                <div class="col">
-                                                    회원정보 수정</div>
-                                                <button class="col-2 text-center btn btn-outline-success h-25 w-25" style="font-size: 1rem; "
-                                                onclick="window.location='/member/modify?member_id=${memberDTO.member_id}'">수정</button>
-                                            </div>
-                                            </li>
-                                        </ul>
-                                    </div>
+<body>
+<%@ include file="/WEB-INF/common/header.jsp"%>
+<main class="container py-h">
+    <div id="page-content-wrapper">
+        <div class="container py-h">
+    <div class="row g-5">
+        <div class="col-md-3"style="background-color: #e4f3ef">
+        <%@ include file="/WEB-INF/common/sidebar.jsp"%>
+        </div>
+        <div class="col-md-9">
+            <h3 class="pb-4 mb-4 fst-italic border-bottom"></h3>
+            <article>
+                <div class="card border-primary m-2 mx-auto" style="width: 38rem; height: auto; box-shadow: 0 5 5 5">
+                    <div class="card-body">
+                        <h4 class="card-title px-3 fw-bold">기본 정보</h4>
+                        <hr class="my-1">
+                        <ul class="list-group list-group-flush px-3 my-2">
+                            <li class="list-group-item" style="border:none;"><h5 class="card-title fw-bold">${memberDTO.name}</h5></li>
+                            <li class="list-group-item" style="border:none;"><h6 class="card-subtitle mb-2 text-body-secondary"><span class="material-symbols-outlined align-middle">mail</span> ${memberDTO.email}</h6></li>
+                            <li class="list-group-item"><span class="material-symbols-outlined align-middle" >phone_iphone</span>${memberDTO.phone_num}</li>
+                            <li class="list-group-item"><span class="material-symbols-outlined align-middle">home</span>${memberDTO.addr1}&nbsp;${memberDTO.addr2}</li>
+                            <li class="list-group-item"><span class="material-symbols-outlined align-middle">assignment_turned_in</span> 평생 회원 : ${memberDTO.forever_yn}</li>
+                            <li class="list-group-item"><span class="material-symbols-outlined align-middle">confirmation_number</span> 선택 사항 : ${memberDTO.option}</li>
+                            <li class="list-group-item"><span class="material-symbols-outlined align-middle">how_to_reg</span>${memberDTO.reg_date}</li>
+                            <li class="list-group-item">
+                                <div class="row justify-content-between">
+                                    <div class="col">
+                                        회원정보 수정</div>
+                                    <button class="col-2 text-center btn btn-outline-success h-25 w-25" style="font-size: 1rem; "
+                                            onclick="window.location='/member/modify?member_id=${memberDTO.member_id}'">수정</button>
                                 </div>
-                            </div>
+                            </li>
+                        </ul>
                     </div>
-                    <hr class="my-2">
-                    <div class="col-md-12">
-
-                        <div class="py-3 align-items-center">
-                            <div class="card border-primary m-2 mx-auto" style="width: 38rem; height: auto">
-                                <div class="card-body">
-                                    <h4 class="card-title px-3 fw-bold">보안 설정</h4>
-                                    <h6 class="card-subtitle mb-2 text-body-secondary px-3"><span class="material-symbols-outlined align-middle">password</span> 비밀번호</h6>
-                                    <hr class="my-1">
-                                    <ul class="list-group list-group-flush px-3 my-2">
-                                        <li class="list-group-item">
-                                            <div class="row justify-content-between">
+                </div>
+                <hr class = "my-2">
+                <div class="col-md-12">
+                    <div class="py-3 align-items-center">
+                        <div class="card border-primary m-2 mx-auto" style="width: 38rem; height: auto">
+                            <div class="card-body">
+                                <h4 class="card-title px-3 fw-bold">보안 설정</h4>
+                                <h6 class="card-subtitle mb-2 text-body-secondary px-3"><span class="material-symbols-outlined align-middle">password</span> 비밀번호</h6>
+                                <hr class="my-1">
+                                <ul class="list-group list-group-flush px-3 my-2">
+                                    <li class="list-group-item">
+                                        <div class="row justify-content-between">
                                             <div class="col"><span class="material-symbols-outlined align-middle">lock</span>
                                                 비밀번호 변경</div>
                                             <button class="col-2 text-center btn btn-outline-success h-25 w-25" style="font-size: 1rem; "
-                                                onclick="window.location='/member/modifyPwd?member_id=${memberDTO.member_id}'">수정</button>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
+                                                    onclick="window.location='/member/modifyPwd?member_id=${memberDTO.member_id}'">수정</button>
+                                        </div>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
-                    <hr class="my-2">
-                    <div class="col-md-12">
-                        <div class="py-3 px-4 align-items-center">
-                            <form name="delFrm" id="delFrm" action="/member/delete" method="post">
-                                <input type="hidden" name="member_id" id="member_id" value="${sessionScope.member_id}">
-                                <div class="row justify-content-between">
-                                    <div class="col">
-                                        <p><span class="material-symbols-outlined align-middle">exit_to_app</span> 회원탈퇴</p></div>
-                                    <button class="col-2 text-center btn btn-outline-danger h-25 w-25" id="delBtn" style="font-size: 1rem; ">회원 탈퇴</button>
-                                </div>
-                            </form>
-                        </div>
-                        </div>
+                </div>
+                <hr class="my-2">
+                <div class="col-md-12">
+                    <div class="py-3 px-4 align-items-center">
+                        <form name="delFrm" id="delFrm" action="/member/delete" method="post">
+                            <input type="hidden" name="member_id" id="member_id" value="${sessionScope.member_id}">
+                            <div class="row justify-content-between">
+                                <div class="col">
+                                    <p><span class="material-symbols-outlined align-middle">exit_to_app</span> 회원탈퇴</p></div>
+                                <button class="col-2 text-center btn btn-outline-danger h-25 w-25" id="delBtn" style="font-size: 1rem; ">회원 탈퇴</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
-        </div>
+    </div>
+    </div>
+    </div>
+</main>
 
-        </div>
-
-<%@ include file="/WEB-INF/common/footer.jsp" %>
-<script src="/resources/js/jquery-3.3.1.min.js"></script>
-<script src="/resources/js/popper.min.js"></script>
-<script src="/resources/js/main.js"></script>
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v55bfa2fee65d44688e90c00735ed189a1713218998793"
-        integrity="sha512-FIKRFRxgD20moAo96hkZQy/5QojZDAbyx0mQ17jEGHCJc/vi0G2HXLtofwD7Q3NmivvP9at5EVgbRqOaOQb+Rg=="
-        data-cf-beacon='{"rayId":"879d448bbc1a29e5","version":"2024.4.0","token":"cd0b4b3a733644fc843ef0b185f98241"}'
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
-
-
-
-<script src="/resources/js/bootstrap.bundle.min.js"></script>
-
-<!--
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
--->
+    </div>
+</div>
+<%@ include file="/WEB-INF/common/footer.jsp"%>
 <script>
-document.getElementById("delBtn").addEventListener("click", (e)=>{
-   if(confirm('정말 탈퇴하시겠습니까?')) {
-       alert("탈퇴되었습니다.")
-        document.getElementById("delFrm").submit();
-   }
-   else {
-       e.preventDefault();
-       return false;
-   }
-});
+    document.getElementById("delBtn").addEventListener("click", (e)=>{
+        if(confirm('정말 탈퇴하시겠습니까?')) {
+            alert("탈퇴되었습니다.")
+            document.getElementById("delFrm").submit();
+        }
+        else {
+            e.preventDefault();
+            return false;
+        }
+    });
 </script>
 </body>
 </html>
-
-

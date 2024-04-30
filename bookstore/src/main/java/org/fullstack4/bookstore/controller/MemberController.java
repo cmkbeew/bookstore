@@ -61,7 +61,6 @@ public class MemberController {
     @PostMapping("/idCheck")
     @ResponseBody
     public int idCheck(
-            HttpServletResponse resp,
             @RequestParam(name = "member_id", defaultValue = "") String member_id
     ) {
         int result = memberServiceIf.idCheck(member_id);
