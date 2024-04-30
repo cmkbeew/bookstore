@@ -58,7 +58,7 @@
                             <button type="button" class="btn btn-primary"
                                     onclick="location.href='/member/view?member_id=${sessionScope.member_id}'">마이페이지
                             </button>
-                            <button type="button" class="btn btn-outline-dark" onclick="location.href='/my/cart'">
+                            <button type="button" class="btn btn-outline-dark" onclick="location.href='/my/cart?member_id=${sessionScope.member_id}'">
                                 <i class="bi-cart-fill me-1"></i>
                                 장바구니
                                 <span class="badge bg-primary text-white ms-1 rounded-pill">0</span>

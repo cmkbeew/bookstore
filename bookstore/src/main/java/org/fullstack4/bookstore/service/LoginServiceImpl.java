@@ -3,7 +3,7 @@ package org.fullstack4.bookstore.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.fullstack4.bookstore.domain.MemberVO;
-import org.fullstack4.bookstore.dto.MemberDTO;
+import org.fullstack4.bookstore.dto.LoginDTO;
 import org.fullstack4.bookstore.mapper.LoginMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -15,21 +15,34 @@ public class LoginServiceImpl implements LoginServiceIf{
     private final LoginMapper loginXmlMapper;
     private final ModelMapper modelMapper;
     @Override
-    public MemberDTO login_info(String member_id, String pwd) {
+    public LoginDTO login_info(LoginDTO loginDTO) {
+        LoginDTO loginDTO1 = loginDTO;
     log.info("===============================");
-    log.info("memberId, pwd : " + member_id, pwd);
+    log.info("memberId, pwd : " + loginDTO);
     log.info("===============================");
 
-    MemberVO memberVO = loginXmlMapper.login_info(member_id, pwd);
+    MemberVO memberVO = loginXmlMapper.login_info(loginDTO.getMember_id(), loginDTO.getPwd());
         log.info("memberVO : " +memberVO);
-        log.info("pwd : " +pwd);
-    MemberDTO memberDTO = null;
 
-    if( memberVO != null && memberVO.getPwd().equals(pwd)){
-        memberDTO = modelMapper.map(memberVO, MemberDTO.class);
-        log.info("loginserviceimpl >> 넘어옴>>> 제발,,, : "+memberDTO.toString());
-    }
-        return memberDTO;
+    if( memberVO != null && memberVO.getPwd().equals(loginDTO.getPwd())){
+        loginDTO = modelMapper.map(memberVO, LoginDTO.class);
+        log.info("loginserviceimpl >> 넘어옴>>> 제발,,, : "+loginDTO.toString());
+        if(loginDTO1.getSave_id() != null) {
+            loginDTO.setSave_id(loginDTO1.getSave_id());
+        }
+        if(loginDTO1.getAuto_login() != null) {
+            loginDTO.setAuto_login(loginDTO1.getAuto_login());
+        }
+        if(loginDTO.getSave_id() == null) {
+            loginDTO.setSave_id("");
+        }
+        if(loginDTO.getAuto_login() == null) {
+            loginDTO.setAuto_login("");
+        }
+        return loginDTO;
+    }else{
+        return null;
+        }
     }
 
     @Override

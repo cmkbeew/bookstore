@@ -53,11 +53,35 @@ public class MyController {
     }
     @PostMapping("/updateCnt")
     @ResponseBody
-    public int updateCnt(
-            @RequestParam(name = "member_id", defaultValue = "") String member_id
-    ) {
-//        int result = memberServiceIf.idCheck(member_id);
-        return 0;
+    public void updateMinusCnt(@RequestParam(name = "cart_idx", defaultValue = "") String member_id) {
+        log.info(member_id);
+        myServiceIf.update_cnt(member_id);
+    }
+    @GetMapping("/updateCnt")
+    @ResponseBody
+    public void updatePlusCnt(@RequestParam(name = "cart_idx", defaultValue = "") String member_id) {
+        log.info(member_id);
+        myServiceIf.update_plus_cnt(member_id);
+    }
+
+    @PostMapping("deleteCart")
+    public String deleteCart(@RequestParam(name="")
+                             HttpServletRequest req,HttpSession Session,
+                             RedirectAttributes redirectAttributes) {
+        String memberId = Session.getAttribute("member_id").toString();
+        String[] delete_idx = req.getParameterValues("select");
+        int result = 0;
+
+        for( int i = 0 ; i < delete_idx.length; i++) {
+            int intIdx = Integer.parseInt(delete_idx[i]);
+            result = myServiceIf.deleteCart(intIdx);
+        }
+        if (result > 0) {
+            return "redirect:/my/cart?member_id="+memberId;
+        } else {
+            redirectAttributes.addFlashAttribute("error", "삭제되지 않았습니다.");
+            return "redirect:/my/cart?member_id"+memberId;
+        }
     }
 
     @GetMapping("/cartModify")

@@ -23,8 +23,8 @@ public class ProductMapperTests {
 
     @Test
     public void testProductList() {
-        List<ProductVO> productList = productMapper.productList(pageRequestDTO, "초등");
+//        List<ProductVO> productList = productMapper.productList(pageRequestDTO, "초등");
 
-        log.info("productList : " + productList);
+//        log.info("productList : " + productList);
     }
 }

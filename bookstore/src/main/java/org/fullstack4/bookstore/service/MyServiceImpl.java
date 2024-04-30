@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Log4j2
 @Service
@@ -27,5 +28,24 @@ public class MyServiceImpl implements MyServiceIf{
         log.info("MyServiceImpl >> cart_list(member_id) : " + cartDTOList);
         log.info("====================================================");
         return cartDTOList;
+    }
+
+    @Override
+    public int deleteCart (int idx) {
+        int result = myMapper.deleteCart(idx);
+        return result;
+    }
+
+
+    @Override
+    public void update_cnt(String cart_idx) {
+        log.info("====================================================");
+        myMapper.update_cnt(cart_idx);
+        log.info("MyServiceImpl >> update_cnt(int cart_idx, int product_cnt) : " + cart_idx);
+        log.info("====================================================");
+    }
+    @Override
+    public void update_plus_cnt(String cart_idx) {
+        myMapper.update_plus_cnt(cart_idx);
     }
 }
