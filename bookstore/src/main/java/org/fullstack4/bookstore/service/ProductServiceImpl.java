@@ -31,6 +31,10 @@ public class ProductServiceImpl implements ProductService {
                 .map(vo -> modelMapper.map(vo, ProductDTO.class))
                 .collect(Collectors.toList());
 
+        for(ProductDTO productDTO : dtoList) {
+            productDTO.setDisplay_price(productDTO.getPrice(), productDTO.getDiscount());
+        }
+
         int total_count = productMapper.productTotalCount(productPageRequestDTO);
 
         ProductPageResponseDTO<ProductDTO> responseDTO = ProductPageResponseDTO.<ProductDTO>withAll()
@@ -52,6 +56,8 @@ public class ProductServiceImpl implements ProductService {
         ProductVO productVO = productMapper.productView(product_idx, type);
 
         ProductDTO productDTO = modelMapper.map(productVO, ProductDTO.class);
+
+        productDTO.setDisplay_price(productDTO.getPrice(), productDTO.getDiscount());
 
         return productDTO;
     }
@@ -104,5 +110,22 @@ public class ProductServiceImpl implements ProductService {
         int result = productMapper.productReviewDelete(product_idx, review_idx);
 
         return result;
+    }
+
+    @Override
+    public List<ProductDTO> relatedProductList(ProductDTO productDTO) {
+        ProductVO productVO = modelMapper.map(productDTO, ProductVO.class);
+
+        List<ProductVO> voList = productMapper.relatedProductList(productVO);
+
+        List<ProductDTO> dtoList = voList.stream()
+                                         .map(vo -> modelMapper.map(vo, ProductDTO.class))
+                                         .collect(Collectors.toList());
+        
+        for(ProductDTO list : dtoList) {
+            list.setDisplay_price(list.getPrice(), list.getDiscount());
+        }
+        
+        return dtoList;
     }
 }

@@ -17,4 +17,7 @@ public interface ProductService {
     int productReviewTotalCnt(int product_idx);
     int productReviewModify(ReviewDTO reviewDTO);
     int productReviewDelete(int product_idx, int review_idx);
+
+    // 도서 상세 페이지 관련 상품
+    List<ProductDTO> relatedProductList(ProductDTO productDTO);
 }

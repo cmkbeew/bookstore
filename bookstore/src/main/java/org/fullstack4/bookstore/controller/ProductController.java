@@ -39,11 +39,16 @@ public class ProductController {
 
         // 후기 리스트
         List<ReviewDTO> reviewList = productService.productReviewList(product_idx);
+
         // 후기 count TODO: 후기 페이징
         int review_total_cnt = productService.productReviewTotalCnt(product_idx);
 
+        // 관련 상품 4개
+        List<ProductDTO> relatedProductList = productService.relatedProductList(productDTO);
+
         model.addAttribute("productDTO", productDTO);
         model.addAttribute("reviewList", reviewList);
+        model.addAttribute("relatedProductList", relatedProductList);
     }
 
     @GetMapping("/review/regist")

@@ -71,6 +71,9 @@
                 <c:forEach items="${productList.dtoList}" var="list">
                     <div class="col mb-5">
                         <div class="card h-100">
+                            <c:if test="${list.discount != 0}">
+                                <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                            </c:if>
                             <!-- Product image-->
                             <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="...">
                             <!-- Product details-->
@@ -79,9 +82,17 @@
                                     <!-- Product name-->
                                     <h5 class="fw-bolder">${list.product_name}</h5>
                                     <!-- Product price-->
-                                        ${list.price}원 <br>
-                                        ${list.grade} <br>
-                                        ${list.subject}
+                                    <c:if test="${list.discount != 0}">
+                                        <span class="text-muted text-decoration-line-through">${list.price}원</span>
+                                        ${list.display_price}원
+                                    </c:if>
+                                    <c:if test="${list.discount == 0}">
+                                        ${list.price}원
+                                    </c:if>
+                                    <br>
+                                    ${relatedList.type}  ${list.grade}
+                                    <br>
+                                    ${list.subject}
                                 </div>
                             </div>
                             <!-- Product actions-->

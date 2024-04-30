@@ -66,8 +66,6 @@ public class MyController {
     @PostMapping("/cart/add")
     @ResponseBody
     public String addCart(@RequestBody CartDTO cartDTO) {
-        log.info(cartDTO);
-
         int result = myServiceIf.cart_add(cartDTO);
 
         if(result > 0) {

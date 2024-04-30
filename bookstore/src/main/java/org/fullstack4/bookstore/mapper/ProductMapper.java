@@ -2,6 +2,7 @@ package org.fullstack4.bookstore.mapper;
 
 import org.fullstack4.bookstore.domain.ProductVO;
 import org.fullstack4.bookstore.domain.ReviewVO;
+import org.fullstack4.bookstore.dto.ProductDTO;
 import org.fullstack4.bookstore.dto.ProductPageRequestDTO;
 import org.fullstack4.bookstore.dto.ReviewDTO;
 
@@ -19,4 +20,6 @@ public interface ProductMapper {
     int productReviewTotalCnt(int product_idx);
     int productReviewModify(ReviewVO reviewVO);
     int productReviewDelete(int product_idx, int review_idx);
+
+    List<ProductVO> relatedProductList(ProductVO productVO);
 }

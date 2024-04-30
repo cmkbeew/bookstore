@@ -25,9 +25,9 @@ public class ProductDTO {
     private String tax_yn;
     private LocalDate reg_date;
 
-    public int getPrice() {
-        this.price = price * (100-discount) / 100;
+    private int display_price;
 
-        return price;
+    public void setDisplay_price (int price, int discount) {
+        this.display_price = (int)(price * ((double)(100-discount)/100));
     }
 }

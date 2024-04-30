@@ -94,4 +94,13 @@
         DELETE FROM tbl_bbs_review
         WHERE product_idx = #{param1} AND review_idx = #{param2}
     </delete>
+
+    <select id="relatedProductList" resultType="org.fullstack4.bookstore.domain.ProductVO">
+        SELECT product_idx, product_name, product_content, publisher, author, page_cnt, price, publish_date, type, grade, subject, discount, tax_yn, reg_date
+        FROM tbl_product
+        WHERE product_idx != #{product_idx} AND type = #{type} AND grade = #{grade}
+        -- AND subject = #{subject}
+        ORDER BY product_idx DESC
+        LIMIT 4
+    </select>
 </mapper>
