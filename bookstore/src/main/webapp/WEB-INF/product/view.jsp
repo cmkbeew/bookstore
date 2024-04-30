@@ -67,7 +67,7 @@
                 </table>
                 <form>
                     <div class="d-flex align-items-center">
-                        <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2" id="stepDown"
+                        <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2" id="stepDown" type="button"
                                 onclick="this.parentNode.querySelector('input[type=number]').stepDown(); step();">
                             <span class="material-symbols-outlined">remove</span>
                         </button>
@@ -75,14 +75,15 @@
                         <input id="product_cnt" min="1" name="product_cnt" value="1" type="number"
                                class="form-control form-control-sm" style="width:50px; text-align: center"/>
 
-                        <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2" id="stepUp"
+                        <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2" id="stepUp" type="button"
                                 onclick="this.parentNode.querySelector('input[type=number]').stepUp(); step();">
                             <span class="material-symbols-outlined">add</span>
                         </button>
 
 
-                        <input type="hidden" name="or_member_id" value="${sessionScope.member_id}" />
-                        <input type="hidden" name="product_idx" value="${productDTO.product_idx}"/>
+                        <%--                        <input type="hidden" name="or_member_id" id="or_member_id" value="${sessionScope.member_id}" />--%>
+                        <input type="hidden" name="or_member_id" id="or_member_id" value="test" />
+                        <input type="hidden" name="product_idx" id="product_idx" value="${productDTO.product_idx}"/>
                         <button class="btn btn-outline-dark flex-shrink-0" type="button" onclick="addCart()">
                             <i class="bi-cart-fill me-1"></i>
                             장바구니에 담기
@@ -402,25 +403,39 @@
         total_price.innerText = ${productDTO.price} * product_cnt.value;
     }
 
-    function addCart(product_idx) {
-        let product_cnt = document.getElementById("product_cnt").value;
+    function addCart() {
+        console.log(document.getElementById("product_idx").value);
+        console.log(document.getElementById("product_cnt").value);
+        console.log(document.getElementById("or_member_id").value);
+
+        let params = { product_idx : document.getElementById("product_idx").value,
+            product_cnt : document.getElementById("product_cnt").value,
+            or_member_id : document.getElementById("or_member_id").value
+        }
+
 
         $.ajax({
             type: "POST",
             url: "/my/cart/add",
-            data : {
-                "CartDTO" :
-            },
+            data: JSON.stringify(params),
+            contentType: "application/json; charset=UTF-8",
             success :function(data) {
-                if(data != "N") {
-                    alert("해당 후기를 삭제했습니다.");
-                    window.location.reload(data);
+                if(data == "Y") {
+                    let cart_confirm = confirm("장바구니로 이동하시겠습니까?");
+
+                    if(cart_confirm) {
+                        location.href = "/my/cart";
+                    } else {
+                        location.reload("/product/view?type=${productDTO.type}&product_idx=${productDTO.product_idx}");
+                    }
+                } else {
+                    location.href("/product/view?type=${productDTO.type}&product_idx=${productDTO.product_idx}");
                 }
             },
             error() {
-                alert("삭제 실패");
+                alert("장바구니 담기 실패");
             }
-        });
+    });
     }
 
 </script>

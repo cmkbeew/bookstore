@@ -14,7 +14,19 @@
     </select>
 
     <insert id="cart_add">
-        INSERT INTO tbl_cart(or_member_id, product_no, product_cnt)
-        VALUES (#{or_member_id}, #{product_no}, product_cnt)
+        INSERT INTO tbl_cart(or_member_id, product_idx, product_cnt)
+        VALUES (#{or_member_id}, #{product_idx}, #{product_cnt})
     </insert>
+
+    <select id="find_idx" resultType="int">
+        SELECT COUNT(*)
+        FROM tbl_cart
+        WHERE product_idx = #{product_idx} AND or_member_id = #{or_member_id}
+    </select>
+
+    <update id="cart_cnt_update">
+        UPDATE tbl_cart SET
+        product_cnt = product_cnt + #{product_cnt}
+        WHERE product_idx = #{product_idx} AND or_member_id = #{or_member_id}
+    </update>
 </mapper>

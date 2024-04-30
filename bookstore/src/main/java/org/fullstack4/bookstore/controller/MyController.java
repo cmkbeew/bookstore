@@ -2,6 +2,7 @@ package org.fullstack4.bookstore.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.fullstack4.bookstore.dto.CartDTO;
 import org.fullstack4.bookstore.dto.CartListDTO;
 import org.fullstack4.bookstore.service.MyServiceIf;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 
 @Log4j2
 @Controller
@@ -62,8 +64,17 @@ public class MyController {
     }
 
     @PostMapping("/cart/add")
-    public String addCart() {
-        return null;
+    @ResponseBody
+    public String addCart(@RequestBody CartDTO cartDTO) {
+        log.info(cartDTO);
+
+        int result = myServiceIf.cart_add(cartDTO);
+
+        if(result > 0) {
+            return "Y";
+        } else {
+            return "N";
+        }
     }
 
     @GetMapping("/cartModify")
