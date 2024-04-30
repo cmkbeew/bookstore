@@ -168,7 +168,8 @@
 
     <update id="qnaReplyModify">
         UPDATE tbl_bbs_qna
-        SET content = #{content},
+        SET title = #{title},
+            content = #{content},
             modify_date = NOW()
         WHERE idx = #{idx}
     </update>
@@ -180,14 +181,21 @@
 
     <select id="qnaReplyTotalCount" resultType="int">
         SELECT COUNT(*) FROM tbl_bbs_qna
-        WHERE ref = #{ref} AND idx != #{idx}
+        WHERE ref = #{idx}
     </select>
 
-    <update id="qnaReplyStateUpdate">
+    <update id="replyStateYtoN">
         UPDATE tbl_bbs_qna
         SET reply_state = 'N'
         WHERE idx = #{idx}
     </update>
+
+    <update id="replyStateNtoY">
+        UPDATE tbl_bbs_qna
+        SET reply_state = 'Y'
+        WHERE idx = #{idx}
+    </update>
+
 
     <!-- 도서   -->
     <select id="productList" resultType="org.fullstack4.bookstore.domain.ProductVO">

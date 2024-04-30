@@ -40,9 +40,9 @@ public interface AdminMapper {
     int qnaReplyRegist(QnaVO qnaVO);
     int qnaReplyModify(QnaVO qnaVO);
     int qnaReplyDelete(int idx);
-
     int qnaReplyTotalCount(QnaVO qnaVO);
-    int qnaReplyStateUpdate(QnaVO qnaVO);
+    int replyStateYtoN(int idx);
+    int replyStateNtoY(int idx);
 
 
     // 회원
