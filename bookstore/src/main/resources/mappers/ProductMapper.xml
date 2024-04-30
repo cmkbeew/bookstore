@@ -36,7 +36,7 @@
     </sql>
 
     <select id="productList" resultType="org.fullstack4.bookstore.domain.ProductVO">
-        SELECT product_idx, product_name, publisher, author, page_cnt, price, publish_date, type, grade, subject, discount, tax_yn, reg_date
+        SELECT product_idx, product_name, product_content, publisher, author, page_cnt, price, publish_date, type, grade, subject, discount, tax_yn, reg_date
         FROM tbl_product
         WHERE type = #{type}
         <include refid="whereCondition"></include>
@@ -53,9 +53,45 @@
     </select>
 
     <select id="productView" resultType="org.fullstack4.bookstore.domain.ProductVO">
-        SELECT product_idx, product_name, publisher, author, page_cnt, price, publish_date, type, grade, subject, discount, tax_yn, reg_date
+        SELECT product_idx, product_name, product_content, publisher, author, page_cnt, price, publish_date, type, grade, subject, discount, tax_yn, reg_date
         FROM tbl_product
         WHERE product_idx = #{param1} AND type = #{param2}
     </select>
 
+    <insert id="productReviewRegist">
+        INSERT INTO tbl_bbs_review(title, content, writer, grade, product_idx)
+        VALUES (#{title}, #{content}, #{writer}, #{grade}, #{product_idx})
+    </insert>
+
+    <select id="productReviewList" resultType="org.fullstack4.bookstore.domain.ReviewVO">
+        SELECT review_idx, title, content, writer, grade, reg_date, modify_date, product_idx
+        FROM tbl_bbs_review
+        WHERE product_idx = #{product_idx}
+    </select>
+
+    <select id="productReviewView" resultType="org.fullstack4.bookstore.domain.ReviewVO">
+        SELECT review_idx, title, content, writer, grade, reg_date, modify_date, product_idx
+        FROM tbl_bbs_review
+        WHERE product_idx = #{param1} AND review_idx = #{param2}
+    </select>
+
+    <select id="productReviewTotalCnt" resultType="int">
+        SELECT COUNT(*)
+        FROM tbl_bbs_review
+        WHERE product_idx = #{product_idx}
+    </select>
+
+    <update id="productReviewModify">
+        UPDATE tbl_bbs_review SET
+        title = #{title},
+        content = #{content},
+        writer = #{writer},
+        modify_date = NOW()
+        WHERE product_idx = #{product_idx} AND review_idx = #{review_idx}
+    </update>
+
+    <delete id="productReviewDelete">
+        DELETE FROM tbl_bbs_review
+        WHERE product_idx = #{param1} AND review_idx = #{param2}
+    </delete>
 </mapper>

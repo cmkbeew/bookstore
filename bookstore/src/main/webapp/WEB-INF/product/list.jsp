@@ -24,7 +24,7 @@
     <div class="container px-4 px-lg-5 mt-5">
         <ul class="d-flex justify-content-center list-unstyled mb-3" id="gradeUl">
             <c:choose>
-                <c:when test="${productList.type == 'child'}">
+                <c:when test="${productList.type == '유아'}">
                     <li><button class="btn btn-primary me-3" type="button">전체</button></li>
                 </c:when>
                 <c:otherwise>
@@ -33,7 +33,7 @@
                     <li><button class="btn btn-primary me-3" type="button">2학년</button></li>
                     <li><button class="btn btn-primary me-3" type="button">3학년</button></li>
 
-                    <c:if test="${productList.type == 'element'}">
+                    <c:if test="${productList.type == '초등'}">
                         <li><button class="btn btn-primary me-3" type="button">4학년</button></li>
                         <li><button class="btn btn-primary me-3" type="button">5학년</button></li>
                         <li><button class="btn btn-primary me-3" type="button">6학년</button></li>

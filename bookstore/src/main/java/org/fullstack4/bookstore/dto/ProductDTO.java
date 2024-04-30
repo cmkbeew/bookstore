@@ -12,6 +12,7 @@ import java.time.LocalDate;
 public class ProductDTO {
     private int product_idx;
     private String product_name;
+    private String product_content;
     private String publisher;
     private String author;
     private int page_cnt;
