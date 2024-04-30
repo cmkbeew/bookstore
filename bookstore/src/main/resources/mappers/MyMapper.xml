@@ -5,11 +5,11 @@
 <mapper namespace="org.fullstack4.bookstore.mapper.MyMapper">
 <!-- 장바구니 리스트 확인-->
     <select id="cart_list" resultType="org.fullstack4.bookstore.domain.CartListVO">
-        SELECT tc.cart_idx as cart_idx, tc.or_member_id as or_member_id, tc.goods_cnt as goods_cnt, tc.order_date as order_date,
+        SELECT tc.cart_idx as cart_idx, tc.or_member_id as or_member_id, tc.product_cnt as product_cnt, tc.add_date as add_date,
                tp.product_name as product_name, tp.publisher as publisher, tp.author as author,
                tp.price as price, tp.discount as discount
         FROM tbl_cart AS tc
-        INNER JOIN tbl_product AS tp ON tc.product_no = tp.product_idx
+        INNER JOIN tbl_product AS tp ON tc.product_idx = tp.product_idx
         WHERE tc.or_member_id = #{member_id}
     </select>
 </mapper>

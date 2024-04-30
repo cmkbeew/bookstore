@@ -38,12 +38,12 @@ public class MyController {
 
     @GetMapping("/cart")
     public void cartGet(CartListDTO cartListDTO,
-//                        @RequestParam(name="member_id", defaultValue = "") String member_id,
+                        @RequestParam(name="member_id", defaultValue = "") String member_id,
                         Model model,
                         HttpSession session
                         ) {
         log.info("장바구니");
-        String member_id = session.getAttribute("member_id").toString();
+//        String member_id = session.getAttribute("member_id").toString();
         log.info("member Id : " + member_id);
         List<CartListDTO> cartList = myServiceIf.cart_list(member_id);
         log.info("cartList : " +  cartList);

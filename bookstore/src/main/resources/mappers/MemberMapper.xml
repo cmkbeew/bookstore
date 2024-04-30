@@ -38,7 +38,7 @@
         select pwd from tbl_member where member_id = #{member_id}
     </select>
     <update id="delete_member">
-        UPDATE tbl_member SET  leave_date = now(), join_state = "N"
+        UPDATE tbl_member SET  leave_date = now(), member_state = "N"
         where member_id = #{member_id}
 --         delete from tbl_member where member_id=#{member_id}
     </update>

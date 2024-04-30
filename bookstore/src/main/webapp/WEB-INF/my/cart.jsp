@@ -89,16 +89,18 @@
                                                                     </div>
                                                                     <div class="d-flex flex-row align-items-center">
                                                                         <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2"
-                                                                                id="minus${list.cart_idx}" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                                                                id="minus${list.cart_idx}" onclick="this.parentNode.querySelector('input[type=number]').stepDown(); cntBook(current${status.index})">
                                                                             <span class="material-symbols-outlined">remove</span>
                                                                         </button>
 
                                                                         <input id="form${list.cart_idx}" min="1" name="quantity" value="1" type="number"
                                                                                class="form-control form-control-sm" style="width:50px; text-align: center"/>
+                                                                        <input type="hidden" name=current${status.index} value="${list.cart_idx}"/ >
+
 
 
                                                                         <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2" value
-                                                                                id="plus${list.cart_idx}" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                                                                id="plus${list.cart_idx}" onclick="this.parentNode.querySelector('input[type=number]').stepUp(); cntBook(current${status.index})">
                                                                             <span class="material-symbols-outlined">add</span>
                                                                         </button>
                                                                         <div style="width: 100px;">
@@ -170,6 +172,11 @@
 </div>
 <%@ include file="/WEB-INF/common/footer.jsp"%>
 <script>
+    function cntBook(idx){
+            var url = 'deletingBook.do?bookname=' + idx.value;
+
+
+
     function idbtnChek() {
         let id = $('#member_id').val();
         $.ajax({

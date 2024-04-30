@@ -10,13 +10,15 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class CartListVO {
     private int cart_idx;
-    private int goods_cnt;
     private String or_member_id;
+    private int product_idx;
+    private int product_cnt;
     private LocalDate order_date;
-//    private int product_idx;
+    //    private int product_idx;
     private String product_name;
     private String publisher;
     private String author;
+    private int display_price;
     private int price;
     private int discount;
 }

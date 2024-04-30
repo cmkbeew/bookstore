@@ -12,8 +12,9 @@ import java.time.LocalDate;
 
 public class CartListDTO {
     private int cart_idx;
-    private int goods_cnt;
     private String or_member_id;
+    private int product_idx;
+    private int product_cnt;
     private LocalDate order_date;
     //    private int product_idx;
     private String product_name;
