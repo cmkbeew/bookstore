@@ -393,7 +393,6 @@
     }
 
     function goDelete(review_idx, product_idx) {
-        const frm = document.getElementById("frmDelete");
         let confirm_flag = confirm("해당 문의글을 삭제하시겠습니까?");
 
         if(confirm_flag) {
@@ -429,15 +428,10 @@
     }
 
     function addCart() {
-        console.log(document.getElementById("product_idx").value);
-        console.log(document.getElementById("product_cnt").value);
-        console.log(document.getElementById("or_member_id").value);
-
         let params = { product_idx : document.getElementById("product_idx").value,
             product_cnt : document.getElementById("product_cnt").value,
             or_member_id : document.getElementById("or_member_id").value
         }
-
 
         $.ajax({
             type: "POST",

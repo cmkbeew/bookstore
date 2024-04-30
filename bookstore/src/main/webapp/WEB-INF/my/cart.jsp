@@ -137,8 +137,8 @@
                                                     </div>
                                                     <div class="row justify-content-around">
                                                         <button type="button" id="delBtn" class="btn btn-outline-danger btn-circle btn-lg btn-circle col-3">삭제하기</button>
-                                                        <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle col-4" onclick="location.href='/cart/pay'">선택 상품 주문하기</button>
-                                                        <button type="button" class="btn btn-primary btn-circle btn-lg btn-circle col-4" onclick="location.href='/cart/pay'">전체 상품 주문하기</button>
+                                                        <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle col-4" onclick="location.href='/my/payment?member_id=${sessionScope.member_id}'">선택 상품 주문하기</button>
+                                                        <button type="button" class="btn btn-primary btn-circle btn-lg btn-circle col-4" onclick="location.href='/my/payment?member_id=${sessionScope.member_id}'">전체 상품 주문하기</button>
                                                     </div>
                                                 </c:when>
                                                 <c:otherwise>
