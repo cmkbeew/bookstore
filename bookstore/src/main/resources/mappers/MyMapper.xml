@@ -12,4 +12,9 @@
         INNER JOIN tbl_product AS tp ON tc.product_idx = tp.product_idx
         WHERE tc.or_member_id = #{member_id}
     </select>
+
+    <insert id="cart_add">
+        INSERT INTO tbl_cart(or_member_id, product_no, product_cnt)
+        VALUES (#{or_member_id}, #{product_no}, product_cnt)
+    </insert>
 </mapper>

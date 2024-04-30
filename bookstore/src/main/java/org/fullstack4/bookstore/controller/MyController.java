@@ -19,8 +19,9 @@ import java.util.List;
 @RequestMapping(value="/my")
 @RequiredArgsConstructor
 public class MyController {
-    @Autowired
+
     private final MyServiceIf myServiceIf;
+
     @GetMapping("/my")
     public void myGet() {
         log.info("마이페이지 목록");
@@ -58,6 +59,11 @@ public class MyController {
     ) {
 //        int result = memberServiceIf.idCheck(member_id);
         return 0;
+    }
+
+    @PostMapping("/cart/add")
+    public String addCart() {
+        return null;
     }
 
     @GetMapping("/cartModify")

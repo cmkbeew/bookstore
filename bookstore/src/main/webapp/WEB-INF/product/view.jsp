@@ -65,25 +65,30 @@
                         <td id="real_price">${productDTO.price}</td>
                     </tr>
                 </table>
-                <div class="d-flex align-items-center">
-                    <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2" id="stepDown"
-                            onclick="this.parentNode.querySelector('input[type=number]').stepDown(); step();">
-                        <span class="material-symbols-outlined">remove</span>
-                    </button>
+                <form>
+                    <div class="d-flex align-items-center">
+                        <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2" id="stepDown"
+                                onclick="this.parentNode.querySelector('input[type=number]').stepDown(); step();">
+                            <span class="material-symbols-outlined">remove</span>
+                        </button>
 
-                    <input id="goods_cnt" min="1" name="goods_cnt" value="1" type="number"
-                           class="form-control form-control-sm" style="width:50px; text-align: center"/>
+                        <input id="product_cnt" min="1" name="product_cnt" value="1" type="number"
+                               class="form-control form-control-sm" style="width:50px; text-align: center"/>
 
-                    <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2" id="stepUp"
-                            onclick="this.parentNode.querySelector('input[type=number]').stepUp(); step();">
-                        <span class="material-symbols-outlined">add</span>
-                    </button>
+                        <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2" id="stepUp"
+                                onclick="this.parentNode.querySelector('input[type=number]').stepUp(); step();">
+                            <span class="material-symbols-outlined">add</span>
+                        </button>
 
-                    <button class="btn btn-outline-dark flex-shrink-0" type="button" onclick="addCart()">
-                        <i class="bi-cart-fill me-1"></i>
-                        장바구니에 담기
-                    </button>
-                </div>
+
+                        <input type="hidden" name="or_member_id" value="${sessionScope.member_id}" />
+                        <input type="hidden" name="product_idx" value="${productDTO.product_idx}"/>
+                        <button class="btn btn-outline-dark flex-shrink-0" type="button" onclick="addCart()">
+                            <i class="bi-cart-fill me-1"></i>
+                            장바구니에 담기
+                        </button>
+                    </div>
+                </form>
                 <div class="fs-5 text-end">
                     <div>
                         총 상품금액 <sub>(총 수량)</sub>
@@ -388,23 +393,23 @@
     }
 
     function step() {
-        const goods_cnt = document.getElementById("goods_cnt");
+        const product_cnt = document.getElementById("product_cnt");
         let total_price = document.getElementById("total_price");
         let total_count = document.getElementById("total_count");
 
-        total_count.innerText = "(" + goods_cnt.value + ")";
+        total_count.innerText = "(" + product_cnt.value + ")";
 
-        total_price.innerText = ${productDTO.price} * goods_cnt.value;
+        total_price.innerText = ${productDTO.price} * product_cnt.value;
     }
 
-    function addCart() {
+    function addCart(product_idx) {
+        let product_cnt = document.getElementById("product_cnt").value;
+
         $.ajax({
             type: "POST",
             url: "/my/cart/add",
             data : {
-                review_idx : review_idx,
-                product_idx : product_idx,
-                type : "${productDTO.type}"
+                "CartDTO" :
             },
             success :function(data) {
                 if(data != "N") {
