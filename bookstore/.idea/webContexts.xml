@@ -4,6 +4,7 @@
     <option name="state">
       <map>
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/member/modifyPwd.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/member" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/my/cart.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/my" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/my/qna.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/my" />
       </map>
     </option>

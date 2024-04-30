@@ -449,7 +449,7 @@
                     let cart_confirm = confirm("장바구니로 이동하시겠습니까?");
 
                     if(cart_confirm) {
-                        location.href = "/my/cart";
+                        location.href = "/my/cart?member_id=${sessionScope.member_id}";
                     } else {
                         location.reload("/product/view?type=${productDTO.type}&product_idx=${productDTO.product_idx}");
                     }

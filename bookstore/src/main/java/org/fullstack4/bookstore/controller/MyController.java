@@ -56,15 +56,15 @@ public class MyController {
     }
     @PostMapping("/updateCnt")
     @ResponseBody
-    public void updateMinusCnt(@RequestParam(name = "cart_idx", defaultValue = "") String member_id) {
-        log.info(member_id);
-        myServiceIf.update_cnt(member_id);
-    }
-    @GetMapping("/updateCnt")
-    @ResponseBody
-    public void updatePlusCnt(@RequestParam(name = "cart_idx", defaultValue = "") String member_id) {
-        log.info(member_id);
-        myServiceIf.update_plus_cnt(member_id);
+    public String updateCnt(@RequestParam(name = "cart_idx") String cart_idx,
+                          @RequestParam(name = "product_cnt") int product_cnt,
+                          @RequestParam(name = "or_member_id") String or_member_id) {
+        log.info("cart_idx : " + cart_idx);
+        log.info("product_cnt : " + product_cnt);
+
+        myServiceIf.update_cnt(cart_idx, product_cnt, or_member_id);
+
+        return "/my/cart?member_id=" + or_member_id;
     }
 
     @PostMapping("deleteCart")
