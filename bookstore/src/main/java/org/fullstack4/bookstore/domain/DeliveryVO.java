@@ -10,11 +10,16 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DeliveryVO {
-    private int pay_idx;
-    private String delivery_company;
-    private String company_tel;
+    private int delivery_idx;
     private String tracking_num;
+    private String receiver_name;
+    private String receiver_phone_num;
+    private String zipcode;
+    private String receiver_addr;
     private String delivery_state;
     private LocalDate start_date;
     private LocalDate arrive_date;
+
+    private String member_id;
+    private int pay_idx;
 }

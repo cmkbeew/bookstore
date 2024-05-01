@@ -52,8 +52,12 @@
                                         </p>
                                     </div>
                                 </div>
+                                <form class="mt-4" method="post" action="/my/payment">
+                                    <input type="hidden" name="member_id" value="${sessionScope.member_id}" />
 
-                                <c:forEach items="${cartList}" var="list">
+                                    <c:forEach items="${cartList}" var="list">
+                                    <input type="hidden" name="cart_idx" value="${list.cart_idx}" />
+                                    <input type="hidden" name="sell_price" value="${list.price}" />
                                     <div class="card mb-3">
                                         <div class="card-body">
                                             <div class="d-flex justify-content-between">
@@ -87,7 +91,19 @@
                                             </div>
                                         </div>
                                     </div>
-                                </c:forEach>
+                                    </c:forEach>
+
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <div class="text-end">
+                                                <span style="font-size: 20px;">주문금액 합계 : ${total_price}원 + 배송비 : ${shipping}원</span>
+                                            </div>
+                                            <hr>
+                                            <div class="text-end">
+                                                <span style="font-size: 20px;">총 주문금액 : <span style="color: indianred; font-size: 22px">${total_price + shipping}원</span></span>
+                                            </div>
+                                        </div>
+                                    </div>
                             </div>
 
                             <!-- 오른쪽 결제 창 -->
@@ -97,93 +113,103 @@
                                         <div class="d-flex justify-content-between align-items-center mb-3">
                                             <h5 class="mb-0">주문 고객 정보</h5>
                                         </div>
+                                        <div class="form-outline form-white mb-2">
+                                            <label class="form-label" for="name">이름</label>
+                                            <input type="text" id="name" name="name" class="form-control form-control-lg text-black"
+                                                   placeholder="Name" value="${sessionScope.name}" />
+                                        </div>
 
-                                        <form class="mt-4">
-                                            <div class="form-outline form-white mb-2">
-                                                <label class="form-label" for="name">이름</label>
-                                                <input type="text" id="name" name="name" class="form-control form-control-lg"
-                                                       placeholder="Name" value="${sessionScope.name}" />
-                                            </div>
-
-                                            <div class="form-outline form-white mb-2">
-                                                <label class="form-label" for="phone_num">휴대폰번호</label>
-                                                <input type="text" id="phone_num" name="phone_num" class="form-control form-control-lg"
-                                                       placeholder="010 5678 9012" maxlength="13" value="${sessionScope.phone_num}" />
-                                            </div>
-                                            <div class="form-outline form-white mb-5">
-                                                <label class="form-label" for="email">이메일</label>
-                                                <input type="email" id="email" name="email" class="form-control form-control-lg"
-                                                       placeholder="Email" value="${sessionScope.email}"/>
-                                            </div>
+                                        <div class="form-outline form-white mb-2">
+                                            <label class="form-label" for="phone_num">휴대폰번호</label>
+                                            <input type="text" id="phone_num" name="phone_num" class="form-control form-control-lg text-black"
+                                                   placeholder="010 0000 0000" maxlength="13" value="${sessionScope.phone_num}" />
+                                        </div>
+                                        <div class="form-outline form-white mb-5">
+                                            <label class="form-label" for="email">이메일</label>
+                                            <input type="email" id="email" name="email" class="form-control form-control-lg text-black"
+                                                   placeholder="Email" value="${sessionScope.email}"/>
+                                        </div>
 
 
-                                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                                <h5 class="mb-0">받는 고객 정보</h5>
-                                                <label class="mb-0" style="font-size: 13px;" for="same_check">
-                                                    <input type="checkbox" id="same_check" />
-                                                    주문 고객 정보와 일치하면 선택하세요.
-                                                </label>
-                                            </div>
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <h5 class="mb-0">받는 고객 정보</h5>
+                                            <label class="mb-0" style="font-size: 13px;" for="same_check">
+                                                <input type="checkbox" id="same_check" />
+                                                주문 고객 정보와 일치하면 선택하세요.
+                                            </label>
+                                        </div>
 
-                                            <div class="form-outline form-white mb-2">
-                                                <label class="form-label" for="receiver">받는 사람</label>
-                                                <input type="text" id="receiver" name="name" class="form-control form-control-lg"
-                                                       placeholder="Name" />
-                                            </div>
+                                        <div class="form-outline form-white mb-2">
+                                            <label class="form-label" for="receiver_name">받는 사람</label>
+                                            <input type="text" id="receiver_name" name="receiver_name" class="form-control form-control-lg text-black"
+                                                   placeholder="Name" />
+                                        </div>
 
-                                            <div class="form-outline form-white mb-2">
-                                                <label class="form-label" for="receiver_phone_num">휴대폰번호</label>
-                                                <input type="text" id="receiver_phone_num" name="receiver_phone_num" class="form-control form-control-lg"
-                                                       placeholder="010 5678 9012" maxlength="11" />
-                                            </div>
+                                        <div class="form-outline form-white mb-2">
+                                            <label class="form-label" for="receiver_phone_num">휴대폰번호</label>
+                                            <input type="text" id="receiver_phone_num" name="receiver_phone_num" class="form-control form-control-lg text-black"
+                                                   placeholder="010 0000 0000" maxlength="13" />
+                                        </div>
 
-                                            <div class="form-outline form-white mb-2">
-                                                <label class="form-label" for="zipcode">배송지 주소</label>
+                                        <div class="form-outline form-white mb-2">
+                                            <label class="form-label" for="zipcode">배송지 주소</label>
 
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <input type="text" id="zipcode" name="zipcode" class="form-control form-control-lg me-2"
-                                                           placeholder="우편번호" required readonly />
-                                                    <input type="button" class="btn" value="주소 찾기" name="zipcodebtn" id="zipcodebtn" onclick="addr()">
-                                                </div>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <input type="text" id="zipcode" name="zipcode" class="form-control form-control-lg text-black me-2"
+                                                       placeholder="우편번호" required readonly />
+                                                <input type="button" class="btn" value="주소 찾기" name="zipcodebtn" id="zipcodebtn" onclick="addr()">
                                             </div>
+                                        </div>
 
-                                            <div class="form-outline form-white mb-2">
-                                                <input type="text" id="addr1" name="addr1" class="form-control form-control-lg"
-                                                       placeholder="기본주소" maxlength="11" />
-                                            </div>
-                                            <div class="form-outline form-white mb-2">
-                                                <input type="text" id="addr2" name="addr2" class="form-control form-control-lg"
-                                                       placeholder="상세주소" maxlength="11" />
-                                            </div>
-                                        </form>
+                                        <div class="form-outline form-white mb-2">
+                                            <input type="text" id="addr1" name="addr1" class="form-control form-control-lg text-black"
+                                                   placeholder="기본주소" maxlength="11" readonly/>
+                                        </div>
+                                        <div class="form-outline form-white mb-2">
+                                            <input type="text" id="addr2" name="addr2" class="form-control form-control-lg text-black"
+                                                   placeholder="상세주소" />
+                                        </div>
 
                                         <hr class="my-4">
 
                                         <div class="d-flex justify-content-between">
-                                            <p class="mb-2">주문상품</p>
-                                            <p class="mb-2">4798 ₩</p>
+                                            <p class="mb-2">주문금액</p>
+                                            <p class="mb-2">${total_price} ₩</p>
                                         </div>
 
                                         <div class="d-flex justify-content-between">
                                             <p class="mb-2">배송비</p>
-                                            <p class="mb-2">2500 ₩</p>
+                                            <p class="mb-2">${shipping} ₩</p>
+                                        </div>
+                                        <p class="mb-2 text-end" style="color: indianred; font-size: 14px">※ 15,000원이상 구입시 배송비 무료</p>
+
+                                        <hr class="my-4">
+
+                                        <div class="d-flex justify-content-between mb-4 fs-4">
+                                            <p class="mb-2">최종결제금액</p>
+                                            <p class="mb-2">${total_price + shipping} ₩</p>
                                         </div>
 
-                                        <div class="d-flex justify-content-between mb-4">
-                                            <p class="mb-2">Total(Incl. taxes)</p>
-                                            <p class="mb-2">$4818.00</p>
+                                        <div class="form-outline form-white">
+                                            <label class="form-label">결제 수단</label>
                                         </div>
 
-                                        <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-info btn-block btn-lg">
-                                            <div class="d-flex justify-content-between">
-                                                <span>$4818.00</span>
-                                                <span>Checkout</span>
-                                            </div>
+                                        <div class="form-check form-check-inline mb-2">
+                                            <input class="form-check-input" type="radio" name="pay_method" id="pay_method" value="무통장입금" checked>
+                                            <label class="form-check-label" for="pay_method">무통장입금</label>
+                                        </div>
+                                        <%--                                            <div class="form-check form-check-inline">--%>
+                                        <%--                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">--%>
+                                        <%--                                                <label class="form-check-label" for="inlineRadio2">2</label>--%>
+                                        <%--                                            </div>--%>
+
+                                        <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-info btn-block btn-lg">
+                                            <span>결제하기</span>
                                         </button>
                                         <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-info btn-block btn-lg" onclick="location.href='/my/cart?member_id=${sessionScope.member_id}'">
                                             이전으로
                                         </button>
-
+                                        </form>
                                     </div>
                                 </div>
 
@@ -216,50 +242,26 @@
     }
 
     document.getElementById("same_check").addEventListener("click", function(e) {
-        let receiver = document.getElementById("receiver");
+        let receiver_name = document.getElementById("receiver_name");
         let rpn = document.getElementById("receiver_phone_num");
         let zipcode = document.getElementById("zipcode");
         let addr1 = document.getElementById("addr1");
         let addr2 = document.getElementById("addr2");
 
         if(document.getElementById("same_check").checked) {
-            receiver.value = "${sessionScope.name}";
+            receiver_name.value = "${sessionScope.name}";
             rpn.value = "${sessionScope.phone_num}";
             zipcode.value = "${sessionScope.zipcode}";
             addr1.value = "${sessionScope.addr1}";
             addr2.value = "${sessionScope.addr2}";
         } else {
-            receiver.value = "";
+            receiver_name.value = "";
             rpn.value = "";
             zipcode.value = "";
             addr1.value = "";
             addr2.value = "";
         }
-    })
-
-    // function same_check() {
-    <%--    let sc = document.getElementById("same_check");--%>
-    <%--    let receiver = document.getElementById("receiver");--%>
-    <%--    let rpn = document.getElementById("receiver_phone_num");--%>
-    <%--    let zipcode = document.getElementById("zipcode");--%>
-    <%--    let addr1 = document.getElementById("addr1");--%>
-
-    <%--    console.log(sc.checked);--%>
-
-    <%--    if(sc.checked) {--%>
-    <%--        receiver.value = "${sessionScope.name}";--%>
-    <%--        rpn.value = "${sessionScope.phone_num}";--%>
-    <%--        zipcode.value = "${sessionScope.zipcode}";--%>
-    <%--        addr1.value = "${sessionScope.addr1}";--%>
-    <%--    } else {--%>
-    <%--        receiver.value = "";--%>
-    <%--        rpn.value = "";--%>
-    <%--        zipcode.value = "";--%>
-    <%--        addr1.value = "";--%>
-    <%--    }--%>
-    <%--}--%>
-
-
+    });
 </script>
 </body>
 </html>

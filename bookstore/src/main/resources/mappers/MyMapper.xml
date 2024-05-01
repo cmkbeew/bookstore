@@ -40,11 +40,24 @@
 <!--        update tbl_cart set product_cnt =product_cnt+1 where cart_idx = #{cart_idx}-->
 <!--    </update>-->
 
-
-
-    <delete id="deleteCart" parameterType="java.util.Arrays">
+    <delete id="deleteCart">
         DELETE FROM tbl_cart
-        where cart_idx IN (#{idxList})
+        where cart_idx = #{cart_idx}
     </delete>
 
+    <insert id="paymentInsert">
+        INSERT INTO tbl_payment (pay_method, pay_price, member_id, name, phone_num, email, receiver_name, receiver_phone_num, receiver_addr, cart_idx, product_idx, product_name, product_cnt)
+        VALUES (#{pay_method}, #{pay_price}, #{member_id}, #{name}, #{phone_num}, #{email}, #{receiver_name}, #{receiver_phone_num}, #{receiver_addr}, #{cart_idx}, #{product_idx}, #{product_name}, #{product_cnt})
+    </insert>
+
+    <select id="paymentSelect" resultType="org.fullstack4.bookstore.domain.PaymentVO">
+        SELECT pay_idx, pay_method, pay_price, pay_date, pay_cancel_date, member_id, name, phone_num, email, receiver_name, receiver_phone_num, receiver_addr, cart_idx, product_idx, product_name, product_cnt
+        FROM tbl_payment
+        WHERE cart_idx = #{cart_idx}
+    </select>
+
+    <insert id="deliveryInsert">
+        INSERT INTO tbl_delivery (tracking_num, receiver_name, receiver_phone_num, zipcode, receiver_addr, member_id, pay_idx)
+        VALUES (#{tracking_num}, #{receiver_name}, #{receiver_phone_num}, #{zipcode}, #{receiver_addr}, #{member_id}, #{pay_idx})
+    </insert>
 </mapper>

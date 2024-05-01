@@ -3,8 +3,11 @@ package org.fullstack4.bookstore.service;
 
 import org.apache.ibatis.annotations.Param;
 import org.fullstack4.bookstore.domain.CartVO;
+import org.fullstack4.bookstore.domain.PaymentVO;
 import org.fullstack4.bookstore.dto.CartDTO;
 import org.fullstack4.bookstore.dto.CartListDTO;
+import org.fullstack4.bookstore.dto.DeliveryDTO;
+import org.fullstack4.bookstore.dto.PaymentDTO;
 
 import java.util.List;
 
@@ -15,4 +18,9 @@ public interface MyServiceIf {
     int deleteCart (int idx);
 
     int cart_add(CartDTO cartDTO);
+
+    int paymentInsert(PaymentDTO paymentDTO);
+    PaymentDTO paymentSelect(int cart_idx);
+
+    int deliveryInsert(DeliveryDTO deliveryDTO);
 }

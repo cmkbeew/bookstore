@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.fullstack4.bookstore.dto.CartDTO;
 import org.fullstack4.bookstore.dto.CartListDTO;
+import org.fullstack4.bookstore.dto.DeliveryDTO;
+import org.fullstack4.bookstore.dto.PaymentDTO;
 import org.fullstack4.bookstore.service.MyServiceIf;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -45,22 +48,15 @@ public class MyController {
                         Model model,
                         HttpSession session
                         ) {
-        log.info("장바구니");
-//        String member_id = session.getAttribute("member_id").toString();
-        log.info("member Id : " + member_id);
         List<CartListDTO> cartList = myServiceIf.cart_list(member_id);
-        log.info("cartList : " +  cartList);
+
         model.addAttribute("cartList", cartList);
-
-
     }
     @PostMapping("/updateCnt")
     @ResponseBody
     public String updateCnt(@RequestParam(name = "cart_idx") String cart_idx,
                           @RequestParam(name = "product_cnt") int product_cnt,
                           @RequestParam(name = "or_member_id") String or_member_id) {
-        log.info("cart_idx : " + cart_idx);
-        log.info("product_cnt : " + product_cnt);
 
         myServiceIf.update_cnt(cart_idx, product_cnt, or_member_id);
 
@@ -114,6 +110,51 @@ public class MyController {
                         Model model) {
         // 장바구니 전체 리스트
         List<CartListDTO> cartList = myServiceIf.cart_list(member_id);
+
+        // 주문 금액 합계
+        int total_price = cartList.stream().mapToInt(CartListDTO::getDisplay_price).sum();
+
+        // 배송비
+        int shipping = 2500;
+        if(total_price >= 15000) {
+            shipping = 0;
+        }
+
         model.addAttribute("cartList", cartList);
+        model.addAttribute("total_price", total_price);
+        model.addAttribute("shipping", shipping);
+    }
+
+    @PostMapping("/payment")
+    public String paymentInsert(PaymentDTO paymentDTO, DeliveryDTO deliveryDTO, int[] cart_idx) {
+        System.out.println("paymentDTO : " + paymentDTO);
+        System.out.println("deliveryDTO : " + deliveryDTO);
+        System.out.println("cart_idx[] : " + cart_idx);
+
+
+        List<CartListDTO> cartList = myServiceIf.cart_list(paymentDTO.getMember_id());
+        log.info("cartList : " + cartList);
+
+        for(int i=0; i<cartList.size(); i++) {
+            log.info(cartList.get(i).getCart_idx());
+            paymentDTO.setPay_price(cartList.get(i).getDisplay_price());
+            paymentDTO.setCart_idx(cartList.get(i).getCart_idx());
+            paymentDTO.setProduct_idx(cartList.get(i).getProduct_idx());
+            paymentDTO.setProduct_name(cartList.get(i).getProduct_name());
+            paymentDTO.setProduct_cnt(cartList.get(i).getProduct_cnt());
+
+            // 결제 내역 추가
+            myServiceIf.paymentInsert(paymentDTO);
+            // 장바구니번호로 결제 내용 불러오기
+            PaymentDTO dto = myServiceIf.paymentSelect(cartList.get(i).getCart_idx());
+            // 배송 내역에 넣을 결제번호 세팅
+            deliveryDTO.setPay_idx(dto.getPay_idx());
+            // 배송 내역 추가
+            myServiceIf.deliveryInsert(deliveryDTO);
+            // 장바구니 삭제
+            myServiceIf.deleteCart(cartList.get(i).getCart_idx());
+        }
+
+        return "redirect:/my/order?member_id=" + paymentDTO.getMember_id();
     }
 }
