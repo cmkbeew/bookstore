@@ -22,24 +22,22 @@
     <link href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/minty/bootstrap.min.css" rel="stylesheet"/>
     <link href="/resources/css/admin/styles.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/minty/bootstrap.min.css" integrity="sha384-H4X+4tKc7b8s4GoMrylmy2ssQYpDHoqzPa9aKXbDwPoPUA3Ra8PA5dGzijN+ePnH" crossorigin="anonymous">
-
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="/resources/fonts/icomoon/style.css">
     <script src="https://cdn.tiny.cloud/1/l7s9qc136p4pmwyuszv8b1a5nh66vdir4b84oksbknriidxl/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 </head>
-<body>
+<body style="background-color: #eeeeee;">
 <%@ include file="/WEB-INF/common/header.jsp"%>
 <div class="d-flex py-h" id="wrapper">
     <%@ include file="/WEB-INF/common/adminSidebar.jsp"%>
     <!-- Page content wrapper-->
-    <div id="page-content-wrapper">
+    <div id="page-content-wrapper" style="min-height: 80vh;">
         <button class="btn btn-primary" id="sidebarToggle">
-            <i class="fa fa-arrow-left" aria-hidden="true" style="display: block;"></i>
-            <i class="fa fa-arrow-right" aria-hidden="true" style="display: none;"></i>
+            <span class="material-symbols-outlined" style="display: block;">arrow_back</span>
+            <span class="material-symbols-outlined" style="display: none;">arrow_forward</span>
         </button>
         <!-- Page content-->
-        <div class="container py-h" style="margin-bottom: 5rem;">
+        <div class="container" style="margin-bottom: 5rem;">
             <div class="row">
                 <div class="col-md-12">
                     <form name="registFrm" id="registFrm" method="post" action="/admin/notice/regist" enctype="multipart/form-data">
@@ -51,20 +49,20 @@
                                 <div class="full-width site-content col-md-12">
                                     <div>
                                         <table class="table no-wrap user-table mb-0 text-lg-start">
-                                            <tr>
-                                                <th style="width: 120px; vertical-align: middle">제목 <i class="fa fa-pencil" aria-hidden="true"></i></th>
+                                            <tr class="table-light">
+                                                <th style="width: 120px;">제목<span class="material-symbols-outlined web_font">title</span></th>
                                                 <td>
                                                     <input type="text" name="title" id="title" class="form-control" value="${noticeDTO.title}" placeholder="제목"/>
                                                     <div id="div_err_title" style="display: none"></div>
                                                 </td>
 
                                             </tr>
-                                            <tr>
-                                                <th style="vertical-align: middle;">작성자 <i class="fa fa-user" ></i></th>
+                                            <tr class="table-light">
+                                                <th>작성자<span class="material-symbols-outlined web_font">face</span></th>
                                                 <td><input type="text" name="writer" id="writer" class="form-control" value="${member_id}" readonly/></td>
                                             </tr>
-                                            <tr>
-                                                <th style="vertical-align: middle;">고정여부 <i class="fa fa-thumb-tack" aria-hidden="true"></i></th>
+                                            <tr class="table-light">
+                                                <th>고정여부<span class="material-symbols-outlined web_font">keep</span></th>
                                                 <td>
                                                     <label class="control control--checkbox">
                                                         <input type="checkbox" name="fix_state" id="fix_state" value="-1">
@@ -79,11 +77,12 @@
                                         <div id="div_err_content" style="display: none"></div>
                                     </div>
                                     <table class="table no-wrap user-table mb-0 text-lg-start">
-                                        <tr>
-                                            <th style="width: 120px; vertical-align: middle;">첨부파일</th>
-                                            <td>
-                                                <input type="file" name="file" class="form-control" />
-                                            </td>
+                                        <tr class="table-light">
+                                            <th style="width: 120px; vertical-align: middle;">
+                                                첨부파일
+                                                <span class="material-symbols-outlined web_font">attach_file</span>
+                                            </th>
+                                            <td><input type="file" name="file" class="form-control" /></td>
                                         </tr>
                                     </table>
                                 </div>

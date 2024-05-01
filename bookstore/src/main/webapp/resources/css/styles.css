@@ -104,6 +104,18 @@ body {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
+/* 추가 */
+.py-h {
+  padding-top : 8vh;
+}
+.py-h2 {
+  padding-top : 4rem;
+}
+.web_font {
+  transform: translateY(20%);
+}
+
+
 hr {
   margin: 1rem 0;
   color: inherit;
@@ -7811,12 +7823,6 @@ textarea.form-control-lg {
   padding-top: 3rem !important;
   padding-bottom: 3rem !important;
 }
-.py-h {
-  padding-top : 3.5rem;
-}
-.py-h2 {
-  padding-top : 4rem;
-}
 .pt-0 {
   padding-top: 0 !important;
 }
@@ -10809,6 +10815,7 @@ textarea.form-control-lg {
     text-align: center !important;
   }
 }
+
 @media (min-width: 1200px) {
   .fs-1 {
     font-size: 2.5rem !important;

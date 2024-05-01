@@ -22,19 +22,17 @@
     <link href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/minty/bootstrap.min.css" rel="stylesheet"/>
     <link href="/resources/css/admin/styles.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/minty/bootstrap.min.css" integrity="sha384-H4X+4tKc7b8s4GoMrylmy2ssQYpDHoqzPa9aKXbDwPoPUA3Ra8PA5dGzijN+ePnH" crossorigin="anonymous">
-
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0" />
 </head>
-<body>
+<body style="background-color: #eeeeee;">
 <%@ include file="/WEB-INF/common/header.jsp"%>
 <div class="d-flex py-h" id="wrapper">
     <%@ include file="/WEB-INF/common/adminSidebar.jsp"%>
     <!-- Page content wrapper-->
-    <div id="page-content-wrapper">
+    <div id="page-content-wrapper" style="min-height: 80vh;">
         <button class="btn btn-primary" id="sidebarToggle">
-            <i class="fa fa-arrow-left" aria-hidden="true" style="display: block;"></i>
-            <i class="fa fa-arrow-right" aria-hidden="true" style="display: none;"></i>
+            <span class="material-symbols-outlined" style="display: block;">arrow_back</span>
+            <span class="material-symbols-outlined" style="display: none;">arrow_forward</span>
         </button>
         <!-- Page content-->
         <div class="container py-h">
@@ -52,21 +50,21 @@
                                     <div>
                                         <div>
                                             <table class="table no-wrap user-table mb-0 text-lg-start">
-                                                <tr>
-                                                    <th style="width: 120px;">글번호</th>
-                                                    <td>${qnaDTO.idx}</td>
-                                                </tr>
-                                                <tr>
-                                                    <th style="width: 120px;">제목 <i class="fa fa-pencil" aria-hidden="true"></i></th>
+                                                <tr class="table-light">
+                                                    <th style="width: 120px;">제목<span class="material-symbols-outlined web_font">title</span></th>
                                                     <td>${qnaDTO.title}</td>
                                                 </tr>
-                                                <tr>
-                                                    <th>작성자 <i class="fa fa-user"></i></th>
+                                                <tr class="table-light">
+                                                    <th>작성자<span class="material-symbols-outlined web_font">face</span></th>
                                                     <td>${qnaDTO.writer}</td>
                                                 </tr>
-                                                <tr>
-                                                    <th>작성일 <i class="fa fa-calendar"></i></th>
+                                                <tr class="table-light">
+                                                    <th>작성일<span class="material-symbols-outlined web_font">calendar_month</span></th>
                                                     <td>${qnaDTO.reg_date}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>내용<span class="material-symbols-outlined web_font">description</span></th>
+                                                    <td></td>
                                                 </tr>
                                             </table>
                                         </div>
@@ -82,16 +80,16 @@
                 <div class="mt-md-2">
                     <c:if test="${qnaDTO.idx eq qnaDTO.ref}">
                         <div>
-                            <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2" onclick="location.href='/admin/list?type=qna';"><i class="fa fa-list"></i></button>
-                            <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2" onclick="goDelete()"><i class="fa fa-trash"></i></button>
-                            <button id="replyBtn" type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2" onclick="location.href='/admin/qna/replyRegist?idx=${qnaDTO.idx}'"><i class="fa fa-reply" aria-hidden="true" style="transform: rotate(180deg)"></i></button>
+                            <button type="button" class="btn btn-primary btn-circle btn-lg btn-circle ml-2" onclick="location.href='/admin/list?type=qna';"><span class="material-symbols-outlined">list</span></button>
+                            <button id="replyBtn" type="button" class="btn btn-primary btn-circle btn-lg btn-circle ml-2" onclick="location.href='/admin/qna/replyRegist?idx=${qnaDTO.idx}'"><span class="material-symbols-outlined">prompt_suggestion</span></button>
+                            <button type="button" class="btn btn-primary btn-circle btn-lg btn-circle ml-2" onclick="goDelete()"><span class="material-symbols-outlined">delete</span></button>
                         </div>
                     </c:if>
                     <c:if test="${qnaDTO.idx ne qnaDTO.ref}">
                         <div>
-                            <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2" onclick="location.href='/admin/list?type=qna';"><i class="fa fa-list"></i></button>
-                            <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2" onclick="location.href='/admin/qna/replyModify?idx=${qnaDTO.idx}';"><i class="fa fa-edit"></i></button>
-                            <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2" onclick="goDelete()"><i class="fa fa-trash"></i></button>
+                            <button type="button" class="btn btn-primary btn-circle btn-lg btn-circle ml-2" onclick="location.href='/admin/list?type=qna';"><span class="material-symbols-outlined">list</span></button>
+                            <button type="button" class="btn btn-primary btn-circle btn-lg btn-circle ml-2" onclick="location.href='/admin/qna/replyModify?idx=${qnaDTO.idx}';"><span class="material-symbols-outlined">edit_note</span></button>
+                            <button type="button" class="btn btn-primary btn-circle btn-lg btn-circle ml-2" onclick="goDelete()"><span class="material-symbols-outlined">delete</span></button>
                         </div>
                     </c:if>
                 </div>

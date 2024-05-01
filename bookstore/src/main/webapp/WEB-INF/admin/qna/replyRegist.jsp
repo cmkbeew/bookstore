@@ -28,18 +28,18 @@
     <link rel="stylesheet" href="/resources/fonts/icomoon/style.css">
     <script src="https://cdn.tiny.cloud/1/l7s9qc136p4pmwyuszv8b1a5nh66vdir4b84oksbknriidxl/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 </head>
-<body>
+<body style="background-color: #eeeeee;">
 <%@ include file="/WEB-INF/common/header.jsp"%>
 <div class="d-flex py-h" id="wrapper">
     <%@ include file="/WEB-INF/common/adminSidebar.jsp"%>
     <!-- Page content wrapper-->
-    <div id="page-content-wrapper">
+    <div id="page-content-wrapper" style="min-height: 80vh;">
         <button class="btn btn-primary" id="sidebarToggle">
-            <i class="fa fa-arrow-left" aria-hidden="true" style="display: block;"></i>
-            <i class="fa fa-arrow-right" aria-hidden="true" style="display: none;"></i>
+            <span class="material-symbols-outlined" style="display: block;">arrow_back</span>
+            <span class="material-symbols-outlined" style="display: none;">arrow_forward</span>
         </button>
         <!-- Page content-->
-        <div class="container py-h" style="margin-bottom: 5rem;">
+        <div class="container" style="margin-bottom: 5rem;">
             <div class="row">
                 <div class="col-md-12">
                     <form name="registFrm" id="registFrm" method="post" action="/admin/qna/replyRegist">
@@ -52,15 +52,14 @@
                                 <div class="full-width site-content col-md-12">
                                     <div>
                                         <table class="table no-wrap user-table mb-0 text-lg-start">
-                                            <tr>
-                                                <th style="width: 120px; vertical-align: middle">제목 <i class="fa fa-pencil" aria-hidden="true"></i></th>
+                                            <tr class="table-light">
+                                                <th style="width: 120px;">제목<span class="material-symbols-outlined web_font">title</span></th>
                                                 <td>
                                                     <input type="text" name="title" id="title" class="form-control" value="답변입니다." readonly/>
                                                 </td>
-
                                             </tr>
-                                            <tr>
-                                                <th style="vertical-align: middle;">작성자 <i class="fa fa-user" ></i></th>
+                                            <tr class="table-light">
+                                                <th>작성자<span class="material-symbols-outlined web_font">face</span></th>
                                                 <td><input type="text" name="writer" id="writer" class="form-control" value="${member_id}" readonly/></td>
                                             </tr>
                                         </table>

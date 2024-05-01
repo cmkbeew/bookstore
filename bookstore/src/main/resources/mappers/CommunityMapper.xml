@@ -140,10 +140,16 @@
         LIMIT 1
     </select>
 
-    <insert id="qnaRegist">
+    <insert id="qnaRegist" parameterType="org.fullstack4.bookstore.domain.QnaVO" useGeneratedKeys="true"  keyProperty="idx" keyColumn="idx">
         INSERT INTO tbl_bbs_qna(title, content, writer)
         VALUES (#{title}, #{content}, #{writer})
     </insert>
+
+    <update id="qnaUpdate" parameterType="org.fullstack4.bookstore.domain.QnaVO" useGeneratedKeys="true"  keyProperty="idx" keyColumn="idx">
+        UPDATE tbl_bbs_qna SET ref = #{idx}
+        WHERE idx = #{idx}
+    </update>
+
 
     <update id="qnaModify">
         UPDATE tbl_bbs_qna SET

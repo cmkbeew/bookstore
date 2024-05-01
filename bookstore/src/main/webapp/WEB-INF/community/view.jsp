@@ -13,15 +13,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/minty/bootstrap.min.css" rel="stylesheet"/>
     <link href="/resources/css/admin/styles.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/minty/bootstrap.min.css" integrity="sha384-H4X+4tKc7b8s4GoMrylmy2ssQYpDHoqzPa9aKXbDwPoPUA3Ra8PA5dGzijN+ePnH" crossorigin="anonymous">
-
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0" />
 </head>
-<body>
+<body style="background-color: #eeeeee;">
 <%@ include file="/WEB-INF/common/header.jsp"%>
 <div class="d-flex py-h mb-3" id="wrapper">
     <!-- Page content wrapper-->
-    <div id="page-content-wrapper">
+    <div id="page-content-wrapper" style="min-height: 80vh;">
         <!-- Page content-->
         <div class="container py-h">
             <div class="row">
@@ -40,51 +38,59 @@
                                         <div>
                                             <div>
                                                 <table class="table no-wrap user-table mb-0 text-lg-start">
-                                                    <tr>
-                                                        <th style="width: 120px;">제목 <i class="fa fa-pencil" aria-hidden="true"></i></th>
+                                                    <tr class="table-light">
+                                                        <th style="width: 120px;">제목<span class="material-symbols-outlined web_font">title</span></th>
                                                         <td>${dto.title}</td>
                                                     </tr>
-                                                    <tr>
-                                                        <th>작성자 <i class="fa fa-user"></i></th>
+                                                    <tr class="table-light">
+                                                        <th>작성자<span class="material-symbols-outlined web_font">face</span></th>
                                                         <td>${dto.writer}</td>
                                                     </tr>
-                                                    <tr>
-                                                        <th>작성일 <i class="fa fa-calendar"></i></th>
+                                                    <tr class="table-light">
+                                                        <th>작성일<span class="material-symbols-outlined web_font">calendar_month</span></th>
                                                         <td>${dto.reg_date}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>내용<span class="material-symbols-outlined web_font">description</span></th>
+                                                        <td></td>
                                                     </tr>
                                                 </table>
                                             </div>
                                             <div class="p-3" style="min-height: 20vh;">
                                                     ${dto.content}
                                             </div>
-                                            <c:if test="${dto.org_file_name != null}">
+                                            <c:if test="${dto.org_file_name != null && dto.org_file_name != ''}">
                                                 <table class="table no-wrap user-table mb-0 text-lg-start">
                                                     <tr>
-                                                        <th style="width: 120px;">첨부파일</th>
-                                                        <td><span class="material-symbols-outlined">attach_file</span>
-                                                                ${dto.org_file_name}
+                                                        <th style="width: 120px; vertical-align: middle;">첨부파일</th>
+                                                        <td>
+                                                            <span class="material-symbols-outlined web_font">attach_file</span>
+                                                            <span>${dto.org_file_name}</span>
                                                         </td>
                                                     </tr>
                                                 </table>
                                             </c:if>
                                         </div>
                                     </c:if>
-
                                     <c:if test="${type == 'faq'}">
                                         <div>
                                             <div>
                                                 <table class="table no-wrap user-table mb-0 text-lg-start">
-                                                    <tr>
-                                                        <th style="width: 120px;">제목 <i class="fa fa-pencil" aria-hidden="true"></i></th>
+                                                    <tr class="table-light">
+                                                        <th style="width: 120px;">제목<span class="material-symbols-outlined web_font">title</span></th>
                                                         <td>${dto.title}</td>
                                                     </tr>
-                                                    <tr>
-                                                        <th>작성자 <i class="fa fa-user"></i></th>
+                                                    <tr class="table-light">
+                                                        <th>작성자<span class="material-symbols-outlined web_font">face</span></th>
                                                         <td>${dto.writer}</td>
                                                     </tr>
-                                                    <tr>
-                                                        <th>작성일 <i class="fa fa-calendar"></i></th>
+                                                    <tr class="table-light">
+                                                        <th>작성일<span class="material-symbols-outlined web_font">calendar_month</span></th>
                                                         <td>${dto.reg_date}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>내용<span class="material-symbols-outlined web_font">description</span></th>
+                                                        <td></td>
                                                     </tr>
                                                 </table>
                                             </div>
@@ -98,21 +104,29 @@
                                         <div>
                                             <div>
                                                 <table class="table no-wrap user-table mb-0 text-lg-start">
-                                                    <tr>
-                                                        <th style="width: 120px;">제목 <i class="fa fa-pencil" aria-hidden="true"></i></th>
+                                                    <tr class="table-light">
+                                                        <th style="width: 120px;">
+                                                            제목<span class="material-symbols-outlined web_font">title</span>
+                                                        </th>
                                                         <td>${dto.title}</td>
                                                     </tr>
-                                                    <tr>
-                                                        <th>작성자 <i class="fa fa-user"></i></th>
+                                                    <tr class="table-light">
+                                                        <th>
+                                                            작성자<span class="material-symbols-outlined web_font">face</span>
+                                                        </th>
                                                         <td>${dto.writer}</td>
                                                     </tr>
-                                                    <tr>
-                                                        <th>작성일 <i class="fa fa-calendar"></i></th>
+                                                    <tr class="table-light">
+                                                        <th>작성일<span class="material-symbols-outlined web_font">calendar_month</span></th>
                                                         <td>${dto.reg_date}</td>
                                                     </tr>
-                                                    <tr>
-                                                        <th>조회수 <i class="fa fa-eye" aria-hidden="true"></i></th>
+                                                    <tr class="table-light">
+                                                        <th>조회수<span class="material-symbols-outlined web_font">visibility</span></th>
                                                         <td>${dto.read_cnt}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>내용<span class="material-symbols-outlined web_font">description</span></th>
+                                                        <td></td>
                                                     </tr>
                                                 </table>
                                             </div>
@@ -129,15 +143,25 @@
             </div>
             <div style="display: flex; justify-content: space-between; margin-top: 4px;">
                 <div>
-                    <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle" onclick="location.href='/community/list?type=${type}'"><i class="fa fa-list"></i></button>
+                    <button type="button" class="btn btn-primary btn-circle btn-lg btn-circle" onclick="location.href='/community/list?type=${type}'">
+                        <span class="material-symbols-outlined">list</span>
+                    </button>
                     <c:if test="${sessionScope.member_id == dto.writer}">
-                        <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle" onclick="location.href='/community/qna/modify?idx=${dto.idx}'"><i class="fa fa-pencil-square-o"></i></button>
-                        <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle" onclick="goDelete()"><i class="fa fa-trash-o"></i></button>
+                        <c:if test="${type == 'qna'}">
+                            <c:if test="${dto.reply_state == 'Y'}">
+                                <button type="button" class="btn btn-primary btn-circle btn-lg btn-circle" onclick="noModifyDelete()"><span class="material-symbols-outlined">edit_note</span></button>
+                                <button type="button" class="btn btn-primary btn-circle btn-lg btn-circle" onclick="noModifyDelete()"><span class="material-symbols-outlined">delete</span></button>
+                            </c:if>
+                            <c:if test="${dto.reply_state == 'N'}">
+                                <button type="button" class="btn btn-primary btn-circle btn-lg btn-circle" onclick="location.href='/community/qna/modify?idx=${dto.idx}'"><span class="material-symbols-outlined">edit_note</span></button>
+                                <button type="button" class="btn btn-primary btn-circle btn-lg btn-circle" onclick="goDelete()"><span class="material-symbols-outlined">delete</span></button>
+                            </c:if>
+                        </c:if>
                     </c:if>
                 </div>
 
             </div>
-            <div class="card mt-5">
+            <div class="card my-5">
                 <table class="table no-wrap user-table mb-0 text-lg-start">
 
                     <tr>
@@ -177,6 +201,10 @@
         if(confirm_flag) {
             frm.submit();
         }
+    }
+
+    function noModifyDelete() {
+        alert("답변이 달린 글은 수정/삭제가 불가합니다.")
     }
 </script>
 <%@ include file="/WEB-INF/common/footer.jsp"%>

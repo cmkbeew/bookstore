@@ -42,6 +42,11 @@
         <include refid="whereCondition"></include>
     </select>
 
+    <select id="memberTotalCount" resultType="int">
+        SELECT COUNT(*) FROM tbl_member
+        <include refid="whereCondition"></include>
+    </select>
+
     <select id="noticeListByPage" resultType="org.fullstack4.bookstore.domain.NoticeVO">
         SELECT idx, title, writer, reg_date, content, org_file_name, save_file_name, fix_state
         FROM tbl_bbs_notice
@@ -66,6 +71,32 @@
         LIMIT #{page_skip_count}, #{page_size}
     </select>
 
+    <select id="memberListByPage" resultType="org.fullstack4.bookstore.domain.MemberVO">
+        SELECT member_idx, member_id, name, addr1, addr2, zipcode, phone_num, email
+        , forever_yn, point, mileage, member_state, join_state, option, reg_date, leave_date
+        FROM tbl_member
+        <include refid="whereCondition"></include>
+        ORDER BY member_idx DESC
+        LIMIT #{page_skip_count}, #{page_size}
+    </select>
+
+    <!-- test   -->
+<!--    <select id="qnaListByPage" resultType="org.fullstack4.bookstore.domain.QnaVO">-->
+<!--        SELECT B.rownum , B.idx, B.ref, B.title, B.content, B.writer,-->
+<!--        B.read_cnt, B.reg_date, B.modify_date, B.reply_state-->
+<!--        FROM (-->
+<!--        SELECT ROWNUM() AS rownum , A.idx, A.ref, A.title, A.content, A.writer,-->
+<!--        A.read_cnt, A.reg_date, A.modify_date, A.reply_state-->
+<!--        FROM (-->
+<!--        SELECT idx, ref, title, content, writer,-->
+<!--        read_cnt, reg_date, modify_date, reply_state-->
+<!--        FROM tbl_bbs_qna-->
+<!--        <include refid="whereCondition"></include>-->
+<!--        ORDER BY ref ASC, idx DESC) A-->
+<!--        ) B-->
+<!--        ORDER BY rownum DESC-->
+<!--        LIMIT #{page_skip_count}, #{page_size}-->
+<!--    </select>-->
 
     <!-- 공지사항 -->
     <select id="noticeList" resultType="org.fullstack4.bookstore.domain.NoticeVO">
@@ -151,6 +182,22 @@
         WHERE idx = #{idx}
     </select>
 
+<!--    <select id="qnaView" resultType="org.fullstack4.bookstore.domain.QnaVO">-->
+<!--        SELECT B.rownum, B.idx, B.ref, B.title, B.content, B.writer,-->
+<!--        B.read_cnt, B.reg_date, B.modify_date, B.reply_state-->
+<!--        FROM (-->
+<!--        SELECT ROWNUM() AS rownum , A.idx, A.ref, A.title, A.content, A.writer,-->
+<!--        A.read_cnt, A.reg_date, A.modify_date, A.reply_state-->
+<!--        FROM (-->
+<!--        SELECT idx, ref, title, content, writer,-->
+<!--        read_cnt, reg_date, modify_date, reply_state-->
+<!--        FROM tbl_bbs_qna-->
+<!--        <include refid="whereCondition"></include>-->
+<!--        ORDER BY ref ASC, idx DESC) A-->
+<!--        ) B-->
+<!--        WHERE idx = #{idx}-->
+<!--    </select>-->
+
     <delete id="qnaDelete">
         DELETE FROM tbl_bbs_qna
         WHERE idx = #{idx} OR ref = #{idx}
@@ -174,11 +221,6 @@
         WHERE idx = #{idx}
     </update>
 
-    <delete id="qnaReplyDelete">
-        DELETE FROM tbl_bbs_qna
-        WHERE idx = #{idx}
-    </delete>
-
     <select id="qnaReplyTotalCount" resultType="int">
         SELECT COUNT(*) FROM tbl_bbs_qna
         WHERE ref = #{idx}
@@ -193,7 +235,7 @@
     <update id="replyStateNtoY">
         UPDATE tbl_bbs_qna
         SET reply_state = 'Y'
-        WHERE idx = #{idx}
+        WHERE ref = #{ref}
     </update>
 
 

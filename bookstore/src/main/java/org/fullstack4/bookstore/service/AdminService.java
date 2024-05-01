@@ -11,9 +11,11 @@ public interface AdminService {
     int noticeTotalCount(PageRequestDTO pageRequestDTO);
     int faqTotalCount(PageRequestDTO pageRequestDTO);
     int qnaTotalCount(PageRequestDTO pageRequestDTO);
+    int memberTotalCount(PageRequestDTO pageRequestDTO);
     PageResponseDTO<NoticeDTO> noticeListByPage(PageRequestDTO pageRequestDTO);
     PageResponseDTO<FaqDTO> faqListByPage(PageRequestDTO pageRequestDTO);
     PageResponseDTO<QnaDTO> qnaListByPage(PageRequestDTO pageRequestDTO);
+    PageResponseDTO<MemberDTO> memberListByPage(PageRequestDTO pageRequestDTO);
 
 
     // 공지사항
@@ -39,11 +41,8 @@ public interface AdminService {
     int qnaDelete(int idx);
     int qnaReplyRegist(QnaDTO qnaDTO);
     int qnaReplyModify(QnaDTO qnaDTO);
-    int qnaReplyDelete(int idx);
 
     int qnaReplyTotalCount(QnaDTO qnaDTO);
-    int replyStateYtoN(int idx);
-    int replyStateNtoY(int idx);
 
 
 

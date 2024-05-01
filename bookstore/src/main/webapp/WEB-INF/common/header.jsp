@@ -2,8 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <html>
-<nav class="navbar navbar-expand-lg navbar-light bg-light" style="position: fixed; top:0; width:100%; z-index: 10000;">
-    <div class="container px-4 px-lg-5">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="position: fixed; top:0; width:100%; height: 8vh; z-index: 10000;">
+    <div class="container px-4 px-lg-5 bg-light">
         <a class="navbar-brand" href="/">Ddoi Story</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
@@ -48,7 +48,7 @@
                 </li>
                 <li class="nav-item"><a class="nav-link" href="/data/list">자료실</a></li>
             </ul>
-            <div class="col-md-5 text-end">
+            <div>
                 <c:choose>
                     <c:when test="${not empty sessionScope.member_id}">
                         <c:if test="${sessionScope.member_id ne 'admin'}">
@@ -80,11 +80,6 @@
                             </button>
                             <button type="button" class="btn btn-primary me-2" onclick="location.href='/member/join'">
                                 회원가입
-                            </button>
-                            <button type="button" class="btn btn-outline-dark" onclick="location.href='/my/cart'">
-                                <i class="bi-cart-fill me-1"></i>
-                                장바구니
-                                <span class="badge bg-primary text-white ms-1 rounded-pill">0</span>
                             </button>
                         </c:if>
                     </c:otherwise>

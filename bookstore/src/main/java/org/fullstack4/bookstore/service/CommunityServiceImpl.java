@@ -136,6 +136,14 @@ public class CommunityServiceImpl implements CommunityService {
                 .map(vo -> modelMapper.map(vo, QnaDTO.class))
                 .collect(Collectors.toList());
 
+        // 보여지는 내용 길이 설정
+        for(QnaDTO dto : dtoList) {
+            dto.setContent(dto.getContent().replace("\r\n", " "));
+            if(dto.getContent().length() >= 20) {
+                dto.setContent(dto.getContent().substring(0, 20) + ".....");
+            }
+        }
+
         int total_count = communityMapper.qnaTotalCount(pageRequestDTO);
 
         PageResponseDTO<QnaDTO> responseDTO = PageResponseDTO.<QnaDTO>withAll()
@@ -180,8 +188,8 @@ public class CommunityServiceImpl implements CommunityService {
     @Override
     public int qnaRegist(QnaDTO qnaDTO) {
         QnaVO qnaVO = modelMapper.map(qnaDTO, QnaVO.class);
-
         int result = communityMapper.qnaRegist(qnaVO);
+        int result2 = communityMapper.qnaUpdate(qnaVO);
 
         return result;
     }
@@ -189,11 +197,12 @@ public class CommunityServiceImpl implements CommunityService {
     @Override
     public QnaDTO qnaModifyGet(int qna_idx) {
         QnaVO qnaVO = communityMapper.qnaView(qna_idx);
-
         QnaDTO qnaDTO = modelMapper.map(qnaVO, QnaDTO.class);
 
         return qnaDTO;
     }
+
+
 
     @Override
     public int qnaModify(QnaDTO qnaDTO) {

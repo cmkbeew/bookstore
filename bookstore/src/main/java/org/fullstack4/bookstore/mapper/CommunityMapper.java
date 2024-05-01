@@ -30,6 +30,7 @@ public interface CommunityMapper {
     QnaVO qnaPrev(int qna_idx);
     QnaVO qnaNext(int qna_idx);
     int qnaRegist(QnaVO qnaVO);
+    int qnaUpdate(QnaVO qnaVO);
     int qnaModify(QnaVO qnaVO);
     int qnaDelete(int qna_idx);
     void qnaUpdateReadCnt(int qna_idx);
