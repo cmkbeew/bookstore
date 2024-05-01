@@ -2,8 +2,10 @@ package org.fullstack4.bookstore.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.fullstack4.bookstore.domain.QnaVO;
 import org.fullstack4.bookstore.dto.CartDTO;
 import org.fullstack4.bookstore.dto.CartListDTO;
+import org.fullstack4.bookstore.dto.QnaDTO;
 import org.fullstack4.bookstore.service.MyServiceIf;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -104,8 +106,14 @@ public class MyController {
         log.info("장바구니수정");
     }
     @GetMapping("/qna")
-    public void qnaGet() {
-        log.info("질문 목록");
+    public void qnaGet(QnaDTO qnaDTO,
+                       @RequestParam(name="member_id", defaultValue = "") String member_id,
+                       Model model) {
+        log.info("myController >> qnaGet()");
+        List<QnaDTO> qnaList = myServiceIf.qna_list_all(member_id);
+        log.info("qnaList : " +  qnaList);
+        model.addAttribute("qnaList", qnaList);
+
     }
     
 }

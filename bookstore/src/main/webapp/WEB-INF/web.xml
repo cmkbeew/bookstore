@@ -46,6 +46,10 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
+    <welcome-file-list>
+        <welcome-file>org.fullstack4.bookstore.controller.IndexController</welcome-file>
+    </welcome-file-list>
+
     <!-- 모든 페이지 header, footer 적용 -->
 <!--    <jsp-config>-->
 <!--        <jsp-property-group>-->

@@ -5,6 +5,8 @@ import lombok.extern.log4j.Log4j2;
 import org.fullstack4.bookstore.domain.CartVO;
 import org.fullstack4.bookstore.dto.CartDTO;
 import org.fullstack4.bookstore.dto.CartListDTO;
+import org.fullstack4.bookstore.dto.QnaDTO;
+import org.fullstack4.bookstore.mapper.CommunityMapper;
 import org.fullstack4.bookstore.mapper.MyMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,7 @@ import java.util.stream.Collectors;
 public class MyServiceImpl implements MyServiceIf{
     private final ModelMapper modelMapper;
     private final MyMapper myMapper;
+    private final CommunityMapper communityMapper;
     @Override
     public List<CartListDTO> cart_list(String member_id) {
         log.info("====================================================");
@@ -57,5 +60,13 @@ public class MyServiceImpl implements MyServiceIf{
             result = myMapper.cart_add(cartVO);
         }
         return result;
+    }
+
+    @Override
+    public List<QnaDTO> qna_list_all(String member_id) {
+        List<QnaDTO> QnaDTOList = myMapper.qna_list_all(member_id).stream()
+                .map(vo->modelMapper.map(vo, QnaDTO.class))
+                .collect(Collectors.toList());
+        return QnaDTOList;
     }
 }
