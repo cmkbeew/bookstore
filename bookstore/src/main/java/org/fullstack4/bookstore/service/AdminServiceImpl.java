@@ -34,11 +34,22 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    public int memberTotalCount(PageRequestDTO pageRequestDTO) { return adminMapper.memberTotalCount(pageRequestDTO); }
+
+    @Override
     public PageResponseDTO<NoticeDTO> noticeListByPage(PageRequestDTO pageRequestDTO) {
         List<NoticeVO> voList = adminMapper.noticeListByPage(pageRequestDTO);
         List<NoticeDTO> dtoList = voList.stream()
                 .map(vo -> modelMapper.map(vo, NoticeDTO.class))
                 .collect(Collectors.toList());
+
+//        // 보여지는 내용 길이 설정
+//        for(NoticeDTO dto : dtoList) {
+//            dto.setContent(dto.getContent().replace("\r\n", " "));
+//            if(dto.getContent().length() >= 20) {
+//                dto.setContent(dto.getContent().substring(0, 20) + ".....");
+//            }
+//        }
 
         int total_count = adminMapper.noticeTotalCount(pageRequestDTO);
 
@@ -58,6 +69,14 @@ public class AdminServiceImpl implements AdminService {
                 .map(vo -> modelMapper.map(vo, FaqDTO.class))
                 .collect(Collectors.toList());
 
+//        // 보여지는 내용 길이 설정
+//        for(FaqDTO dto : dtoList) {
+//            dto.setContent(dto.getContent().replace("\r\n", " "));
+//            if(dto.getContent().length() >= 20) {
+//                dto.setContent(dto.getContent().substring(0, 20) + ".....");
+//            }
+//        }
+
         int total_count = adminMapper.faqTotalCount(pageRequestDTO);
 
         PageResponseDTO<FaqDTO> pageResponseDTO = PageResponseDTO.<FaqDTO>withAll()
@@ -76,9 +95,35 @@ public class AdminServiceImpl implements AdminService {
                 .map(vo -> modelMapper.map(vo, QnaDTO.class))
                 .collect(Collectors.toList());
 
+//        // 보여지는 내용 길이 설정
+//        for(QnaDTO dto : dtoList) {
+//            dto.setContent(dto.getContent().replace("\r\n", " "));
+//            if(dto.getContent().length() >= 20) {
+//                dto.setContent(dto.getContent().substring(0, 20) + ".....");
+//            }
+//        }
+
         int total_count = adminMapper.qnaTotalCount(pageRequestDTO);
 
         PageResponseDTO<QnaDTO> pageResponseDTO = PageResponseDTO.<QnaDTO>withAll()
+                .requestDTO(pageRequestDTO)
+                .dtoList(dtoList)
+                .total_count(total_count)
+                .build();
+
+        return pageResponseDTO;
+    }
+
+    @Override
+    public PageResponseDTO<MemberDTO> memberListByPage(PageRequestDTO pageRequestDTO) {
+        List<MemberVO> voList = adminMapper.memberListByPage(pageRequestDTO);
+        List<MemberDTO> dtoList = voList.stream()
+                .map(vo -> modelMapper.map(vo, MemberDTO.class))
+                .collect(Collectors.toList());
+
+        int total_count = adminMapper.memberTotalCount(pageRequestDTO);
+
+        PageResponseDTO<MemberDTO> pageResponseDTO = PageResponseDTO.<MemberDTO>withAll()
                 .requestDTO(pageRequestDTO)
                 .dtoList(dtoList)
                 .total_count(total_count)
@@ -205,11 +250,7 @@ public class AdminServiceImpl implements AdminService {
     public int qnaReplyRegist(QnaDTO qnaDTO) {
         QnaVO qnaVO = modelMapper.map(qnaDTO, QnaVO.class);
         int result = adminMapper.qnaReplyRegist(qnaVO);
-
-//        qnaDTO.setIndent(qnaVO.getIndent() + 1);
-//
-//        QnaVO qnaVO2 = modelMapper.map(qnaDTO, QnaVO.class);
-//        int result2 = adminMapper.qnaReplyRegist(qnaVO2);
+        int result2 = adminMapper.replyStateNtoY(qnaVO.getIdx());
 
         return result;
     }
@@ -222,27 +263,9 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public int qnaReplyDelete(int idx) {
-        int result = adminMapper.qnaReplyDelete(idx);
-        return result;
-    }
-
-    @Override
     public int qnaReplyTotalCount(QnaDTO qnaDTO) {
         QnaVO qnaVO = modelMapper.map(qnaDTO, QnaVO.class);
         return adminMapper.qnaReplyTotalCount(qnaVO);
-    }
-
-    @Override
-    public int replyStateYtoN(int idx) {
-        int result = adminMapper.replyStateYtoN(idx);
-        return result;
-    }
-
-    @Override
-    public int replyStateNtoY(int idx) {
-        int result = adminMapper.replyStateNtoY(idx);
-        return result;
     }
 
 

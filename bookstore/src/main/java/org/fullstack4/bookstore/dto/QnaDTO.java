@@ -34,6 +34,7 @@ public class QnaDTO {
     private LocalDate modify_date;
     private String reply_state;
 
+
 //    public void setModify_date(LocalDate modify_date) {
 //        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //        Date now = new Date();

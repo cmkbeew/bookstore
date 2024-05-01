@@ -15,7 +15,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
 
-    <title>admin >> bbsList</title>
+    <title>admin >> community</title>
 
     <%--  header 부트스트랩  --%>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
@@ -24,26 +24,24 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/minty/bootstrap.min.css" integrity="sha384-H4X+4tKc7b8s4GoMrylmy2ssQYpDHoqzPa9aKXbDwPoPUA3Ra8PA5dGzijN+ePnH" crossorigin="anonymous">
 
     <%-- list 부트스트랩   --%>
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="/resources/fonts/icomoon/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0" />
 </head>
-<body>
+<body style="background-color: #eeeeee">
 <%@ include file="/WEB-INF/common/header.jsp"%>
 <div class="d-flex py-h" id="wrapper">
     <%@ include file="/WEB-INF/common/adminSidebar.jsp"%>
     <!-- Page content wrapper-->
-    <div id="page-content-wrapper">
+    <div id="page-content-wrapper" style="min-height: 80vh;">
         <button class="btn btn-primary" id="sidebarToggle">
-            <i class="fa fa-arrow-left" aria-hidden="true" style="display: block;"></i>
-            <i class="fa fa-arrow-right" aria-hidden="true" style="display: none;"></i>
+            <span class="material-symbols-outlined" style="display: block;">arrow_back</span>
+            <span class="material-symbols-outlined" style="display: none;">arrow_forward</span>
         </button>
         <!-- Page content-->
-        <div class="container py-h">
+        <div class="container">
             <!-- 검색 -->
             <form id="frmSearch" name="frmSearch" method="get" action="/admin/list">
                 <input type="hidden" name="type" value="${communityList.type}"/>
-                <%--                    <input type="hidden" name="page_block_end" value="${bbsPagingList.page_block_end}">--%>
                 <div class="d-flex justify-content-center align-items-center">
                     <div class="mx-2 my-3">
                         <select class="form-select form-select-lg" name="search_date" id="search_date">
@@ -75,30 +73,46 @@
                         <h5>총 <span class="text-primary">${communityList.total_count}</span>개</h5>
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title text-uppercase mb-0 text-center">${bbsTitle}</h5>
+                                <h5 class="card-title mb-0 text-center">${bbsTitle}</h5>
                             </div>
-                            <div class="table-responsive">
-                                <table class="table no-wrap user-table mb-0">
+                            <div class="table-responsive px-1 pb-4">
+                                <table class="table no-wrap user-table mb-0 table-hover px-1 pb-4">
                                     <thead>
-                                    <tr>
+                                    <tr class="table-light">
                                         <th scope="col" class="border-0 text-uppercase font-medium pl-4" style="vertical-align: middle;">
                                             <label class="control control--checkbox">
                                                 <input type="checkbox" name="select" id="selectAll" value="">
                                                 <div class="control__indicator"></div>
                                             </label>
                                         </th>
-                                        <th scope="col" class="border-0 text-uppercase font-medium pl-4">번호</th>
                                         <th scope="col" class="border-0 text-uppercase font-medium">제목</th>
+                                        <c:if test="${communityList.type == 'notice'}">
+                                            <th scope="col" class="border-0 text-uppercase font-medium">첨부파일명</th>
+                                        </c:if>
                                         <th scope="col" class="border-0 text-uppercase font-medium">작성자</th>
                                         <th scope="col" class="border-0 text-uppercase font-medium">작성일</th>
                                         <c:if test="${communityList.type == 'qna'}">
-                                            <th scope="col" class="border-0 text-uppercase font-medium">답변여부</th>
+                                            <th scope="col" class="border-0 text-uppercase font-medium">조회수</th>
                                         </c:if>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <c:choose>
                                         <c:when test="${!empty communityList && communityList.total_count > 0}">
+<%--                                            <c:forEach begin="0" end="${communityList.total_count}" var="i">--%>
+<%--                                                <tr>--%>
+<%--                                                    <td class="pl-4" style="width: 80px;">--%>
+<%--                                                        <label class="control control--checkbox">--%>
+<%--                                                            <input type="checkbox" name="select" id="select+${communityList.dtoList[i].idx}" value="${communityList.dtoList[i].idx}">--%>
+<%--                                                            <div class="control__indicator"></div>--%>
+<%--                                                        </label>--%>
+<%--                                                    </td>--%>
+<%--                                                    <td>${communityList.total_count - i}</td>--%>
+<%--                                                    <td>${communityList.dtoList[i].idx}</td>--%>
+<%--                                                    <td>${communityList.dtoList[i].title}</td>--%>
+<%--                                                    <td>${communityList.dtoList[i].reg_date}</td>--%>
+<%--                                                </tr>--%>
+<%--                                            </c:forEach>--%>
                                             <c:forEach items="${communityList.dtoList}" var="list">
                                                 <tr>
                                                     <td class="pl-4" style="width: 80px;">
@@ -107,7 +121,9 @@
                                                             <div class="control__indicator"></div>
                                                         </label>
                                                     </td>
-                                                    <td class="pl-4"><a href="/admin/${communityList.type}/view?idx=${list.idx}">${list.idx}</a></td>
+<%--                                                    <c:if test="${communityList.type == 'qna'}">--%>
+<%--                                                        <td class="pl-4"><a href="/admin/${communityList.type}/view?idx=${list.idx}">${list}</a></td>--%>
+<%--                                                    </c:if>--%>
                                                     <td style="max-width: 300px;">
                                                         <a href="/admin/${communityList.type}/view?idx=${list.idx}" style="max-width: 100%; display: block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
                                                             <c:if test="${communityList.type == 'notice'}">
@@ -120,28 +136,34 @@
                                                                     </c:otherwise>
                                                                 </c:choose>
                                                                 <c:if test="${list.org_file_name != null && list.org_file_name != ''}">
-                                                                    <span class="material-symbols-outlined" style="vertical-align: center; transform: translateY(15%)">attach_file</span>
+                                                                    <span class="material-symbols-outlined web_font">attach_file</span>
                                                                 </c:if>
                                                             </c:if>
 
                                                             <c:if test="${communityList.type == 'faq'}">
                                                                 <span>${list.title}</span>
                                                             </c:if>
-
                                                             <c:if test="${communityList.type == 'qna'}">
                                                                 <span>
                                                                     <c:if test="${list.ref < list.idx}">
-                                                                        <i class="fa fa-reply" aria-hidden="true" style="transform: rotate(180deg)"></i>
+                                                                        <span class="material-symbols-outlined">prompt_suggestion</span>
                                                                     </c:if>
                                                                     ${list.title}
                                                                 </span>
                                                             </c:if>
                                                         </a>
                                                     </td>
+                                                    <c:if test="${communityList.type == 'notice'}">
+                                                        <td>
+                                                            <a href="/admin/${communityList.type}/view?idx=${list.idx}">
+                                                            <c:out value="${!empty list.org_file_name ? list.org_file_name : '첨부파일 없음'}" />  ${list.org_file_name}
+                                                            </a>
+                                                        </td>
+                                                    </c:if>
                                                     <td><a href="/admin/${communityList.type}/view?idx=${list.idx}">${list.writer}</a></td>
                                                     <td><a href="/admin/${communityList.type}/view?idx=${list.idx}">${list.reg_date}</a></td>
                                                     <c:if test="${communityList.type == 'qna'}">
-                                                        <td style="width: 100px;"><a href="/admin/${communityList.type}/view?idx=${list.idx}">${list.reply_state}</a></td>
+                                                        <td style="width: 100px;"><a href="/admin/${communityList.type}/view?idx=${list.idx}">${list.read_cnt}</a></td>
                                                     </c:if>
                                                 </tr>
                                             </c:forEach>
@@ -158,17 +180,17 @@
                         </div>
                         <div style="display: flex; justify-content: space-between; margin-top: 4px;">
                             <div>
-                                <button type="submit" id="deleteBtn" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2" onclick="goDelete()">
-                                    <i class="fa fa-trash"></i>
+                                <button type="submit" id="deleteBtn" class="btn btn-primary btn-circle btn-lg btn-circle ml-2" onclick="goDelete()">
+                                    <span class="material-symbols-outlined">delete</span>
                                 </button>
                                 <c:if test="${communityList.type == 'notice'}">
-                                    <button id="fixBtn" type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2">
-                                        <i class="fa fa-thumb-tack" aria-hidden="true"></i>
+                                    <button id="fixBtn" type="button" class="btn btn-primary btn-circle btn-lg btn-circle ml-2">
+                                        <span class="material-symbols-outlined">keep</span>
                                     </button>
                                 </c:if>
                                 <c:if test="${communityList.type != 'qna'}">
-                                    <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2" onclick="location.href='/admin/${communityList.type}/regist'">
-                                        <i class="fa fa-upload"></i>
+                                    <button type="button" class="btn btn-primary btn-circle btn-lg btn-circle ml-2" onclick="location.href='/admin/${communityList.type}/regist'">
+                                        <span class="material-symbols-outlined">edit</span>
                                     </button>
                                 </c:if>
                             </div>

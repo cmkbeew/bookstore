@@ -1,6 +1,7 @@
 package org.fullstack4.bookstore.service;
 
 import org.fullstack4.bookstore.domain.FaqVO;
+import org.fullstack4.bookstore.domain.NoticeVO;
 import org.fullstack4.bookstore.domain.QnaVO;
 import org.fullstack4.bookstore.dto.*;
 

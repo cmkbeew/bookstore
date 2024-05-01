@@ -11,9 +11,13 @@ public interface AdminMapper {
     int noticeTotalCount(PageRequestDTO pageRequestDTO);
     int faqTotalCount(PageRequestDTO pageRequestDTO);
     int qnaTotalCount(PageRequestDTO pageRequestDTO);
+    int memberTotalCount(PageRequestDTO pageRequestDTO);
     List<NoticeVO> noticeListByPage(PageRequestDTO pageRequestDTO);
     List<FaqVO> faqListByPage(PageRequestDTO pageRequestDTO);
     List<QnaVO> qnaListByPage(PageRequestDTO pageRequestDTO);
+    List<MemberVO> memberListByPage(PageRequestDTO pageRequestDTO);
+
+
 
     // 공지사항
     List<NoticeVO> noticeList();
@@ -39,7 +43,6 @@ public interface AdminMapper {
     int qnaDelete(int idx);
     int qnaReplyRegist(QnaVO qnaVO);
     int qnaReplyModify(QnaVO qnaVO);
-    int qnaReplyDelete(int idx);
     int qnaReplyTotalCount(QnaVO qnaVO);
     int replyStateYtoN(int idx);
     int replyStateNtoY(int idx);

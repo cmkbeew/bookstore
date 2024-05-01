@@ -90,12 +90,12 @@ public class CommunityController {
     }
 
     @GetMapping("/qna/regist")
-    public void qnaRegist() {
+    public void qnaRegistGET() {
 
     }
 
     @PostMapping("/qna/regist")
-    public String qnaRegist(@Valid QnaDTO qnaDTO,
+    public String qnaRegistPOST(@Valid QnaDTO qnaDTO,
                             BindingResult bindingResult,
                             RedirectAttributes redirectAttributes) {
         if(bindingResult.hasErrors()) {
@@ -105,7 +105,14 @@ public class CommunityController {
             return "redirect:/community/qna/regist";
         }
 
+        log.info("===============================");
+        log.info("AdminController >> qnaRegistPOST >> qnaDTO : " + qnaDTO);
+
         int result = communityService.qnaRegist(qnaDTO);
+        log.info("result : " + result);
+        log.info("regist >> qnaDTO : " + qnaDTO);
+
+        log.info("===============================");
 
         if(result > 0) {
             return "redirect:/community/list?type=qna";

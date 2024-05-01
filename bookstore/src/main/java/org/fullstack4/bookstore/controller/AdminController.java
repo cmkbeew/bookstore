@@ -147,7 +147,6 @@ public class AdminController {
 
         // 이전글 다음글
         Map<String, NoticeDTO> noticeMap = communityService.noticeView(idx);
-
         noticeMap.get("noticeDTO").setContent(noticeMap.get("noticeDTO").getContent().replace("\r\n", "<br>"));
 
         model.addAttribute("dto", noticeMap.get("noticeDTO"));
@@ -302,7 +301,6 @@ public class AdminController {
 
         // 이전글 다음글
         Map<String, FaqDTO> faqMap = communityService.faqView(idx);
-
         faqMap.get("faqDTO").setContent(faqMap.get("faqDTO").getContent().replace("\r\n", "<br>"));
 
         model.addAttribute("dto", faqMap.get("faqDTO"));
@@ -422,6 +420,7 @@ public class AdminController {
 
         // 이전글 다음글
         Map<String, QnaDTO> qnaMap = communityService.qnaView(idx);
+//        qnaMap.get("qnaDTO").setContent(qnaMap.get("qnaDTO").getContent().replace("\r\n", "<br>"));
 
         model.addAttribute("dto", qnaMap.get("qnaDTO"));
         model.addAttribute("prevDTO", qnaMap.get("qnaPrevDTO"));
@@ -464,8 +463,6 @@ public class AdminController {
         }
 
         int result = adminService.qnaReplyRegist(qnaDTO);
-//        adminService.replyStateNtoY(qnaDTO.getIdx());
-//        adminService.replyStateNtoY(qnaDTO.getRef());
 
         if (result > 0) {
             return "redirect:/admin/list?type=qna";
@@ -523,14 +520,13 @@ public class AdminController {
     // view 페이지에서 답변 삭제
     @PostMapping(path = "/qna/delete")
     public String qnaDeletePOST(
-            @RequestParam(name = "idx", defaultValue = "0") int idx,
-            @Valid QnaDTO qnaDTO,
-            HttpServletRequest req
+            @RequestParam(name = "idx", defaultValue = "0") int idx
     ) {
         log.info("===============================");
-        log.info("AdminController >> noticeDeletePOST()");
+        log.info("AdminController >> qnaDeletePOST()");
 
         int result = adminService.qnaDelete(idx);
+
 //        int qnaReplyTotalCount = adminService.qnaReplyTotalCount(qnaDTO);
 //        if (qnaReplyTotalCount == 0) {
 //            adminService.replyStateYtoN(idx);
@@ -547,15 +543,34 @@ public class AdminController {
 
     // 회원
     @GetMapping("/member/list")
-    public void memberListGET(Model model) {
+    public void memberListGET(
+            @Valid PageRequestDTO pageRequestDTO,
+            BindingResult bindingResult,
+            RedirectAttributes redirectAttributes,
+            Model model
+    ) {
         log.info("===============================");
         log.info("AdminController >> memberListGET()");
 
-        List<MemberDTO> memberList = adminService.memberList();
+        if (bindingResult.hasErrors()) {
+            log.info("AdminController >> list Error");
+            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+        }
+
+        PageResponseDTO<MemberDTO> memberList = adminService.memberListByPage(pageRequestDTO);
         model.addAttribute("memberList", memberList);
 
         log.info("===============================");
     }
+
+    @PostMapping("/member/list")
+    public void memberListPOST() {
+        log.info("===============================");
+        log.info("AdminController >> memberListPOST()");
+        log.info("===============================");
+    }
+
+
 
     // 도서
     @GetMapping("/product/list")
