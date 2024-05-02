@@ -51,6 +51,8 @@ public class OrderDTO {
 
     private String order_code;
 
+    private String delivery_state;
+
     public String getReceiver_addr() {
         return addr1 + " " + addr2;
     }

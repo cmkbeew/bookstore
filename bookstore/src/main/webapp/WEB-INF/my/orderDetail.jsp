@@ -57,18 +57,17 @@
                             <div class="card">
                                 <div class="card-body p-4">
                                     <div class="row">
-                                        <form id="frm" name="frm" method="post" action="">
-                                            <div class="col-lg-12">
-                                                <h5 class="mb-3"><a href="#!" class="text-body"><i class="fas fa-long-arrow-alt-left me-2"></i>Continue shopping</a></h5>
-                                                <hr>
-                                                <div class="d-flex justify-content-between align-items-center mb-4">
-                                                    <div>
-                                                        <p class="mb-1">Shopping cart</p>
-                                                        <p class="mb-0">You have items in your cart</p>
-                                                    </div>
+                                        <div class="col-lg-12">
+                                            <h5 class="mb-3"><a href="#!" class="text-body"><i class="fas fa-long-arrow-alt-left me-2"></i>주문 상세 내역</a></h5>
+                                            <hr>
+                                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                                <div>
+                                                    <p class="mb-1">Shopping cart</p>
+                                                    <p class="mb-0">You have items in your cart</p>
                                                 </div>
-                                                <c:choose>
-                                                <c:when test="${not empty orderDetailDTO}" >
+                                            </div>
+                                            <c:choose>
+                                                <c:when test="${not empty orderDetailDTO}">
                                                     <c:forEach items="${orderDetailDTO}" var="list" varStatus="status">
                                                         <div class="card mb-3">
                                                             <div class="card-body">
@@ -76,7 +75,7 @@
                                                                     <div class="d-flex flex-row align-items-center">
                                                                         <div>
                                                                             <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp"
-                                                                                    class="img-fluid rounded-3" alt="Shopping item" style="width: 65px;">
+                                                                                 class="img-fluid rounded-3" alt="Shopping item" style="width: 65px;">
                                                                         </div>
                                                                         <div class="ms-3">
                                                                             <h5>${list.product_name}</h5>
@@ -84,11 +83,10 @@
                                                                     </div>
                                                                     <div class="d-flex flex-row align-items-center">
                                                                         <input id="form${list.order_idx}" min="1" name="quantity" value="${list.product_cnt}" type="number"
-                                                                               class="form-control form-control-sm" style="width:50px; text-align: center" readonly/>
-                                                                        <div style="width: 100px;">
+                                                                               class="form-control form-control-sm me-2" style="width:50px; text-align: center" readonly/>
+                                                                        <div>
                                                                             <p class="small mb-0">결제금액 : ${list.order_price}</p>
                                                                         </div>
-                                                                        <a href="#!" style="color: #cecece;"><i class="fas fa-trash-alt"></i></a>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -96,18 +94,22 @@
                                                     </c:forEach>
                                                     <div class="card mb-3">
                                                         <div class="card-body">
-                                                            <div class="d-flex justify-content-center">
-                                                                <input id="total_value" min="1" name="quantity" value="1" type="number"
-                                                                       class="form-control form-control-sm" style="width:50px; text-align: center"/>
-                                                                <a href="#!" style="color: #cecece;"><i class="fas fa-trash-alt"></i></a>
+                                                            <div class="text-end py-2">
+                                                                <div>
+                                                                    <span style="font-size: 20px;">총 결제금액 : <span style="color: indianred; font-size: 22px">${total_price + shipping}원</span></span>
+                                                                </div>
                                                             </div>
+                                                            <p class="text-end" style="color: indianred; font-size: 14px">※ 15,000원이상 구입시 배송비 무료</p>
                                                         </div>
                                                     </div>
-                                                    <div class="row justify-content-around">
-                                                        <button type="button" id="delBtn" class="btn btn-outline-danger btn-circle btn-lg btn-circle col-3">삭제하기</button>
-                                                        <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle col-4" onclick="selectProduct()">선택 상품 주문하기</button>
-                                                        <button type="button" class="btn btn-primary btn-circle btn-lg btn-circle col-4" onclick="location.href='/my/payment?member_id=${sessionScope.member_id}'">전체 상품 주문하기</button>
-                                                    </div>
+                                                    <form id="orderDelete" name="orderDelete" method="post" action="/my/orderDelete">
+                                                        <input type="hidden" name="member_id" value="${sessionScope.member_id}" />
+                                                        <input type="hidden" name="order_code" value="${order_code}" />
+                                                        <div class="row justify-content-around">
+                                                            <button type="button" class="btn btn-primary btn-circle btn-lg btn-circle col-4" onclick="location.href='/my/order?member_id=${sessionScope.member_id}'">주문목록</button>
+                                                            <button type="button" class="btn btn-outline-danger btn-circle btn-lg btn-circle col-4" onclick="deleteOrder()">주문취소</button>
+                                                        </div>
+                                                    </form>
                                                 </c:when>
                                                 <c:otherwise>
                                                     <div class="card mb-3">
@@ -119,74 +121,31 @@
                                                     </div>
                                                 </c:otherwise>
                                             </c:choose>
-                                        </div>
-                                    </form>
-                                </div>
 
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
+                </div>
             </div>
         </div>
     </div>
 </div>
-</div>
 <%@ include file="/WEB-INF/common/footer.jsp"%>
 <script>
-    let delBtn = document.getElementById("delBtn");
-    delBtn.addEventListener("click", (e) => {
-        document.getElementById("frm").action = "/my/deleteCart";
-        document.getElementById("frm").submit();
+    function deleteOrder() {
+        const frm = document.getElementById("orderDelete");
+        console.log(frm);
+        let delete_check = confirm("삭제하시겠습니까?");
 
-    });
-
-    function bookCntUpdate(cartIdx) {
-        let product_cnt = document.getElementById("form"+cartIdx).value;
-
-        $.ajax({
-            url: "/my/updateCnt",
-            type: "post",
-            data: {
-                product_cnt : product_cnt,
-                cart_idx : cartIdx,
-                or_member_id: "${sessionScope.member_id}"
-            },
-            success: function (url) {
-                location.reload(url);
-            },
-            error: function (err) {
-                console.log(err);
-            }
-        });
+        if(delete_check) {
+            frm.submit();
+        }
     }
-
-    const allCheckboxDOM = document.querySelectorAll(".control--checkbox");
-    const control = document.querySelectorAll(".control__indicator");
-    let idx = [];
-
-    // allCheckboxDOM.addEventListener("click", (e) => {
-    //     for (let i = 0; i < allCheckboxDOM.length; i++) {
-    //         allCheckboxDOM[i].children[0].checked = true;
-    //     }
-    // }, false);
-
-    for (let i = 0; i < control.length; i++) {
-        control[i].addEventListener("click", function(e) {
-            // e.target.parentNode.parentNode.parentNode.children[0].children[0].children[0].checked = true;
-            console.log(e.target.parentNode.parentNode.parentNode.children[0].children[0].children[0].checked)
-
-        }, false)
-    }
-
-
-    // for (let i = 0; i < control.length; i++) {
-    //     control[i].addEventListener("click", function (e) {
-    //         console.log(e.target.parentNode.parentNode.parentNode.children[1].children[0].textContent);
-    //         idx.push(e.target.parentNode.parentNode.parentNode.children[1].children[0].textContent);
-    //     }, false)
-    // }
 </script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 </body>

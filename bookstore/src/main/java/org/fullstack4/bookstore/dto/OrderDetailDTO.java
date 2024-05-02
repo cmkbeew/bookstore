@@ -25,6 +25,7 @@ public class OrderDetailDTO {
     private String zipcode;
     private String receiver_addr;
     private String order_code;
+    private String delivery_state;
     private int order_item_idx;
     private String product_name;
     private int product_cnt;

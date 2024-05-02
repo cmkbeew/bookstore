@@ -73,8 +73,12 @@
                                 <thead>
                                 <tr scope="row">
                                     <th scope="col" class="border-0">주문번호</th>
+                                    <th scope="col" class="border-0">대표 상품명</th>
                                     <th scope="col" class="border-0">받는고객명</th>
+                                    <th scope="col" class="border-0">받는고객번호</th>
+                                    <th scope="col" class="border-0">받는고객주소</th>
                                     <th scope="col" class="border-0">결제금액</th>
+                                    <th scope="col" class="border-0">배송상태</th>
                                     <th scope="col" class="border-0">주문일자</th>
                                 </tr>
                                 </thead>
@@ -84,8 +88,12 @@
                                         <c:forEach items="${orderList}" var="list" varStatus="i">
                                             <tr style="cursor:pointer;" onclick="window.location.href='/my/orderDetail?member_id=${sessionScope.member_id}&order_code=${list.order_code}'">
                                                 <td class="pl-4">${list.order_code}</td>
+                                                <td>${list.product_name}</td>
                                                 <td>${list.receiver_name}</td>
+                                                <td>${list.receiver_phone_num}</td>
+                                                <td>(${list.zipcode}) ${list.receiver_addr}</td>
                                                 <td>${list.pay_price}</td>
+                                                <td>${list.delivery_state}</td>
                                                 <td>${list.pay_date}</td>
                                             </tr>
                                         </c:forEach>

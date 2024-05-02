@@ -34,7 +34,9 @@ public class MyController {
 
     @GetMapping("/order")
     public void orderGet(Model model) {
-        List<OrderDTO> orderList = myServiceIf.order_list();
+        List<OrderDetailDTO> orderList = myServiceIf.order_list();
+
+        log.info("orderList : " + orderList);
 
 
         model.addAttribute("orderList", orderList);
@@ -44,6 +46,15 @@ public class MyController {
     public void orderPost(String order_code, Model model) {
         List<OrderDetailDTO> orderDetailDTO = myServiceIf.order_detail(order_code);
 
+        int total_price = orderDetailDTO.stream().mapToInt(OrderDetailDTO::getOrder_price).sum();
+        int shipping = 2500;
+        if(total_price >= 15000) {
+            shipping = 0;
+        }
+
+        model.addAttribute("order_code", order_code);
+        model.addAttribute("total_price", total_price);
+        model.addAttribute("shipping", shipping);
         model.addAttribute("orderDetailDTO", orderDetailDTO);
     }
 
@@ -115,6 +126,7 @@ public class MyController {
     public void cartModifyGet() {
         log.info("장바구니수정");
     }
+
     @GetMapping("/qna")
     public void qnaGet(QnaDTO qnaDTO,
                        @RequestParam(name="member_id", defaultValue = "") String member_id,
@@ -162,53 +174,16 @@ public class MyController {
         model.addAttribute("shipping", shipping);
     }
 
-//    @PostMapping("/payment")
-//    public String paymentInsert(@Valid PaymentDTO paymentDTO,
-//                                BindingResult bindingResult,
-//                                RedirectAttributes redirectAttributes,
-//                                DeliveryDTO deliveryDTO,
-//                                String same_check) {
-//        if(bindingResult.hasErrors()) {
-//            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
-//            redirectAttributes.addFlashAttribute("paymentDTO", paymentDTO);
-//            redirectAttributes.addFlashAttribute("same_check", same_check);
-//
-//            return "redirect:/my/payment?member_id=" + paymentDTO.getMember_id();
-//        }
-//
-//        List<CartListDTO> cartList = myServiceIf.cart_list(paymentDTO.getMember_id());
-//
-//        if(cartList != null) {
-//            for(int i=0; i<cartList.size(); i++) {
-//                log.info(cartList.get(i).getCart_idx());
-//                paymentDTO.setPay_price(cartList.get(i).getDisplay_price());
-//                paymentDTO.setCart_idx(cartList.get(i).getCart_idx());
-//                paymentDTO.setProduct_idx(cartList.get(i).getProduct_idx());
-//                paymentDTO.setProduct_name(cartList.get(i).getProduct_name());
-//                paymentDTO.setProduct_cnt(cartList.get(i).getProduct_cnt());
-//
-//                // 결제 내역 추가
-//                myServiceIf.paymentInsert(paymentDTO);
-//                // 장바구니번호로 결제 내용 불러오기
-//                PaymentDTO dto = myServiceIf.paymentSelect(cartList.get(i).getCart_idx());
-//                // 배송 내역에 넣을 결제번호 세팅
-//                deliveryDTO.setPay_idx(dto.getPay_idx());
-//                // 배송 내역 추가
-//                myServiceIf.deliveryInsert(deliveryDTO);
-//                // 장바구니 삭제
-//                myServiceIf.deleteCart(cartList.get(i).getCart_idx());
-//            }
-//        }
-//
-//        return "redirect:/my/order?member_id=" + paymentDTO.getMember_id();
-//    }
-
     @PostMapping("/payment")
     public String paymentInsert(@Valid OrderDTO orderDTO,
                                 BindingResult bindingResult,
                                 RedirectAttributes redirectAttributes,
                                 OrderItemDTO orderItemDTO,
+                                DeliveryDTO deliveryDTO,
                                 String same_check) {
+
+        log.info("deliveryDTO : " + deliveryDTO);
+
         if(bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
             redirectAttributes.addFlashAttribute("orderDTO", orderDTO);
@@ -259,6 +234,17 @@ public class MyController {
 
         myServiceIf.cart_add(cartDTO);
 
-        return "redirect:/my/payment?member_id="+session.getAttribute("member_id");
+        return "redirect:/my/payment?member_id=" + session.getAttribute("member_id");
+    }
+
+    @PostMapping("/orderDelete")
+    public String orderDelete(String member_id, String order_code) {
+        int orderResult = myServiceIf.orderDelete(member_id, order_code);
+
+        if(orderResult > 0) {
+            return "redirect:/my/order?member_id=" + member_id;
+        } else {
+            return "redirect:/my/orderDetail?member_id=" + member_id + "&order_code=" + order_code;
+        }
     }
 }

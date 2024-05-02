@@ -49,18 +49,14 @@
                             <table class="table no-wrap user-table mb-0">
                                 <thead>
                                 <tr>
-                                    <th scope="col" class="border-0">번호</th>
-                                    <th scope="col" class="border-0">운송장번호</th>
-                                    <th scope="col" class="border-0">배송회사</th>
-                                    <th scope="col" class="border-0">수취자 이름</th>
-                                    <th scope="col" class="border-0">수취자 휴대폰번호</th>
-                                    <th scope="col" class="border-0">우편번호</th>
-                                    <th scope="col" class="border-0">수취자 주소</th>
+                                    <th scope="col" class="border-0">주문번호</th>
+                                    <th scope="col" class="border-0">대표상품명</th>
+                                    <th scope="col" class="border-0">받는고객명</th>
+                                    <th scope="col" class="border-0">받는고객휴대폰번호</th>
+                                    <th scope="col" class="border-0">받는고객주소</th>
+                                    <th scope="col" class="border-0">결제금액</th>
                                     <th scope="col" class="border-0">배송상태</th>
-                                    <th scope="col" class="border-0">배송시작일</th>
-                                    <th scope="col" class="border-0">배송도착일</th>
-                                    <th scope="col" class="border-0">주문자 아이디</th>
-                                    <th scope="col" class="border-0">결제번호</th>
+                                    <th scope="col" class="border-0">주문일자</th>
                                 </tr>
                                 </thead>
                                 <tbody>

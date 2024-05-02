@@ -61,7 +61,7 @@
                                         </p>
                                     </div>
                                 </div>
-                                <form class="mt-4" method="post" action="/my/payment">
+                                <form class="mt-4" id="frmOrder" method="post" action="/my/payment">
                                     <input type="hidden" name="member_id" value="${sessionScope.member_id}" />
                                     <input type="hidden" name="pay_price" value="${total_price + shipping}"/>
 
@@ -233,7 +233,7 @@
                                         </div>
                                         <div id="div_err_delivery_company" style="display: none"></div>
 
-                                        <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-info btn-block btn-lg">
+                                        <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-info btn-block btn-lg" onclick="orderCheck()">
                                             <span>결제하기</span>
                                         </button>
                                         <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-info btn-block btn-lg" onclick="location.href='/my/cart?member_id=${sessionScope.member_id}'">
@@ -298,6 +298,15 @@
             addr2.value = "";
         }
     });
+
+    function orderCheck() {
+        let frm = document.getElementById("frmOrder");
+        let order_check = confirm("결제하시겠습니까?");
+
+        if(order_check) {
+            frm.submit();
+        }
+    }
 </script>
 </body>
 </html>

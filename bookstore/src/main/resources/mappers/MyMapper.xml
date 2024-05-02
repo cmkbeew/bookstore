@@ -60,22 +60,6 @@
         where cart_idx = #{cart_idx}
     </delete>
 
-<!--    <insert id="paymentInsert">-->
-<!--        INSERT INTO tbl_payment (pay_method, delivery_company, pay_price, member_id, name, phone_num, email, receiver_name, receiver_phone_num, receiver_addr, cart_idx, product_idx, product_name, product_cnt)-->
-<!--        VALUES (#{pay_method}, #{delivery_company}, #{pay_price}, #{member_id}, #{name}, #{phone_num}, #{email}, #{receiver_name}, #{receiver_phone_num}, #{receiver_addr}, #{cart_idx}, #{product_idx}, #{product_name}, #{product_cnt})-->
-<!--    </insert>-->
-
-<!--    <select id="paymentSelect" resultType="org.fullstack4.bookstore.domain.PaymentVO">-->
-<!--        SELECT pay_idx, pay_method, delivery_company,pay_price, pay_date, pay_cancel_date, member_id, name, phone_num, email, receiver_name, receiver_phone_num, receiver_addr, cart_idx, product_idx, product_name, product_cnt-->
-<!--        FROM tbl_payment-->
-<!--        WHERE cart_idx = #{cart_idx}-->
-<!--    </select>-->
-
-<!--    <insert id="deliveryInsert">-->
-<!--        INSERT INTO tbl_delivery (tracking_num, delivery_company, receiver_name, receiver_phone_num, zipcode, receiver_addr, member_id, pay_idx)-->
-<!--        VALUES (#{tracking_num}, #{delivery_company}, #{receiver_name}, #{receiver_phone_num}, #{zipcode}, #{receiver_addr}, #{member_id}, #{pay_idx})-->
-<!--    </insert>-->
-
     <select id="qna_list_all" resultType="org.fullstack4.bookstore.domain.QnaVO">
         SELECT idx, title, content, writer, read_cnt,reg_date, modify_date,reply_state
         FROM tbl_bbs_qna
@@ -103,16 +87,30 @@
     </insert>
 
     <select id="order_list">
-        SELECT order_idx, pay_method, delivery_company, pay_price, pay_date, pay_cancel_date, member_id, name, phone_num, email, receiver_name, receiver_phone_num, zipcode, receiver_addr, order_code
-        FROM tbl_order
+        SELECT
+            od.order_idx, od.pay_method, od.delivery_company, od.pay_price, od.pay_date, od.pay_cancel_date, od.member_id, od.name, od.phone_num, od.email, od.receiver_name, od.receiver_phone_num, od.zipcode, od.receiver_addr, od.order_code, od.delivery_state,
+            oi.order_item_idx, oi.product_name, oi.product_cnt, oi.price, oi.discount, oi.discount_price, oi.order_price
+        FROM tbl_order AS od INNER JOIN tbl_order_item AS oi ON oi.order_code = od.order_code
+        -- WHERE od.delivery_state = #{delivery_state}
+        GROUP BY od.order_code
         ORDER BY order_idx DESC
     </select>
 
     <select id="order_detail">
         SELECT
-            od.order_idx, od.pay_method, od.delivery_company, od.pay_price, od.pay_date, od.pay_cancel_date, od.member_id, od.name, od.phone_num, od.email, od.receiver_name, od.receiver_phone_num, od.zipcode, od.receiver_addr, od.order_code,
+            od.order_idx, od.pay_method, od.delivery_company, od.pay_price, od.pay_date, od.pay_cancel_date, od.member_id, od.name, od.phone_num, od.email, od.receiver_name, od.receiver_phone_num, od.zipcode, od.receiver_addr, od.order_code, od.delivery_state,
             oi.order_item_idx, oi.product_name, oi.product_cnt, oi.price, oi.discount, oi.discount_price, oi.order_price
         FROM tbl_order AS od INNER JOIN tbl_order_item AS oi ON oi.order_code = od.order_code
         WHERE od.order_code = #{order_code}
     </select>
+
+    <delete id="orderDelete">
+        DELETE FROM tbl_order
+        WHERE member_id = #{member_id} AND order_code = #{order_code}
+    </delete>
+
+    <delete id="orderItemDelete">
+        DELETE FROM tbl_order_item
+        WHERE member_id = #{member_id} AND order_code = #{order_code}
+    </delete>
 </mapper>
