@@ -165,7 +165,6 @@ public class AdminController {
         log.info("AdminController >> noticeFixGET()");
 
         int result = adminService.noticeFix(idx);
-        ;
 
         if (result > 0) {
             log.info("===============================");

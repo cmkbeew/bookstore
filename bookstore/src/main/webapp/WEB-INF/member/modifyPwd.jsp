@@ -6,20 +6,35 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/resources/fonts/icomoon/style.css">
-    <link rel="stylesheet" href="/resources/css/owl.carousel.min.css">
     <meta name="description" content="">
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/checkout/">
-    <%--    헤더 css--%>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/minty/bootstrap.min.css" rel="stylesheet"/>
+
+<%--    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">--%>
+<%--    <link rel="stylesheet" href="/resources/fonts/icomoon/style.css">--%>
+<%--    <link rel="stylesheet" href="/resources/css/owl.carousel.min.css">--%>
+<%--    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/checkout/">--%>
+<%--    &lt;%&ndash;    헤더 css&ndash;%&gt;--%>
+<%--    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />--%>
+<%--    <link href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/minty/bootstrap.min.css" rel="stylesheet"/>--%>
+<%--    <link href="/resources/css/styles.css" rel="stylesheet" />--%>
+
+<%--    <link rel="stylesheet" href="/resources/css/login/style.css">--%>
+<%--    <link rel="stylesheet" href="/resources/css/mintybootstrap.min.css">--%>
+<%--    <link rel="stylesheet" href="/resources/css/mintybootstrap.css">--%>
+<%--    <link rel="stylesheet" href="/resources/css/ifta.css">--%>
+
+    <%--  header 부트스트랩  --%>
+    <link href="/resources/mintybootstrap.min.css" rel="stylesheet"/>
     <link href="/resources/css/styles.css" rel="stylesheet" />
 
-    <link rel="stylesheet" href="/resources/css/login/style.css">
-    <link rel="stylesheet" href="/resources/css/mintybootstrap.min.css">
-    <link rel="stylesheet" href="/resources/css/mintybootstrap.css">
-    <link rel="stylesheet" href="/resources/css/ifta.css">
+    <%--    해당 템플릿 css--%>
+    <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/resources/css/carousel.css" rel="stylesheet">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/carousel/">
+    <link rel="stylesheet" href="/resources/css/owl.carousel.css">
+    <link rel="stylesheet" href="/resources/css/owl.theme.green.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/resources/fonts/icomoon/style.css">
     <title>회원가입</title>
     <style>
         .bd-placeholder-img {
