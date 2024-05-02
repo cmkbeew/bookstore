@@ -12,6 +12,7 @@ public class PaymentVO {
     // 결제 관련
     private int pay_idx;
     private String pay_method;
+    private String delivery_company;
     private int pay_price;
     private LocalDate pay_date;
     private LocalDate pay_cancel_date;
@@ -25,6 +26,7 @@ public class PaymentVO {
     // 수취자 정보
     private String receiver_name;
     private String receiver_phone_num;
+    private String zipcode;
     private String receiver_addr;
 
     // 상품 정보

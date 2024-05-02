@@ -7,11 +7,13 @@ import org.fullstack4.bookstore.service.MyServiceIf;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -129,14 +131,21 @@ public class MyController {
     }
 
     @PostMapping("/payment")
-    public String paymentInsert(PaymentDTO paymentDTO, DeliveryDTO deliveryDTO, int[] cart_idx) {
-        System.out.println("paymentDTO : " + paymentDTO);
-        System.out.println("deliveryDTO : " + deliveryDTO);
-        System.out.println("cart_idx[] : " + cart_idx);
+    public String paymentInsert(@Valid PaymentDTO paymentDTO,
+                                BindingResult bindingResult,
+                                RedirectAttributes redirectAttributes,
+                                DeliveryDTO deliveryDTO,
+                                String same_check) {
+        if(bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+            redirectAttributes.addFlashAttribute("paymentDTO", paymentDTO);
+            redirectAttributes.addFlashAttribute("same_check", same_check);
 
+            return "redirect:/my/payment?member_id=" + paymentDTO.getMember_id();
+        }
 
         List<CartListDTO> cartList = myServiceIf.cart_list(paymentDTO.getMember_id());
-        log.info("cartList : " + cartList);
+
         for(int i=0; i<cartList.size(); i++) {
             log.info(cartList.get(i).getCart_idx());
             paymentDTO.setPay_price(cartList.get(i).getDisplay_price());

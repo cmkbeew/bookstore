@@ -52,12 +52,12 @@
     </delete>
 
     <insert id="paymentInsert">
-        INSERT INTO tbl_payment (pay_method, pay_price, member_id, name, phone_num, email, receiver_name, receiver_phone_num, receiver_addr, cart_idx, product_idx, product_name, product_cnt)
-        VALUES (#{pay_method}, #{pay_price}, #{member_id}, #{name}, #{phone_num}, #{email}, #{receiver_name}, #{receiver_phone_num}, #{receiver_addr}, #{cart_idx}, #{product_idx}, #{product_name}, #{product_cnt})
+        INSERT INTO tbl_payment (pay_method, delivery_company, pay_price, member_id, name, phone_num, email, receiver_name, receiver_phone_num, receiver_addr, cart_idx, product_idx, product_name, product_cnt)
+        VALUES (#{pay_method}, #{delivery_company}, #{pay_price}, #{member_id}, #{name}, #{phone_num}, #{email}, #{receiver_name}, #{receiver_phone_num}, #{receiver_addr}, #{cart_idx}, #{product_idx}, #{product_name}, #{product_cnt})
     </insert>
 
     <select id="paymentSelect" resultType="org.fullstack4.bookstore.domain.PaymentVO">
-        SELECT pay_idx, pay_method, pay_price, pay_date, pay_cancel_date, member_id, name, phone_num, email, receiver_name, receiver_phone_num, receiver_addr, cart_idx, product_idx, product_name, product_cnt
+        SELECT pay_idx, pay_method, delivery_company,pay_price, pay_date, pay_cancel_date, member_id, name, phone_num, email, receiver_name, receiver_phone_num, receiver_addr, cart_idx, product_idx, product_name, product_cnt
         FROM tbl_payment
         WHERE cart_idx = #{cart_idx}
     </select>
