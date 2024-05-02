@@ -15,7 +15,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
 
-    <title>admin >> noticeList</title>
+    <title>myInfo</title>
 
 <%--    &lt;%&ndash;  header 부트스트랩  &ndash;%&gt;--%>
 <%--    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />--%>
@@ -43,14 +43,15 @@
     <link rel="stylesheet" href="/resources/fonts/icomoon/style.css">
 
 
+
 </head>
 <body>
 <%@ include file="/WEB-INF/common/header.jsp"%>
 <main class="container py-h">
     <div id="page-content-wrapper">
-        <div class="container py-h">
+        <div class="container">
     <div class="row g-5">
-        <div class="col-md-3"style="background-color: #e4f3ef">
+        <div class="col-md-3">
         <%@ include file="/WEB-INF/common/sidebar.jsp"%>
         </div>
         <div class="col-md-9">

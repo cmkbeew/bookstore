@@ -13,8 +13,9 @@ public class DeliveryListDTO {
     private int pay_idx;
     private LocalDate pay_date;
     private String member_id;
+    private String product_name;
     private int product_cnt;
     private String delivery_state;
-    private int tracking_num;
+    private String tracking_num;
 
 }

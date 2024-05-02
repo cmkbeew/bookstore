@@ -31,6 +31,15 @@ public class MyServiceImpl implements MyServiceIf{
 
         return cartDTOList;
     }
+//    public List<CartListDTO> cart_selcList(String member_id, int cart_idx) {
+//        List<CartListDTO> cartselcList = myMapper.cart_selcList(member_id, cart_idx).stream()
+//                .map(vo->modelMapper.map(vo, CartListDTO.class))
+//                .collect(Collectors.toList());
+//
+//        cartselcList.forEach(dto-> dto.setDisplay_price(dto.getPrice(),dto.getDiscount()));
+//
+//        return cartselcList;
+//    }
 
     @Override
     public void update_cnt(String cart_idx, int product_count, String or_member_id) {

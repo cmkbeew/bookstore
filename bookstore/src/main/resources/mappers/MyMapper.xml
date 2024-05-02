@@ -13,6 +13,15 @@
         WHERE or_member_id = #{member_id}
     </select>
 
+<!--    <select id="cart_selcList" resultType="org.fullstack4.bookstore.domain.CartListVO">-->
+<!--        SELECT tc.cart_idx as cart_idx, tc.or_member_id as or_member_id, tc.product_cnt as product_cnt, tc.add_date as add_date, tc.product_idx as product_idx,-->
+<!--               tp.product_name as product_name, tp.publisher as publisher, tp.author as author,-->
+<!--               tp.price as price, tp.discount as discount-->
+<!--        FROM tbl_cart AS tc-->
+<!--                 INNER JOIN tbl_product AS tp ON tc.product_idx = tp.product_idx-->
+<!--        WHERE or_member_id = #{member_id} and cart_idx = #{cart_idx}-->
+<!--    </select>-->
+
     <insert id="cart_add">
         INSERT INTO tbl_cart(or_member_id, product_idx, product_cnt)
         VALUES (#{or_member_id}, #{product_idx}, #{product_cnt})
@@ -74,8 +83,9 @@
         ORDER BY idx DESC
     </select>
 
-    <select id="recent_order" resultType="org.fullstack4.bookstore.domain.DeliveryVO">
-        SELECT tp.pay_idx as pay_idx ,left(tp.pay_date, 10 ) as pay_date, tp.member_id as member_id, tp.product_cnt, td.delivery_state, tdtracking_num
+    <select id="recent_order" resultType="org.fullstack4.bookstore.domain.DeliveryListVO">
+        SELECT tp.pay_idx as pay_idx ,left(tp.pay_date, 10 ) as pay_date, tp.member_id as member_id, tp.product_cnt as product_cnt, tp.product_name as product_name,
+               td.delivery_state as delivery_state, td.tracking_num as tracing_num
         FROM tbl_payment as tp
         inner join tbl_delivery as td on tp.pay_idx = td.pay_idx
         where  tp.member_id = #{member_id}

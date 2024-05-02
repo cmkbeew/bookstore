@@ -17,7 +17,6 @@
 
     <title>admin >> community</title>
 
-
     <%--  header 부트스트랩  --%>
     <link href="/resources/mintybootstrap.min.css" rel="stylesheet"/>
     <link href="/resources/css/styles.css" rel="stylesheet" />
@@ -30,16 +29,6 @@
     <link rel="stylesheet" href="/resources/css/owl.theme.green.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
-<%--    &lt;%&ndash;  header 부트스트랩  &ndash;%&gt;--%>
-<%--&lt;%&ndash;    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />&ndash;%&gt;--%>
-<%--    <link href="/resources/css/styles.css" rel="stylesheet" />--%>
-<%--    <link href="/resources/mintybootstrap.min.css" rel="stylesheet"/>--%>
-<%--    <link rel="stylesheet" href="/resources/css/bootstrap.min.css" integrity="sha384-H4X+4tKc7b8s4GoMrylmy2ssQYpDHoqzPa9aKXbDwPoPUA3Ra8PA5dGzijN+ePnH" crossorigin="anonymous">--%>
-
-<%--    &lt;%&ndash; list 부트스트랩   &ndash;%&gt;--%>
-<%--&lt;%&ndash;    <link href="/resources/css/admin/styles.css" rel="stylesheet" />&ndash;%&gt;--%>
-<%--    <link rel="stylesheet" href="/resources/fonts/icomoon/style.css">--%>
-<%--    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0" />--%>
 </head>
 <body style="background-color: #eeeeee">
 <%@ include file="/WEB-INF/common/header.jsp"%>

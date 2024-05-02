@@ -30,8 +30,13 @@ public class MyController {
     }
 
     @GetMapping("/order")
-    public void orderGet() {
+    public void orderGet(@RequestParam(name="member_id", defaultValue = "") String member_id,
+                         Model model) {
         log.info("결제내역페이지");
+        List<DeliveryListDTO> deliveryList = myServiceIf.recent_order(member_id);
+        log.info(deliveryList);
+        model.addAttribute("deliveryList",deliveryList);
+
 
     }
     @PostMapping("/order")
@@ -47,8 +52,18 @@ public class MyController {
                         ) {
         List<CartListDTO> cartList = myServiceIf.cart_list(member_id);
 
+        int total_price = cartList.stream().mapToInt(CartListDTO::getDisplay_price).sum();
+
+        // 배송비
+        int shipping = 2500;
+        if(total_price >= 15000) {
+            shipping = 0;
+        }
         model.addAttribute("cartList", cartList);
+        model.addAttribute("shipping", shipping);
+        model.addAttribute("total_price", total_price);
     }
+
     @PostMapping("/updateCnt")
     @ResponseBody
     public String updateCnt(@RequestParam(name = "cart_idx") String cart_idx,
@@ -61,11 +76,12 @@ public class MyController {
     }
 
     @PostMapping("deleteCart")
-    public String deleteCart(@RequestParam(name="")
+    public String deleteCart(
                              HttpServletRequest req,HttpSession Session,
                              RedirectAttributes redirectAttributes) {
         String memberId = Session.getAttribute("member_id").toString();
         String[] delete_idx = req.getParameterValues("select");
+        log.info(Arrays.toString(delete_idx));
         int result = 0;
 
         for( int i = 0 ; i < delete_idx.length; i++) {
@@ -107,12 +123,27 @@ public class MyController {
 
     }
 
-
     @GetMapping("/payment")
     public void cartPay(@RequestParam(name="member_id") String member_id,
+                        CartDTO cartDTO,
+                        ProductDTO productDTO,
+                        HttpServletRequest req,
                         Model model) {
-        // 장바구니 전체 리스트
-        List<CartListDTO> cartList = myServiceIf.cart_list(member_id);
+        String[] select_idx = req.getParameterValues("select");
+        log.info(cartDTO);
+        log.info("select Idx : " + Arrays.toString(select_idx));
+
+
+//        List<CartListDTO> cartList ;
+//        if( select_idx.length < 1) {
+//            // 장바구니 전체 리스트
+//             cartList = myServiceIf.cart_list(member_id);
+//        } else {
+//            for(int i = 0; i< select_idx.length < i++) {
+//                cartList = myServiceIf.cart_selcList(member_id, select_idx[i]);
+//            }
+//        }
+        List<CartListDTO> cartList= myServiceIf.cart_list(member_id);
 
         // 주문 금액 합계
         int total_price = cartList.stream().mapToInt(CartListDTO::getDisplay_price).sum();
@@ -133,8 +164,6 @@ public class MyController {
         System.out.println("paymentDTO : " + paymentDTO);
         System.out.println("deliveryDTO : " + deliveryDTO);
         System.out.println("cart_idx[] : " + cart_idx);
-
-
         List<CartListDTO> cartList = myServiceIf.cart_list(paymentDTO.getMember_id());
         log.info("cartList : " + cartList);
         for(int i=0; i<cartList.size(); i++) {
@@ -158,5 +187,16 @@ public class MyController {
         }
 
         return "redirect:/my/order?member_id=" + paymentDTO.getMember_id();
+    }
+
+    @PostMapping("/paymentNow")
+    public String payNow(
+            CartDTO cartDTO,
+            HttpSession session
+    ) {
+
+        myServiceIf.cart_add(cartDTO);
+
+        return "redirect:/my/payment?member_id="+session.getAttribute("member_id");
     }
 }

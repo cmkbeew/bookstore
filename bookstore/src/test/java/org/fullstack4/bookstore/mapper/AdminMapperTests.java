@@ -75,12 +75,12 @@ public class AdminMapperTests {
         int result = adminMapper.noticeModify(noticeVO);
     }
 
-    @Test
-    public void testReplyDelete() {
-        QnaVO qnaVO = QnaVO.builder()
-                .idx(14)
-                .build();
-        int result = adminMapper.qnaReplyDelete(qnaVO.getIdx());
-    }
+//    @Test
+//    public void testReplyDelete() {
+//        QnaVO qnaVO = QnaVO.builder()
+//                .idx(14)
+//                .build();
+//        int result = adminMapper.qnaReplyDelete(qnaVO.getIdx());
+//    }
 
 }

@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: 82108
-  Date: 2024-04-25
-  Time: 오후 2:38
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -15,7 +8,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
 
-    <title>Myy cart</title>
+    <title>My cart</title>
 
 <%--    &lt;%&ndash;  header 부트스트랩  &ndash;%&gt;--%>
 <%--    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />--%>
@@ -36,41 +29,39 @@
     <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="/resources/css/carousel.css" rel="stylesheet">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/carousel/">
-    <link rel="stylesheet" href="/resources/css/owl.carousel.css">
-    <link rel="stylesheet" href="/resources/css/owl.theme.green.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="/resources/fonts/icomoon/style.css">
+    <link rel="stylesheet" href="/resources/css/admin/styles.css">
 
     <style>
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button {
             -webkit-appearance: none;
-            margin: 0;
-        }
+            margin: 0; }
     </style>
 </head>
+
 <body>
 <%@ include file="/WEB-INF/common/header.jsp"%>
 <div class="d-flex py-h" id="wrapper">
     <div id="page-content-wrapper">
-        <div class="container py-h">
+        <div class="container">
             <div class="row">
-                <div class="col-md-3"style="background-color: #e4f3ef">
-                    <%@ include file="/WEB-INF/common/sidebar.jsp"%>
+                <div class="col-md-3">
+<%--                    style="background-color: #e4f3ef"--%>
+                <%@ include file="/WEB-INF/common/sidebar.jsp"%>
                 </div>
                 <div class="col-md-9">
-                    <%--                    <section class="h-100 h-custom" style="background-color: #eee;">--%>
                     <div class="container py-5 h-100">
-                        <%--                            <div class="row d-flex justify-content-center align-items-center h-100">--%>
                         <div class="col">
                             <div class="card">
                                 <div class="card-body p-4">
                                     <div class="row">
                                         <form id="frm" name="frm" method="post" action="">
                                             <div class="col-lg-12">
-                                                <h5 class="mb-3"><a href="#!" class="text-body"><i class="fas fa-long-arrow-alt-left me-2"></i>Continue shopping</a></h5>
+                                                <h5 class="mb-3"><a href="/product/list?type=유아" class="text-body"><i class="fas fa-long-arrow-alt-left me-2"></i>계속 쇼핑하기</a></h5>
                                                 <hr>
                                                 <div class="d-flex justify-content-between align-items-center mb-4">
                                                     <div>
@@ -86,12 +77,11 @@
                                                                 <div class="d-flex justify-content-between">
                                                                     <div class="d-flex flex-row align-items-center">
                                                                         <div><label class="control control--checkbox">
-                                                                            <input type="checkbox" name="select" id="${list.cart_idx}" value="">
+                                                                            <input class="control_value" type="checkbox" name="select" id="${list.cart_idx}" value="${list.cart_idx}">
                                                                             <div class="control__indicator"></div>
                                                                         </label></div>
                                                                         <div>
-                                                                            <img
-                                                                                    src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp"
+                                                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp"
                                                                                     class="img-fluid rounded-3" alt="Shopping item" style="width: 65px;">
                                                                         </div>
                                                                         <div class="ms-3">
@@ -100,26 +90,30 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="d-flex flex-row align-items-center">
-                                                                        <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2" type="button"
-                                                                                id="minus${list.cart_idx}" onclick="this.parentNode.querySelector('input[type=number]').stepDown(); bookCntUpdate(${list.cart_idx})"
+                                                                        <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2 up" type="button"
+                                                                                id="minus${list.cart_idx}" onclick="this.parentNode.querySelector('input[type=number]').stepDown(); bookCntUpdate(${list.cart_idx});"
                                                                                 <c:out value="${list.product_cnt eq 1 ? 'disabled' : '' }"/>>
                                                                             <span class="material-symbols-outlined">remove</span>
                                                                         </button>
 
                                                                         <input id="form${list.cart_idx}" min="1" name="quantity" value="${list.product_cnt}" type="number"
-                                                                               class="form-control form-control-sm" style="width:50px; text-align: center" readonly/>
-                                                                        <input type="hidden" id="cart_${status.index}" name="cart_${status.index}" value="${list.cart_idx}"/>
-                                                                        <input type="hidden" id="product_${status.index}" name="product_${status.index}" value="${list.product_idx}"/>
+                                                                               class="form-control form-control-sm totalCnt" style="width:50px; text-align: center" readonly/>
+                                                                        <div class="cart_info">
+                                                                        <input type="hidden" class="cart_idx"  value="${list.cart_idx}"/>
+                                                                        <input type="hidden" class="cart_price"  value="${list.display_price}"/>
+                                                                        <input type="hidden" class="cart_cnt"  value="${list.product_cnt}"/>
+                                                                            <input type="hidden" class="cart_totalPrice" value="${list.display_price * list.product_cnt}"/>
+                                                                        </div>
 
 
 
                                                                         <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2" type="button"
-                                                                                id="plus${list.cart_idx}" onclick="this.parentNode.querySelector('input[type=number]').stepUp(); bookCntUpdate(${list.cart_idx})">
+                                                                                id="plus${list.cart_idx}" onclick="this.parentNode.querySelector('input[type=number]').stepUp(); bookCntUpdate(${list.cart_idx}); totalCnt(${list.cart_idx});" >
                                                                             <span class="material-symbols-outlined">add</span>
                                                                         </button>
                                                                         <div style="width: 100px;">
                                                                             <c:choose>
-                                                                                <c:when test="${list.display_price eq list.price}">
+                                                                                <c:when test="${list.discount == 0}">
                                                                                     <p class="small mb-0">정가 : ${list.price}</p>
                                                                                     <%--                                                                                    <p class="small mb-0">정가 : ${list.price}</p>--%>
                                                                                 </c:when>
@@ -136,12 +130,13 @@
                                                         </div>
                                                     </c:forEach>
                                                     <div class="card mb-3">
-                                                        <div class="card-body">
-                                                            <div class="d-flex justify-content-center">
-                                                                <input id="total_value" min="1" name="quantity" value="1" type="number"
-                                                                       class="form-control form-control-sm" style="width:50px; text-align: center"/>
-                                                                <a href="#!" style="color: #cecece;"><i class="fas fa-trash-alt"></i></a>
-                                                            </div>
+                                                        <div class="card-body d-flex justify-content-between">
+                                                            <div class><p>총 도서 금액 : ${total_price}</p>
+                                                                <p>배송비 : ${shipping}</p></div>
+<%--                                                            <div class="d-flex justify-content-end">--%>
+
+                                                                <h3>${shipping + total_price}원</h3>
+<%--                                                            </div>--%>
                                                         </div>
                                                     </div>
                                                     <div class="row justify-content-around">
@@ -172,31 +167,37 @@
             </div>
         </div>
     </div>
-</div>
+    </div>
 </div>
 <%@ include file="/WEB-INF/common/footer.jsp"%>
 <script>
+
+    let total_cnt = document.getElementById("total_cnt");
+    let totalCntValue = document.querySelector(".totalCnt");
+    let total_price = document.getElementById("total_price");
     let delBtn = document.getElementById("delBtn");
     delBtn.addEventListener("click", (e) => {
         document.getElementById("frm").action = "/my/deleteCart";
         document.getElementById("frm").submit();
-
     });
 
+
     function bookCntUpdate(cartIdx) {
-        let product_cnt = document.getElementById("form"+cartIdx).value;
+        let product_cnt = document.getElementById("form" + cartIdx).value;
 
         $.ajax({
             url: "/my/updateCnt",
             type: "post",
             data: {
-                product_cnt : product_cnt,
-                cart_idx : cartIdx,
+                product_cnt: product_cnt,
+                cart_idx: cartIdx,
                 or_member_id: "${sessionScope.member_id}"
             },
             success: function (url) {
                 // location.reload(url);
                 location.href = url;
+
+
             },
             error: function (err) {
                 console.log(err);
@@ -234,30 +235,23 @@
     // }
 
     const allCheckboxDOM = document.querySelectorAll(".control--checkbox");
-    const control = document.querySelectorAll(".control__indicator");
+    const control = document.querySelectorAll(".control_value");
     let idx = [];
 
-    // allCheckboxDOM.addEventListener("click", (e) => {
-    //     for (let i = 0; i < allCheckboxDOM.length; i++) {
-    //         allCheckboxDOM[i].children[0].checked = true;
-    //     }
-    // }, false);
-
     for (let i = 0; i < control.length; i++) {
-        control[i].addEventListener("click", function(e) {
+        control[i].addEventListener("click", function (e) {
+            // if(!e.target.parentNode.parentNode.parentNode.children[0].children[0].children[0].checked) {
+            //     e.target.parentNode.parentNode.parentNode.children[0].children[0].children[0].checked = true;
+            // } else {
+            //     e.target.parentNode.parentNode.parentNode.children[0].children[0].children[0].checked = false;
+            // }
             // e.target.parentNode.parentNode.parentNode.children[0].children[0].children[0].checked = true;
-            console.log(e.target.parentNode.parentNode.parentNode.children[0].children[0].children[0].checked)
-
+            console.log(e.target.checked)
+            console.log(e.target.id);
+            idx.push(e.target.id);
+            console.log(idx);
         }, false)
     }
-
-
-    // for (let i = 0; i < control.length; i++) {
-    //     control[i].addEventListener("click", function (e) {
-    //         console.log(e.target.parentNode.parentNode.parentNode.children[1].children[0].textContent);
-    //         idx.push(e.target.parentNode.parentNode.parentNode.children[1].children[0].textContent);
-    //     }, false)
-    // }
 
 </script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>

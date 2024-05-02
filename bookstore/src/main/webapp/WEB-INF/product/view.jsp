@@ -4,7 +4,7 @@
 <head>
     <title>도서 목록</title>
     <%--  header 부트스트랩  --%>
-    <link href="/resources/mintybootstrap.min.css" rel="stylesheet"/>
+<%--    <link href="/resources/mintybootstrap.min.css" rel="stylesheet"/>--%>
     <link href="/resources/css/styles.css" rel="stylesheet" />
 
     <%--    해당 템플릿 css--%>
@@ -17,7 +17,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="/resources/fonts/icomoon/style.css">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+<%--    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />--%>
     <script src="//code.jquery.com/jquery-3.5.1.min.js" ></script>
 
     <style>
@@ -29,9 +29,7 @@
     </style>
 </head>
 <body>
-<body>
 <%@ include file="/WEB-INF/common/header.jsp"%>
-<<body>
 <!-- Product section-->
 <section class="py-5">
     <div class="container px-4 px-lg-5 my-5">
@@ -80,7 +78,7 @@
                         <td id="real_price">${productDTO.display_price}</td>
                     </tr>
                 </table>
-                <form>
+                <form id="infoFrm" name="infoFrm">
                     <div class="d-flex align-items-center">
                         <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2" id="stepDown" type="button"
                                 onclick="this.parentNode.querySelector('input[type=number]').stepDown(); step();">
@@ -99,21 +97,33 @@
                         <input type="hidden" name="or_member_id" id="or_member_id" value="${sessionScope.member_id}" />
                         <%--                        <input type="hidden" name="or_member_id" id="or_member_id" value="test" />--%>
                         <input type="hidden" name="product_idx" id="product_idx" value="${productDTO.product_idx}"/>
-                        <button class="btn btn-outline-dark flex-shrink-0" type="button" onclick="addCart()">
-                            <i class="bi-cart-fill me-1"></i>
-                            장바구니에 담기
-                        </button>
                     </div>
-                </form>
+
+
                 <div class="fs-5 text-end">
                     <div>
                         총 상품금액 <sub>(총 수량)</sub>
                         <span id="total_price" style="font-size: 30px; color: #0c63e4">${productDTO.display_price}</span>원<span style="font-size: 20px; color: #0c63e4"><sub id="total_count">(1)</sub></span>
                     </div>
-                    <div>
-
-                    </div>
                 </div>
+
+                    <div class="row">
+                    <div class="fs-5 text-end my-5">
+
+
+
+                    <button class="btn btn-outline-dark flex-shrink-0" type="button" onclick="addCart()">
+                        <span class="material-symbols-outlined align-middle">shopping_cart</span>장바구니에 담기
+                    </button>
+
+                        <input type="hidden" name="product_cnt" value="">
+                        <button class="btn btn-outline-dark flex-shrink-0" type="button" onclick="pay()">
+                            <span class="material-symbols-outlined align-middle">credit_card</span>
+                            바로 구매하기
+                        </button>
+                    </form>
+                    </div>
+                    </div>
             </div>
 
             <!-- 도서 정보 탭 -->
@@ -465,6 +475,16 @@
                 alert("장바구니 담기 실패");
             }
         });
+    }
+    function pay() {
+        if(${not empty sessionScope.member_id}) {
+        document.getElementById("infoFrm").action ="/my/paymentNow";
+        document.getElementById("infoFrm").method = "post";
+        document.getElementById("infoFrm").submit();
+        } else {
+            alert("로그인이 필요한 서비스입니다.");
+            window.location.href="/login/login";
+        }
     }
 
 </script>
