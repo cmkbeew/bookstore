@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.fullstack4.bookstore.mapper.IndexMapper">
+    <select id="product_list" resultType="org.fullstack4.bookstore.domain.ProductVO">
+        select product_idx, product_name, type, grade, price, publish_date
+        from tbl_product
+        where type = #{type}
+        order by publish_date desc
+        limit 0,4
+    </select>
+
+    <select id="product_random" resultType="org.fullstack4.bookstore.domain.ProductVO">
+        select product_idx, product_name, type, grade, price
+        from tbl_product
+        where type = #{type}
+        order by rand()
+        limit 3;
+    </select>
+
+    <select id="main_notice" resultType="org.fullstack4.bookstore.domain.NoticeVO">
+        select idx, title, left(reg_date,10) as reg_date
+        from tbl_bbs_notice
+        order by reg_date DESC
+            limit 5;
+    </select>
+
+    <select id="main_faq" resultType="org.fullstack4.bookstore.domain.FaqVO">
+        select idx, title, left(reg_date,10) as reg_date
+        from tbl_bbs_faq
+        order by reg_date DESC
+            limit 5;
+    </select>
+</mapper>

@@ -9,6 +9,8 @@ import org.fullstack4.bookstore.dto.CartDTO;
 import org.fullstack4.bookstore.dto.CartListDTO;
 import org.fullstack4.bookstore.dto.DeliveryDTO;
 import org.fullstack4.bookstore.dto.PaymentDTO;
+import org.fullstack4.bookstore.dto.QnaDTO;
+import org.fullstack4.bookstore.mapper.CommunityMapper;
 import org.fullstack4.bookstore.mapper.MyMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,7 @@ import java.util.stream.Collectors;
 public class MyServiceImpl implements MyServiceIf{
     private final ModelMapper modelMapper;
     private final MyMapper myMapper;
+    private final CommunityMapper communityMapper;
     @Override
     public List<CartListDTO> cart_list(String member_id) {
         List<CartListDTO> cartDTOList = myMapper.cart_list(member_id).stream()
@@ -87,5 +90,11 @@ public class MyServiceImpl implements MyServiceIf{
         int paymentResult = myMapper.deliveryInsert(deliveryVO);
 
         return paymentResult;
+    }
+    public List<QnaDTO> qna_list_all(String member_id) {
+        List<QnaDTO> QnaDTOList = myMapper.qna_list_all(member_id).stream()
+                .map(vo->modelMapper.map(vo, QnaDTO.class))
+                .collect(Collectors.toList());
+        return QnaDTOList;
     }
 }

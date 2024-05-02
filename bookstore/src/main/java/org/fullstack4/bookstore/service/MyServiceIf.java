@@ -8,6 +8,9 @@ import org.fullstack4.bookstore.dto.CartDTO;
 import org.fullstack4.bookstore.dto.CartListDTO;
 import org.fullstack4.bookstore.dto.DeliveryDTO;
 import org.fullstack4.bookstore.dto.PaymentDTO;
+import org.fullstack4.bookstore.dto.CartDTO;
+import org.fullstack4.bookstore.dto.CartListDTO;
+import org.fullstack4.bookstore.dto.QnaDTO;
 
 import java.util.List;
 
@@ -18,9 +21,9 @@ public interface MyServiceIf {
     int deleteCart (int idx);
 
     int cart_add(CartDTO cartDTO);
-
     int paymentInsert(PaymentDTO paymentDTO);
     PaymentDTO paymentSelect(int cart_idx);
 
     int deliveryInsert(DeliveryDTO deliveryDTO);
+    List<QnaDTO> qna_list_all(String member_id);
 }

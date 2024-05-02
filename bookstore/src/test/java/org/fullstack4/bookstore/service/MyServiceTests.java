@@ -2,6 +2,8 @@ package org.fullstack4.bookstore.service;
 
 import lombok.extern.log4j.Log4j2;
 import org.fullstack4.bookstore.dto.CartListDTO;
+import org.fullstack4.bookstore.dto.ProductDTO;
+import org.fullstack4.bookstore.dto.QnaDTO;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,4 +25,13 @@ public class MyServiceTests {
                 .build();
         log.info(myServiceIf.cart_list(cartListDTO.getOr_member_id()));
     }
+
+    @Test
+    public void bbs_List(){
+        QnaDTO bbsListDTO = QnaDTO.builder()
+                .writer("%")
+                .build();
+        log.info(myServiceIf.qna_list_all(bbsListDTO.getWriter()));
+    }
+
 }

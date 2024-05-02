@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="org.fullstack4.bookstore.mapper.MyMapper">
@@ -39,6 +39,12 @@
 <!--    <update id="update_plus_cnt">-->
 <!--        update tbl_cart set product_cnt =product_cnt+1 where cart_idx = #{cart_idx}-->
 <!--    </update>-->
+<!--    <delete id="deleteCart" parameterType="java.util.Arrays">-->
+<!--        DELETE FROM tbl_cart-->
+<!--        where cart_idx IN (#{idxList})-->
+<!--    </delete>-->
+<!--    MY QNA 리스트 출력-->
+
 
     <delete id="deleteCart">
         DELETE FROM tbl_cart
@@ -60,4 +66,12 @@
         INSERT INTO tbl_delivery (tracking_num, receiver_name, receiver_phone_num, zipcode, receiver_addr, member_id, pay_idx)
         VALUES (#{tracking_num}, #{receiver_name}, #{receiver_phone_num}, #{zipcode}, #{receiver_addr}, #{member_id}, #{pay_idx})
     </insert>
+
+    <select id="qna_list_all" resultType="org.fullstack4.bookstore.domain.QnaVO">
+        SELECT idx, title, content, writer, read_cnt,reg_date, modify_date,reply_state
+        FROM tbl_bbs_qna
+        where writer = #{member_id}
+        ORDER BY idx DESC
+    </select>
+
 </mapper>

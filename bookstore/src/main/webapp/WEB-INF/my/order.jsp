@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -8,7 +9,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
 
-    <title>Order</title>
+    <title>My QNA</title>
 
     <%--  header 부트스트랩  --%>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
@@ -19,6 +20,8 @@
     <%-- list 부트스트랩   --%>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="/resources/fonts/icomoon/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="/resources/css/mycss.css">
 </head>
 <body>
 <%@ include file="/WEB-INF/common/header.jsp"%>
@@ -26,67 +29,39 @@
     <%--    <%@ include file="/WEB-INF/common/adminSidebar.jsp"%>--%>
     <!-- Page content wrapper-->
     <div id="page-content-wrapper">
-        <%--        <button class="btn btn-primary" id="sidebarToggle">--%>
-        <%--            <i class="fa fa-arrow-left" aria-hidden="true" style="display: block;"></i>--%>
-        <%--            <i class="fa fa-arrow-right" aria-hidden="true" style="display: none;"></i>--%>
-        <%--        </button>--%>
         <!-- Page content-->
         <div class="container py-h">
             <div class="row">
-                <div class="col-md-3"style="background-color: #e4f3ef">
+                <div class="col-md-3"style="background-color: #e4f3ef ">
                     <%@ include file="/WEB-INF/common/sidebar.jsp"%>
                 </div>
                 <div class="col-md-9">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title text-uppercase mb-0 text-center">회원관리</h5>
+                            <h5 class="card-title text-uppercase mb-0 text-center">나의 문의 내역</h5>
                         </div>
                         <div class="table-responsive">
-                            <table class="table no-wrap user-table mb-0">
+                            <table class="table no-wrap user-table custom-table mb-0 text-center">
                                 <thead>
-                                <tr>
-                                    <th scope="col" class="border-0">선택</th>
+                                <tr scope="row">
                                     <th scope="col" class="border-0">번호</th>
-                                    <th scope="col" class="border-0">아이디</th>
-                                    <th scope="col" class="border-0">이름</th>
-                                    <%--                                    <th scope="col" class="border-0 text-uppercase font-medium">주소</th>--%>
-                                    <%--                                    <th scope="col" class="border-0 text-uppercase font-medium">상세주소</th>--%>
-                                    <%--                                    <th scope="col" class="border-0 text-uppercase font-medium">우편번호</th>--%>
-                                    <%--                                    <th scope="col" class="border-0 text-uppercase font-medium">휴대폰번호</th>--%>
-                                    <th scope="col" class="border-0" >이메일</th>
-                                    <th scope="col" class="border-0">평생회원</th>
-                                    <th scope="col" class="border-0">선택사항</th>
-                                    <th scope="col" class="border-0">포인트</th>
-                                    <th scope="col" class="border-0">회원상태</th>
-                                    <th scope="col" class="border-0">가입일</th>
-                                    <th scope="col" class="border-0">탈퇴일</th>
+                                    <th scope="col" class="border-0">문의 글 제목</th>
+                                    <th scope="col" class="border-0">조회수</th>
+                                    <th scope="col" class="border-0" >작성일자</th>
+                                    <th scope="col" class="border-0">답변 여부</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <c:choose>
-                                    <c:when test="${!empty memberList}">
-                                        <c:forEach items="${memberList}" var="list">
-                                            <tr>
-                                                <td class="pl-4">
-                                                    <label class="control control--checkbox">
-                                                        <input type="checkbox" name="select" id="select" value="">
-                                                        <div class="control__indicator"></div>
-                                                    </label>
-                                                </td>
-                                                <td class="pl-4">${list.member_idx}</td>
-                                                <td>${list.member_id}</td>
-                                                <td>${list.name}</td>
-                                                    <%--                                                <td>${list.addr1}</td>--%>
-                                                    <%--                                                <td>${list.addr2}</td>--%>
-                                                    <%--                                                <td>${list.zipcode}</td>--%>
-                                                    <%--                                                <td>${list.phone_num}</td>--%>
-                                                <td>${list.email}</td>
-                                                <td>${list.forever_yn}</td>
-                                                <td>${list.option}</td>
-                                                <td>${list.point}</td>
-                                                <td>${list.member_state}</td>
+                                    <c:when test="${!empty qnaList}">
+                                        <c:forEach items="${qnaList}" var="list" varStatus="i">
+                                            <tr style="cursor:pointer;" onclick="window.location.href='/community/view?type=qna&idx=${list.idx}'">
+                                                <td class="pl-4">${fn:length(qnaList) - i.index}</td>
+                                                <td>${list.title}</td>
+                                                    <%--                                                    <td>${list.writer}</td>--%>
+                                                <td><span class="material-symbols-outlined align-middle" style="color: gray; font-size: 1rem">visibility</span> ${list.read_cnt}</td>
                                                 <td>${list.reg_date}</td>
-                                                <td>${list.leave_date}</td>
+                                                <td>${list.reply_state}</td>
                                             </tr>
                                         </c:forEach>
                                     </c:when>
@@ -100,17 +75,12 @@
                             </table>
                         </div>
                     </div>
-                    <div style="display: flex; justify-content: space-between; margin-top: 4px;">
-                        <div>
-                            <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2"><i class="fa fa-envelope" aria-hidden="true"></i></button>
-                            <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2"><i class="fa fa-credit-card" aria-hidden="true"></i></button>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <%@ include file="/WEB-INF/common/footer.jsp"%>
+
 </body>
 </html>

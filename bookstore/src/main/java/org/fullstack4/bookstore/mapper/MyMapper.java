@@ -5,6 +5,7 @@ import org.fullstack4.bookstore.domain.CartListVO;
 import org.fullstack4.bookstore.domain.CartVO;
 import org.fullstack4.bookstore.domain.DeliveryVO;
 import org.fullstack4.bookstore.domain.PaymentVO;
+import org.fullstack4.bookstore.domain.QnaVO;
 import org.fullstack4.bookstore.dto.CartDTO;
 import org.fullstack4.bookstore.dto.PaymentDTO;
 
@@ -25,4 +26,6 @@ public interface MyMapper {
     PaymentVO paymentSelect(int cart_idx);
 
     int deliveryInsert(DeliveryVO deliveryVO);
+
+    List<QnaVO> qna_list_all(String member_id);
 }
