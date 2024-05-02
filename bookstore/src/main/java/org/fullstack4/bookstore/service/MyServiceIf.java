@@ -16,15 +16,12 @@ public interface MyServiceIf {
     int deleteCart (int idx);
 
     int cart_add(CartDTO cartDTO);
-//    int paymentInsert(PaymentDTO paymentDTO);
-//    PaymentDTO paymentSelect(int cart_idx);
-
-//    int deliveryInsert(DeliveryDTO deliveryDTO);
     List<QnaDTO> qna_list_all(String member_id);
     List<DeliveryListDTO> recent_order(String member_id);
 
     void order_item_insert(OrderItemDTO orderItemDTO);
     void order_insert(OrderDTO orderDTO);
-    List<OrderDTO> order_list();
+    List<OrderDetailDTO> order_list();
     List<OrderDetailDTO> order_detail(String order_code);
+    int orderDelete(@Param(value = "member_id") String member_id, @Param(value = "order_code") String order_code);
 }

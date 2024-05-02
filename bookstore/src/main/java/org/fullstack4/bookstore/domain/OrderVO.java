@@ -36,4 +36,5 @@ public class OrderVO {
     private String addr2;
 
     private String order_code;
+    private String delivery_state;
 }

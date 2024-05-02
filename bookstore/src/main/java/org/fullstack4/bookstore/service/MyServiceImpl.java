@@ -8,6 +8,7 @@ import org.fullstack4.bookstore.mapper.CommunityMapper;
 import org.fullstack4.bookstore.mapper.MyMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -59,32 +60,6 @@ public class MyServiceImpl implements MyServiceIf{
         return result;
     }
 
-//    @Override
-//    public int paymentInsert(PaymentDTO paymentDTO) {
-//        PaymentVO paymentVO = modelMapper.map(paymentDTO, PaymentVO.class);
-//
-//        int paymentResult = myMapper.paymentInsert(paymentVO);
-//
-//        return paymentResult;
-//    }
-//
-//    @Override
-//    public PaymentDTO paymentSelect(int cart_idx) {
-//        PaymentVO paymentVO = myMapper.paymentSelect(cart_idx);
-//
-//        PaymentDTO paymentDTO = modelMapper.map(paymentVO, PaymentDTO.class);
-//
-//        return paymentDTO;
-//    }
-//
-//    @Override
-//    public int deliveryInsert(DeliveryDTO deliveryDTO) {
-//        DeliveryVO deliveryVO = modelMapper.map(deliveryDTO, DeliveryVO.class);
-//
-//        int paymentResult = myMapper.deliveryInsert(deliveryVO);
-//
-//        return paymentResult;
-//    }
     public List<QnaDTO> qna_list_all(String member_id) {
         List<QnaDTO> QnaDTOList = myMapper.qna_list_all(member_id).stream()
                 .map(vo->modelMapper.map(vo, QnaDTO.class))
@@ -115,11 +90,11 @@ public class MyServiceImpl implements MyServiceIf{
     }
 
     @Override
-    public List<OrderDTO> order_list() {
-        List<OrderVO> voList = myMapper.order_list();
+    public List<OrderDetailDTO> order_list() {
+        List<OrderDetailVO> voList = myMapper.order_list();
 
-        List<OrderDTO> dtoList = voList.stream()
-                .map(vo -> modelMapper.map(vo, OrderDTO.class))
+        List<OrderDetailDTO> dtoList = voList.stream()
+                .map(vo -> modelMapper.map(vo, OrderDetailDTO.class))
                 .collect(Collectors.toList());
 
         return dtoList;
@@ -135,4 +110,14 @@ public class MyServiceImpl implements MyServiceIf{
 
         return dtoList;
     }
+
+    @Override
+    @Transactional
+    public int orderDelete(String member_id, String order_code) {
+        int orderResult = myMapper.orderDelete(member_id, order_code);
+        int orderItemResult = myMapper.orderItemDelete(member_id, order_code);
+
+        return orderResult;
+    }
+
 }

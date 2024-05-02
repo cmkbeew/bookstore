@@ -10,7 +10,6 @@
             <ol class="list-group list-group-flush">
                 <li class="list-group-item"><a href="/member/view?member_id=${sessionScope.member_id}" style="color:black">내 프로필</a></li>
                 <li class="list-group-item"><a href="/my/qna?member_id=${sessionScope.member_id}" style="color:black">작성한 qna</a></li>
-                <li class="list-group-item"><a href="/my/order?member_id=${sessionScope.member_id}" style="color:black">결제 내역</a></li>
                 <li class="list-group-item"><a href="/my/order?member_id=${sessionScope.member_id}" style="color:black">주문 조회</a></li>
                 <li class="list-group-item"><a href="/my/cart?member_id=${sessionScope.member_id}" style="color:black">장바구니</a></li>
             </ol>
