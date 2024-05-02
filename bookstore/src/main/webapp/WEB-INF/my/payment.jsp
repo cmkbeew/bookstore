@@ -7,8 +7,9 @@
     <%-- header 부트스트랩   --%>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/minty/bootstrap.min.css" rel="stylesheet"/>
-    <link href="/resources/css/admin/styles.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/minty/bootstrap.min.css" integrity="sha384-H4X+4tKc7b8s4GoMrylmy2ssQYpDHoqzPa9aKXbDwPoPUA3Ra8PA5dGzijN+ePnH" crossorigin="anonymous">
+    <link href="/resources/css/admin/styles.css" rel="stylesheet" />
+
 
     <%-- list 부트스트랩   --%>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
@@ -118,23 +119,27 @@
                                             <input type="text" id="name" name="name" class="form-control form-control-lg text-black"
                                                    placeholder="Name" value="${sessionScope.name}" />
                                         </div>
+                                        <div id="div_err_name" style="display: none"></div>
 
                                         <div class="form-outline form-white mb-2">
                                             <label class="form-label" for="phone_num">휴대폰번호</label>
                                             <input type="text" id="phone_num" name="phone_num" class="form-control form-control-lg text-black"
                                                    placeholder="010 0000 0000" maxlength="13" value="${sessionScope.phone_num}" />
                                         </div>
+                                        <div id="div_err_phone_num" style="display: none"></div>
+
                                         <div class="form-outline form-white mb-5">
                                             <label class="form-label" for="email">이메일</label>
                                             <input type="email" id="email" name="email" class="form-control form-control-lg text-black"
                                                    placeholder="Email" value="${sessionScope.email}"/>
+                                            <div id="div_err_email" style="display: none"></div>
                                         </div>
 
 
                                         <div class="d-flex justify-content-between align-items-center mb-3">
                                             <h5 class="mb-0">받는 고객 정보</h5>
                                             <label class="mb-0" style="font-size: 13px;" for="same_check">
-                                                <input type="checkbox" id="same_check" />
+                                                <input type="checkbox" name="same_check" id="same_check" <c:if test="${same_check == 'on'}">checked</c:if> />
                                                 주문 고객 정보와 일치하면 선택하세요.
                                             </label>
                                         </div>
@@ -142,33 +147,39 @@
                                         <div class="form-outline form-white mb-2">
                                             <label class="form-label" for="receiver_name">받는 사람</label>
                                             <input type="text" id="receiver_name" name="receiver_name" class="form-control form-control-lg text-black"
-                                                   placeholder="Name" />
+                                                   placeholder="Name" value="${paymentDTO.receiver_name}" />
                                         </div>
+                                        <div id="div_err_receiver_name" style="display: none"></div>
 
                                         <div class="form-outline form-white mb-2">
                                             <label class="form-label" for="receiver_phone_num">휴대폰번호</label>
                                             <input type="text" id="receiver_phone_num" name="receiver_phone_num" class="form-control form-control-lg text-black"
-                                                   placeholder="010 0000 0000" maxlength="13" />
+                                                   placeholder="010 0000 0000" maxlength="13" value="${paymentDTO.receiver_phone_num}"/>
                                         </div>
+                                        <div id="div_err_receiver_phone_num" style="display: none"></div>
 
                                         <div class="form-outline form-white mb-2">
                                             <label class="form-label" for="zipcode">배송지 주소</label>
 
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <input type="text" id="zipcode" name="zipcode" class="form-control form-control-lg text-black me-2"
-                                                       placeholder="우편번호" required readonly />
+                                                       placeholder="우편번호" value="${paymentDTO.zipcode}" required readonly />
                                                 <input type="button" class="btn" value="주소 찾기" name="zipcodebtn" id="zipcodebtn" onclick="addr()">
                                             </div>
                                         </div>
+                                        <div id="div_err_zipcode" style="display: none"></div>
 
                                         <div class="form-outline form-white mb-2">
                                             <input type="text" id="addr1" name="addr1" class="form-control form-control-lg text-black"
-                                                   placeholder="기본주소" maxlength="11" readonly/>
+                                                   placeholder="기본주소" maxlength="11" value="${paymentDTO.addr1}" readonly/>
                                         </div>
+                                        <div id="div_err_addr1" style="display: none"></div>
+
                                         <div class="form-outline form-white mb-2">
                                             <input type="text" id="addr2" name="addr2" class="form-control form-control-lg text-black"
-                                                   placeholder="상세주소" />
+                                                   placeholder="상세주소" value="${paymentDTO.addr2}" />
                                         </div>
+                                        <div id="div_err_addr2" style="display: none"></div>
 
                                         <hr class="my-4">
 
@@ -198,10 +209,22 @@
                                             <input class="form-check-input" type="radio" name="pay_method" id="pay_method" value="무통장입금" checked>
                                             <label class="form-check-label" for="pay_method">무통장입금</label>
                                         </div>
-                                        <%--                                            <div class="form-check form-check-inline">--%>
-                                        <%--                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">--%>
-                                        <%--                                                <label class="form-check-label" for="inlineRadio2">2</label>--%>
-                                        <%--                                            </div>--%>
+
+                                        <div class="form-outline form-white">
+                                            <label class="form-label">택배 회사</label>
+                                        </div>
+                                        <div class="form-check form-check-inline d-flex justify-content-between align-items-center">
+                                            <label class="form-check-label" for="hanjin">
+                                                <input class="form-check-input" type="checkbox" name="delivery_company" id="hanjin" value="한진택배">한진택배
+                                            </label>
+                                            <label class="form-check-label" for="cj">
+                                                <input class="form-check-input" type="checkbox" name="delivery_company" id="cj" value="CJ대한통운">CJ대한통운
+                                            </label>
+                                            <label class="form-check-label" for="post">
+                                                <input class="form-check-input" type="checkbox" name="delivery_company" id="post" value="우체국택배">우체국택배
+                                            </label>
+                                        </div>
+                                        <div id="div_err_delivery_company" style="display: none"></div>
 
                                         <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-info btn-block btn-lg">
                                             <span>결제하기</span>
@@ -212,11 +235,8 @@
                                         </form>
                                     </div>
                                 </div>
-
                             </div>
-
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -232,6 +252,15 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <script>
+    const serverValidResult = {};
+    <c:forEach items="${errors}" var="err">
+        if(document.getElementById("div_err_${err.getField()}") != null) {
+            document.getElementById("div_err_${err.getField()}").innerHTML = "<span style='color:red;'>${err.defaultMessage}</span>";
+            document.getElementById("div_err_${err.getField()}").style.display = "block";
+        }
+        serverValidResult['${err.getField()}'] = '${err.defaultMessage}';
+    </c:forEach>
+
     function addr() {
         new daum.Postcode({
             oncomplete: function (data) {
