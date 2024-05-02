@@ -74,4 +74,12 @@
         ORDER BY idx DESC
     </select>
 
+    <select id="recent_order" resultType="org.fullstack4.bookstore.domain.DeliveryVO">
+        SELECT tp.pay_idx as pay_idx ,left(tp.pay_date, 10 ) as pay_date, tp.member_id as member_id, tp.product_cnt, td.delivery_state, tdtracking_num
+        FROM tbl_payment as tp
+        inner join tbl_delivery as td on tp.pay_idx = td.pay_idx
+        where  tp.member_id = #{member_id}
+        ORDER BY pay_date DESC
+    </select>
+
 </mapper>
