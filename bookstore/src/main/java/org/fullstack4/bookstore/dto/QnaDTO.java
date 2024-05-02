@@ -27,7 +27,6 @@ public class QnaDTO {
     @NotBlank(message = "내용을 입력하세요.")
     private String content;
 
-    @NotBlank(message = "작성자를 입력하세요.")
     private String writer;
     private int read_cnt;
     private LocalDate reg_date;

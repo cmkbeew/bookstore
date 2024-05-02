@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 @Log4j2
 @Controller
@@ -78,6 +79,7 @@ public class AdminController {
         log.info("AdminController >> bbsDeletePOST()");
         String[] delete_idx = req.getParameterValues("select");
         String referer = req.getHeader("Referer");
+        log.info("delete_idx" + delete_idx);
 
 
 
@@ -250,7 +252,7 @@ public class AdminController {
             log.info("Errors");
             redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
             redirectAttributes.addFlashAttribute("noticeDTO", noticeDTO);
-            return "redirect:/bbs/modify?idx=" + noticeDTO.getIdx();
+            return "redirect:/admin/notice/modify?idx=" + noticeDTO.getIdx();
         }
 
         int result = adminService.noticeModify(noticeDTO);
@@ -266,8 +268,7 @@ public class AdminController {
 
     @PostMapping(path = "/notice/delete")
     public String noticeDeletePOST(
-            @RequestParam(name = "idx", defaultValue = "0") int idx,
-            HttpServletRequest req
+            @RequestParam(name = "idx", defaultValue = "0") int idx
     ) {
         log.info("===============================");
         log.info("AdminController >> noticeDeletePOST()");
@@ -446,6 +447,7 @@ public class AdminController {
 
     @PostMapping("/qna/replyRegist")
     public String qnaReplyRegistPOST(
+            @RequestParam int idx,
             @Valid QnaDTO qnaDTO,
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes
@@ -458,7 +460,7 @@ public class AdminController {
             log.info("Errors");
             redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
             redirectAttributes.addFlashAttribute("qnaDTO", qnaDTO);
-            return "redirect:/admin/qna/regist";
+            return "redirect:/admin/qna/replyRegist?idx=" + idx;
         }
 
         int result = adminService.qnaReplyRegist(qnaDTO);
@@ -467,7 +469,7 @@ public class AdminController {
             return "redirect:/admin/list?type=qna";
         } else {
             redirectAttributes.addFlashAttribute("qnaDTO", qnaDTO);
-            return "redirect:/admin/qna/replyRegist?idx=" + qnaDTO.getIdx();
+            return "redirect:/admin/qna/replyRegist?idx=" + idx;
         }
 
     }

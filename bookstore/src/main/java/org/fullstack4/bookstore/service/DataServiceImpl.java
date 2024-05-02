@@ -2,8 +2,8 @@ package org.fullstack4.bookstore.service;
 
 import lombok.RequiredArgsConstructor;
 import org.fullstack4.bookstore.domain.DataVO;
-import org.fullstack4.bookstore.dto.DataDTO;
-import org.fullstack4.bookstore.dto.FaqDTO;
+import org.fullstack4.bookstore.domain.NoticeVO;
+import org.fullstack4.bookstore.dto.*;
 import org.fullstack4.bookstore.mapper.DataMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -17,6 +17,28 @@ public class DataServiceImpl implements DataService {
 
     private final DataMapper dataMapper;
     private final ModelMapper modelMapper;
+
+    @Override
+    public int dataTotalCount(PageRequestDTO pageRequestDTO) {
+        return dataMapper.dataTotalCount(pageRequestDTO);
+    }
+
+    @Override
+    public PageResponseDTO<DataDTO> dataListByPage(PageRequestDTO pageRequestDTO) {
+        List<DataVO> voList = dataMapper.dataListByPage(pageRequestDTO);
+        List<DataDTO> dtoList = voList.stream()
+                .map(vo -> modelMapper.map(vo, DataDTO.class))
+                .collect(Collectors.toList());
+        int total_count = dataMapper.dataTotalCount(pageRequestDTO);
+
+        PageResponseDTO<DataDTO> pageResponseDTO = PageResponseDTO.<DataDTO>withAll()
+                .requestDTO(pageRequestDTO)
+                .dtoList(dtoList)
+                .total_count(total_count)
+                .build();
+
+        return pageResponseDTO;
+    }
 
     @Override
     public int dataRegist(DataDTO dataDTO) {

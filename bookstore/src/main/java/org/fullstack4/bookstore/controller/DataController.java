@@ -1,7 +1,8 @@
 package org.fullstack4.bookstore.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.fullstack4.bookstore.dto.DataDTO;
+import lombok.extern.log4j.Log4j2;
+import org.fullstack4.bookstore.dto.*;
 import org.fullstack4.bookstore.service.DataService;
 import org.fullstack4.bookstore.util.FileUploadUtil;
 import org.springframework.stereotype.Controller;
@@ -19,19 +20,36 @@ import java.io.File;
 import java.util.List;
 import java.util.UUID;
 
+@Log4j2
 @Controller
+@RequestMapping(value="/data")
 @RequiredArgsConstructor
-@RequestMapping("/data")
 public class DataController {
 
     private final DataService dataService;
 
     @GetMapping("/list")
-    public void dataList(Model model) {
-        List<DataDTO> dataList = dataService.dataList();
+    public void dataListGET(
+            @Valid PageRequestDTO pageRequestDTO,
+            BindingResult bindingResult,
+            RedirectAttributes redirectAttributes,
+            Model model
+    ) {
 
+        log.info("===============================");
+        log.info("AdminController >> bbsListGET()");
+
+        if (bindingResult.hasErrors()) {
+            log.info("AdminController >> list Error");
+            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+        }
+
+        PageResponseDTO<DataDTO> dataList = dataService.dataListByPage(pageRequestDTO);
         model.addAttribute("dataList", dataList);
+
+        log.info("===============================");
     }
+
 
     @GetMapping("/view")
     public void dataView(int data_idx, Model model) {

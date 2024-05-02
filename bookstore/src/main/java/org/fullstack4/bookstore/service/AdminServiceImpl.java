@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Log4j2
 @Service
@@ -171,6 +172,13 @@ public class AdminServiceImpl implements AdminService {
         int result = adminMapper.noticeDelete(idx);
         return result;
     }
+
+//    @Override
+//    public int noticeListDelete(String[] idxArr) {
+//        Integer[] newArr = Stream.of(idxArr).mapToInt(Integer::parseInt).boxed().toArray(Integer[]::new);
+//        int result = adminMapper.noticeListDelete(newArr);
+//        return result;
+//    }
 
     @Override
     public int noticeFix(int idx) {

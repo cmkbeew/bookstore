@@ -80,24 +80,6 @@
         LIMIT #{page_skip_count}, #{page_size}
     </select>
 
-    <!-- test   -->
-<!--    <select id="qnaListByPage" resultType="org.fullstack4.bookstore.domain.QnaVO">-->
-<!--        SELECT B.rownum , B.idx, B.ref, B.title, B.content, B.writer,-->
-<!--        B.read_cnt, B.reg_date, B.modify_date, B.reply_state-->
-<!--        FROM (-->
-<!--        SELECT ROWNUM() AS rownum , A.idx, A.ref, A.title, A.content, A.writer,-->
-<!--        A.read_cnt, A.reg_date, A.modify_date, A.reply_state-->
-<!--        FROM (-->
-<!--        SELECT idx, ref, title, content, writer,-->
-<!--        read_cnt, reg_date, modify_date, reply_state-->
-<!--        FROM tbl_bbs_qna-->
-<!--        <include refid="whereCondition"></include>-->
-<!--        ORDER BY ref ASC, idx DESC) A-->
-<!--        ) B-->
-<!--        ORDER BY rownum DESC-->
-<!--        LIMIT #{page_skip_count}, #{page_size}-->
-<!--    </select>-->
-
     <!-- 공지사항 -->
     <select id="noticeList" resultType="org.fullstack4.bookstore.domain.NoticeVO">
         SELECT idx, title, writer, content, reg_date, org_file_name, save_file_name, fix_state
@@ -131,6 +113,17 @@
         DELETE FROM tbl_bbs_notice
         WHERE idx = #{idx}
     </delete>
+
+<!--    <delete id="noticeListDelete" parameterType="java.utill.Arrays">-->
+<!--        DELETE FROM tbl_bbs_notice-->
+<!--        <where>-->
+<!--            idx IN-->
+<!--               <foreach collection="array" item="item" index="index" separator="," open="(" close=")">-->
+<!--                   #{item}-->
+<!--               </foreach>-->
+<!--        </where>-->
+<!--    </delete>-->
+
 
     <update id="noticeFix">
         UPDATE tbl_bbs_notice SET fix_state = -1
@@ -181,22 +174,6 @@
         FROM tbl_bbs_qna
         WHERE idx = #{idx}
     </select>
-
-<!--    <select id="qnaView" resultType="org.fullstack4.bookstore.domain.QnaVO">-->
-<!--        SELECT B.rownum, B.idx, B.ref, B.title, B.content, B.writer,-->
-<!--        B.read_cnt, B.reg_date, B.modify_date, B.reply_state-->
-<!--        FROM (-->
-<!--        SELECT ROWNUM() AS rownum , A.idx, A.ref, A.title, A.content, A.writer,-->
-<!--        A.read_cnt, A.reg_date, A.modify_date, A.reply_state-->
-<!--        FROM (-->
-<!--        SELECT idx, ref, title, content, writer,-->
-<!--        read_cnt, reg_date, modify_date, reply_state-->
-<!--        FROM tbl_bbs_qna-->
-<!--        <include refid="whereCondition"></include>-->
-<!--        ORDER BY ref ASC, idx DESC) A-->
-<!--        ) B-->
-<!--        WHERE idx = #{idx}-->
-<!--    </select>-->
 
     <delete id="qnaDelete">
         DELETE FROM tbl_bbs_qna
