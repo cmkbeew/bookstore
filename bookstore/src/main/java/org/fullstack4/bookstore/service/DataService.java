@@ -2,12 +2,10 @@ package org.fullstack4.bookstore.service;
 
 import org.fullstack4.bookstore.domain.DataVO;
 import org.fullstack4.bookstore.domain.MemberVO;
-import org.fullstack4.bookstore.dto.DataDTO;
-import org.fullstack4.bookstore.dto.NoticeDTO;
-import org.fullstack4.bookstore.dto.PageRequestDTO;
-import org.fullstack4.bookstore.dto.PageResponseDTO;
+import org.fullstack4.bookstore.dto.*;
 
 import java.util.List;
+import java.util.Map;
 
 public interface DataService {
     int dataTotalCount(PageRequestDTO pageRequestDTO);
@@ -15,7 +13,8 @@ public interface DataService {
 
     int dataRegist(DataDTO dataDTO);
     List<DataDTO> dataList();
-    DataDTO dataView(int data_idx);
+    Map<String, DataDTO> dataView(int data_idx);
+    DataDTO dataModifyGet(int data_idx);
     int dataModify(DataDTO dataDTO);
     int dataDelete(int data_idx);
 }

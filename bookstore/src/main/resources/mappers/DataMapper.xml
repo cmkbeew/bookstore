@@ -40,11 +40,6 @@
         LIMIT #{page_skip_count}, #{page_size}
     </select>
 
-    <insert id="dataRegist">
-        INSERT INTO tbl_bbs_data(title, content, writer, org_file_name, save_file_name)
-        VALUES (#{title}, #{content}, #{writer}, #{org_file_name}, #{save_file_name})
-    </insert>
-
     <select id="dataList" resultType="org.fullstack4.bookstore.domain.DataVO">
         SELECT data_idx, title, content, writer, org_file_name, save_file_name, reg_date, modify_date
         FROM tbl_bbs_data
@@ -56,6 +51,28 @@
         FROM tbl_bbs_data
         WHERE data_idx = #{data_idx}
     </select>
+
+    <select id="dataPrev" resultType="org.fullstack4.bookstore.domain.DataVO">
+        SELECT data_idx, title
+        FROM tbl_bbs_data
+        WHERE data_idx <![CDATA[<]]> #{data_idx}
+        ORDER BY data_idx DESC
+            LIMIT 1
+    </select>
+
+    <select id="dataNext" resultType="org.fullstack4.bookstore.domain.DataVO">
+        SELECT data_idx, title
+        FROM tbl_bbs_data
+        WHERE data_idx <![CDATA[>]]> #{data_idx}
+        ORDER BY data_idx
+            LIMIT 1
+    </select>
+
+    <insert id="dataRegist">
+        INSERT INTO tbl_bbs_data(title, content, writer, org_file_name, save_file_name)
+        VALUES (#{title}, #{content}, #{writer}, #{org_file_name}, #{save_file_name})
+    </insert>
+
 
     <update id="dataModify">
         UPDATE tbl_bbs_data SET
@@ -72,4 +89,6 @@
         DELETE FROM tbl_bbs_data
         WHERE data_idx = #{data_idx}
     </delete>
+
+
 </mapper>

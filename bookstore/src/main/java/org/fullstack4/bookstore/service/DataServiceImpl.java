@@ -1,16 +1,22 @@
 package org.fullstack4.bookstore.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.fullstack4.bookstore.domain.DataVO;
 import org.fullstack4.bookstore.domain.NoticeVO;
+import org.fullstack4.bookstore.domain.QnaVO;
 import org.fullstack4.bookstore.dto.*;
+import org.fullstack4.bookstore.mapper.CommunityMapper;
 import org.fullstack4.bookstore.mapper.DataMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
+@Log4j2
 @Service
 @RequiredArgsConstructor
 public class DataServiceImpl implements DataService {
@@ -68,13 +74,39 @@ public class DataServiceImpl implements DataService {
         return dtoList;
     }
 
+
     @Override
-    public DataDTO dataView(int data_idx) {
+    public Map<String, DataDTO> dataView(int data_idx) {
+        Map<String, DataDTO> maps = new HashMap<>();
+
+        DataVO dataVO = dataMapper.dataView(data_idx);
+        DataVO dataPrevVO = dataMapper.dataPrev(data_idx);
+        DataVO dataNextVO = dataMapper.dataNext(data_idx);
+
+        DataDTO dataDTO = modelMapper.map(dataVO, DataDTO.class);
+        maps.put("dataDTO", dataDTO);
+        log.info("dataDTO : " + dataDTO);
+
+        if (dataPrevVO != null) {
+            DataDTO dataPrevDTO = modelMapper.map(dataPrevVO, DataDTO.class);
+            maps.put("dataPrevDTO", dataPrevDTO);
+        }
+
+        if (dataNextVO != null) {
+            DataDTO dataNextDTO = modelMapper.map(dataNextVO, DataDTO.class);
+            maps.put("dataNextDTO", dataNextDTO);
+        }
+        return maps;
+    }
+
+    @Override
+    public DataDTO dataModifyGet(int data_idx) {
         DataVO dataVO = dataMapper.dataView(data_idx);
         DataDTO dataDTO = modelMapper.map(dataVO, DataDTO.class);
 
         return dataDTO;
     }
+
 
     @Override
     public int dataModify(DataDTO dataDTO) {

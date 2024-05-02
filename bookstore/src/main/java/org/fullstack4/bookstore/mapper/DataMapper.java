@@ -10,9 +10,12 @@ public interface DataMapper {
     int dataTotalCount(PageRequestDTO pageRequestDTO);
     List<DataVO> dataListByPage(PageRequestDTO pageRequestDTO);
 
-    int dataRegist(DataVO dataVO);
     List<DataVO> dataList();
     DataVO dataView(int data_idx);
+    DataVO dataPrev(int data_idx);
+    DataVO dataNext(int data_idx);
+
+    int dataRegist(DataVO dataVO);
     int dataModify(DataVO dataVO);
     int dataDelete(int data_idx);
 }

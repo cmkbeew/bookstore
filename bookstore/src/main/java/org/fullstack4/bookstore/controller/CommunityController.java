@@ -19,6 +19,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -91,6 +95,42 @@ public class CommunityController {
         }
     }
 
+    // 파일 다운로드 (시도했으나 실패)
+    @GetMapping("/filedownload")
+    public String filedownloadGET(
+            @RequestParam("idx") int idx,
+            HttpServletRequest req,
+            HttpServletResponse res
+    ) throws UnsupportedEncodingException {
+//        String upload_path = req.getServletContext().getRealPath("");
+        NoticeDTO noticeDTO = adminService.noticeView(idx);
+
+        File file = new File("C:\\Uploads" + noticeDTO.getSave_file_name());
+        res.setHeader("Content-Disposition", "attachment; filename=\"" + noticeDTO.getOrg_file_name() + "\";");
+        res.setHeader("Content-Transfer-Encoding", "binary");
+        res.setHeader("Content-Type",
+                noticeDTO.getSave_file_name().substring(noticeDTO.getSave_file_name().lastIndexOf("."), noticeDTO.getSave_file_name().length()));
+        res.setHeader("Content-Length", "" + file.length());
+        res.setHeader("Pragma", "no-cache;");
+        res.setHeader("Expires", "-1;");
+
+        try (
+                FileInputStream fis = new FileInputStream(file);
+                OutputStream out = res.getOutputStream();
+        ) {
+            int readCnt = 0;
+            byte[] buffer = new byte[1024];
+            while((readCnt = fis.read(buffer)) != -1) {
+                out.write(buffer, 0, readCnt);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return "redirect:/community/view?type=notice&idx=" + idx;
+    }
+
 
     @GetMapping("/qna/regist")
     public void qnaRegistGET(
@@ -127,51 +167,6 @@ public class CommunityController {
             return "redirect:/community/qna/regist";
         }
     }
-
-//    @GetMapping("/qna/regist")
-//    public void qnaRegistGET(
-////            @RequestParam int idx,
-//            Model model
-//    ) {
-//        log.info("===============================");
-//        log.info("AdminController >> qnaReplyRegistGET()");
-//
-//
-////        QnaDTO qnaDTO = adminService.qnaView(idx);
-////        model.addAttribute("qnaDTO", qnaDTO);
-////        log.info("qnaDTO : " + qnaDTO);
-//
-//        log.info("===============================");
-//    }
-//
-//    @PostMapping("/qna/regist")
-//    public String qnaRegistPOST(
-////            @RequestParam int idx,
-//            @Valid QnaDTO qnaDTO,
-//            BindingResult bindingResult,
-//            RedirectAttributes redirectAttributes
-//    ) {
-//        log.info("===============================");
-//        log.info("AdminController >> qnaReplyRegistPOST()");
-//
-//        log.info("errors: " + bindingResult.getAllErrors());
-//        if (bindingResult.hasErrors()) {
-//            log.info("Errors");
-//            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
-//            redirectAttributes.addFlashAttribute("qnaDTO", qnaDTO);
-//            return "redirect:/community/qna/regist";
-//        }
-//
-//        int result = communityService.qnaRegist(qnaDTO);
-//
-//        if (result > 0) {
-//            return "redirect:/community/list?type=qna";
-//        } else {
-//            redirectAttributes.addFlashAttribute("qnaDTO", qnaDTO);
-//            return "redirect:/community/qna/regist";
-//        }
-//
-//    }
 
     @GetMapping("/qna/modify")
     public void qnaModifyGet(int idx, Model model) {

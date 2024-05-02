@@ -67,7 +67,7 @@
                                                         <th style="width: 120px; vertical-align: middle;">첨부파일</th>
                                                         <td>
                                                             <span class="material-symbols-outlined web_font">attach_file</span>
-                                                            <span>${dto.org_file_name}</span>
+                                                            <span><a href="/community/filedownload?idx=${dto.idx}" target="_blank">${dto.org_file_name}</a></span>
                                                         </td>
                                                     </tr>
                                                 </table>

@@ -18,7 +18,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
@@ -221,6 +226,42 @@ public class AdminController {
             redirectAttributes.addFlashAttribute("noticeDTO", noticeDTO);
             return "redirect:/admin/notice/regist";
         }
+    }
+
+    // 파일 다운로드 (시도했으나 실패)
+    @GetMapping("/filedownload")
+    public String filedownloadGET(
+            @RequestParam("idx") int idx,
+            HttpServletRequest req,
+            HttpServletResponse res
+    ) throws UnsupportedEncodingException {
+//        String upload_path = req.getServletContext().getRealPath("");
+        NoticeDTO noticeDTO = adminService.noticeView(idx);
+
+        File file = new File("C:\\Uploads" + noticeDTO.getSave_file_name());
+        res.setHeader("Content-Disposition", "attachment; filename=\"" + noticeDTO.getOrg_file_name() + "\";");
+        res.setHeader("Content-Transfer-Encoding", "binary");
+        res.setHeader("Content-Type",
+                noticeDTO.getSave_file_name().substring(noticeDTO.getSave_file_name().lastIndexOf("."), noticeDTO.getSave_file_name().length()));
+        res.setHeader("Content-Length", "" + file.length());
+        res.setHeader("Pragma", "no-cache;");
+        res.setHeader("Expires", "-1;");
+
+        try (
+                FileInputStream fis = new FileInputStream(file);
+                OutputStream out = res.getOutputStream();
+        ) {
+            int readCnt = 0;
+            byte[] buffer = new byte[1024];
+            while((readCnt = fis.read(buffer)) != -1) {
+                out.write(buffer, 0, readCnt);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return "redirect:/admin/notice/view?idx=" + idx;
     }
 
     @GetMapping(path = "/notice/modify")
