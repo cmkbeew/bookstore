@@ -54,36 +54,33 @@
                 <div class="col-md-9">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title text-uppercase mb-0 text-center">나의 문의 내역</h5>
+                            <h5 class="card-title text-uppercase mb-0 text-center">나의 결제 내역</h5>
                         </div>
                         <div class="table-responsive">
                             <table class="table no-wrap user-table custom-table mb-0 text-center">
                                 <thead>
                                 <tr scope="row">
-                                    <th scope="col" class="border-0">번호</th>
-                                    <th scope="col" class="border-0">문의 글 제목</th>
-                                    <th scope="col" class="border-0">조회수</th>
-                                    <th scope="col" class="border-0" >작성일자</th>
-                                    <th scope="col" class="border-0">답변 여부</th>
+                                    <th scope="col" class="border-0">주문번호</th>
+                                    <th scope="col" class="border-0">받는고객명</th>
+                                    <th scope="col" class="border-0">결제금액</th>
+                                    <th scope="col" class="border-0">주문일자</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <c:choose>
-                                    <c:when test="${!empty qnaList}">
-                                        <c:forEach items="${qnaList}" var="list" varStatus="i">
-                                            <tr style="cursor:pointer;" onclick="window.location.href='/community/view?type=qna&idx=${list.idx}'">
-                                                <td class="pl-4">${fn:length(qnaList) - i.index}</td>
-                                                <td>${list.title}</td>
-                                                    <%--                                                    <td>${list.writer}</td>--%>
-                                                <td><span class="material-symbols-outlined align-middle" style="color: gray; font-size: 1rem">visibility</span> ${list.read_cnt}</td>
-                                                <td>${list.reg_date}</td>
-                                                <td>${list.reply_state}</td>
+                                    <c:when test="${!empty orderList}">
+                                        <c:forEach items="${orderList}" var="list" varStatus="i">
+                                            <tr style="cursor:pointer;" onclick="window.location.href='/my/orderDetail?member_id=${sessionScope.member_id}&order_code=${list.order_code}'">
+                                                <td class="pl-4">${list.order_code}</td>
+                                                <td>${list.receiver_name}</td>
+                                                <td>${list.pay_price}</td>
+                                                <td>${list.pay_date}</td>
                                             </tr>
                                         </c:forEach>
                                     </c:when>
                                     <c:otherwise>
                                         <tr>
-                                            <td class="text-center" colspan="5">회원정보가 없습니다.</td>
+                                            <td class="text-center" colspan="5">결제 내역이 없습니다.</td>
                                         </tr>
                                     </c:otherwise>
                                 </c:choose>

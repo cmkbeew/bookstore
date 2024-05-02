@@ -38,7 +38,7 @@
         <div class="row gx-4 gx-lg-5 align-items-center">
             <div class="col-md-6">
                 <c:if test="${productDTO.discount != 0}">
-                    <div class="badge bg-dark text-white position-absolute" style="top: 1rem; right: 2rem">Sale</div>
+                    <div class="badge bg-secondary text-white position-absolute" style="top: 1rem; right: 2rem">Sale</div>
                 </c:if>
                 <img class="card-img-top mb-5 mb-md-0" src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg" alt="...">
             </div>

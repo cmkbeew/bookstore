@@ -12,6 +12,7 @@ import java.time.LocalDate;
 public class DeliveryVO {
     private int delivery_idx;
     private String tracking_num;
+    private String delivery_company;
     private String receiver_name;
     private String receiver_phone_num;
     private String zipcode;

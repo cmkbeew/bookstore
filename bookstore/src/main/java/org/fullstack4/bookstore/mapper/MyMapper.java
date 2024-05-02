@@ -18,11 +18,16 @@ public interface MyMapper {
     int find_idx(@Param("product_idx") int product_idx, @Param("or_member_id") String or_member_id);
     int cart_cnt_update(CartVO cartVO);
 
-    int paymentInsert(PaymentVO paymentVO);
-    PaymentVO paymentSelect(int cart_idx);
-
-    int deliveryInsert(DeliveryVO deliveryVO);
+//    int paymentInsert(PaymentVO paymentVO);
+//    PaymentVO paymentSelect(int cart_idx);
+//
+//    int deliveryInsert(DeliveryVO deliveryVO);
 
     List<QnaVO> qna_list_all(String member_id);
     List<DeliveryListVO> recent_order(String member_id);
+
+    void order_item_insert(OrderItemVO orderItemVO);
+    void order_insert(OrderVO orderVO);
+    List<OrderVO> order_list();
+    List<OrderDetailVO> order_detail(String order_code);
 }

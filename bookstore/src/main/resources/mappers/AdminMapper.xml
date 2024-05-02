@@ -257,15 +257,15 @@
 
     <!-- 배송   -->
     <select id="deliveryList" resultType="org.fullstack4.bookstore.domain.DeliveryVO">
-        SELECT pay_idx, delivery_company, company_tel, tracking_num, delivery_state, start_date, arrive_date
+        SELECT delivery_idx, tracking_num, delivery_company, receiver_name, receiver_phone_num, zipcode, receiver_addr, delivery_state, start_date, arrive_date, member_id, pay_idx
         FROM tbl_delivery
         ORDER BY pay_idx DESC
     </select>
 
     <select id="deliveryView" resultType="org.fullstack4.bookstore.domain.DeliveryVO">
-        SELECT pay_idx, delivery_company, company_tel, tracking_num, delivery_state, start_date, arrive_date
+        SELECT delivery_idx, tracking_num, delivery_company, receiver_name, receiver_phone_num, zipcode, receiver_addr, delivery_state, start_date, arrive_date, member_id, pay_idx
         FROM tbl_delivery
-        WHERE pay_idx = #{pay_idx}
+        WHERE delivery_idx = #{delivery_idx}
     </select>
 
     <update id="deliveryModify">

@@ -52,12 +52,17 @@
                                 <thead>
                                 <tr>
                                     <th scope="col" class="border-0">번호</th>
-                                    <th scope="col" class="border-0">배송회사</th>
-                                    <th scope="col" class="border-0">전화번호</th>
                                     <th scope="col" class="border-0">운송장번호</th>
+                                    <th scope="col" class="border-0">배송회사</th>
+                                    <th scope="col" class="border-0">수취자 이름</th>
+                                    <th scope="col" class="border-0">수취자 휴대폰번호</th>
+                                    <th scope="col" class="border-0">우편번호</th>
+                                    <th scope="col" class="border-0">수취자 주소</th>
                                     <th scope="col" class="border-0">배송상태</th>
                                     <th scope="col" class="border-0">배송시작일</th>
                                     <th scope="col" class="border-0">배송도착일</th>
+                                    <th scope="col" class="border-0">주문자 아이디</th>
+                                    <th scope="col" class="border-0">결제번호</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -65,13 +70,18 @@
                                     <c:when test="${!empty deliveryList}">
                                         <c:forEach items="${deliveryList}" var="list">
                                             <tr>
-                                                <td class="pl-4"><a href="/admin/delivery/modify?idx=${list.pay_idx}">${list.pay_idx}</a></td>
-                                                <td><a href="/admin/delivery/modify?idx=${list.pay_idx}">${list.delivery_company}</a></td>
-                                                <td><a href="/admin/delivery/modify?idx=${list.pay_idx}">${list.company_tel}</a></td>
-                                                <td><a href="/admin/delivery/modify?idx=${list.pay_idx}">${list.tracking_num}</a></td>
-                                                <td><a href="/admin/delivery/modify?idx=${list.pay_idx}">${list.delivery_state}</a></td>
-                                                <td><a href="/admin/delivery/modify?idx=${list.pay_idx}">${list.start_date}</a></td>
-                                                <td><a href="/admin/delivery/modify?idx=${list.pay_idx}">${list.arrive_date}</a></td>
+                                                <td class="pl-4"><a href="/admin/delivery/modify?idx=${list.delivery_idx}">${list.delivery_idx}</a></td>
+                                                <td><a href="/admin/delivery/modify?idx=${list.delivery_idx}">${list.tracking_num}</a></td>
+                                                <td><a href="/admin/delivery/modify?idx=${list.delivery_idx}">${list.delivery_company}</a></td>
+                                                <td><a href="/admin/delivery/modify?idx=${list.delivery_idx}">${list.receiver_name}</a></td>
+                                                <td><a href="/admin/delivery/modify?idx=${list.delivery_idx}">${list.receiver_phone_num}</a></td>
+                                                <td><a href="/admin/delivery/modify?idx=${list.delivery_idx}">${list.zipcode}</a></td>
+                                                <td><a href="/admin/delivery/modify?idx=${list.delivery_idx}">${list.receiver_addr}</a></td>
+                                                <td><a href="/admin/delivery/modify?idx=${list.delivery_idx}">${list.delivery_state}</a></td>
+                                                <td><a href="/admin/delivery/modify?idx=${list.delivery_idx}">${list.start_date}</a></td>
+                                                <td><a href="/admin/delivery/modify?idx=${list.delivery_idx}">${list.arrive_date}</a></td>
+                                                <td><a href="/admin/delivery/modify?idx=${list.delivery_idx}">${list.member_id}</a></td>
+                                                <td><a href="/admin/delivery/modify?idx=${list.delivery_idx}">${list.pay_idx}</a></td>
                                             </tr>
                                         </c:forEach>
                                     </c:when>

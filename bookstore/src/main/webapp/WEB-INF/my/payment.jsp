@@ -63,10 +63,9 @@
                                 </div>
                                 <form class="mt-4" method="post" action="/my/payment">
                                     <input type="hidden" name="member_id" value="${sessionScope.member_id}" />
+                                    <input type="hidden" name="pay_price" value="${total_price + shipping}"/>
 
                                     <c:forEach items="${cartList}" var="list">
-                                    <input type="hidden" name="cart_idx" value="${list.cart_idx}" />
-                                    <input type="hidden" name="sell_price" value="${list.price}" />
                                     <div class="card mb-3">
                                         <div class="card-body">
                                             <div class="d-flex justify-content-between">
@@ -155,14 +154,14 @@
                                         <div class="form-outline form-white mb-2">
                                             <label class="form-label" for="receiver_name">받는 사람</label>
                                             <input type="text" id="receiver_name" name="receiver_name" class="form-control form-control-lg text-black"
-                                                   placeholder="Name" value="${paymentDTO.receiver_name}" />
+                                                   placeholder="Name" value="${orderDTO.receiver_name}" />
                                         </div>
                                         <div id="div_err_receiver_name" style="display: none"></div>
 
                                         <div class="form-outline form-white mb-2">
                                             <label class="form-label" for="receiver_phone_num">휴대폰번호</label>
                                             <input type="text" id="receiver_phone_num" name="receiver_phone_num" class="form-control form-control-lg text-black"
-                                                   placeholder="010 0000 0000" maxlength="13" value="${paymentDTO.receiver_phone_num}"/>
+                                                   placeholder="010 0000 0000" maxlength="13" value="${orderDTO.receiver_phone_num}"/>
                                         </div>
                                         <div id="div_err_receiver_phone_num" style="display: none"></div>
 
@@ -171,7 +170,7 @@
 
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <input type="text" id="zipcode" name="zipcode" class="form-control form-control-lg text-black me-2"
-                                                       placeholder="우편번호" value="${paymentDTO.zipcode}" required readonly />
+                                                       placeholder="우편번호" value="${orderDTO.zipcode}" required readonly />
                                                 <input type="button" class="btn" value="주소 찾기" name="zipcodebtn" id="zipcodebtn" onclick="addr()">
                                             </div>
                                         </div>
@@ -179,13 +178,13 @@
 
                                         <div class="form-outline form-white mb-2">
                                             <input type="text" id="addr1" name="addr1" class="form-control form-control-lg text-black"
-                                                   placeholder="기본주소" maxlength="11" value="${paymentDTO.addr1}" readonly/>
+                                                   placeholder="기본주소" maxlength="11" value="${orderDTO.addr1}" readonly/>
                                         </div>
                                         <div id="div_err_addr1" style="display: none"></div>
 
                                         <div class="form-outline form-white mb-2">
                                             <input type="text" id="addr2" name="addr2" class="form-control form-control-lg text-black"
-                                                   placeholder="상세주소" value="${paymentDTO.addr2}" />
+                                                   placeholder="상세주소" value="${orderDTO.addr2}" />
                                         </div>
                                         <div id="div_err_addr2" style="display: none"></div>
 
@@ -223,13 +222,13 @@
                                         </div>
                                         <div class="form-check form-check-inline d-flex justify-content-between align-items-center">
                                             <label class="form-check-label" for="hanjin">
-                                                <input class="form-check-input" type="checkbox" name="delivery_company" id="hanjin" value="한진택배">한진택배
+                                                <input class="form-check-input" type="radio" name="delivery_company" id="hanjin" value="한진택배">한진택배
                                             </label>
                                             <label class="form-check-label" for="cj">
-                                                <input class="form-check-input" type="checkbox" name="delivery_company" id="cj" value="CJ대한통운">CJ대한통운
+                                                <input class="form-check-input" type="radio" name="delivery_company" id="cj" value="CJ대한통운">CJ대한통운
                                             </label>
                                             <label class="form-check-label" for="post">
-                                                <input class="form-check-input" type="checkbox" name="delivery_company" id="post" value="우체국택배">우체국택배
+                                                <input class="form-check-input" type="radio" name="delivery_company" id="post" value="우체국택배">우체국택배
                                             </label>
                                         </div>
                                         <div id="div_err_delivery_company" style="display: none"></div>

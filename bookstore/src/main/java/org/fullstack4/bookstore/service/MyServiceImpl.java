@@ -2,9 +2,7 @@ package org.fullstack4.bookstore.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.fullstack4.bookstore.domain.CartVO;
-import org.fullstack4.bookstore.domain.DeliveryVO;
-import org.fullstack4.bookstore.domain.PaymentVO;
+import org.fullstack4.bookstore.domain.*;
 import org.fullstack4.bookstore.dto.*;
 import org.fullstack4.bookstore.mapper.CommunityMapper;
 import org.fullstack4.bookstore.mapper.MyMapper;
@@ -61,32 +59,32 @@ public class MyServiceImpl implements MyServiceIf{
         return result;
     }
 
-    @Override
-    public int paymentInsert(PaymentDTO paymentDTO) {
-        PaymentVO paymentVO = modelMapper.map(paymentDTO, PaymentVO.class);
-
-        int paymentResult = myMapper.paymentInsert(paymentVO);
-
-        return paymentResult;
-    }
-
-    @Override
-    public PaymentDTO paymentSelect(int cart_idx) {
-        PaymentVO paymentVO = myMapper.paymentSelect(cart_idx);
-
-        PaymentDTO paymentDTO = modelMapper.map(paymentVO, PaymentDTO.class);
-
-        return paymentDTO;
-    }
-
-    @Override
-    public int deliveryInsert(DeliveryDTO deliveryDTO) {
-        DeliveryVO deliveryVO = modelMapper.map(deliveryDTO, DeliveryVO.class);
-
-        int paymentResult = myMapper.deliveryInsert(deliveryVO);
-
-        return paymentResult;
-    }
+//    @Override
+//    public int paymentInsert(PaymentDTO paymentDTO) {
+//        PaymentVO paymentVO = modelMapper.map(paymentDTO, PaymentVO.class);
+//
+//        int paymentResult = myMapper.paymentInsert(paymentVO);
+//
+//        return paymentResult;
+//    }
+//
+//    @Override
+//    public PaymentDTO paymentSelect(int cart_idx) {
+//        PaymentVO paymentVO = myMapper.paymentSelect(cart_idx);
+//
+//        PaymentDTO paymentDTO = modelMapper.map(paymentVO, PaymentDTO.class);
+//
+//        return paymentDTO;
+//    }
+//
+//    @Override
+//    public int deliveryInsert(DeliveryDTO deliveryDTO) {
+//        DeliveryVO deliveryVO = modelMapper.map(deliveryDTO, DeliveryVO.class);
+//
+//        int paymentResult = myMapper.deliveryInsert(deliveryVO);
+//
+//        return paymentResult;
+//    }
     public List<QnaDTO> qna_list_all(String member_id) {
         List<QnaDTO> QnaDTOList = myMapper.qna_list_all(member_id).stream()
                 .map(vo->modelMapper.map(vo, QnaDTO.class))
@@ -100,5 +98,41 @@ public class MyServiceImpl implements MyServiceIf{
                 .map(vo->modelMapper.map(vo, DeliveryListDTO.class))
                 .collect(Collectors.toList());
         return orderList;
+    }
+
+    @Override
+    public void order_item_insert(OrderItemDTO orderItemDTO) {
+        OrderItemVO orderItemVO = modelMapper.map(orderItemDTO, OrderItemVO.class);
+
+        myMapper.order_item_insert(orderItemVO);
+    }
+
+    @Override
+    public void order_insert(OrderDTO orderDTO) {
+        OrderVO orderVO = modelMapper.map(orderDTO, OrderVO.class);
+
+        myMapper.order_insert(orderVO);
+    }
+
+    @Override
+    public List<OrderDTO> order_list() {
+        List<OrderVO> voList = myMapper.order_list();
+
+        List<OrderDTO> dtoList = voList.stream()
+                .map(vo -> modelMapper.map(vo, OrderDTO.class))
+                .collect(Collectors.toList());
+
+        return dtoList;
+    }
+
+    @Override
+    public List<OrderDetailDTO> order_detail(String order_code) {
+        List<OrderDetailVO> voList = myMapper.order_detail(order_code);
+
+        List<OrderDetailDTO> dtoList = voList.stream()
+                .map(vo -> modelMapper.map(vo, OrderDetailDTO.class))
+                .collect(Collectors.toList());
+
+        return dtoList;
     }
 }

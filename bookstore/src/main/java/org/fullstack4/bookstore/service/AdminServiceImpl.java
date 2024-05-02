@@ -295,9 +295,13 @@ public class AdminServiceImpl implements AdminService {
     // 배송관리
     @Override
     public List<DeliveryDTO> deliveryList() {
-        List<DeliveryDTO> dtoList = adminMapper.deliveryList().stream()
+        List<DeliveryVO> voList = adminMapper.deliveryList();
+
+        List<DeliveryDTO> dtoList = voList.stream()
                 .map(vo -> modelMapper.map(vo, DeliveryDTO.class))
                 .collect(Collectors.toList());
+
+        log.info("dtoList : " + dtoList);
 
         return dtoList;
     }

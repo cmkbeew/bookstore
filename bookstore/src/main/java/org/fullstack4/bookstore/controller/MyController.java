@@ -17,6 +17,7 @@ import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 @Log4j2
 @Controller
@@ -32,13 +33,17 @@ public class MyController {
     }
 
     @GetMapping("/order")
-    public void orderGet() {
-        log.info("결제내역페이지");
+    public void orderGet(Model model) {
+        List<OrderDTO> orderList = myServiceIf.order_list();
 
+        model.addAttribute("orderList", orderList);
     }
-    @PostMapping("/order")
-    public void orderPost() {
-        log.info("결제내역페이지");
+
+    @GetMapping("/orderDetail")
+    public void orderPost(String order_code, Model model) {
+        List<OrderDetailDTO> orderDetailDTO = myServiceIf.order_detail(order_code);
+
+        model.addAttribute("orderDetailDTO", orderDetailDTO);
     }
 
     @GetMapping("/cart")
@@ -130,42 +135,91 @@ public class MyController {
         model.addAttribute("shipping", shipping);
     }
 
+//    @PostMapping("/payment")
+//    public String paymentInsert(@Valid PaymentDTO paymentDTO,
+//                                BindingResult bindingResult,
+//                                RedirectAttributes redirectAttributes,
+//                                DeliveryDTO deliveryDTO,
+//                                String same_check) {
+//        if(bindingResult.hasErrors()) {
+//            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+//            redirectAttributes.addFlashAttribute("paymentDTO", paymentDTO);
+//            redirectAttributes.addFlashAttribute("same_check", same_check);
+//
+//            return "redirect:/my/payment?member_id=" + paymentDTO.getMember_id();
+//        }
+//
+//        List<CartListDTO> cartList = myServiceIf.cart_list(paymentDTO.getMember_id());
+//
+//        if(cartList != null) {
+//            for(int i=0; i<cartList.size(); i++) {
+//                log.info(cartList.get(i).getCart_idx());
+//                paymentDTO.setPay_price(cartList.get(i).getDisplay_price());
+//                paymentDTO.setCart_idx(cartList.get(i).getCart_idx());
+//                paymentDTO.setProduct_idx(cartList.get(i).getProduct_idx());
+//                paymentDTO.setProduct_name(cartList.get(i).getProduct_name());
+//                paymentDTO.setProduct_cnt(cartList.get(i).getProduct_cnt());
+//
+//                // 결제 내역 추가
+//                myServiceIf.paymentInsert(paymentDTO);
+//                // 장바구니번호로 결제 내용 불러오기
+//                PaymentDTO dto = myServiceIf.paymentSelect(cartList.get(i).getCart_idx());
+//                // 배송 내역에 넣을 결제번호 세팅
+//                deliveryDTO.setPay_idx(dto.getPay_idx());
+//                // 배송 내역 추가
+//                myServiceIf.deliveryInsert(deliveryDTO);
+//                // 장바구니 삭제
+//                myServiceIf.deleteCart(cartList.get(i).getCart_idx());
+//            }
+//        }
+//
+//        return "redirect:/my/order?member_id=" + paymentDTO.getMember_id();
+//    }
+
     @PostMapping("/payment")
-    public String paymentInsert(@Valid PaymentDTO paymentDTO,
+    public String paymentInsert(@Valid OrderDTO orderDTO,
                                 BindingResult bindingResult,
                                 RedirectAttributes redirectAttributes,
-                                DeliveryDTO deliveryDTO,
+                                OrderItemDTO orderItemDTO,
                                 String same_check) {
         if(bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
-            redirectAttributes.addFlashAttribute("paymentDTO", paymentDTO);
+            redirectAttributes.addFlashAttribute("orderDTO", orderDTO);
             redirectAttributes.addFlashAttribute("same_check", same_check);
 
-            return "redirect:/my/payment?member_id=" + paymentDTO.getMember_id();
+            return "redirect:/my/payment?member_id=" + orderDTO.getMember_id();
         }
+        Random rand = new Random();
+        int createNum = 0;
+        String strNum = "";
+        String resultNum = "";
+        for(int i=0; i< 10; i++) {
+            createNum = rand.nextInt(9);
+            strNum = Integer.toString(createNum);
+            resultNum += strNum;
+        }
+        orderItemDTO.setOrder_code(resultNum);
+        orderDTO.setOrder_code(resultNum);
 
-        List<CartListDTO> cartList = myServiceIf.cart_list(paymentDTO.getMember_id());
+        List<CartListDTO> cartList = myServiceIf.cart_list(orderDTO.getMember_id());
+        log.info("cartList : " + cartList);
 
         for(int i=0; i<cartList.size(); i++) {
-            log.info(cartList.get(i).getCart_idx());
-            paymentDTO.setPay_price(cartList.get(i).getDisplay_price());
-            paymentDTO.setCart_idx(cartList.get(i).getCart_idx());
-            paymentDTO.setProduct_idx(cartList.get(i).getProduct_idx());
-            paymentDTO.setProduct_name(cartList.get(i).getProduct_name());
-            paymentDTO.setProduct_cnt(cartList.get(i).getProduct_cnt());
+            orderItemDTO.setProduct_idx(cartList.get(i).getProduct_idx());
+            orderItemDTO.setProduct_name(cartList.get(i).getProduct_name());
+            orderItemDTO.setProduct_cnt(cartList.get(i).getProduct_cnt());
+            orderItemDTO.setPrice(cartList.get(i).getPrice());
+            orderItemDTO.setDiscount(cartList.get(i).getDiscount());
+            orderItemDTO.setDiscount_price(cartList.get(i).getPrice());
+            orderItemDTO.setOrder_price(cartList.get(i).getDisplay_price());
 
-            // 결제 내역 추가
-            myServiceIf.paymentInsert(paymentDTO);
-            // 장바구니번호로 결제 내용 불러오기
-            PaymentDTO dto = myServiceIf.paymentSelect(cartList.get(i).getCart_idx());
-            // 배송 내역에 넣을 결제번호 세팅
-            deliveryDTO.setPay_idx(dto.getPay_idx());
-            // 배송 내역 추가
-            myServiceIf.deliveryInsert(deliveryDTO);
-            // 장바구니 삭제
+            myServiceIf.order_item_insert(orderItemDTO);
+            // 결제한 목록 카트 삭제
             myServiceIf.deleteCart(cartList.get(i).getCart_idx());
         }
+        // 결제 정보 넣기
+        myServiceIf.order_insert(orderDTO);
 
-        return "redirect:/my/order?member_id=" + paymentDTO.getMember_id();
+        return "redirect:/my/order?member_id=" + orderDTO.getMember_id();
     }
 }

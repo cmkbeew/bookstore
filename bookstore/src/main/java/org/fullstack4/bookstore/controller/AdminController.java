@@ -584,19 +584,13 @@ public class AdminController {
         log.info("===============================");
     }
 
-
-
     // 배송
     @GetMapping("/delivery/list")
     public void deliveryListGET(Model model) {
-        log.info("===============================");
-        log.info("AdminController >> deliveryListGET()");
-
         List<DeliveryDTO> deliveryList = adminService.deliveryList();
-        model.addAttribute("deliveryList", deliveryList);
+        log.info("deliveryList : " + deliveryList);
 
-        log.info("deliveryList : " + deliveryList.toString());
-        log.info("===============================");
+        model.addAttribute("deliveryList", deliveryList);
     }
 
     @GetMapping(path="/delivery/view", params="idx")
