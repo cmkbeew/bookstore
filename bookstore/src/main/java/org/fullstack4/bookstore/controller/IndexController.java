@@ -69,4 +69,8 @@ public class IndexController {
 
         req.getRequestDispatcher("/index.jsp").forward(req,resp);
     }
+    @GetMapping("/company/greeting")
+    public void companyGet() {
+        log.info("회사 소개");
+    }
 }

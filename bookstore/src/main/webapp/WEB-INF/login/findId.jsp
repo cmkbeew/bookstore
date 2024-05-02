@@ -16,9 +16,11 @@
 
     <title>findID</title>
 
+    <link rel="stylesheet" href="/resources/fonts/icomoon/style.css">
+    <link rel="stylesheet" href="/resources/css/ifta.css">
     <%--  header 부트스트랩  --%>
-    <link href="/resources/mintybootstrap.min.css" rel="stylesheet"/>
-    <link href="/resources/css/styles.css" rel="stylesheet" />
+    <link href="/resources/css/admin/styles.css" rel="stylesheet" />
+    <link href="/resources/css/login/style.css" rel="stylesheet" />
 
     <%--    해당 템플릿 css--%>
     <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
@@ -27,8 +29,6 @@
     <link rel="stylesheet" href="/resources/css/owl.carousel.css">
     <link rel="stylesheet" href="/resources/css/owl.theme.green.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/resources/fonts/icomoon/style.css">
 </head>
 <body>
 <%@ include file="/WEB-INF/common/header.jsp"%>

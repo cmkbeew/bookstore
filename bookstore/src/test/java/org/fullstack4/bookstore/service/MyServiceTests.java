@@ -2,6 +2,7 @@ package org.fullstack4.bookstore.service;
 
 import lombok.extern.log4j.Log4j2;
 import org.fullstack4.bookstore.dto.CartListDTO;
+import org.fullstack4.bookstore.dto.DeliveryListDTO;
 import org.fullstack4.bookstore.dto.ProductDTO;
 import org.fullstack4.bookstore.dto.QnaDTO;
 import org.junit.jupiter.api.Test;
@@ -32,6 +33,14 @@ public class MyServiceTests {
                 .writer("%")
                 .build();
         log.info(myServiceIf.qna_list_all(bbsListDTO.getWriter()));
+    }
+
+    @Test
+    public void bbs_List11(){
+        DeliveryListDTO bbsListDTO = DeliveryListDTO.builder()
+                .member_id("test")
+                .build();
+        log.info(myServiceIf.recent_order(bbsListDTO.getMember_id()));
     }
 
 }

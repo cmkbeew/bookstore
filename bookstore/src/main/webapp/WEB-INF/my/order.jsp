@@ -24,20 +24,31 @@
 <%--    <link rel="stylesheet" href="/resources/css/mycss.css">--%>
 
     <%--  header 부트스트랩  --%>
-    <link href="/resources/mintybootstrap.min.css" rel="stylesheet"/>
-    <link href="/resources/css/styles.css" rel="stylesheet" />
+<%--    <link href="/resources/admin/styles.css" rel="stylesheet"/>--%>
+<%--    <link href="/resources/css/styles.css" rel="stylesheet" />--%>
 
     <%--    해당 템플릿 css--%>
-    <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
+<%--    <link href="/resources/css/bootstrap.min.css" rel="stylesheet">--%>
+<%--    <link href="/resources/css/carousel.css" rel="stylesheet">--%>
+<%--    <link href="/resources/css/bootstrap.css" rel="stylesheet">--%>
+
+<%--    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/carousel/">--%>
+<%--    <link rel="stylesheet" href="/resources/css/owl.carousel.css">--%>
+<%--    <link rel="stylesheet" href="/resources/css/owl.theme.green.css">--%>
+<%--    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />--%>
+<%--    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">--%>
+<%--    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />--%>
+<%--    <link rel="stylesheet" href="/resources/fonts/icomoon/style.css">--%>
+    <%--    해당 템플릿 css--%>
+    <link href="/resources/css/bootstrap.css" rel="stylesheet">
     <link href="/resources/css/carousel.css" rel="stylesheet">
+    <link href="/resources/css/admin/styles.css" rel="stylesheet">
+    <link href="/resources/css/mycss.css" rel="stylesheet">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/carousel/">
     <link rel="stylesheet" href="/resources/css/owl.carousel.css">
     <link rel="stylesheet" href="/resources/css/owl.theme.green.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="/resources/fonts/icomoon/style.css">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0" />
+
 </head>
 <body>
 <%@ include file="/WEB-INF/common/header.jsp"%>
@@ -46,15 +57,16 @@
     <!-- Page content wrapper-->
     <div id="page-content-wrapper">
         <!-- Page content-->
-        <div class="container py-h">
+        <div class="container">
             <div class="row">
-                <div class="col-md-3"style="background-color: #e4f3ef ">
+                <div class="col-md-3">
                     <%@ include file="/WEB-INF/common/sidebar.jsp"%>
                 </div>
                 <div class="col-md-9">
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title text-uppercase mb-0 text-center">나의 결제 내역</h5>
+
                         </div>
                         <div class="table-responsive">
                             <table class="table no-wrap user-table custom-table mb-0 text-center">

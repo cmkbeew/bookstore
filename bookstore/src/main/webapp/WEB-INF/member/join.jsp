@@ -82,9 +82,8 @@
                                                        placeholder="" value="${dto.member_id}" required>
                                             </div>
                                             <div class="col-md-4">
-                                                <%--                                            <label for="zipcodebtn" class="form-label">우편번호</label>--%>
-                                                <input type="button" class="btn btn-outline-primary col-12 mb-2" style="height: 70px" value="주소 찾기" name="idBtn"
-                                                       id="idBtn" onclick="idbtnChek()">
+                                                <input type="button" class="btn btn-outline-primary col-12 mb-2" style="height: 70px" value="아이디 중복체크" name="idBtn"
+                                                       id="idBtn" onclick="idbtnChek()" disabled>
                                             </div>
                                             <div class="invalid-feedback">
                                                 사용할 아이디를 입력해주세요.
@@ -570,9 +569,12 @@ SNS 계정 가입   [필수 – 네이버] 이름, 이메일주소, 휴대폰번
             e.stopPropagation();
             document.getElementById("feedbackId").style.display = "block";
             document.getElementById("feedbackId").innerText = "규칙에 맞는 아이디를 입력해주세요."
+            document.getElementById("idBtn").disabled() ;
         }
         if (member_id.value.length < 1 || (idcheck).test(member_id.value)) {
             document.getElementById("feedbackId").style.display = "none";
+        } if(member_id.value.length >=4) {
+            document.getElementById("idBtn").disabled = false;
         }
     })
     pwd1.addEventListener("input", (e) => {
@@ -642,10 +644,10 @@ SNS 계정 가입   [필수 – 네이버] 이름, 이메일주소, 휴대폰번
             data:{member_id : id},
             success:function(cnt){
                 if(cnt == 0){
-                    $('.idCk1').css("dispaly","none");
+                    $('.idCk1').css("display","none");
                     $('.idCk2').css("display","block");
                 } else {
-                    $('.idCk2').css("dispaly","none");
+                    $('.idCk2').css("display","none");
                     $('.idCk1').css("display","block");
                     $('#member_id').val('');
                 }

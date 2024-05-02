@@ -11,6 +11,8 @@ import java.util.List;
 
 public interface MyServiceIf {
     List<CartListDTO> cart_list(String member_id);
+
+//    List<CartListDTO> cart_selcList(String member_id, int cart_idx);
     void update_cnt(String cart_idx, int product_count, String or_member_id);
 
     int deleteCart (int idx);

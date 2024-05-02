@@ -36,6 +36,7 @@ public class MyController {
     public void orderGet(Model model) {
         List<OrderDTO> orderList = myServiceIf.order_list();
 
+
         model.addAttribute("orderList", orderList);
     }
 
@@ -54,8 +55,18 @@ public class MyController {
                         ) {
         List<CartListDTO> cartList = myServiceIf.cart_list(member_id);
 
+        int total_price = cartList.stream().mapToInt(CartListDTO::getDisplay_price).sum();
+
+        // 배송비
+        int shipping = 2500;
+        if(total_price >= 15000) {
+            shipping = 0;
+        }
         model.addAttribute("cartList", cartList);
+        model.addAttribute("shipping", shipping);
+        model.addAttribute("total_price", total_price);
     }
+
     @PostMapping("/updateCnt")
     @ResponseBody
     public String updateCnt(@RequestParam(name = "cart_idx") String cart_idx,
@@ -68,11 +79,12 @@ public class MyController {
     }
 
     @PostMapping("deleteCart")
-    public String deleteCart(@RequestParam(name="")
+    public String deleteCart(
                              HttpServletRequest req,HttpSession Session,
                              RedirectAttributes redirectAttributes) {
         String memberId = Session.getAttribute("member_id").toString();
         String[] delete_idx = req.getParameterValues("select");
+        log.info(Arrays.toString(delete_idx));
         int result = 0;
 
         for( int i = 0 ; i < delete_idx.length; i++) {
@@ -114,12 +126,27 @@ public class MyController {
 
     }
 
-
     @GetMapping("/payment")
     public void cartPay(@RequestParam(name="member_id") String member_id,
+                        CartDTO cartDTO,
+                        ProductDTO productDTO,
+                        HttpServletRequest req,
                         Model model) {
-        // 장바구니 전체 리스트
-        List<CartListDTO> cartList = myServiceIf.cart_list(member_id);
+        String[] select_idx = req.getParameterValues("select");
+        log.info(cartDTO);
+        log.info("select Idx : " + Arrays.toString(select_idx));
+
+
+//        List<CartListDTO> cartList ;
+//        if( select_idx.length < 1) {
+//            // 장바구니 전체 리스트
+//             cartList = myServiceIf.cart_list(member_id);
+//        } else {
+//            for(int i = 0; i< select_idx.length < i++) {
+//                cartList = myServiceIf.cart_selcList(member_id, select_idx[i]);
+//            }
+//        }
+        List<CartListDTO> cartList= myServiceIf.cart_list(member_id);
 
         // 주문 금액 합계
         int total_price = cartList.stream().mapToInt(CartListDTO::getDisplay_price).sum();
@@ -202,6 +229,7 @@ public class MyController {
         orderDTO.setOrder_code(resultNum);
 
         List<CartListDTO> cartList = myServiceIf.cart_list(orderDTO.getMember_id());
+
         log.info("cartList : " + cartList);
 
         for(int i=0; i<cartList.size(); i++) {
@@ -221,5 +249,16 @@ public class MyController {
         myServiceIf.order_insert(orderDTO);
 
         return "redirect:/my/order?member_id=" + orderDTO.getMember_id();
+    }
+
+    @PostMapping("/paymentNow")
+    public String payNow(
+            CartDTO cartDTO,
+            HttpSession session
+    ) {
+
+        myServiceIf.cart_add(cartDTO);
+
+        return "redirect:/my/payment?member_id="+session.getAttribute("member_id");
     }
 }
