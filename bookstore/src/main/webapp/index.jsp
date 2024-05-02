@@ -12,17 +12,18 @@
 
     <%--  header 부트스트랩  --%>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/minty/bootstrap.min.css" rel="stylesheet"/>
+<%--    <link href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/minty/bootstrap.min.css" rel="stylesheet"/>--%>
     <link href="/resources/css/styles.css" rel="stylesheet" />
 
 <%--    해당 템플릿 css--%>
     <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/resources/css/mintybootstrap.min.css" rel="stylesheet">
     <link href="/resources/css/carousel.css" rel="stylesheet">
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/carousel/">
+<%--    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/carousel/">--%>
 <%--     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>&ndash;%&gt;--%>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/minty/bootstrap.min.css" integrity="sha384-H4X+4tKc7b8s4GoMrylmy2ssQYpDHoqzPa9aKXbDwPoPUA3Ra8PA5dGzijN+ePnH" crossorigin="anonymous">
-    <link rel="stylesheet" href="/resources/css/owl.carousel.css">
-    <link rel="stylesheet" href="/resources/css/owl.theme.green.css">
+<%--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/minty/bootstrap.min.css" integrity="sha384-H4X+4tKc7b8s4GoMrylmy2ssQYpDHoqzPa9aKXbDwPoPUA3Ra8PA5dGzijN+ePnH" crossorigin="anonymous">--%>
+<%--    <link rel="stylesheet" href="/resources/css/owl.carousel.css">--%>
+<%--    <link rel="stylesheet" href="/resources/css/owl.theme.green.css">--%>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
     <style>
@@ -279,9 +280,9 @@
     </div>
     <%@ include file="/WEB-INF/common/footer.jsp"%>
 <script>
-    <link rel="stylesheet" href="/resources/js/owl.carousel.js"/>
-    <link rel="stylesheet" href="/resources/js/owl.autoplay.js"/>
-    <link rel="stylesheet" href="/resources/js/owl.navigation.js"/>
+    // <link rel="stylesheet" href="/resources/js/owl.carousel.js"/>
+    // <link rel="stylesheet" href="/resources/js/owl.autoplay.js"/>
+    // <link rel="stylesheet" href="/resources/js/owl.navigation.js"/>
 
     // $(function() {
     //     $('.owl-carousel').owlCarousel({

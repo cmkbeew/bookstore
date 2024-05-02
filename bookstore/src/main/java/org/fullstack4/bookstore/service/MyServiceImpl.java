@@ -5,11 +5,7 @@ import lombok.extern.log4j.Log4j2;
 import org.fullstack4.bookstore.domain.CartVO;
 import org.fullstack4.bookstore.domain.DeliveryVO;
 import org.fullstack4.bookstore.domain.PaymentVO;
-import org.fullstack4.bookstore.dto.CartDTO;
-import org.fullstack4.bookstore.dto.CartListDTO;
-import org.fullstack4.bookstore.dto.DeliveryDTO;
-import org.fullstack4.bookstore.dto.PaymentDTO;
-import org.fullstack4.bookstore.dto.QnaDTO;
+import org.fullstack4.bookstore.dto.*;
 import org.fullstack4.bookstore.mapper.CommunityMapper;
 import org.fullstack4.bookstore.mapper.MyMapper;
 import org.modelmapper.ModelMapper;
@@ -96,5 +92,13 @@ public class MyServiceImpl implements MyServiceIf{
                 .map(vo->modelMapper.map(vo, QnaDTO.class))
                 .collect(Collectors.toList());
         return QnaDTOList;
+    }
+
+    @Override
+    public List<DeliveryListDTO> recent_order(String member_id) {
+        List<DeliveryListDTO> orderList = myMapper.recent_order(member_id).stream()
+                .map(vo->modelMapper.map(vo, DeliveryListDTO.class))
+                .collect(Collectors.toList());
+        return orderList;
     }
 }

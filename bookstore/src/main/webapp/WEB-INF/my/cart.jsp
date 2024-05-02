@@ -38,14 +38,7 @@
 <body>
 <%@ include file="/WEB-INF/common/header.jsp"%>
 <div class="d-flex py-h" id="wrapper">
-    <%--    <%@ include file="/WEB-INF/common/adminSidebar.jsp"%>--%>
-    <!-- Page content wrapper-->
     <div id="page-content-wrapper">
-        <%--        <button class="btn btn-primary" id="sidebarToggle">--%>
-        <%--            <i class="fa fa-arrow-left" aria-hidden="true" style="display: block;"></i>--%>
-        <%--            <i class="fa fa-arrow-right" aria-hidden="true" style="display: none;"></i>--%>
-        <%--        </button>--%>
-        <!-- Page content-->
         <div class="container py-h">
             <div class="row">
                 <div class="col-md-3"style="background-color: #e4f3ef">
@@ -66,7 +59,7 @@
                                                 <div class="d-flex justify-content-between align-items-center mb-4">
                                                     <div>
                                                         <p class="mb-1">Shopping cart</p>
-                                                        <p class="mb-0">You have ${model.cartList} items in your cart</p>
+                                                        <p class="mb-0">You have items in your cart</p>
                                                     </div>
                                                 </div>
                                                 <c:choose>
