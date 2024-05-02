@@ -17,36 +17,22 @@
 
     <title>admin >> community</title>
 
-
-    <%--  header 부트스트랩  --%>
-    <link href="/resources/mintybootstrap.min.css" rel="stylesheet"/>
-    <link href="/resources/css/styles.css" rel="stylesheet" />
-
     <%--    해당 템플릿 css--%>
-    <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/resources/css/bootstrap.css" rel="stylesheet">
     <link href="/resources/css/carousel.css" rel="stylesheet">
+    <link href="/resources/css/admin/styles.css" rel="stylesheet">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/carousel/">
     <link rel="stylesheet" href="/resources/css/owl.carousel.css">
     <link rel="stylesheet" href="/resources/css/owl.theme.green.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-
-<%--    &lt;%&ndash;  header 부트스트랩  &ndash;%&gt;--%>
-<%--&lt;%&ndash;    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />&ndash;%&gt;--%>
-<%--    <link href="/resources/css/styles.css" rel="stylesheet" />--%>
-<%--    <link href="/resources/mintybootstrap.min.css" rel="stylesheet"/>--%>
-<%--    <link rel="stylesheet" href="/resources/css/bootstrap.min.css" integrity="sha384-H4X+4tKc7b8s4GoMrylmy2ssQYpDHoqzPa9aKXbDwPoPUA3Ra8PA5dGzijN+ePnH" crossorigin="anonymous">--%>
-
-<%--    &lt;%&ndash; list 부트스트랩   &ndash;%&gt;--%>
-<%--&lt;%&ndash;    <link href="/resources/css/admin/styles.css" rel="stylesheet" />&ndash;%&gt;--%>
-<%--    <link rel="stylesheet" href="/resources/fonts/icomoon/style.css">--%>
-<%--    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0" />--%>
+    <link rel="stylesheet" href="/resources/fonts/icomoon/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0" />
 </head>
 <body style="background-color: #eeeeee">
 <%@ include file="/WEB-INF/common/header.jsp"%>
-<div class="d-flex py-h" id="wrapper">
+<div class="d-flex" id="wrapper" style="min-height: 80vh;">
     <%@ include file="/WEB-INF/common/adminSidebar.jsp"%>
     <!-- Page content wrapper-->
-    <div id="page-content-wrapper" style="min-height: 80vh;">
+    <div id="page-content-wrapper">
         <button class="btn btn-primary" id="sidebarToggle">
             <span class="material-symbols-outlined" style="display: block;">arrow_back</span>
             <span class="material-symbols-outlined" style="display: none;">arrow_forward</span>
@@ -95,7 +81,7 @@
                                     <tr class="table-light">
                                         <th scope="col" class="border-0 text-uppercase font-medium pl-4" style="vertical-align: middle;">
                                             <label class="control control--checkbox">
-                                                <input type="checkbox" name="select" id="selectAll" value="">
+                                                <input type="checkbox" name="selectAll" id="selectAll" value="">
                                                 <div class="control__indicator"></div>
                                             </label>
                                         </th>
@@ -113,31 +99,14 @@
                                     <tbody>
                                     <c:choose>
                                         <c:when test="${!empty communityList && communityList.total_count > 0}">
-<%--                                            <c:forEach begin="0" end="${communityList.total_count}" var="i">--%>
-<%--                                                <tr>--%>
-<%--                                                    <td class="pl-4" style="width: 80px;">--%>
-<%--                                                        <label class="control control--checkbox">--%>
-<%--                                                            <input type="checkbox" name="select" id="select+${communityList.dtoList[i].idx}" value="${communityList.dtoList[i].idx}">--%>
-<%--                                                            <div class="control__indicator"></div>--%>
-<%--                                                        </label>--%>
-<%--                                                    </td>--%>
-<%--                                                    <td>${communityList.total_count - i}</td>--%>
-<%--                                                    <td>${communityList.dtoList[i].idx}</td>--%>
-<%--                                                    <td>${communityList.dtoList[i].title}</td>--%>
-<%--                                                    <td>${communityList.dtoList[i].reg_date}</td>--%>
-<%--                                                </tr>--%>
-<%--                                            </c:forEach>--%>
                                             <c:forEach items="${communityList.dtoList}" var="list">
                                                 <tr>
                                                     <td class="pl-4" style="width: 80px;">
                                                         <label class="control control--checkbox">
-                                                            <input type="checkbox" name="select" id="select+${list.idx}" value="${list.idx}">
+                                                            <input type="checkbox" name="select" class="selectOne" id="select${list.idx}" value="${list.idx}">
                                                             <div class="control__indicator"></div>
                                                         </label>
                                                     </td>
-<%--                                                    <c:if test="${communityList.type == 'qna'}">--%>
-<%--                                                        <td class="pl-4"><a href="/admin/${communityList.type}/view?idx=${list.idx}">${list}</a></td>--%>
-<%--                                                    </c:if>--%>
                                                     <td style="max-width: 300px;">
                                                         <a href="/admin/${communityList.type}/view?idx=${list.idx}" style="max-width: 100%; display: block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
                                                             <c:if test="${communityList.type == 'notice'}">
@@ -244,30 +213,56 @@
 <%@ include file="/WEB-INF/common/footer.jsp"%>
 <script>
     const selectAllDOM = document.querySelector("#selectAll");
-    const allCheckboxDOM = document.querySelectorAll(".control--checkbox");
-    selectAllDOM.addEventListener("click", function (e) {
-        if (selectAllDOM.checked) {
-            for (let i = 0; i < allCheckboxDOM.length; i++) {
-                allCheckboxDOM[i].children[0].checked = true;
-            }
-        } else {
-            for (let i = 0; i < allCheckboxDOM.length; i++) {
-                allCheckboxDOM[i].children[0].checked = false;
-            }
-        }
-
-    }, false)
-
+    const selectOneDOMList = document.querySelectorAll(".selectOne");
     const fixBtn = document.querySelector("#fixBtn");
-    const control = document.querySelectorAll(".control__indicator");
     let idx = [];
 
-    for (let i = 0; i < control.length; i++) {
-        control[i].addEventListener("click", function (e) {
-            console.log(e.target.parentNode.parentNode.parentNode.children[1].children[0].textContent);
-            idx.push(e.target.parentNode.parentNode.parentNode.children[1].children[0].textContent);
+    // 체크 박스 전체 선택 및 해제
+    selectAllDOM.addEventListener("click", function (e) {
+        if (selectAllDOM.checked) {
+            for (let i = 0; i < selectOneDOMList.length; i++) {
+                selectOneDOMList[i].checked = true;
+            }
+        } else {
+            for (let i = 0; i < selectOneDOMList.length; i++) {
+                selectOneDOMList[i].checked = false;
+            }
+        }
+    }, false)
+
+    // 체크 박스 하나씩 선택 및 해제
+    for (let i = 0; i < selectOneDOMList.length; i++) {
+        selectOneDOMList[i].addEventListener("click", function (e) {
+            // console.log(idx.includes(e.target.parentNode.children[0].value));
+            //
+            // if (selectOneDOMList[i].checked && idx.includes(e.target.parentNode.children[0].value)) {
+            //     idx.pop()
+            // }
+
+            if (selectOneDOMList[i].checked) {
+                idx.push(e.target.parentNode.children[0].value);
+            }
+            console.log(idx);
+
+            //
+            //     if (idx.includes(e.target.parentNode.children[0].value)) {
+            //         idx.pop()
+            //     } else {
+            //         idx.push(e.target.parentNode.children[0].value);
+            //     }
+            // }
+
+            // //체크박스 삭제
+            // String[] arrIdx = idxList.split(",");
+            // Integer[] newArr = Stream.of(arrIdx).mapToInt(Integer::parseInt).boxed().toArray(Integer[]::new);
+            // qnaServiceIf.deleteQnaCommu(newArr);
+            //
+            // log.info("idxList : " + idxList);
+            // return "sdf";
+
         }, false)
     }
+
 
     fixBtn.addEventListener("click", function (e) {
         console.log(idx.length);

@@ -3,6 +3,7 @@ package org.fullstack4.bookstore.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.fullstack4.bookstore.dto.*;
+import org.fullstack4.bookstore.service.AdminService;
 import org.fullstack4.bookstore.service.CommunityService;
 import org.fullstack4.bookstore.util.FileUploadUtil;
 import org.springframework.stereotype.Controller;
@@ -29,6 +30,7 @@ import java.util.Map;
 @RequestMapping("/community")
 public class CommunityController {
 
+    private final AdminService adminService;
     private final CommunityService communityService;
 
     @GetMapping("/list")
@@ -89,39 +91,87 @@ public class CommunityController {
         }
     }
 
-    @GetMapping("/qna/regist")
-    public void qnaRegistGET() {
 
+    @GetMapping("/qna/regist")
+    public void qnaRegistGET(
+    ) {
+        log.info("===============================");
+        log.info("AdminController >> qnaRegistGET()");
+        log.info("===============================");
     }
 
     @PostMapping("/qna/regist")
-    public String qnaRegistPOST(@Valid QnaDTO qnaDTO,
-                            BindingResult bindingResult,
-                            RedirectAttributes redirectAttributes) {
-        if(bindingResult.hasErrors()) {
+    public String qnaRegistPOST(
+            @Valid QnaDTO qnaDTO,
+            BindingResult bindingResult,
+            RedirectAttributes redirectAttributes
+    ) {
+        log.info("===============================");
+        log.info("AdminController >> qnaRegistPOST()");
+
+        log.info("errors: " + bindingResult.getAllErrors());
+
+        if (bindingResult.hasErrors()) {
+            log.info("Errors");
             redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
             redirectAttributes.addFlashAttribute("qnaDTO", qnaDTO);
-
             return "redirect:/community/qna/regist";
         }
 
-        log.info("===============================");
-        log.info("AdminController >> qnaRegistPOST >> qnaDTO : " + qnaDTO);
-
         int result = communityService.qnaRegist(qnaDTO);
-        log.info("result : " + result);
-        log.info("regist >> qnaDTO : " + qnaDTO);
 
-        log.info("===============================");
-
-        if(result > 0) {
+        if (result > 0) {
             return "redirect:/community/list?type=qna";
         } else {
             redirectAttributes.addFlashAttribute("qnaDTO", qnaDTO);
-
             return "redirect:/community/qna/regist";
         }
     }
+
+//    @GetMapping("/qna/regist")
+//    public void qnaRegistGET(
+////            @RequestParam int idx,
+//            Model model
+//    ) {
+//        log.info("===============================");
+//        log.info("AdminController >> qnaReplyRegistGET()");
+//
+//
+////        QnaDTO qnaDTO = adminService.qnaView(idx);
+////        model.addAttribute("qnaDTO", qnaDTO);
+////        log.info("qnaDTO : " + qnaDTO);
+//
+//        log.info("===============================");
+//    }
+//
+//    @PostMapping("/qna/regist")
+//    public String qnaRegistPOST(
+////            @RequestParam int idx,
+//            @Valid QnaDTO qnaDTO,
+//            BindingResult bindingResult,
+//            RedirectAttributes redirectAttributes
+//    ) {
+//        log.info("===============================");
+//        log.info("AdminController >> qnaReplyRegistPOST()");
+//
+//        log.info("errors: " + bindingResult.getAllErrors());
+//        if (bindingResult.hasErrors()) {
+//            log.info("Errors");
+//            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+//            redirectAttributes.addFlashAttribute("qnaDTO", qnaDTO);
+//            return "redirect:/community/qna/regist";
+//        }
+//
+//        int result = communityService.qnaRegist(qnaDTO);
+//
+//        if (result > 0) {
+//            return "redirect:/community/list?type=qna";
+//        } else {
+//            redirectAttributes.addFlashAttribute("qnaDTO", qnaDTO);
+//            return "redirect:/community/qna/regist";
+//        }
+//
+//    }
 
     @GetMapping("/qna/modify")
     public void qnaModifyGet(int idx, Model model) {

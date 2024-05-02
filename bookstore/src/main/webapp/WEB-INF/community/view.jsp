@@ -8,17 +8,14 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
 
-    <%--  header 부트스트랩  --%>
-    <link href="/resources/mintybootstrap.min.css" rel="stylesheet"/>
-    <link href="/resources/css/styles.css" rel="stylesheet" />
-
     <%--    해당 템플릿 css--%>
-    <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/resources/css/bootstrap.css" rel="stylesheet">
     <link href="/resources/css/carousel.css" rel="stylesheet">
+    <link href="/resources/css/admin/styles.css" rel="stylesheet">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/carousel/">
     <link rel="stylesheet" href="/resources/css/owl.carousel.css">
     <link rel="stylesheet" href="/resources/css/owl.theme.green.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0" />
 </head>
 <body style="background-color: #eeeeee;">
 <%@ include file="/WEB-INF/common/header.jsp"%>

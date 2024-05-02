@@ -24,6 +24,7 @@ public interface AdminService {
     int noticeRegist(NoticeDTO noticeDTO);
     int noticeModify(NoticeDTO noticeDTO);
     int noticeDelete(int idx);
+//    int noticeListDelete(String[] idxArr);
     int noticeFix(int idx);
 
 

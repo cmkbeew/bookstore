@@ -25,6 +25,7 @@ public interface AdminMapper {
     int noticeRegist(NoticeVO noticeVO);
     int noticeModify(NoticeVO noticeVO);
     int noticeDelete(int idx);
+//    int noticeListDelete(Integer[] idxArr);
     int noticeFix(int idx);
 
 
