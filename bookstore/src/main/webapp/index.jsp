@@ -279,24 +279,6 @@
         </div>
     </div>
     <%@ include file="/WEB-INF/common/footer.jsp"%>
-<script>
-    // <link rel="stylesheet" href="/resources/js/owl.carousel.js"/>
-    // <link rel="stylesheet" href="/resources/js/owl.autoplay.js"/>
-    // <link rel="stylesheet" href="/resources/js/owl.navigation.js"/>
-
-    // $(function() {
-    //     $('.owl-carousel').owlCarousel({
-    //     items : 2,
-    //         margin: 10,
-    //         loop: true,
-    //         nav: true,
-    //         navText['이전','다음'],
-    //         autoplay: true,
-    //         autoplayTimeout: 3000,
-    //         autoplayHoverPause: true
-    //     });
-    // });
-</script>
 </body>
 </html>
 
