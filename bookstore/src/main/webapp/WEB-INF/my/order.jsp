@@ -55,7 +55,7 @@
                                 <c:choose>
                                     <c:when test="${!empty orderList}">
                                         <c:forEach items="${orderList}" var="list" varStatus="i">
-                                            <tr style="cursor:pointer;" onclick="window.location.href=''/my/orderDetail?member_id=${sessionScope.member_id}&delivery_state=${delivery_state}&order_code=${list.order_code}'">
+                                            <tr style="cursor:pointer;" onclick="window.location.href='/my/orderDetail?member_id=${sessionScope.member_id}&delivery_state=${delivery_state}&order_code=${list.order_code}'">
                                                 <td class="pl-4" style="font-size:13px">${list.order_code}</td>
                                                 <td style="font-size:13px">${list.product_name}</td>
                                                 <td style="font-size:13px">${list.receiver_name}</td>
