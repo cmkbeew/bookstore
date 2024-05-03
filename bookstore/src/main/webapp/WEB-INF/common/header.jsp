@@ -55,7 +55,7 @@
                             <button type="button" class="btn btn-outline-primary me-2"
                                     onclick="location.href='/login/logout'">로그아웃
                             </button>
-                            <button type="button" class="btn btn-primary"
+                            <button type="button" class="btn btn-primary me-2"
                                     onclick="location.href='/member/view?member_id=${sessionScope.member_id}'">마이페이지
                             </button>
                             <button type="button" class="btn btn-outline-dark" onclick="location.href='/my/cart?member_id=${sessionScope.member_id}'">
@@ -68,7 +68,7 @@
                             <button type="button" class="btn btn-outline-primary me-2"
                                     onclick="location.href='/login/logout'">로그아웃
                             </button>
-                            <button type="button" class="btn btn-primary"
+                            <button type="button" class="btn btn-primary me-2"
                                     onclick="location.href='/admin/list?type=notice'">관리자페이지
                             </button>
                         </c:if>

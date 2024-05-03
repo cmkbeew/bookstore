@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.fullstack4.bookstore.dto.*;
 import org.fullstack4.bookstore.service.MyServiceIf;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,10 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 @Log4j2
@@ -59,12 +58,33 @@ public class MyController {
         model.addAttribute("orderDetailDTO", orderDetailDTO);
     }
 
+    //    @PostMapping("/orderCancelRequest")
+//    public String orderCancelRequest(String member_id, String order_code, String delivery_state, Model model) throws UnsupportedEncodingException {
+//        int updateToCancel = myServiceIf.orderCancelRequest(member_id, order_code, delivery_state);
+//
+//        model.addAttribute("updateToCancel", updateToCancel);
+//
+//        delivery_state = URLEncoder.encode(delivery_state, "utf-8");
+//        return "redirect:/my/orderDetail?member_id=" + member_id + "&delivery_state=" + delivery_state + "&order_code=" + order_code;
+//    }
+    @PostMapping("/orderCancelRequest")
+    public String orderCancelRequest(String member_id, String order_code, String delivery_state, Model model) throws UnsupportedEncodingException {
+        int result = myServiceIf.orderCancelRequest(member_id, order_code, delivery_state);
+
+        delivery_state = URLEncoder.encode(delivery_state, "utf-8");
+        if(result > 0) {
+            return "redirect:/my/order?member_id=" + member_id + "&delivery_state=" + delivery_state;
+        } else {
+            return "redirect:/my/orderDetail?member_id=" + member_id + "&delivery_state=" + delivery_state + "&order_code=" + order_code;
+        }
+    }
+
     @GetMapping("/cart")
     public void cartGet(CartListDTO cartListDTO,
                         @RequestParam(name="member_id", defaultValue = "") String member_id,
                         Model model,
                         HttpSession session
-                        ) {
+    ) {
         List<CartListDTO> cartList = myServiceIf.cart_list(member_id);
 
         int total_price = cartList.stream().mapToInt(CartListDTO::getDisplay_price).sum();
@@ -82,8 +102,8 @@ public class MyController {
     @PostMapping("/updateCnt")
     @ResponseBody
     public String updateCnt(@RequestParam(name = "cart_idx") String cart_idx,
-                          @RequestParam(name = "product_cnt") int product_cnt,
-                          @RequestParam(name = "or_member_id") String or_member_id) {
+                            @RequestParam(name = "product_cnt") int product_cnt,
+                            @RequestParam(name = "or_member_id") String or_member_id) {
 
         myServiceIf.update_cnt(cart_idx, product_cnt, or_member_id);
 
@@ -92,8 +112,8 @@ public class MyController {
 
     @PostMapping("deleteCart")
     public String deleteCart(
-                             HttpServletRequest req,HttpSession Session,
-                             RedirectAttributes redirectAttributes) {
+            HttpServletRequest req,HttpSession Session,
+            RedirectAttributes redirectAttributes) {
         String memberId = Session.getAttribute("member_id").toString();
         String[] delete_idx = req.getParameterValues("select");
         log.info(Arrays.toString(delete_idx));
@@ -231,16 +251,5 @@ public class MyController {
         myServiceIf.cart_add(cartDTO);
 
         return "redirect:/my/payment?member_id=" + session.getAttribute("member_id");
-    }
-
-    @PostMapping("/orderDelete")
-    public String orderDelete(String member_id, String order_code) {
-        int orderResult = myServiceIf.orderDelete(member_id, order_code);
-
-        if(orderResult > 0) {
-            return "redirect:/my/order?member_id=" + member_id;
-        } else {
-            return "redirect:/my/orderDetail?member_id=" + member_id + "&order_code=" + order_code;
-        }
     }
 }

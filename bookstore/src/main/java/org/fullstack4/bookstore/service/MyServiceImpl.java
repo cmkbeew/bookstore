@@ -120,13 +120,20 @@ public class MyServiceImpl implements MyServiceIf{
         return dtoList;
     }
 
+//    @Override
+//    @Transactional
+//    public int orderDelete(String member_id, String order_code) {
+//        int orderResult = myMapper.orderDelete(member_id, order_code);
+//        int orderItemResult = myMapper.orderItemDelete(member_id, order_code);
+//
+//        return orderResult;
+//    }
+
+
     @Override
-    @Transactional
-    public int orderDelete(String member_id, String order_code) {
-        int orderResult = myMapper.orderDelete(member_id, order_code);
-        int orderItemResult = myMapper.orderItemDelete(member_id, order_code);
+    public int orderCancelRequest(String member_id, String order_code, String delivery_state) {
+        int result = myMapper.orderCancelRequest(member_id, order_code, delivery_state);
 
-        return orderResult;
+        return result;
     }
-
 }
