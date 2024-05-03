@@ -21,5 +21,11 @@ public interface ProductMapper {
     int productReviewModify(ReviewVO reviewVO);
     int productReviewDelete(int product_idx, int review_idx);
 
+    // 도서 상세 페이지 관련 상품
     List<ProductVO> relatedProductList(ProductVO productVO);
+
+    // 도서 관리 페이지
+    List<ProductVO> adminProductList();
+    ProductVO adminProductView(int product_idx);
+
 }

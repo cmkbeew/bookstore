@@ -27,47 +27,61 @@
     <link rel="stylesheet" href="/resources/fonts/icomoon/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0" />
 </head>
-<body>
+<body style="background-color: #eeeeee">
 <%@ include file="/WEB-INF/common/header.jsp"%>
-<div class="d-flex py-h" id="wrapper">
+<div class="d-flex" id="wrapper" style="min-height: 80vh;">
     <%@ include file="/WEB-INF/common/adminSidebar.jsp"%>
     <!-- Page content wrapper-->
     <div id="page-content-wrapper">
         <button class="btn btn-primary" id="sidebarToggle">
-            <i class="fa fa-arrow-left" aria-hidden="true" style="display: block;"></i>
-            <i class="fa fa-arrow-right" aria-hidden="true" style="display: none;"></i>
+            <span class="material-symbols-outlined" style="display: block;">arrow_back</span>
+            <span class="material-symbols-outlined" style="display: none;">arrow_forward</span>
         </button>
         <!-- Page content-->
-        <div class="container py-h">
+        <div class="container">
+            <!-- 검색 -->
+            <form id="frmSearch" name="frmSearch" method="get" action="admin/product/list">
+                <input type="hidden" name="type" id="type" value="${adminProductListByPage.type}" />
+                <input type="hidden" name="grade" id="grade" value="${adminProductListByPage.grade}" />
+                <div class="d-flex justify-content-center align-items-center mb-3">
+                    <div class="me-2">
+                        <input class="form-control form-control-lg me-2" type="search" placeholder="교재이름" name="search_word" id="search_word" value="${productList.search_word}">
+                    </div>
+                    <div>
+                        <button class="btn btn-primary" type="submit" id="btn_search">검색</button>
+                    </div>
+                </div>
+            </form>
+            <!-- 검색 끝 -->
             <div class="row">
                 <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title text-uppercase mb-0 text-center">도서</h5>
+                    <form name="registFrm" id="registFrm" method="post" action="/admin/regist">
+                        <h5>총 <span class="text-primary">${adminProductListByPage.total_count}</span>개</h5>
+                        <div class="card">
+                            <div class="card-body">
+                            <h5 class="card-title text-uppercase mb-0 text-center">도서관리</h5>
                         </div>
                         <div class="table-responsive">
                             <table class="table no-wrap user-table mb-0">
                                 <thead>
                                 <tr>
                                     <th scope="col" class="border-0">선택</th>
-                                    <th scope="col" class="border-0">번호</th>
-                                    <th scope="col" class="border-0">아이디</th>
-                                    <th scope="col" class="border-0">이름</th>
-                                    <th scope="col" class="border-0" >이메일</th>
-                                    <th scope="col" class="border-0">평생회원</th>
-                                    <th scope="col" class="border-0">선택사항</th>
-                                    <th scope="col" class="border-0">포인트</th>
-                                    <th scope="col" class="border-0">회원상태</th>
-                                    <th scope="col" class="border-0">가입일</th>
-                                    <th scope="col" class="border-0">탈퇴일</th>
-                                    <th scope="col" class="border-0">탈퇴일</th>
-                                    <th scope="col" class="border-0">탈퇴일</th>
+                                    <th scope="col" class="border-0">상품명</th>
+                                    <th scope="col" class="border-0">출판사</th>
+                                    <th scope="col" class="border-0">저자</th>
+                                    <th scope="col" class="border-0">출판일</th>
+                                    <th scope="col" class="border-0">유형</th>
+                                    <th scope="col" class="border-0">학년</th>
+                                    <th scope="col" class="border-0">과목</th>
+                                    <th scope="col" class="border-0">쪽수</th>
+                                    <th scope="col" class="border-0">가격</th>
+                                    <th scope="col" class="border-0">할인율</th>
+                                    <th scope="col" class="border-0">상품등록일</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:choose>
-                                    <c:when test="${!empty productList}">
-                                        <c:forEach items="${productList}" var="list">
+                                    <c:if test="${not empty adminProductList}">
+                                        <c:forEach items="${adminProductList}" var="list">
                                             <tr>
                                                 <td class="pl-4">
                                                     <label class="control control--checkbox">
@@ -75,27 +89,25 @@
                                                         <div class="control__indicator"></div>
                                                     </label>
                                                 </td>
-                                                <td class="pl-4">${list.product_idx}</td>
-                                                <td>${list.product_name}</td>
-                                                <td>${list.publisher}</td>
-                                                <td>${list.author}</td>
-                                                <td>${list.reg_date}</td>
-                                                <td>${list.page_cnt}</td>
-                                                <td>${list.price}</td>
-                                                <td>${list.tax_yn}</td>
-                                                <td>${list.publish_date}</td>
-                                                <td>${list.category1}</td>
-                                                <td>${list.category2}</td>
-                                                <td>${list.discount}</td>
+                                                <td><a href="/admin/product/view?product_idx=${list.product_idx}">${list.product_name}</a></td>
+                                                <td><a href="/admin/product/view?product_idx=${list.product_idx}">${list.publisher}</a></td>
+                                                <td><a href="/admin/product/view?product_idx=${list.product_idx}">${list.author}</a></td>
+                                                <td><a href="/admin/product/view?product_idx=${list.product_idx}">${list.publish_date}</a></td>
+                                                <td><a href="/admin/product/view?product_idx=${list.product_idx}">${list.type}</a></td>
+                                                <td><a href="/admin/product/view?product_idx=${list.product_idx}">${list.grade}</a></td>
+                                                <td><a href="/admin/product/view?product_idx=${list.product_idx}">${list.subject}</a></td>
+                                                <td><a href="/admin/product/view?product_idx=${list.product_idx}">${list.page_cnt}</a></td>
+                                                <td><a href="/admin/product/view?product_idx=${list.product_idx}">${list.price}</a></td>
+                                                <td><a href="/admin/product/view?product_idx=${list.product_idx}">${list.discount}</a></td>
+                                                <td><a href="/admin/product/view?product_idx=${list.product_idx}">${list.reg_date}</a></td>
                                             </tr>
                                         </c:forEach>
-                                    </c:when>
-                                    <c:otherwise>
+                                    </c:if>
+                                    <c:if test="${empty adminProductList}">
                                         <tr>
-                                            <td class="text-center" colspan="5">회원정보가 없습니다.</td>
+                                            <td class="text-center" colspan="5">도서정보가 없습니다.</td>
                                         </tr>
-                                    </c:otherwise>
-                                </c:choose>
+                                    </c:if>
                                 </tbody>
                             </table>
                         </div>

@@ -14,7 +14,7 @@
         <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/list?type=faq">FAQ</a>
         <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/list?type=qna">QnA</a>
         <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/member/list">회원관리</a>
-        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/product/list">도서</a>
+        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/product/list">도서관리</a>
 
         <div class="list-group list-group-flush">
             <a class="list-group-item list-group-item-action list-group-item-light p-3 dropdown-toggle" href="#"
