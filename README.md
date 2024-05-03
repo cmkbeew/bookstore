@@ -40,7 +40,7 @@ MariaDB 10.11 / dbeaver
 
 ### **-데이터 베이스 구축**
 ![image](https://github.com/cmkbeew/bookstore/assets/77384277/3a9547dc-01e3-4179-914e-a745600c0a5a)
-
+[[bookstore_table.sql 확인]](https://github.com/cmkbeew/bookstore/blob/main/bookstore_table.sql) [[table_foreign_key.sql 확인]](https://github.com/cmkbeew/bookstore/blob/main/table_foreign_key.sql)
 
 테이블 명 추가, 디비버 이미지 다운 받아서 넣으면 될 듯.
 
