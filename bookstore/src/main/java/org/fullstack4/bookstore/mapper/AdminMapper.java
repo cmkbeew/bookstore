@@ -58,6 +58,5 @@ public interface AdminMapper {
     List<ProductVO> productList();
 
     // 배송
-    List<DeliveryVO> deliveryList();
     int deliveryUpdateState(@Param(value = "order_idx") ArrayList<Integer> order_idx, @Param(value = "delivery_state") String delivery_state);
 }

@@ -290,7 +290,6 @@ public class AdminServiceImpl implements AdminService {
         return dtoList;
     }
 
-    
     // 도서
     @Override
     public List<ProductDTO> productList() {
@@ -300,22 +299,8 @@ public class AdminServiceImpl implements AdminService {
 
         return dtoList;
     }
-
     
     // 배송관리
-    @Override
-    public List<DeliveryDTO> deliveryList() {
-        List<DeliveryVO> voList = adminMapper.deliveryList();
-
-        List<DeliveryDTO> dtoList = voList.stream()
-                .map(vo -> modelMapper.map(vo, DeliveryDTO.class))
-                .collect(Collectors.toList());
-
-        log.info("dtoList : " + dtoList);
-
-        return dtoList;
-    }
-
     @Override
     public int deliveryUpdateState(ArrayList<Integer> order_idx, String delivery_state) {
         int result = adminMapper.deliveryUpdateState(order_idx, delivery_state);

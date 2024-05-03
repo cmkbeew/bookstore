@@ -19,7 +19,6 @@ public interface MyServiceIf {
 
     int cart_add(CartDTO cartDTO);
     List<QnaDTO> qna_list_all(String member_id);
-    List<DeliveryListDTO> recent_order(String member_id);
 
     void order_item_insert(OrderItemDTO orderItemDTO);
     void order_insert(OrderDTO orderDTO);

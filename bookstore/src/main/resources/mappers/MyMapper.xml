@@ -67,15 +67,6 @@
         ORDER BY idx DESC
     </select>
 
-    <select id="recent_order" resultType="org.fullstack4.bookstore.domain.DeliveryListVO">
-        SELECT tp.pay_idx as pay_idx ,left(tp.pay_date, 10 ) as pay_date, tp.member_id as member_id, tp.product_cnt as product_cnt, tp.product_name as product_name,
-               td.delivery_state as delivery_state, td.tracking_num as tracing_num
-        FROM tbl_payment as tp
-        inner join tbl_delivery as td on tp.pay_idx = td.pay_idx
-        where  tp.member_id = #{member_id}
-        ORDER BY pay_date DESC
-    </select>
-
     <insert id="order_item_insert">
         INSERT INTO tbl_order_item (order_code, member_id, product_idx, product_name, product_cnt, price, discount, discount_price, order_price)
         VALUES (#{order_code}, #{member_id}, #{product_idx}, #{product_name}, #{product_cnt}, #{price}, #{discount}, #{discount_price}, #{order_price})
@@ -121,27 +112,4 @@
         WHERE member_id = #{member_id} AND order_code = #{order_code}
     </update>
 
-<!--    <update id="orderCancelRequestApprove">-->
-<!--        UPDATE tbl_order SET-->
-<!--        <if test="delivery_state.equals('배송전')">-->
-<!--            delivery_state = '취소완료'-->
-<!--        </if>-->
-<!--        <if test="delivery_state.equals('주문취소요청')">-->
-<!--            delivery_state = '배송중'-->
-<!--        </if>-->
-<!--        <if test="delivery_state.equals('배송중')">-->
-<!--            delivery_state = '주문취소요청'-->
-<!--        </if>-->
-<!--        WHERE member_id = #{member_id} AND order_code = #{order_code}-->
-<!--    </update>-->
-
-<!--    <delete id="orderDelete">-->
-<!--        DELETE FROM tbl_order-->
-<!--        WHERE member_id = #{member_id} AND order_code = #{order_code}-->
-<!--    </delete>-->
-
-<!--    <delete id="orderItemDelete">-->
-<!--        DELETE FROM tbl_order_item-->
-<!--        WHERE member_id = #{member_id} AND order_code = #{order_code}-->
-<!--    </delete>-->
 </mapper>

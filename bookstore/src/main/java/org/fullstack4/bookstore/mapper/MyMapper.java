@@ -2,8 +2,6 @@ package org.fullstack4.bookstore.mapper;
 
 import org.apache.ibatis.annotations.Param;
 import org.fullstack4.bookstore.domain.*;
-import org.fullstack4.bookstore.dto.CartDTO;
-import org.fullstack4.bookstore.dto.PaymentDTO;
 
 import java.util.List;
 
@@ -20,7 +18,6 @@ public interface MyMapper {
     int cart_cnt_update(CartVO cartVO);
 
     List<QnaVO> qna_list_all(String member_id);
-    List<DeliveryListVO> recent_order(String member_id);
 
     void order_item_insert(OrderItemVO orderItemVO);
     void order_insert(OrderVO orderVO);
@@ -28,6 +25,4 @@ public interface MyMapper {
     List<OrderDetailVO> order_detail(String order_code);
 
     int orderCancelRequest(@Param(value = "member_id") String member_id, @Param(value = "order_code") String order_code, @Param(value = "delivery_state") String delivery_state);
-//    int orderDelete(@Param(value = "member_id") String member_id, @Param(value = "order_code") String order_code);
-//    int orderItemDelete(@Param(value = "member_id") String member_id, @Param(value = "order_code") String order_code);
 }

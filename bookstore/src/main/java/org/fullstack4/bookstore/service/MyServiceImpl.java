@@ -77,14 +77,6 @@ public class MyServiceImpl implements MyServiceIf{
     }
 
     @Override
-    public List<DeliveryListDTO> recent_order(String member_id) {
-        List<DeliveryListDTO> orderList = myMapper.recent_order(member_id).stream()
-                .map(vo->modelMapper.map(vo, DeliveryListDTO.class))
-                .collect(Collectors.toList());
-        return orderList;
-    }
-
-    @Override
     public void order_item_insert(OrderItemDTO orderItemDTO) {
         OrderItemVO orderItemVO = modelMapper.map(orderItemDTO, OrderItemVO.class);
 
