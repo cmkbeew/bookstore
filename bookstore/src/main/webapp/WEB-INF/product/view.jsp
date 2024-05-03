@@ -26,6 +26,10 @@
             -webkit-appearance: none;
             margin: 0;
         }
+        #info_tbl tr, #info_tbl td {
+            padding: 5px;
+            margin : 10px;
+        }
     </style>
 </head>
 <body>
@@ -43,9 +47,9 @@
             <div class="col-md-6">
                 <%--                    <div class="small mb-1">SKU: BST-498</div>--%>
                 <h1 class="display-5 fw-bolder">${productDTO.product_name}</h1>
-                <table>
+                <table id="info_tbl">
                     <tr>
-                        <th>대상</th>
+                        <th >대상</th>
                         <td>${productDTO.type}</td>
                     </tr>
                     <tr>
@@ -58,11 +62,12 @@
                     </tr>
                     <tr>
                         <th>정가</th>
-                        <td id="price">${productDTO.price}</td>
+                        <td id="price" style="color: #ff5c5c; font-size:20px; font-weight: bold">${productDTO.price}원
+                            <c:if test="${productDTO.discount !=null || productDTO.discount != 0}">(${productDTO.discount}%할인)</c:if></td>
                     </tr>
                     <tr>
                         <th>판매가</th>
-                        <td id="sell_price"></td>
+                        <td id="sell_price" style="color: #232323; font-size:20px; font-weight: bold"></td>
                     </tr>
                     <tr>
                         <th>적립금</th>

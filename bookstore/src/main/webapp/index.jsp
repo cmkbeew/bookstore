@@ -180,7 +180,7 @@
             </div>
         </div>
 <%--중등 책--%>
-        <hr class="featurette-divider">
+        <hr class="featurette-divider  my-5">
         <div class="row text-center">
             <h3>학년 별 추천 책 ( 중등 )</h3>
             <div class="tab-content" id="pills-tabContent">
@@ -203,7 +203,7 @@
                 </div>
             </div>
         </div>
-        <hr class="featurette-divider">
+        <hr class="featurette-divider  my-5">
 <%--고등 책--%>
         <div class="row text-center">
             <h3>학년 별 추천 책 ( 고등 )</h3>
@@ -232,13 +232,13 @@
                 <div class="tab-pane fade" id="pills-disabled" role="tabpanel" aria-labelledby="pills-disabled-tab" tabindex="0">...</div>
             </div>
         </div>
-        <hr class="featurette-divider">
+        <hr class="featurette-divider my-5">
         <div class="row featurette">
             <div class="col-md-6">
                 <div class="card border-primary m-2 mx-auto" style="width: 30rem; height: auto; box-shadow: 0 5 5 5">
                     <div class="card-body">
                         <div class="row d-flex align-items-center">
-                            <h4 class=" px-3 fw-bold col-6 align-items-center" style="color:#139d03;">공지사항</h4>
+                            <h4 class=" px-3 fw-bold col-6 align-items-center">공지사항</h4>
                             <a class="col-6 text-md-end" href="/community/list?type=qna">+더보기</a>
                         </div>
                         <hr class="my-1">
@@ -255,11 +255,11 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 mb-5">
                 <div class="card border-primary m-2 mx-auto" style="width: 30rem; height: auto; box-shadow: 0 5 5 5">
                     <div class="card-body ">
                         <div class="row d-flex align-items-center">
-                            <h4 class=" px-3 fw-bold col-6 align-items-center" style="color:#139d03;">FAQ</h4>
+                            <h4 class=" px-3 fw-bold col-6 align-items-center">FAQ</h4>
                             <a class="col-6 text-md-end" href="/community/list?type=faq">+더보기</a>
                         </div>
                         <hr class="my-1">
