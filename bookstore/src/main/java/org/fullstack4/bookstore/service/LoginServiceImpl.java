@@ -53,8 +53,9 @@ public class LoginServiceImpl implements LoginServiceIf{
         log.info("===============================");
 
         String member_id = loginXmlMapper.search_id(name, email);
-        log.info("memberid : "+loginXmlMapper.search_id(name, email));
-        return loginXmlMapper.search_id(name, email);
+        log.info("memberid : "+ member_id);
+
+        return member_id;
     }
 
     @Override

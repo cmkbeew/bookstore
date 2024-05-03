@@ -316,6 +316,12 @@ public class AdminController {
         log.info("===============================");
         log.info("AdminController >> noticeDeletePOST()");
 
+        NoticeDTO dto = adminService.noticeView(idx);
+
+        if(dto != null && dto.getSave_file_name() != null) {
+            FileUploadUtil.deleteFile(dto.getSave_file_name());
+        }
+
         int result = adminService.noticeDelete(idx);
 
         if (result > 0) {

@@ -139,28 +139,28 @@ public class LoginController {
             @RequestParam(name = "name", defaultValue = "") String name,
             @RequestParam(name = "email", defaultValue = "") String email,
             RedirectAttributes redirectAttributes,
-            HttpServletResponse resp,
-            PrintWriter out) throws IOException {
-
-        out = resp.getWriter();
-        resp.setCharacterEncoding("UTF-8");
-        resp.setContentType("text/html; charset=UTF-8");
+            HttpServletResponse resp) throws IOException {
 
         String member_id = loginServiceIf.search_id(name,email);
+
+        log.info("member_id : " + member_id);
+
         if(member_id == null) {
+            resp.setCharacterEncoding("UTF-8");
+            resp.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = resp.getWriter();
             out.println("<script>alert('조건에 맞는 회원정보가 없습니다.'); window.location.href='/login/findId'</script>");
             out.close();
         }
-        redirectAttributes.addFlashAttribute("member_id", member_id);
+        redirectAttributes.addAttribute("member_id", member_id);
+
         return "redirect:/login/findIdResult";
     }
     @GetMapping("/findIdResult")
-    public void findIdResult(
-            HttpServletRequest req,
-            @RequestParam(name = "member_id", defaultValue = "") String member_id
+    public void findIdResult(Model model,
+                             @RequestParam(name = "member_id", defaultValue = "") String member_id
             ) {
-        req.setAttribute("member_id", member_id);
-        log.info(member_id);
+        model.addAttribute("member_id", member_id);
     }
     @GetMapping("/findPwd")
     public void findPwdGet() {
