@@ -232,13 +232,6 @@
         ORDER BY member_idx DESC
     </select>
 
-    <!-- 배송   -->
-    <select id="deliveryList" resultType="org.fullstack4.bookstore.domain.DeliveryVO">
-        SELECT delivery_idx, tracking_num, delivery_company, receiver_name, receiver_phone_num, zipcode, receiver_addr, delivery_state, start_date, arrive_date, member_id, pay_idx
-        FROM tbl_delivery
-        ORDER BY pay_idx DESC
-    </select>
-
     <update id="deliveryUpdateState">
         UPDATE tbl_order SET
         delivery_state = #{delivery_state}

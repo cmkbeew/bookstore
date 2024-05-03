@@ -55,6 +55,5 @@ public interface AdminService {
     List<ProductDTO> productList();
 
     // 배송
-    List<DeliveryDTO> deliveryList();
     int deliveryUpdateState(ArrayList<Integer> order_idx, String delivery_state);
 }
