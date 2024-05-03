@@ -107,13 +107,41 @@
         WHERE od.order_code = #{order_code}
     </select>
 
-    <delete id="orderDelete">
-        DELETE FROM tbl_order
+    <update id="orderCancelRequest">
+        UPDATE tbl_order SET
+        <if test="delivery_state.equals('배송전')">
+            delivery_state = '취소완료'
+        </if>
+        <if test="delivery_state.equals('주문취소요청')">
+            delivery_state = '배송중'
+        </if>
+        <if test="delivery_state.equals('배송중')">
+            delivery_state = '주문취소요청'
+        </if>
         WHERE member_id = #{member_id} AND order_code = #{order_code}
-    </delete>
+    </update>
 
-    <delete id="orderItemDelete">
-        DELETE FROM tbl_order_item
-        WHERE member_id = #{member_id} AND order_code = #{order_code}
-    </delete>
+<!--    <update id="orderCancelRequestApprove">-->
+<!--        UPDATE tbl_order SET-->
+<!--        <if test="delivery_state.equals('배송전')">-->
+<!--            delivery_state = '취소완료'-->
+<!--        </if>-->
+<!--        <if test="delivery_state.equals('주문취소요청')">-->
+<!--            delivery_state = '배송중'-->
+<!--        </if>-->
+<!--        <if test="delivery_state.equals('배송중')">-->
+<!--            delivery_state = '주문취소요청'-->
+<!--        </if>-->
+<!--        WHERE member_id = #{member_id} AND order_code = #{order_code}-->
+<!--    </update>-->
+
+<!--    <delete id="orderDelete">-->
+<!--        DELETE FROM tbl_order-->
+<!--        WHERE member_id = #{member_id} AND order_code = #{order_code}-->
+<!--    </delete>-->
+
+<!--    <delete id="orderItemDelete">-->
+<!--        DELETE FROM tbl_order_item-->
+<!--        WHERE member_id = #{member_id} AND order_code = #{order_code}-->
+<!--    </delete>-->
 </mapper>

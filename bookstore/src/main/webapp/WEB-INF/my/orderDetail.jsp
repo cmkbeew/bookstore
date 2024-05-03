@@ -102,19 +102,26 @@
                                                             <p class="text-end" style="color: indianred; font-size: 14px">※ 15,000원이상 구입시 배송비 무료</p>
                                                         </div>
                                                     </div>
-                                                    <form id="orderDelete" name="orderDelete" method="post" action="/my/orderDelete">
+                                                    <form id="orderCancel" name="orderCancel" method="post" action="/my/orderCancelRequest">
                                                         <input type="hidden" name="member_id" value="${sessionScope.member_id}" />
                                                         <input type="hidden" name="order_code" value="${order_code}" />
+                                                        <input type="hidden" name="delivery_state" value="${delivery_state}" />
                                                         <div class="row justify-content-around">
-                                                            <button type="button" class="btn btn-primary btn-circle btn-lg btn-circle col-4" onclick="location.href='/my/order?member_id=${sessionScope.member_id}&delivery_state=${delivery_state}'">주문목록</button>
+                                                            <button type="button" class="btn btn-primary btn-circle btn-lg btn-circle col-4" onclick="location.href='/my/order?member_id=${sessionScope.member_id}&delivery_state=${delivery_state}'">목록</button>
                                                             <c:if test="${delivery_state == '배송전'}">
-                                                                <button type="button" class="btn btn-outline-danger btn-circle btn-lg btn-circle col-4" onclick="deleteOrder()">주문취소</button>
+                                                                <button type="button" class="btn btn-outline-danger btn-circle btn-lg btn-circle col-4" onclick="cancelOrder()">주문취소</button>
                                                             </c:if>
                                                             <c:if test="${delivery_state == '배송중'}">
-                                                                <button type="button" class="btn btn-outline-danger btn-circle btn-lg btn-circle col-4" onclick="requestRefund()">환불요청</button>
+                                                                <button type="button" class="btn btn-outline-danger btn-circle btn-lg btn-circle col-4" onclick="cancelOrder()">주문취소요청</button>
+                                                            </c:if>
+                                                            <c:if test="${delivery_state == '주문취소요청'}">
+                                                                <button type="button" class="btn btn-outline-danger btn-circle btn-lg btn-circle col-4" onclick="cancelOrder()">요청취소</button>
                                                             </c:if>
                                                             <c:if test="${delivery_state == '배송완료'}">
                                                                 <button type="button" class="btn btn-outline-danger btn-circle btn-lg btn-circle col-4" disabled>배송완료</button>
+                                                            </c:if>
+                                                            <c:if test="${delivery_state == '취소완료'}">
+                                                                <button type="button" class="btn btn-outline-danger btn-circle btn-lg btn-circle col-4" disabled>취소완료</button>
                                                             </c:if>
                                                         </div>
                                                     </form>
@@ -145,18 +152,28 @@
 </div>
 <%@ include file="/WEB-INF/common/footer.jsp"%>
 <script>
-    function deleteOrder() {
-        const frm = document.getElementById("orderDelete");
+    function cancelOrder() {
+        const frm = document.getElementById("orderCancel");
         console.log(frm);
-        let delete_check = confirm("주문 취소하시겠습니까?");
+        let delete_check = confirm("주문 취소 요청을 하시겠습니까?");
 
         if(delete_check) {
             frm.submit();
-        }
-    }
+            <%--$.ajax({--%>
+            <%--   type : "post",--%>
+            <%--   url : "/my/orderCancelRequest",--%>
+            <%--   data : {--%>
+            <%--       member_id : "${sessionScope.member_id}",--%>
+            <%--       order_code : "${order_code}",--%>
+            <%--       delivery_state : "${delivery_state}"--%>
+            <%--   },--%>
+            <%--   success : function (url) {--%>
+            <%--       console.log(url);--%>
 
-    function requestRefund() {
-        // TODO: 환불 요청 구현
+            <%--       window.location.href = url;--%>
+            <%--   }--%>
+            <%--});--%>
+        }
     }
 </script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>

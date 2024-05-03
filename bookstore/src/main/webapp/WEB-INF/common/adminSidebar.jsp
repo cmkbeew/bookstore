@@ -22,9 +22,11 @@
                 배송관리
             </a>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuClickable">
-                <li><a class="list-group-item list-group-item-action list-group-item-light p-3 dropdown-item <c:if test="${delivery_state == '배송전'}">active</c:if>" href="/admin/delivery/list?delivery_state=배송전">배송전</a></li>
-                <li><a class="list-group-item list-group-item-action list-group-item-light p-3 dropdown-item <c:if test="${delivery_state == '배송중'}">active</c:if>" href="/admin/delivery/list?delivery_state=배송중">배송중</a></li>
-                <li><a class="list-group-item list-group-item-action list-group-item-light p-3 dropdown-item <c:if test="${delivery_state == '배송완료'}">active</c:if>" href="/admin/delivery/list?delivery_state=배송완료">배송완료</a></li>
+                <li><a class="list-group-item list-group-item-action list-group-item-light dropdown-item <c:if test="${delivery_state == '배송전'}">active</c:if>" href="/admin/delivery/list?delivery_state=배송전">배송전</a></li>
+                <li><a class="list-group-item list-group-item-action list-group-item-light dropdown-item <c:if test="${delivery_state == '배송중'}">active</c:if>" href="/admin/delivery/list?delivery_state=배송중">배송중</a></li>
+                <li><a class="list-group-item list-group-item-action list-group-item-light dropdown-item <c:if test="${delivery_state == '배송완료'}">active</c:if>" href="/admin/delivery/list?delivery_state=배송완료">배송완료</a></li>
+                <li><a class="list-group-item list-group-item-action list-group-item-light dropdown-item <c:if test="${delivery_state == '주문취소요청중'}">active</c:if>" href="/admin/delivery/list?delivery_state=주문취소요청중">주문취소요청중</a></li>
+                <li><a class="list-group-item list-group-item-action list-group-item-light dropdown-item <c:if test="${delivery_state == '취소완료'}">active</c:if>" href="/admin/delivery/list?delivery_state=취소완료">취소완료</a></li>
             </ul>
         </div>
     </div>
