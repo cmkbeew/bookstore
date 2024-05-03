@@ -1,9 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link href="/resources/css/bootstrap.css" rel="stylesheet">
 <div class="position-sticky my-2" style="top: 4rem;">
         <div class="p-4 mb-3 border-primary bg-light rounded text-center" style="border:1px solid;">
-            <h4 class="fst-italic">${sessionScope.member_id}</h4>
-            <p class="mb-0">${memberDTO.email}</p>
+            <h4 class="fst-italic">${sessionScope.member_id} 님</h4>
         </div>
         <div class="p-4">
             <h4 class="fst-italic">MENU</h4>

@@ -50,7 +50,6 @@
         <div class="container">
             <div class="row g-5">
                 <div class="col-md-3" style="background-color: #e4f3ef">
-<%--                    --%>
                 <%@ include file="/WEB-INF/common/sidebar.jsp"%>
                 </div>
                 <div class="col-md-9">

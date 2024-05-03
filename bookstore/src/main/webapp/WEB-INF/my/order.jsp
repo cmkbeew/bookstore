@@ -34,7 +34,13 @@
                 <div class="col-md-9">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title text-uppercase mb-0 text-center">나의 결제 내역</h5>
+                            <h5 class="card-title text-uppercase mb-0 text-center">
+                                <c:if test="${delivery_state == '배송전'}">나의 결제 내역</c:if>
+                                <c:if test="${delivery_state == '배송중'}">배송 중 내역</c:if>
+                                <c:if test="${delivery_state == '배송완료'}">배송 완료 내역</c:if>
+                                <c:if test="${delivery_state == '주문취소요청'}">주문 취소 내역</c:if>
+                                <c:if test="${delivery_state == '취소완료'}">주문 취소 내역</c:if>
+                            </h5>
 
                         </div>
                         <div class="table-responsive">
@@ -69,7 +75,7 @@
                                     </c:when>
                                     <c:otherwise>
                                         <tr>
-                                            <td class="text-center" colspan="5">결제 내역이 없습니다.</td>
+                                            <td class="text-center" colspan="8">결제 내역이 없습니다.</td>
                                         </tr>
                                     </c:otherwise>
                                 </c:choose>
