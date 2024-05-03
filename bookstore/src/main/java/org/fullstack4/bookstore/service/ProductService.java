@@ -20,4 +20,11 @@ public interface ProductService {
 
     // 도서 상세 페이지 관련 상품
     List<ProductDTO> relatedProductList(ProductDTO productDTO);
+
+
+    // 도서 관리 페이지
+    List<ProductDTO> adminProductList();
+    ProductDTO adminProductView(int product_idx);
+
+
 }

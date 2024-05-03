@@ -2,12 +2,10 @@ package org.fullstack4.bookstore.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.fullstack4.bookstore.domain.NoticeVO;
 import org.fullstack4.bookstore.domain.ProductVO;
 import org.fullstack4.bookstore.domain.ReviewVO;
-import org.fullstack4.bookstore.dto.ProductPageRequestDTO;
-import org.fullstack4.bookstore.dto.ProductPageResponseDTO;
-import org.fullstack4.bookstore.dto.ProductDTO;
-import org.fullstack4.bookstore.dto.ReviewDTO;
+import org.fullstack4.bookstore.dto.*;
 import org.fullstack4.bookstore.mapper.ProductMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -128,4 +126,26 @@ public class ProductServiceImpl implements ProductService {
         
         return dtoList;
     }
+
+    // 도서 관리 페이지
+    @Override
+    public List<ProductDTO> adminProductList() {
+        List<ProductVO> voList = productMapper.adminProductList();
+        List<ProductDTO> dtoList = voList.stream().map(vo -> modelMapper.map(vo, ProductDTO.class)).collect(Collectors.toList());
+
+        return dtoList;
+    }
+
+    @Override
+    public ProductDTO adminProductView(int product_idx) {
+        ProductVO productVO = productMapper.adminProductView(product_idx);
+
+        ProductDTO productDTO = modelMapper.map(productVO, ProductDTO.class);
+
+        productDTO.setDisplay_price(productDTO.getPrice(), productDTO.getDiscount());
+
+        return productDTO;
+    }
+
+
 }

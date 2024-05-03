@@ -27,12 +27,12 @@
     <link rel="stylesheet" href="/resources/fonts/icomoon/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0" />
 </head>
-<body style="background-color: #eeeeee;">
+<body style="background-color: #eeeeee">
 <%@ include file="/WEB-INF/common/header.jsp"%>
-<div class="d-flex py-h" id="wrapper">
+<div class="d-flex" id="wrapper" style="min-height: 80vh;">
     <%@ include file="/WEB-INF/common/adminSidebar.jsp"%>
     <!-- Page content wrapper-->
-    <div id="page-content-wrapper" style="min-height: 80vh;">
+    <div id="page-content-wrapper">
         <button class="btn btn-primary" id="sidebarToggle">
             <span class="material-symbols-outlined" style="display: block;">arrow_back</span>
             <span class="material-symbols-outlined" style="display: none;">arrow_forward</span>

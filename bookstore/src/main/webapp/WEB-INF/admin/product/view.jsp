@@ -35,14 +35,106 @@
 
     <%-- bbsList 부트스트랩   --%>
 </head>
-<body>
+<body style="background-color: #eeeeee;">
 <%@ include file="/WEB-INF/common/header.jsp"%>
-<h1 style="padding-top: 92px;">admin >> bbsView</h1>
-<ul>
-    <li>${noticeDTO}</li>
-</ul>
-
-
+<div class="d-flex py-h" id="wrapper">
+    <%@ include file="/WEB-INF/common/adminSidebar.jsp"%>
+    <!-- Page content wrapper-->
+    <div id="page-content-wrapper" style="min-height: 80vh;">
+        <button class="btn btn-primary" id="sidebarToggle">
+            <span class="material-symbols-outlined" style="display: block;">arrow_back</span>
+            <span class="material-symbols-outlined" style="display: none;">arrow_forward</span>
+        </button>
+        <!-- Page content-->
+        <div class="container">
+            <form name="deleteFrm" id="deleteFrm" method="post" action="/admin/product/delete">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title text-uppercase mb-0" style="text-align: center;">도서관리</h5>
+                            </div>
+                            <div class="row text-left">
+                                <div id="content" class="full-width site-content col-md-12">
+                                    <div>
+                                        <div>
+                                            <table class="table no-wrap user-table mb-0 text-lg-start">
+                                                <tr class="table-light">
+                                                    <th style="width: 120px;">상품명<span class="material-symbols-outlined web_font">title</span></th>
+                                                    <td>${productDTO.product_name}</td>
+                                                </tr>
+                                                <tr class="table-light">
+                                                    <th>출판사<span class="material-symbols-outlined web_font">face</span></th>
+                                                    <td>${productDTO.publisher}</td>
+                                                </tr>
+                                                <tr class="table-light">
+                                                    <th>상품등록일<span class="material-symbols-outlined web_font">calendar_month</span></th>
+                                                    <td>${productDTO.reg_date}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>내용<span class="material-symbols-outlined web_font">description</span></th>
+                                                    <td></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div class="p-3" style="min-height: 20vh;">
+                                            ${productDTO.content}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-md-2">
+                    <div>
+                        <button type="button" class="btn btn-primary btn-circle btn-lg btn-circle ml-2"><span class="material-symbols-outlined">list</span></button>
+                        <button type="button" class="btn btn-primary btn-circle btn-lg btn-circle ml-2"><span class="material-symbols-outlined">edit_note</span></button>
+                        <button type="button" class="btn btn-primary btn-circle btn-lg btn-circle ml-2"><span class="material-symbols-outlined">delete</span></button>
+                    </div>
+                </div>
+            </form>
+            <div class="card my-5">
+                <table class="table no-wrap user-table mb-0 text-lg-start">
+                    <tr>
+                        <th style="width: 120px;">
+                            <span class="material-symbols-outlined" style="vertical-align: middle;">expand_less</span>
+                            <span>이전글</span>
+                        </th>
+                        <c:if test="${prevDTO != null}">
+                            <td><a href="/admin/faq/view?idx=${prevDTO.idx}">${prevDTO.title}</a></td>
+                        </c:if>
+                        <c:if test="${prevDTO == null}">
+                            <td>이전글이 없습니다.</td>
+                        </c:if>
+                    </tr>
+                    <tr>
+                        <th style="width: 120px;">
+                            <span class="material-symbols-outlined" style="vertical-align: middle;">expand_more</span>
+                            <span>다음글</span>
+                        </th>
+                        <c:if test="${nextDTO != null}">
+                            <td><a href="/admin/faq/view?idx=${nextDTO.idx}">${nextDTO.title}</a></td>
+                        </c:if>
+                        <c:if test="${nextDTO == null}">
+                            <td>다음글이 없습니다.</td>
+                        </c:if>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 <%@ include file="/WEB-INF/common/footer.jsp"%>
+<script>
+    function goDelete() {
+        const frm = document.getElementById("deleteFrm");
+        let confirm_flag = confirm("해당 게시글을 삭제하시겠습니까?");
+
+        if (confirm_flag) {
+            frm.submit();
+        }
+    }
+</script>
 </body>
 </html>
