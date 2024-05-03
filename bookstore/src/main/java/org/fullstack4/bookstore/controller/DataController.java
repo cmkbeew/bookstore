@@ -71,8 +71,8 @@ public class DataController {
         dataMap.get("dataDTO").setContent(dataMap.get("dataDTO").getContent().replace("\r\n", "<br>"));
 
         model.addAttribute("dto", dataMap.get("dataDTO"));
-        model.addAttribute("prevDTO", dataMap.get("qnaPrevDTO"));
-        model.addAttribute("nextDTO", dataMap.get("qnaNextDTO"));
+        model.addAttribute("prevDTO", dataMap.get("dataPrevDTO"));
+        model.addAttribute("nextDTO", dataMap.get("dataNextDTO"));
 
         log.info("===============================");
     }

@@ -85,7 +85,6 @@ public class DataServiceImpl implements DataService {
 
         DataDTO dataDTO = modelMapper.map(dataVO, DataDTO.class);
         maps.put("dataDTO", dataDTO);
-        log.info("dataDTO : " + dataDTO);
 
         if (dataPrevVO != null) {
             DataDTO dataPrevDTO = modelMapper.map(dataPrevVO, DataDTO.class);
@@ -96,6 +95,7 @@ public class DataServiceImpl implements DataService {
             DataDTO dataNextDTO = modelMapper.map(dataNextVO, DataDTO.class);
             maps.put("dataNextDTO", dataNextDTO);
         }
+
         return maps;
     }
 

@@ -611,19 +611,6 @@ public class AdminController {
         log.info("===============================");
     }
 
-    // 도서
-    @GetMapping("/product/list")
-    public void productListGET(Model model) {
-        log.info("===============================");
-        log.info("AdminController >> productListGET()");
-
-        List<ProductDTO> productList = adminService.productList();
-        model.addAttribute("productList", productList);
-
-        log.info("productList : " + productList.toString());
-        log.info("===============================");
-    }
-
     // 배송
     @GetMapping("/delivery/list")
     public void deliveryListGET(String delivery_state, HttpServletRequest req , Model model) {

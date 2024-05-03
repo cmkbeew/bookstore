@@ -97,7 +97,7 @@
                             <span>이전글</span>
                         </th>
                         <c:if test="${prevDTO != null}">
-                            <td><a href="/admin/qna/view?idx=${prevDTO.idx}">${prevDTO.title}</a></td>
+                            <td><a href="/data/view?data_idx=${prevDTO.data_idx}">${prevDTO.title}</a></td>
                         </c:if>
                         <c:if test="${prevDTO == null}">
                             <td>이전글이 없습니다.</td>
@@ -109,7 +109,7 @@
                             <span>다음글</span>
                         </th>
                         <c:if test="${nextDTO != null}">
-                            <td><a href="/admin/qna/view?idx=${nextDTO.idx}">${nextDTO.title}</a></td>
+                            <td><a href="/data/view?data_idx=${nextDTO.data_idx}">${nextDTO.title}</a></td>
                         </c:if>
                         <c:if test="${nextDTO == null}">
                             <td>다음글이 없습니다.</td>
