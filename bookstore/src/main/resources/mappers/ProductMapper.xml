@@ -116,5 +116,31 @@
         WHERE product_idx = #{product_idx}
     </select>
 
+    <insert id="adminProductRegist">
+        INSERT INTO tbl_product(product_name, product_content, publisher, author, page_cnt, price, publish_date, type, grade, subject, discount, tax_yn, reg_date)
+        VALUES (#{product_name}, #{product_content}, #{publisher}, #{author}, #{page_cnt}, #{price}, #{publish_date}, #{type}, #{grade}, #{subject}, #{discount}, #{tax_yn}, NOW())
+    </insert>
+
+    <update id="adminProductModify">
+        UPDATE tbl_product SET
+           product_name = #{product_name},
+           product_content = #{product_content},
+           publisher = #{publisher},
+           author = #{author},
+           page_cnt = #{page_cnt},
+           price = #{price},
+           publish_date = #{publish_date},
+           type = #{type},
+           grade = #{grade},
+           subject = #{subject},
+           discount = #{discount},
+           tax_yn = #{tax_yn}
+        WHERE product_idx = #{product_idx}
+    </update>
+
+    <delete id="adminProductDelete">
+        DELETE FROM tbl_product
+        WHERE product_idx = #{product_idx}
+    </delete>
 
 </mapper>

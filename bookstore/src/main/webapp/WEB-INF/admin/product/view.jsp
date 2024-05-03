@@ -15,7 +15,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
 
-    <title>admin >> bbsView</title>
+    <title>admin >> productView</title>
 
     <%--    해당 템플릿 css--%>
     <link href="/resources/css/bootstrap.css" rel="stylesheet">
@@ -37,7 +37,7 @@
 </head>
 <body style="background-color: #eeeeee;">
 <%@ include file="/WEB-INF/common/header.jsp"%>
-<div class="d-flex py-h" id="wrapper">
+<div class="d-flex" id="wrapper">
     <%@ include file="/WEB-INF/common/adminSidebar.jsp"%>
     <!-- Page content wrapper-->
     <div id="page-content-wrapper" style="min-height: 80vh;">
@@ -68,6 +68,30 @@
                                                     <td>${productDTO.publisher}</td>
                                                 </tr>
                                                 <tr class="table-light">
+                                                    <th>저자<span class="material-symbols-outlined web_font">calendar_month</span></th>
+                                                    <td>${productDTO.author}</td>
+                                                </tr>
+                                                <tr class="table-light">
+                                                    <th>출판일<span class="material-symbols-outlined web_font">calendar_month</span></th>
+                                                    <td>${productDTO.publish_date}</td>
+                                                </tr>
+                                                <tr class="table-light">
+                                                    <th>유형<span class="material-symbols-outlined web_font">calendar_month</span></th>
+                                                    <td>${productDTO.type}</td>
+                                                </tr>
+                                                <tr class="table-light">
+                                                    <th>학년<span class="material-symbols-outlined web_font">calendar_month</span></th>
+                                                    <td>${productDTO.grade}</td>
+                                                </tr>
+                                                <tr class="table-light">
+                                                    <th>과목<span class="material-symbols-outlined web_font">calendar_month</span></th>
+                                                    <td>${productDTO.subject}</td>
+                                                </tr>
+                                                <tr class="table-light">
+                                                    <th>할인율<span class="material-symbols-outlined web_font">calendar_month</span></th>
+                                                    <td>${productDTO.discount}</td>
+                                                </tr>
+                                                <tr class="table-light">
                                                     <th>상품등록일<span class="material-symbols-outlined web_font">calendar_month</span></th>
                                                     <td>${productDTO.reg_date}</td>
                                                 </tr>
@@ -77,9 +101,7 @@
                                                 </tr>
                                             </table>
                                         </div>
-                                        <div class="p-3" style="min-height: 20vh;">
-                                            ${productDTO.content}
-                                        </div>
+                                        <div class="p-3" style="min-height: 20vh;">${productDTO.product_content}</div>
                                     </div>
                                 </div>
                             </div>
@@ -88,9 +110,9 @@
                 </div>
                 <div class="mt-md-2">
                     <div>
-                        <button type="button" class="btn btn-primary btn-circle btn-lg btn-circle ml-2"><span class="material-symbols-outlined">list</span></button>
-                        <button type="button" class="btn btn-primary btn-circle btn-lg btn-circle ml-2"><span class="material-symbols-outlined">edit_note</span></button>
-                        <button type="button" class="btn btn-primary btn-circle btn-lg btn-circle ml-2"><span class="material-symbols-outlined">delete</span></button>
+                        <button type="button" class="btn btn-primary btn-circle btn-lg btn-circle ml-2" onclick="location.href='/admin/product/list';"><span class="material-symbols-outlined">list</span></button>
+                        <button type="button" class="btn btn-primary btn-circle btn-lg btn-circle ml-2" onclick="location.href='/admin/product/modify?product_idx=${productDTO.product_idx}';"><span class="material-symbols-outlined">edit_note</span></button>
+                        <button type="submit" class="btn btn-primary btn-circle btn-lg btn-circle ml-2"><span class="material-symbols-outlined">delete</span></button>
                     </div>
                 </div>
             </form>

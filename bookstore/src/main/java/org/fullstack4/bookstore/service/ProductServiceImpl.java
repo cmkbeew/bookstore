@@ -147,5 +147,29 @@ public class ProductServiceImpl implements ProductService {
         return productDTO;
     }
 
+    @Override
+    public int adminProductRegist(ProductDTO productDTO) {
+        ProductVO productVO = modelMapper.map(productDTO, ProductVO.class);
+        int result = productMapper.adminProductRegist(productVO);
+
+        return result;
+    }
+
+    @Override
+    public int adminProductModify(ProductDTO productDTO) {
+
+        ProductVO productVO = modelMapper.map(productDTO, ProductVO.class);
+        int result = productMapper.adminProductModify(productVO);
+
+        return result;
+    }
+
+    @Override
+    public int adminProductDelete(int product_idx) {
+        int result = productMapper.adminProductDelete(product_idx);
+
+        return result;
+    }
+
 
 }
