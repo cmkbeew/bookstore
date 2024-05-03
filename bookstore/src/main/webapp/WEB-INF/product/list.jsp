@@ -26,6 +26,16 @@
         span a:hover {
             color : gray;
         }
+
+
+        #listUi .rounded-pill:hover {
+            opacity: 0.5;
+        }
+
+        #listUi button {
+            width: 100px;
+            height: 30px;
+        }
     </style>
 </head>
 <body>
@@ -52,9 +62,11 @@
 <!-- Section-->
 <section class="py-5 d-flex">
     <div class="container px-4 px-lg-5 mt-5">
-<%--        <ul class="d-flex justify-content-center list-unstyled mb-3" id="gradeUl">--%>
-
-<%--                    <li><button class="btn badge rounded-pill bg-dark" type="button" style="font-size: 1rem">전체</button></li>--%>
+<%--        <ul class="d-flex justify-content-center list-unstyled mb-3" id="listUi">--%>
+<%--                    <li class="mx-2"><button class="btn badge rounded-pill bg-primary" type="button" style="font-size: 1rem">유아</button></li>--%>
+<%--                    <li class="mx-2"><button class="btn badge rounded-pill bg-dark" type="button" style="font-size: 1rem">초등</button></li>--%>
+<%--                    <li class="mx-2"><button class="btn badge rounded-pill bg-dark" type="button" style="font-size: 1rem">중등</button></li>--%>
+<%--                    <li class="mx-2"><button class="btn badge rounded-pill bg-dark" type="button" style="font-size: 1rem">고등</button></li>--%>
 <%--        </ul>--%>
         <ul class="d-flex justify-content-center list-unstyled mb-3" id="gradeUl">
             <c:choose>
@@ -241,6 +253,9 @@
 
 </script>
 <%@ include file="/WEB-INF/common/footer.jsp"%>
+<script>
+
+</script>
 </body>
-</body>
+
 </html>
