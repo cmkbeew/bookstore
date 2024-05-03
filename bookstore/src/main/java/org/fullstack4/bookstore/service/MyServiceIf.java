@@ -23,7 +23,7 @@ public interface MyServiceIf {
 
     void order_item_insert(OrderItemDTO orderItemDTO);
     void order_insert(OrderDTO orderDTO);
-    List<OrderDetailDTO> order_list(String delivery_state);
+    List<OrderDetailDTO> order_list(String delivery_state, String member_id);
     List<OrderDetailDTO> order_detail(String order_code);
     int orderDelete(@Param(value = "member_id") String member_id, @Param(value = "order_code") String order_code);
 }

@@ -35,8 +35,8 @@ public class MyController {
     }
 
     @GetMapping("/order")
-    public void orderGet(String delivery_state, Model model) {
-        List<OrderDetailDTO> orderList = myServiceIf.order_list(delivery_state);
+    public void orderGet(String delivery_state, String member_id, Model model) {
+        List<OrderDetailDTO> orderList = myServiceIf.order_list(delivery_state, member_id);
 
         model.addAttribute("delivery_state", delivery_state);
         model.addAttribute("orderList", orderList);

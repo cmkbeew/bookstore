@@ -99,8 +99,8 @@ public class MyServiceImpl implements MyServiceIf{
     }
 
     @Override
-    public List<OrderDetailDTO> order_list(String delivery_state) {
-        List<OrderDetailVO> voList = myMapper.order_list(delivery_state);
+    public List<OrderDetailDTO> order_list(String delivery_state, String member_id) {
+        List<OrderDetailVO> voList = myMapper.order_list(delivery_state, member_id);
 
         List<OrderDetailDTO> dtoList = voList.stream()
                 .map(vo -> modelMapper.map(vo, OrderDetailDTO.class))

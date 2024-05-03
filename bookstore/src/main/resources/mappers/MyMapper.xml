@@ -92,6 +92,9 @@
             oi.order_item_idx, oi.product_name, oi.product_cnt, oi.price, oi.discount, oi.discount_price, oi.order_price
         FROM tbl_order AS od INNER JOIN tbl_order_item AS oi ON oi.order_code = od.order_code
         WHERE od.delivery_state = #{delivery_state}
+        <if test="member_id != null and !member_id.equals('admin')">
+            AND od.member_id = #{member_id}
+        </if>
         GROUP BY od.order_code
         ORDER BY order_idx DESC
     </select>

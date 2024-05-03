@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.FileInputStream;
@@ -625,8 +626,14 @@ public class AdminController {
 
     // 배송
     @GetMapping("/delivery/list")
-    public void deliveryListGET(String delivery_state, Model model) {
-        List<OrderDetailDTO> orderDetailList = myServiceIf.order_list(delivery_state);
+    public void deliveryListGET(String delivery_state, HttpServletRequest req , Model model) {
+        HttpSession session = req.getSession();
+        String member_id = "";
+        if(session.getAttribute("member_id") != null) {
+            member_id = (String)session.getAttribute("member_id");
+        }
+
+        List<OrderDetailDTO> orderDetailList = myServiceIf.order_list(delivery_state, member_id);
 
         model.addAttribute("delivery_state", delivery_state);
         model.addAttribute("orderDetailList", orderDetailList);
