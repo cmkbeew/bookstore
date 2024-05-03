@@ -239,18 +239,12 @@
         ORDER BY pay_idx DESC
     </select>
 
-    <select id="deliveryView" resultType="org.fullstack4.bookstore.domain.DeliveryVO">
-        SELECT delivery_idx, tracking_num, delivery_company, receiver_name, receiver_phone_num, zipcode, receiver_addr, delivery_state, start_date, arrive_date, member_id, pay_idx
-        FROM tbl_delivery
-        WHERE delivery_idx = #{delivery_idx}
-    </select>
-
-    <update id="deliveryModify">
-        UPDATE tbl_delivery SET delivery_company = #{delivery_company},
-                                company_tel = #{company_tel},
-                                delivery_state = #{delivery_state},
-                                start_date = #{start_date},
-                                arrive_date = #{arrive_date}
-        WHERE pay_idx = #{pay_idx}
+    <update id="deliveryUpdateState">
+        UPDATE tbl_order SET
+        delivery_state = #{delivery_state}
+        WHERE order_idx IN
+          <foreach collection="order_idx" item="order_idx" open="(" close=")" separator=",">
+              #{order_idx.value}
+          </foreach>
     </update>
 </mapper>

@@ -24,7 +24,7 @@ public interface MyMapper {
 
     void order_item_insert(OrderItemVO orderItemVO);
     void order_insert(OrderVO orderVO);
-    List<OrderDetailVO> order_list();
+    List<OrderDetailVO> order_list(String delivery_state);
     List<OrderDetailVO> order_detail(String order_code);
     int orderDelete(@Param(value = "member_id") String member_id, @Param(value = "order_code") String order_code);
     int orderItemDelete(@Param(value = "member_id") String member_id, @Param(value = "order_code") String order_code);

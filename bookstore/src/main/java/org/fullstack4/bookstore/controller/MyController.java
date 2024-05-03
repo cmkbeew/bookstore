@@ -14,6 +14,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -33,17 +35,15 @@ public class MyController {
     }
 
     @GetMapping("/order")
-    public void orderGet(Model model) {
-        List<OrderDetailDTO> orderList = myServiceIf.order_list();
+    public void orderGet(String delivery_state, Model model) {
+        List<OrderDetailDTO> orderList = myServiceIf.order_list(delivery_state);
 
-        log.info("orderList : " + orderList);
-
-
+        model.addAttribute("delivery_state", delivery_state);
         model.addAttribute("orderList", orderList);
     }
 
     @GetMapping("/orderDetail")
-    public void orderPost(String order_code, Model model) {
+    public void orderPost(String order_code, String delivery_state, Model model) {
         List<OrderDetailDTO> orderDetailDTO = myServiceIf.order_detail(order_code);
 
         int total_price = orderDetailDTO.stream().mapToInt(OrderDetailDTO::getOrder_price).sum();
@@ -53,6 +53,7 @@ public class MyController {
         }
 
         model.addAttribute("order_code", order_code);
+        model.addAttribute("delivery_state", delivery_state);
         model.addAttribute("total_price", total_price);
         model.addAttribute("shipping", shipping);
         model.addAttribute("orderDetailDTO", orderDetailDTO);
@@ -179,11 +180,7 @@ public class MyController {
                                 BindingResult bindingResult,
                                 RedirectAttributes redirectAttributes,
                                 OrderItemDTO orderItemDTO,
-                                DeliveryDTO deliveryDTO,
-                                String same_check) {
-
-        log.info("deliveryDTO : " + deliveryDTO);
-
+                                String same_check) throws UnsupportedEncodingException {
         if(bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
             redirectAttributes.addFlashAttribute("orderDTO", orderDTO);
@@ -205,8 +202,6 @@ public class MyController {
 
         List<CartListDTO> cartList = myServiceIf.cart_list(orderDTO.getMember_id());
 
-        log.info("cartList : " + cartList);
-
         for(int i=0; i<cartList.size(); i++) {
             orderItemDTO.setProduct_idx(cartList.get(i).getProduct_idx());
             orderItemDTO.setProduct_name(cartList.get(i).getProduct_name());
@@ -223,7 +218,8 @@ public class MyController {
         // 결제 정보 넣기
         myServiceIf.order_insert(orderDTO);
 
-        return "redirect:/my/order?member_id=" + orderDTO.getMember_id();
+        String deliverState = URLEncoder.encode("배송전", "utf-8");
+        return "redirect:/my/order?member_id=" + orderDTO.getMember_id() + "&delivery_state=" + deliverState;
     }
 
     @PostMapping("/paymentNow")

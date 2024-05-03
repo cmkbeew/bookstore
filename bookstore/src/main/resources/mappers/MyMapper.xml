@@ -91,7 +91,7 @@
             od.order_idx, od.pay_method, od.delivery_company, od.pay_price, od.pay_date, od.pay_cancel_date, od.member_id, od.name, od.phone_num, od.email, od.receiver_name, od.receiver_phone_num, od.zipcode, od.receiver_addr, od.order_code, od.delivery_state,
             oi.order_item_idx, oi.product_name, oi.product_cnt, oi.price, oi.discount, oi.discount_price, oi.order_price
         FROM tbl_order AS od INNER JOIN tbl_order_item AS oi ON oi.order_code = od.order_code
-        -- WHERE od.delivery_state = #{delivery_state}
+        WHERE od.delivery_state = #{delivery_state}
         GROUP BY od.order_code
         ORDER BY order_idx DESC
     </select>

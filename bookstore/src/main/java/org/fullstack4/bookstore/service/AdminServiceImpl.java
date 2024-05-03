@@ -8,6 +8,8 @@ import org.fullstack4.bookstore.mapper.AdminMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -315,26 +317,9 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public DeliveryDTO deliveryView(int pay_idx) {
-        DeliveryVO deliveryVO = adminMapper.deliveryView(pay_idx);
-
-        DeliveryDTO deliveryDTO = modelMapper.map(deliveryVO, DeliveryDTO.class);
-
-        return deliveryDTO;
-    }
-
-    @Override
-    public int deliveryModify(DeliveryDTO deliveryDTO) {
-        log.info("====================================");
-        DeliveryVO deliveryVO = modelMapper.map(deliveryDTO, DeliveryVO.class);
-        int result = adminMapper.deliveryModify(deliveryVO);
-
-        log.info("DeliveryServiceImpl >> modify(deliveryDTO : " + deliveryDTO.toString());
-        log.info("BbsServiceImpl >> result : " + result);
-        log.info("====================================");
+    public int deliveryUpdateState(ArrayList<Integer> order_idx, String delivery_state) {
+        int result = adminMapper.deliveryUpdateState(order_idx, delivery_state);
 
         return result;
     }
-
-
 }

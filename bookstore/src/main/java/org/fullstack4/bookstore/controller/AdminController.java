@@ -6,14 +6,12 @@ import org.fullstack4.bookstore.domain.NoticeVO;
 import org.fullstack4.bookstore.dto.*;
 import org.fullstack4.bookstore.service.AdminService;
 import org.fullstack4.bookstore.service.CommunityService;
+import org.fullstack4.bookstore.service.MyServiceIf;
 import org.fullstack4.bookstore.util.FileUploadUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -24,6 +22,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
@@ -36,6 +36,7 @@ public class AdminController {
 
     private final AdminService adminService;
     private final CommunityService communityService;
+    private final MyServiceIf myServiceIf;
 
     @GetMapping(path = "/list")
     public void bbsListGET(
@@ -558,7 +559,6 @@ public class AdminController {
         }
     }
 
-
     // view 페이지에서 답변 삭제
     @PostMapping(path = "/qna/delete")
     public String qnaDeletePOST(
@@ -580,8 +580,6 @@ public class AdminController {
             return "redirect:/admin/list?type=qna&err=deleteErr";
         }
     }
-
-
 
     // 회원
     @GetMapping("/member/list")
@@ -612,8 +610,6 @@ public class AdminController {
         log.info("===============================");
     }
 
-
-
     // 도서
     @GetMapping("/product/list")
     public void productListGET(Model model) {
@@ -629,75 +625,27 @@ public class AdminController {
 
     // 배송
     @GetMapping("/delivery/list")
-    public void deliveryListGET(Model model) {
-        List<DeliveryDTO> deliveryList = adminService.deliveryList();
-        log.info("deliveryList : " + deliveryList);
+    public void deliveryListGET(String delivery_state, Model model) {
+        List<OrderDetailDTO> orderDetailList = myServiceIf.order_list(delivery_state);
 
-        model.addAttribute("deliveryList", deliveryList);
+        model.addAttribute("delivery_state", delivery_state);
+        model.addAttribute("orderDetailList", orderDetailList);
     }
 
-    @GetMapping(path="/delivery/view", params="idx")
-    public void deliveryViewGET(
-            @RequestParam int idx,
-            HttpServletRequest req,
-            Model model
+    @PostMapping("/delivery/updateState")
+    @ResponseBody
+    public void deliveryModifyUpdate(
+            @RequestParam(name = "check_idx[]") ArrayList<Integer> check_idx,
+            @RequestParam(name = "delivery_state") String delivery_state
     ) {
-        log.info("===============================");
-        log.info("AdminController >> deliveryViewGET()");
-        DeliveryDTO deliveryDTO = adminService.deliveryView(idx);
-        String referer = req.getHeader("Referer");
+        int result = 0;
 
-        model.addAttribute("referer", referer);
-        model.addAttribute("deliveryDTO", deliveryDTO);
-
+        result = adminService.deliveryUpdateState(check_idx, delivery_state);
+//        for(int i=0; i<check_idx.size(); i++) {
+//            result += adminService.deliveryUpdateState(check_idx.get(i), delivery_state);
+//        }
+        log.info("result : " + result);
         log.info("===============================");
     }
-
-    @GetMapping(path="/delivery/modify", params="idx")
-    public void deliveryModifyGET(
-            @RequestParam int idx,
-            HttpServletRequest req,
-            Model model
-    ) {
-        log.info("===============================");
-        log.info("AdminController >> deliveryModifyGET()");
-        DeliveryDTO deliveryDTO = adminService.deliveryView(idx);
-        String referer = req.getHeader("Referer");
-
-        model.addAttribute("referer", referer);
-        model.addAttribute("deliveryDTO", deliveryDTO);
-
-        log.info("===============================");
-    }
-
-//    @PostMapping(path="/delivery/modify", params="idx")
-//    public String deliveryModifyPOST(
-//            @Valid DeliveryDTO deliveryDTO,
-//             BindingResult bindingResult,
-//             RedirectAttributes redirectAttributes
-//    ) {
-//        log.info("===============================");
-//        log.info("AdminController >> deliveryModifyPOST()");
-//        log.info("deliveryDTO : " + deliveryDTO.toString());
-//        log.info("===============================");
-//
-//        if(bindingResult.hasErrors()) {
-//            log.info("Errors");
-//            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
-//            redirectAttributes.addFlashAttribute("deliveryDTO", deliveryDTO);
-//            return "redirect:/admin/modify?idx="+deliveryDTO.getPay_idx();
-//        }
-//
-//        int result = adminService.deliveryModify(deliveryDTO);
-//        log.info("result : " + result);
-//        log.info("===============================");
-//
-//        if (result > 0) {
-//            return "redirect:/admin/view?idx="+deliveryDTO.getPay_idx();
-//        }
-//        else {
-//            return "/admin/modify?idx="+deliveryDTO.getPay_idx();
-//        }
-//    }
 
 }
