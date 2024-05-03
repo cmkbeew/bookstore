@@ -45,12 +45,12 @@
 
 <body>
 <%@ include file="/WEB-INF/common/header.jsp"%>
-<div class="d-flex py-h" id="wrapper">
+<div class="container py-h" id="wrapper">
     <div id="page-content-wrapper">
         <div class="container">
-            <div class="row">
-                <div class="col-md-3">
-<%--                    style="background-color: #e4f3ef"--%>
+            <div class="row g-5">
+                <div class="col-md-3" style="background-color: #e4f3ef">
+<%--                    --%>
                 <%@ include file="/WEB-INF/common/sidebar.jsp"%>
                 </div>
                 <div class="col-md-9">
@@ -111,15 +111,15 @@
                                                                                 id="plus${list.cart_idx}" onclick="this.parentNode.querySelector('input[type=number]').stepUp(); bookCntUpdate(${list.cart_idx}); totalCnt(${list.cart_idx});" >
                                                                             <span class="material-symbols-outlined">add</span>
                                                                         </button>
-                                                                        <div style="width: 100px;">
+                                                                        <div style="width: 150px;">
                                                                             <c:choose>
                                                                                 <c:when test="${list.discount == 0}">
-                                                                                    <p class="small mb-0">정가 : ${list.price}</p>
+                                                                                    <p class="small mb-0">정가 : ${list.price} 원</p>
                                                                                     <%--                                                                                    <p class="small mb-0">정가 : ${list.price}</p>--%>
                                                                                 </c:when>
                                                                                 <c:otherwise>
-                                                                                    <p class="small mb-0"><del>정가 : ${list.price}</del></p>
-                                                                                    <p class="small mb-0">판매가 : ${list.display_price}</p>
+                                                                                    <p class="small mb-0"><del>정가 : ${list.price} 원</del></p>
+                                                                                    <p class="small mb-0">판매가 : ${list.display_price} 원</p>
                                                                                 </c:otherwise>
                                                                             </c:choose>
                                                                         </div>
@@ -130,13 +130,16 @@
                                                         </div>
                                                     </c:forEach>
                                                     <div class="card mb-3">
-                                                        <div class="card-body d-flex justify-content-between">
-                                                            <div class><p>총 도서 금액 : ${total_price}</p>
-                                                                <p>배송비 : ${shipping}</p></div>
-<%--                                                            <div class="d-flex justify-content-end">--%>
-
-                                                                <h3>${shipping + total_price}원</h3>
-<%--                                                            </div>--%>
+                                                        <div class="card-body">
+                                                            <div class="text-start py-2">
+                                                                <div>
+                                                                    <span style="font-size: 20px;">총 도서금액 : <span style="color: #5c9ecd; font-size: 20px">${total_price}원</span></span><br>
+                                                                    <span style="font-size: 20px;">배송비 : <span style="font-size: 20px">${shipping}원</span></span><br>
+                                                                    <p class="text-start" style="color: indianred; font-size: 12px">※ 15,000원이상 구입시 배송비 무료</p>
+                                                                    <hr>
+                                                                    <span style="font-size: 20px;">총 결제금액 : <span style="color: indianred; font-size: 20px">${total_price + shipping}원</span></span><br>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="row justify-content-around">
@@ -171,7 +174,6 @@
 </div>
 <%@ include file="/WEB-INF/common/footer.jsp"%>
 <script>
-
     let total_cnt = document.getElementById("total_cnt");
     let totalCntValue = document.querySelector(".totalCnt");
     let total_price = document.getElementById("total_price");

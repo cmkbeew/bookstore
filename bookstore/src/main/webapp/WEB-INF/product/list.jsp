@@ -17,21 +17,45 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="/resources/fonts/icomoon/style.css">
+
+    <style>
+        span a {
+            text-decoration: none;
+            color : black;
+        }
+        span a:hover {
+            color : gray;
+        }
+    </style>
 </head>
 <body>
 <%@ include file="/WEB-INF/common/header.jsp"%>
 <!-- Header-->
-<header class="bg-info py-5">
-    <div class="container px-4 px-lg-5 my-5">
-        <div class="text-center text-white">
-            <h1 class="display-4 fw-bolder">Shop in style</h1>
-            <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p>
+<%--<header class="bg-info py-5" style="background:linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) ),url('/resources/img/book_img.jpg')">--%>
+<header class=" bg-white" style="border-bottom : 1px solid lightgray">
+    <div class="container px-0 px-lg-5 my-5">
+        <div class="text-white">
+            <h6 class="lead fw-normal mb-0" style="font-size : 1.5rem; color:lightgray;">
+                <span><a href="/">홈</a></span>
+                <span>&gt;</span>
+                <span>
+                    <c:if test="${productList.type == '유아'}"><span><a href="/product/list?type=유아">유아</a></span></c:if>
+                    <c:if test="${productList.type == '초등'}"><span><a href="/product/list?type=초등">초등</a></span></c:if>
+                    <c:if test="${productList.type == '중등'}"><span><a href="/product/list?type=중등">중등</a></span></c:if>
+                    <c:if test="${productList.type == '고등'}"><span><a href="/product/list?type=고등">고등</a></span></c:if>
+                </span>
+            </h6>
+            <br>
         </div>
     </div>
 </header>
 <!-- Section-->
 <section class="py-5 d-flex">
     <div class="container px-4 px-lg-5 mt-5">
+<%--        <ul class="d-flex justify-content-center list-unstyled mb-3" id="gradeUl">--%>
+
+<%--                    <li><button class="btn badge rounded-pill bg-dark" type="button" style="font-size: 1rem">전체</button></li>--%>
+<%--        </ul>--%>
         <ul class="d-flex justify-content-center list-unstyled mb-3" id="gradeUl">
             <c:choose>
                 <c:when test="${productList.type == '유아'}">

@@ -8,23 +8,27 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 @Log4j2
-@WebFilter(urlPatterns = {"/my/*", "/community/view/*", "/data/*", "/admin/*"})
-public class Loginfilter implements Filter {
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+@WebFilter(urlPatterns = {"/admin"})
+public class AdminFilter implements Filter {
 
-        log.info("Login check");
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+        log.info("admin check");
+
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
         HttpSession session = req.getSession();
-
         if(session.getAttribute("member_id") == null) {
             resp.sendRedirect("/login/login");
             return;
         }
-        chain.doFilter(req,resp);
 
+        if(session.getAttribute("member_id") != "admin") {
+            resp.sendRedirect("/");
+            return;
+        }
+        chain.doFilter(req, resp);
     }
 }
