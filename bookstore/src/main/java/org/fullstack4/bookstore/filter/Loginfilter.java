@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 @Log4j2
-//@WebFilter(urlPatterns = {"/my/*"})
+@WebFilter(urlPatterns = {"/my/*", "/community/view/*", "/data/view/*"})
 public class Loginfilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 

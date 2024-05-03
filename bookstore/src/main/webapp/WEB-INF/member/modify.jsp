@@ -26,6 +26,7 @@
     <%--  header 부트스트랩  --%>
     <link href="/resources/mintybootstrap.min.css" rel="stylesheet"/>
     <link href="/resources/css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/resources/css/ifta.css">
 
     <%--    해당 템플릿 css--%>
     <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
@@ -192,7 +193,7 @@
                                         </div>
                                         <hr class="my-2">
                                     </div>
-                                    <button class="w-100 btn btn-primary btn-lg mt-3" type="submit">수정하기</button>
+                                    <button class="w-100 btn btn-primary btn-lg mt-3 mb-5" type="submit">수정하기</button>
                                 </form>
                             </div>
                         </div>
