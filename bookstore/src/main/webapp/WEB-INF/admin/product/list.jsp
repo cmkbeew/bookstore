@@ -55,31 +55,31 @@
             <!-- 검색 끝 -->
             <div class="row">
                 <div class="col-md-12">
-                    <form name="registFrm" id="registFrm" method="post" action="/admin/regist">
+                    <form name="deleteFrm" id="deleteFrm" method="post" action="/admin/product/delete">
                         <h5>총 <span class="text-primary">${adminProductListByPage.total_count}</span>개</h5>
                         <div class="card">
                             <div class="card-body">
-                            <h5 class="card-title text-uppercase mb-0 text-center">도서관리</h5>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table no-wrap user-table mb-0">
-                                <thead>
-                                <tr>
-                                    <th scope="col" class="border-0">선택</th>
-                                    <th scope="col" class="border-0">상품명</th>
-                                    <th scope="col" class="border-0">출판사</th>
-                                    <th scope="col" class="border-0">저자</th>
-                                    <th scope="col" class="border-0">출판일</th>
-                                    <th scope="col" class="border-0">유형</th>
-                                    <th scope="col" class="border-0">학년</th>
-                                    <th scope="col" class="border-0">과목</th>
-                                    <th scope="col" class="border-0">쪽수</th>
-                                    <th scope="col" class="border-0">가격</th>
-                                    <th scope="col" class="border-0">할인율</th>
-                                    <th scope="col" class="border-0">상품등록일</th>
-                                </tr>
-                                </thead>
-                                <tbody>
+                                <h5 class="card-title text-uppercase mb-0 text-center">도서관리</h5>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table no-wrap user-table mb-0">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col" class="border-0">선택</th>
+                                        <th scope="col" class="border-0">상품명</th>
+                                        <th scope="col" class="border-0">출판사</th>
+                                        <th scope="col" class="border-0">저자</th>
+                                        <th scope="col" class="border-0">출판일</th>
+                                        <th scope="col" class="border-0">유형</th>
+                                        <th scope="col" class="border-0">학년</th>
+                                        <th scope="col" class="border-0">과목</th>
+                                        <th scope="col" class="border-0">쪽수</th>
+                                        <th scope="col" class="border-0">가격</th>
+                                        <th scope="col" class="border-0">할인율</th>
+                                        <th scope="col" class="border-0">상품등록일</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
                                     <c:if test="${not empty adminProductList}">
                                         <c:forEach items="${adminProductList}" var="list">
                                             <tr>
@@ -108,16 +108,21 @@
                                             <td class="text-center" colspan="5">도서정보가 없습니다.</td>
                                         </tr>
                                     </c:if>
-                                </tbody>
-                            </table>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; margin-top: 4px;">
-                        <div>
-                            <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2"><i class="fa fa-envelope" aria-hidden="true"></i></button>
-                            <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle ml-2"><i class="fa fa-credit-card" aria-hidden="true"></i></button>
+                        <div style="display: flex; justify-content: space-between; margin-top: 4px;">
+                            <div>
+                                <button type="submit" id="deleteBtn" class="btn btn-primary btn-circle btn-lg btn-circle ml-2" onclick="goDelete()">
+                                    <span class="material-symbols-outlined">delete</span>
+                                </button>
+                                <button type="button" class="btn btn-primary btn-circle btn-lg btn-circle ml-2" onclick="location.href='/admin/product/regist'">
+                                    <span class="material-symbols-outlined">edit</span>
+                                </button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>

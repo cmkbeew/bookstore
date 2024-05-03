@@ -27,5 +27,8 @@ public interface ProductMapper {
     // 도서 관리 페이지
     List<ProductVO> adminProductList();
     ProductVO adminProductView(int product_idx);
+    int adminProductRegist(ProductVO productVO);
+    int adminProductModify(ProductVO productVO);
+    int adminProductDelete(int product_idx);
 
 }

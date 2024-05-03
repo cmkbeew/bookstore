@@ -25,6 +25,9 @@ public interface ProductService {
     // 도서 관리 페이지
     List<ProductDTO> adminProductList();
     ProductDTO adminProductView(int product_idx);
+    int adminProductRegist(ProductDTO productDTO);
+    int adminProductModify(ProductDTO productDTO);
+    int adminProductDelete(int product_idx);
 
 
 }
