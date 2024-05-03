@@ -1,9 +1,11 @@
 package org.fullstack4.bookstore.service;
 
+import org.apache.ibatis.annotations.Param;
 import org.fullstack4.bookstore.domain.NoticeVO;
 import org.fullstack4.bookstore.domain.QnaVO;
 import org.fullstack4.bookstore.dto.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface AdminService {
@@ -45,11 +47,6 @@ public interface AdminService {
 
     int qnaReplyTotalCount(QnaDTO qnaDTO);
 
-
-
-
-
-
     // 회원
     List<MemberDTO> memberList();
 
@@ -59,10 +56,5 @@ public interface AdminService {
 
     // 배송
     List<DeliveryDTO> deliveryList();
-    DeliveryDTO deliveryView(int pay_idx);
-
-    int deliveryModify(DeliveryDTO deliveryDTO);
-
-
-
+    int deliveryUpdateState(ArrayList<Integer> order_idx, String delivery_state);
 }

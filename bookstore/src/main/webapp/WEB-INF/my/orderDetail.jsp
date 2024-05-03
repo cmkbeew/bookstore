@@ -106,8 +106,16 @@
                                                         <input type="hidden" name="member_id" value="${sessionScope.member_id}" />
                                                         <input type="hidden" name="order_code" value="${order_code}" />
                                                         <div class="row justify-content-around">
-                                                            <button type="button" class="btn btn-primary btn-circle btn-lg btn-circle col-4" onclick="location.href='/my/order?member_id=${sessionScope.member_id}'">주문목록</button>
-                                                            <button type="button" class="btn btn-outline-danger btn-circle btn-lg btn-circle col-4" onclick="deleteOrder()">주문취소</button>
+                                                            <button type="button" class="btn btn-primary btn-circle btn-lg btn-circle col-4" onclick="location.href='/my/order?member_id=${sessionScope.member_id}&delivery_state=${delivery_state}'">주문목록</button>
+                                                            <c:if test="${delivery_state == '배송전'}">
+                                                                <button type="button" class="btn btn-outline-danger btn-circle btn-lg btn-circle col-4" onclick="deleteOrder()">주문취소</button>
+                                                            </c:if>
+                                                            <c:if test="${delivery_state == '배송중'}">
+                                                                <button type="button" class="btn btn-outline-danger btn-circle btn-lg btn-circle col-4" onclick="requestRefund()">환불요청</button>
+                                                            </c:if>
+                                                            <c:if test="${delivery_state == '배송완료'}">
+                                                                <button type="button" class="btn btn-outline-danger btn-circle btn-lg btn-circle col-4" disabled>배송완료</button>
+                                                            </c:if>
                                                         </div>
                                                     </form>
                                                 </c:when>
@@ -140,11 +148,15 @@
     function deleteOrder() {
         const frm = document.getElementById("orderDelete");
         console.log(frm);
-        let delete_check = confirm("삭제하시겠습니까?");
+        let delete_check = confirm("주문 취소하시겠습니까?");
 
         if(delete_check) {
             frm.submit();
         }
+    }
+
+    function requestRefund() {
+        // TODO: 환불 요청 구현
     }
 </script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>

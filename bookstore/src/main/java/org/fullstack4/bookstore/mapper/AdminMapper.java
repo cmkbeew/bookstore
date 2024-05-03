@@ -1,8 +1,10 @@
 package org.fullstack4.bookstore.mapper;
 
+import org.apache.ibatis.annotations.Param;
 import org.fullstack4.bookstore.domain.*;
 import org.fullstack4.bookstore.dto.PageRequestDTO;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -57,6 +59,5 @@ public interface AdminMapper {
 
     // 배송
     List<DeliveryVO> deliveryList();
-    DeliveryVO deliveryView(int pay_idx);
-    int deliveryModify(DeliveryVO deliveryVO);
+    int deliveryUpdateState(@Param(value = "order_idx") ArrayList<Integer> order_idx, @Param(value = "delivery_state") String delivery_state);
 }

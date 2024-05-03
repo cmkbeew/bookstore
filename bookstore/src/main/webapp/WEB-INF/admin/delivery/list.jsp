@@ -32,10 +32,10 @@
 <div class="d-flex py-h" id="wrapper">
     <%@ include file="/WEB-INF/common/adminSidebar.jsp"%>
     <!-- Page content wrapper-->
-    <div id="page-content-wrapper">
+    <div id="page-content-wrapper" style="min-height: 80vh;">
         <button class="btn btn-primary" id="sidebarToggle">
-            <i class="fa fa-arrow-left" aria-hidden="true" style="display: block;"></i>
-            <i class="fa fa-arrow-right" aria-hidden="true" style="display: none;"></i>
+            <span class="material-symbols-outlined" style="display: block;">arrow_back</span>
+            <span class="material-symbols-outlined" style="display: none;">arrow_forward</span>
         </button>
         <!-- Page content-->
         <div class="container py-h">
@@ -44,38 +44,46 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title text-uppercase mb-0 text-center">배송관리</h5>
+                            <div class="d-flex justify-content-end align-items-center">
+                                <span class="me-3">변경 : </span>
+                                <button type="button" class="btn btn-outline-primary me-3" onclick="changeState(this)">배송전</button>
+                                <button type="button" class="btn btn-outline-warning me-3" onclick="changeState(this)">배송중</button>
+                                <button type="button" class="btn btn-outline-danger" onclick="changeState(this)">배송완료</button>
+                            </div>
                         </div>
                         <div class="table-responsive">
                             <table class="table no-wrap user-table mb-0">
                                 <thead>
                                 <tr>
+                                    <th scope="col" class="border-0">
+                                        <input type="checkbox" class="form-check my-1 mx-auto" id="checkAll" name="checkAll" onclick="checkAll(this)"/>
+                                    </th>
                                     <th scope="col" class="border-0">주문번호</th>
-                                    <th scope="col" class="border-0">대표상품명</th>
+                                    <th scope="col" class="border-0">배송상태</th>
+                                    <th scope="col" class="border-0">배송회사</th>
                                     <th scope="col" class="border-0">받는고객명</th>
                                     <th scope="col" class="border-0">받는고객휴대폰번호</th>
                                     <th scope="col" class="border-0">받는고객주소</th>
                                     <th scope="col" class="border-0">결제금액</th>
-                                    <th scope="col" class="border-0">배송상태</th>
                                     <th scope="col" class="border-0">주문일자</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <c:choose>
-                                    <c:when test="${!empty deliveryList}">
-                                        <c:forEach items="${deliveryList}" var="list">
+                                    <c:when test="${!empty orderDetailList}">
+                                        <c:forEach items="${orderDetailList}" var="list">
                                             <tr>
-                                                <td class="pl-4"><a href="/admin/delivery/modify?idx=${list.delivery_idx}">${list.delivery_idx}</a></td>
-                                                <td><a href="/admin/delivery/modify?idx=${list.delivery_idx}">${list.tracking_num}</a></td>
-                                                <td><a href="/admin/delivery/modify?idx=${list.delivery_idx}">${list.delivery_company}</a></td>
-                                                <td><a href="/admin/delivery/modify?idx=${list.delivery_idx}">${list.receiver_name}</a></td>
-                                                <td><a href="/admin/delivery/modify?idx=${list.delivery_idx}">${list.receiver_phone_num}</a></td>
-                                                <td><a href="/admin/delivery/modify?idx=${list.delivery_idx}">${list.zipcode}</a></td>
-                                                <td><a href="/admin/delivery/modify?idx=${list.delivery_idx}">${list.receiver_addr}</a></td>
-                                                <td><a href="/admin/delivery/modify?idx=${list.delivery_idx}">${list.delivery_state}</a></td>
-                                                <td><a href="/admin/delivery/modify?idx=${list.delivery_idx}">${list.start_date}</a></td>
-                                                <td><a href="/admin/delivery/modify?idx=${list.delivery_idx}">${list.arrive_date}</a></td>
-                                                <td><a href="/admin/delivery/modify?idx=${list.delivery_idx}">${list.member_id}</a></td>
-                                                <td><a href="/admin/delivery/modify?idx=${list.delivery_idx}">${list.pay_idx}</a></td>
+                                                <td>
+                                                    <input type="checkbox" class="form-check my-1 mx-auto" id="order${list.order_idx}" value="${list.order_idx}" name="checkList"/>
+                                                </td>
+                                                <td>${list.order_code}</td>
+                                                <td>${list.delivery_state}</td>
+                                                <td>${list.delivery_company}</td>
+                                                <td>${list.receiver_name}</td>
+                                                <td>${list.receiver_phone_num}</td>
+                                                <td>(${list.zipcode}) ${list.receiver_addr}</td>
+                                                <td>${list.pay_price}</td>
+                                                <td>${list.pay_date}</td>
                                             </tr>
                                         </c:forEach>
                                     </c:when>
@@ -95,5 +103,47 @@
     </div>
 </div>
 <%@ include file="/WEB-INF/common/footer.jsp"%>
+<script src="/resources/js/jquery-3.3.1.min.js"></script>
+<script>
+    // 체크박스 전체 선택/해제
+    function checkAll(obj) {
+        if(obj.checked) {
+            $("input:checkbox[name=checkList]").prop("checked", true);
+        } else {
+            $("input:checkbox[name=checkList]").prop("checked", false);
+        }
+    }
+
+    // 체크된 값 가져오기
+    function changeState(obj) {
+        let checkboxes = [];
+
+        $("input:checkbox[name=checkList]").each(function() {
+            if($(this).is(":checked") == true) {
+                checkboxes.push($(this).val());
+            }
+        });
+
+        // checkboxes = JSON.stringify(checkboxes);
+
+        let state = obj.textContent;
+
+        if(checkboxes != null) {
+            console.log(typeof checkboxes);
+            $.ajax({
+               type : "post",
+               url : "/admin/delivery/updateState",
+               data : {
+                   check_idx : checkboxes,
+                   delivery_state : state
+               },
+               success : function(url) {
+                   alert("배송 상태가 변경되었습니다.")
+                   location.reload(url);
+               }
+            });
+        }
+    }
+</script>
 </body>
 </html>
