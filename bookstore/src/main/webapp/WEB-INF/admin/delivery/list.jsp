@@ -46,9 +46,15 @@
                             <h5 class="card-title text-uppercase mb-0 text-center">배송관리</h5>
                             <div class="d-flex justify-content-end align-items-center">
                                 <span class="me-3">변경 : </span>
-                                <button type="button" class="btn btn-outline-primary me-3" onclick="changeState(this)">배송전</button>
-                                <button type="button" class="btn btn-outline-warning me-3" onclick="changeState(this)">배송중</button>
-                                <button type="button" class="btn btn-outline-danger" onclick="changeState(this)">배송완료</button>
+                                <c:if test="${delivery_state == '주문취소요청'}" var="cancel">
+                                    <button type="button" class="btn btn-outline-primary me-3" id="rejectCancel" onclick="changeState(this)">취소거부</button>
+                                    <button type="button" class="btn btn-outline-primary me-3" id="approveCancel" onclick="changeState(this)">취소승인</button>
+                                </c:if>
+                                <c:if test="${not cancel}">
+                                    <button type="button" class="btn btn-outline-primary me-3" id="before" onclick="changeState(this)">배송전</button>
+                                    <button type="button" class="btn btn-outline-warning me-3" id="ing" onclick="changeState(this)">배송중</button>
+                                    <button type="button" class="btn btn-outline-danger" id="complete" onclick="changeState(this)">배송완료</button>
+                                </c:if>
                             </div>
                         </div>
                         <div class="table-responsive">
@@ -124,11 +130,23 @@
             }
         });
 
-        // checkboxes = JSON.stringify(checkboxes);
+        let state = obj.id;
+        console.log(state);
+        if(state == "rejectCancel") {
+            state = "배송전";
+        } else if(state == "approveCancel"){
+            state = "취소완료";
+        } else if(state == "before"){
+            state = "배송전";
+        } else if(state == "ing"){
+            state = "배송중";
+        } else if(state == "complete"){
+            state = "배송완료";
+        }
 
-        let state = obj.textContent;
+        let changeCheck = confirm("배송 상태를 변경하겠습니까?");
 
-        if(checkboxes != null) {
+        if(checkboxes != null && changeCheck) {
             console.log(typeof checkboxes);
             $.ajax({
                type : "post",
