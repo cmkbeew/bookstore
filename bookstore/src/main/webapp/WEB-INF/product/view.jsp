@@ -63,7 +63,7 @@
                     <tr>
                         <th>정가</th>
                         <td id="price" style="color: #ff5c5c; font-size:20px; font-weight: bold">${productDTO.price}원
-                            <c:if test="${productDTO.discount !=null || productDTO.discount != 0}">(${productDTO.discount}%할인)</c:if></td>
+                            <c:if test="${productDTO.discount != null && productDTO.discount != 0}">(${productDTO.discount}%할인)</c:if></td>
                     </tr>
                     <tr>
                         <th>판매가</th>

@@ -46,7 +46,7 @@
                                     </div>
                                     <div class="card border-primary mb-3 w-100">
                                         <div class="card-body" style="height: 6rem;">
-                                            <h4 class="card-title text-dark text-center align-items-center">${requestScope['member_id']}</h4>
+                                            <h4 class="card-title text-dark text-center align-items-center">${member_id}</h4>
                                             <%--                                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>--%>
                                         </div>
                                     </div>

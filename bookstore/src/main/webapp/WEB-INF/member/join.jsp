@@ -27,6 +27,7 @@
     <%--  header 부트스트랩  --%>
     <link href="/resources/mintybootstrap.min.css" rel="stylesheet"/>
     <link href="/resources/css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/resources/css/ifta.css">
 
     <%--    해당 템플릿 css--%>
     <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
@@ -99,16 +100,16 @@
 <%--                                                사용할 아이디를 입력해주세요.--%>
 <%--                                            </div>--%>
 <%--                                            <div id="feedbackId" style="display:none;width:100%;margin-top:.15rem;font-size:.875em;color:#dc3545"></div>--%>
+                                            <div class="mb-4" style="display:block;width:100%;margin-top:.25rem;font-size:.875em;color:#9a9a9a">
+                                                영어/숫자 포함 4~16자만 사용 가능합니다.
+                                            </div>
                                             <div class="idCk1" style="display:none;width:100%;margin-top:.15rem;font-size:.875em;color:#dc3545">사용 중인 아이디 입니다.</div>
                                             <div class="idCk2" style="display:none;width:100%;margin-top:.15rem;font-size:.875em;color:#56c2ff">사용 가능한 아이디 입니다.</div>
-                                            <div id="div_err_display_member_id" style="display: none"></div>
+                                            <div id="div_err_member_id" style="display: none"></div>
                                         <div class="col-12 mt-3">
                                             <label for="name" class="small ifta-label">이름</label>
                                             <input type="text" class="ifta-field" id="name" name="name" placeholder=""
                                                    value="${dto.name}" required>
-                                            <div class="mb-4" style="display:block;width:100%;margin-top:.25rem;font-size:.875em;color:#9a9a9a">
-                                                영어/숫자 포함 4~16자만 사용 가능합니다.
-                                            </div>
                                             <div class="invalid-feedback">
                                                 이름을 입력해주세요.
                                             </div>
@@ -135,15 +136,16 @@
                                             <div id="pwdck" style="display: none;">
                                                 비밀번호와 입력 비밀번호가 다릅니다.
                                             </div>
-                                            <div id="div_err_display_pwd" style="display: none"></div>
+                                            <div id="div_err_pwd" style="display: none"></div>
                                         </div>
                                         <div class="col-12 mt-3">
                                             <label for="email" class="small ifta-label">이메일</label>
                                             <input type="email" class="ifta-field" id="email" name="email" value="${dto.email}"
                                                    placeholder="you@example.com" required>
-                                            <div class="invalid-feedback">
+                                            <div class="invalid-feedback" id="emailCk">
                                                 이메일을 형식에 맞게 입력해주세요.
                                             </div>
+                                            <div id="div_err_email" style="display: none"></div>
                                         </div>
                                         <div class="col-12 mt-3">
                                             <div class="row mt-3 mb-4 align-items-center justify-content-center">
@@ -163,8 +165,8 @@
                                                     <input type="tel" class="ifta-field" id="phone_num3" name="phone_num3" value="${dto.phone_num3}"
                                                            placeholder="1111" maxlength="4" required>
                                                 </div>
-                                                <div class="invalid-feedback">
-                                                    전화번호 형식에 맞게 입력해주세요.
+                                                <div class="invalid-feedback" id="phoneck" style='display: none; width:100%;margin-bottom:.25rem;font-size:.875em;color:#dc3545'>
+                                                    전화번호를 입력해주세요.
                                                 </div>
                                             </div>
                                         </div>
@@ -192,7 +194,7 @@
                                             <div class="invalid-feedback">
                                                 우편번호 찾기를 통해 주소를 입력해주세요.
                                             </div>
-                                            <div id="div_err_display_addr1" style="display: none"></div>
+                                            <div id="div_err_addr1" style="display: none"></div>
                                         </div>
                                         <div class="col-12 mt-3">
                                             <label for="addr2" class="small ifta-label">주소2</label>
@@ -496,7 +498,7 @@ SNS 계정 가입   [필수 – 네이버] 이름, 이메일주소, 휴대폰번
                                         <hr class="my-2">
                                     </div>
                                     <div id="div_err"></div>
-                                    <button class="w-100 btn btn-primary btn-lg mt-3" type="submit">가입하기</button>
+                                    <button class="w-100 btn btn-primary btn-lg mt-3" id="submitBtn" type="submit">가입하기</button>
                                 </form>
                             </div>
                         </div>
@@ -552,6 +554,7 @@ SNS 계정 가입   [필수 – 네이버] 이름, 이메일주소, 휴대폰번
 -->
 <script>
     let member_id = document.getElementById("member_id");
+    let email = document.getElementById("email");
     let pwd1 = document.getElementById("pwd");
     let pwd2 = document.getElementById("pwd2");
     let optBtn = document.getElementById("option")
@@ -559,11 +562,26 @@ SNS 계정 가입   [필수 – 네이버] 이름, 이메일주소, 휴대폰번
     let p2 = document.getElementById("phone_num2");
     let p3 = document.getElementById("phone_num3");
     let idCk = document.getElementById("idCk");
+    let emailCk = document.getElementById("emailCk");
+    let submitBtn = document.getElementById("submitBtn");
 
     const idcheck = /^[a-z0-9_]{4,20}$/;
     const pwdCheck = /^.*(?=^.{8,16}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[@#$%^&~!]).*$/;
+    const emailCheck = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
     //validator 체크
+
+    email.addEventListener("input", (e) => {
+        if(!(emailCk.test(email.value))) {
+            e.preventDefault();
+            e.stopPropagation();
+            document.getElementById("emailCk").style.display = "block";
+            document.getElementById("emailCk").innerText = "규칙에 맞는 아이디를 입력해주세요."
+        }
+    });
+
     member_id.addEventListener("input", (e) => {
+        document.querySelector(".idCk1").style.display='none';
+        document.querySelector(".idCk2").style.display='none';
         if (!(idcheck).test(member_id.value)) {
             e.preventDefault();
             e.stopPropagation();
@@ -628,7 +646,7 @@ SNS 계정 가입   [필수 – 네이버] 이름, 이메일주소, 휴대폰번
     const serverValidResult = {};
     <c:forEach items="${errors}" var="err">
     if (document.getElementById("div_err_${err.getField()}") != null) {
-        document.getElementById("div_err_${err.getField()}").innerHTML = "<div style='width:100%;margin-bottom:.25rem;font-size:.875em;color:#dc3545'>${err.getField()}필드는 공백일 수 없습니다.</div>";
+        document.getElementById("div_err_${err.getField()}").innerHTML = "<div style='width:100%;margin-bottom:.25rem;font-size:.875em;color:#dc3545'>${err.getField()}을 다시 한 번 확인해주세요./div>";
         document.getElementById("div_err_${err.getField()}").style.display = "block";
     }
     serverValidResult['${err.getField()}'] = '${err.defaultMessage}';
@@ -658,28 +676,24 @@ SNS 계정 가입   [필수 – 네이버] 이름, 이메일주소, 휴대폰번
         });
     }
 
-    // member_id.addEventListener("input" ,(e)=>{
-    //     let id = $('#member_id').val();
-    //     $.ajax({
-    //         url:'/member/idCheck',
-    //         type:'post',
-    //         data:{id : id},
-    //         success:function(cnt){
-    //             if(cnt == 0){
-    //                 $('.idCk1').css("dispaly","none");
-    //                 $('.idCk2').css("display","block");
-    //
-    //             } else {
-    //                 $('.idCk2').css("dispaly","none");
-    //                 $('.idCk1').css("display","block");
-    //                 $('#member_id').val('');
-    //             }
-    //         },
-    //         error:function(){
-    //             alert("에러입니다");
-    //         }
-    //     });
-    // });
+    submitBtn.addEventListener("click", (e)=> {
+        if(p2.value.length < 3 || p3.value.length < 4) {
+            document.getElementById("phoneck").style.display="block";
+            e.stopPropagation();
+            e.preventDefault();
+        }
+        if(member_id.value.length < 1) {
+            document.getElementById("feedbackId").innerText = "아이디를 입력해주세요.";
+            e.stopPropagation();
+            e.preventDefault();
+        }
+        if(document.querySelector(".idCk2").style.display != 'block') {
+            member_id.focus();
+
+        }
+    })
+
+
 </script>
 
 

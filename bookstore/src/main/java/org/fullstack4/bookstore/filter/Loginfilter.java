@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 @Log4j2
-@WebFilter(urlPatterns = {"/my/*", "/community/view/*", "/data/*", "/admin/*"})
+@WebFilter(urlPatterns = {"/my/*", "/community/view/*", "/data/*", "/admin/*", "/member/modify/*", "/member/modifyPwd/*", "/member/view/*"})
 public class Loginfilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 

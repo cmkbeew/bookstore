@@ -161,6 +161,7 @@ public class LoginController {
                              @RequestParam(name = "member_id", defaultValue = "") String member_id
             ) {
         model.addAttribute("member_id", member_id);
+
     }
     @GetMapping("/findPwd")
     public void findPwdGet() {

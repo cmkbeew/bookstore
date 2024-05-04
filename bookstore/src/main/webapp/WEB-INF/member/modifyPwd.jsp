@@ -213,11 +213,11 @@
     })
     const serverValidResult = {};
     <c:forEach items="${errors}" var="err">
-    if (document.getElementById("div_err_${err.getField()}") != null) {
-        document.getElementById("div_err_${err.getField()}").innerHTML = "<div style='width:100%;margin-bottom:.25rem;font-size:.875em;color:#dc3545'>${err.getField()}필드는 공백일 수 없습니다.</div>";
-        document.getElementById("div_err_${err.getField()}").style.display = "block";
-    }
-    serverValidResult['${err.getField()}'] = '${err.defaultMessage}';
+        if (document.getElementById("div_err_${err.getField()}") != null) {
+            document.getElementById("div_err_${err.getField()}").innerHTML = "<div style='width:100%;margin-bottom:.25rem;font-size:.875em;color:#dc3545'>${err.getField()}필드는 공백일 수 없습니다.</div>";
+            document.getElementById("div_err_${err.getField()}").style.display = "block";
+        }
+        serverValidResult['${err.getField()}'] = '${err.defaultMessage}';
     </c:forEach>
     console.log(serverValidResult);
 

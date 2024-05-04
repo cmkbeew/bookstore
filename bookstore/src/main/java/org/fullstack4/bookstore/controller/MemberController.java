@@ -86,7 +86,6 @@ public class MemberController {
         log.info("=========================");
         MemberDTO memberDTO = memberServiceIf.info_view(member_id);
         String[] arrPhoneNum = (memberDTO.getPhone_num() != null ? memberDTO.getPhone_num().split("-") : null);
-        log.info(Arrays.toString(arrPhoneNum));
         if (arrPhoneNum != null && arrPhoneNum.length == 3) {
             memberDTO.setPhone_num1(arrPhoneNum[0]);
             memberDTO.setPhone_num2(arrPhoneNum[1]);
@@ -105,9 +104,18 @@ public class MemberController {
         log.info("=========================");
         log.info("MemberController >> modifyPost()");
         log.info("=========================");
+
         memberDTO.setPhoneNum(memberDTO.getPhone_num1(), memberDTO.getPhone_num2(), memberDTO.getPhone_num3());
+
         log.info("membercontroller >> memberDTO" + memberDTO);
+        log.info("forever : " + memberDTO.getForever_yn());
+
+        if(memberDTO.getOption() == null) {
+            memberDTO.setOption("N");
+        }
+
         int result = memberServiceIf.info_modify(memberDTO);
+
         if (result > 0) {
             return "redirect:/member/view?member_id="+member_id;
         } else {
