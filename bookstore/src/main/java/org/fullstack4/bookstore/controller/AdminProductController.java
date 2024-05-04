@@ -2,19 +2,23 @@ package org.fullstack4.bookstore.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.fullstack4.bookstore.dto.ProductDTO;
-import org.fullstack4.bookstore.dto.ProductPageRequestDTO;
-import org.fullstack4.bookstore.dto.ProductPageResponseDTO;
+import org.fullstack4.bookstore.dto.*;
 import org.fullstack4.bookstore.service.ProductService;
+import org.fullstack4.bookstore.util.FileUploadUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 @Log4j2
 @Controller
@@ -23,16 +27,29 @@ import java.util.List;
 public class AdminProductController {
     private final ProductService productService;
 
-    @GetMapping("/list")
+    @GetMapping("list")
     public void adminProductListGET(
-            ProductPageRequestDTO productPageRequestDTO,
+            @Valid ProductPageRequestDTO productPageRequestDTO,
+            BindingResult bindingResult,
+            RedirectAttributes redirectAttributes,
             Model model
     ) {
-        ProductPageResponseDTO<ProductDTO> adminProductListByPage = productService.productList(productPageRequestDTO);
+        log.info("===============================");
+        log.info("AdminProductController >> adminProductListGET()");
+
+        if (bindingResult.hasErrors()) {
+            log.info("AdminProductController >> list Error");
+            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+        }
+
+        ProductPageResponseDTO<ProductDTO> adminProductListByPage = productService.adminProductListByPage(productPageRequestDTO);
         List<ProductDTO> adminProductList = productService.adminProductList();
+
+        log.info("adminProductListByPage" + adminProductListByPage);
 
         model.addAttribute("adminProductListByPage", adminProductListByPage);
         model.addAttribute("adminProductList", adminProductList);
+
     }
 
 
@@ -41,30 +58,25 @@ public class AdminProductController {
             @RequestParam int product_idx,
             Model model
     ) {
-        List<ProductDTO> adminProductList = productService.adminProductList();
-        model.addAttribute("adminProductList", adminProductList);
-        ProductDTO productDTO = productService.adminProductView(product_idx);
-        model.addAttribute("productDTO", productDTO);
+        Map<String, ProductDTO> adminProductMap = productService.adminProductView(product_idx);
+        adminProductMap.get("adminProductDTO").setProduct_content(adminProductMap.get("adminProductDTO").getProduct_content().replace("\r\n", "<br"));
 
-        log.info("adminProductList" + adminProductList);
-        log.info("productDTO" + productDTO);
-
+        model.addAttribute("dto", adminProductMap.get("adminProductDTO"));
+        model.addAttribute("prevDTO", adminProductMap.get("adminProductPrevDTO"));
+        model.addAttribute("nextDTO", adminProductMap.get("adminProductNextDTO"));
     }
 
     @GetMapping("/regist")
-    public void adminProductRegistGET(
-            @Valid ProductDTO productDTO,
-            BindingResult bindingResult,
-            RedirectAttributes redirectAttributes
-    ) {
+    public void adminProductRegistGET() {
+        log.info("===============================");
         log.info("AdminProductController >> registGET");
-
-//        return "redirect:/admin/product/list";
+        log.info("===============================");
 
     }
 
     @PostMapping("/regist")
     public String adminProductRegistPOST(
+            @RequestParam("file") MultipartFile multipartFile,
             @Valid ProductDTO productDTO,
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes
@@ -77,10 +89,19 @@ public class AdminProductController {
             return "redirect:/admin/product/regist";
         }
 
+        // 파일 등록
+        String save_file_name = "";
+
+        if (!multipartFile.isEmpty()) {
+            save_file_name = FileUploadUtil.saveFile(multipartFile);
+        }
+        productDTO.setOrg_file_name(multipartFile.getOriginalFilename());
+        productDTO.setSave_file_name(save_file_name);
+
         int result = productService.adminProductRegist(productDTO);
 
         if (result > 0) {
-            return "redirect:/admin/product/view?product_idx=" + productDTO.getProduct_idx();
+            return "redirect:/admin/product/list";
         } else {
             redirectAttributes.addFlashAttribute("productDTO", productDTO);
             return "redirect:/admin/product/regist";
@@ -89,15 +110,18 @@ public class AdminProductController {
 
     @GetMapping("/modify")
     public void adminProductModifyGET(
-            int product_idx,
+            @RequestParam int product_idx,
             Model model
     ) {
-        ProductDTO productDTO = productService.adminProductView(product_idx);
+        log.info("modify");
+        ProductDTO productDTO = productService.adminProductModifyGet(product_idx);
         model.addAttribute("productDTO", productDTO);
     }
 
+
     @PostMapping("modify")
     public String adminProductModifyPOST(
+            @RequestParam("file") MultipartFile multipartFile,
             @Valid ProductDTO productDTO,
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes
@@ -109,6 +133,19 @@ public class AdminProductController {
             return "redirect:/admin/product/modify?product_idx=" + productDTO.getProduct_idx();
         }
 
+        ProductDTO dto = productService.adminProductModifyGet(productDTO.getProduct_idx());
+        String save_file_name = "";
+
+        // 수정 파일 있을 때 저장 및 기존 파일 삭제
+        if(!multipartFile.isEmpty()) {
+            save_file_name = FileUploadUtil.saveFile(multipartFile);
+
+            FileUploadUtil.deleteFile(dto.getSave_file_name());
+        }
+
+        productDTO.setOrg_file_name(multipartFile.getOriginalFilename());
+        productDTO.setSave_file_name(save_file_name);
+
         int result = productService.adminProductModify(productDTO);
 
         if (result > 0) {
@@ -119,6 +156,28 @@ public class AdminProductController {
             return "redirect:/admin/product/modify?product_idx=" + productDTO.getProduct_idx();
         }
     }
+
+    // list에서 checkbox로 삭제
+    @PostMapping(path = "/list/delete")
+    public String bbsDeletePOST(
+            HttpServletRequest req
+    ) {
+        String[] delete_idx = req.getParameterValues("select");
+        String referer = req.getHeader("Referer");
+
+            int result = 0;
+
+            for (int i = 0; i < delete_idx.length; i++) {
+                int intIdx = Integer.parseInt(delete_idx[i]);
+                result = productService.adminProductDelete(intIdx);
+            }
+            if (result > 0) {
+                return "redirect:" + referer;
+            } else {
+                return "redirect:/admin/product/list?err=deleteErr";
+            }
+        }
+
 
     @PostMapping("/delete")
     public String adminProductDeletePOST(

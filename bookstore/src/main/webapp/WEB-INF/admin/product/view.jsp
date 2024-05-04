@@ -26,14 +26,6 @@
     <link rel="stylesheet" href="/resources/css/owl.theme.green.css">
     <link rel="stylesheet" href="/resources/fonts/icomoon/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0" />
-
-<%--    &lt;%&ndash;  header 부트스트랩  &ndash;%&gt;--%>
-<%--    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />--%>
-<%--    <link href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/minty/bootstrap.min.css" rel="stylesheet"/>--%>
-<%--    <link href="/resources/css/styles.css" rel="stylesheet" />--%>
-<%--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/minty/bootstrap.min.css" integrity="sha384-H4X+4tKc7b8s4GoMrylmy2ssQYpDHoqzPa9aKXbDwPoPUA3Ra8PA5dGzijN+ePnH" crossorigin="anonymous">--%>
-
-    <%-- bbsList 부트스트랩   --%>
 </head>
 <body style="background-color: #eeeeee;">
 <%@ include file="/WEB-INF/common/header.jsp"%>
@@ -48,6 +40,7 @@
         <!-- Page content-->
         <div class="container">
             <form name="deleteFrm" id="deleteFrm" method="post" action="/admin/product/delete">
+                <input type="hidden" name="product_idx" id="product_idx" value="${dto.product_idx}"/>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
@@ -60,48 +53,63 @@
                                         <div>
                                             <table class="table no-wrap user-table mb-0 text-lg-start">
                                                 <tr class="table-light">
-                                                    <th style="width: 120px;">상품명<span class="material-symbols-outlined web_font">title</span></th>
-                                                    <td>${productDTO.product_name}</td>
+                                                    <th style="width: 120px;">교재명</th>
+                                                    <td>${dto.product_name}</td>
                                                 </tr>
                                                 <tr class="table-light">
-                                                    <th>출판사<span class="material-symbols-outlined web_font">face</span></th>
-                                                    <td>${productDTO.publisher}</td>
+                                                    <th>출판사</th>
+                                                    <td>${dto.publisher}</td>
                                                 </tr>
                                                 <tr class="table-light">
-                                                    <th>저자<span class="material-symbols-outlined web_font">calendar_month</span></th>
-                                                    <td>${productDTO.author}</td>
+                                                    <th>저자</th>
+                                                    <td>${dto.author}</td>
                                                 </tr>
                                                 <tr class="table-light">
-                                                    <th>출판일<span class="material-symbols-outlined web_font">calendar_month</span></th>
-                                                    <td>${productDTO.publish_date}</td>
+                                                    <th>쪽수</th>
+                                                    <td>${dto.page_cnt}</td>
                                                 </tr>
                                                 <tr class="table-light">
-                                                    <th>유형<span class="material-symbols-outlined web_font">calendar_month</span></th>
-                                                    <td>${productDTO.type}</td>
+                                                    <th>출판일</th>
+                                                    <td>${dto.publish_date}</td>
                                                 </tr>
                                                 <tr class="table-light">
-                                                    <th>학년<span class="material-symbols-outlined web_font">calendar_month</span></th>
-                                                    <td>${productDTO.grade}</td>
+                                                    <th>유형</th>
+                                                    <td>${dto.type}</td>
                                                 </tr>
                                                 <tr class="table-light">
-                                                    <th>과목<span class="material-symbols-outlined web_font">calendar_month</span></th>
-                                                    <td>${productDTO.subject}</td>
+                                                    <th>학년</th>
+                                                    <td>${dto.grade}</td>
                                                 </tr>
                                                 <tr class="table-light">
-                                                    <th>할인율<span class="material-symbols-outlined web_font">calendar_month</span></th>
-                                                    <td>${productDTO.discount}</td>
+                                                    <th>과목</th>
+                                                    <td>${dto.subject}</td>
                                                 </tr>
                                                 <tr class="table-light">
-                                                    <th>상품등록일<span class="material-symbols-outlined web_font">calendar_month</span></th>
-                                                    <td>${productDTO.reg_date}</td>
+                                                    <th>할인율</th>
+                                                    <td>${dto.discount}</td>
+                                                </tr>
+                                                <tr class="table-light">
+                                                    <th>상품등록일</th>
+                                                    <td>${dto.reg_date}</td>
                                                 </tr>
                                                 <tr>
-                                                    <th>내용<span class="material-symbols-outlined web_font">description</span></th>
+                                                    <th>교재소개<span class="material-symbols-outlined web_font">description</span></th>
                                                     <td></td>
                                                 </tr>
                                             </table>
                                         </div>
-                                        <div class="p-3" style="min-height: 20vh;">${productDTO.product_content}</div>
+                                        <div class="p-3" style="min-height: 20vh;">${dto.product_content}</div>
+                                        <c:if test="${dto.org_file_name != null && dto.org_file_name != ''}">
+                                            <table class="table no-wrap user-table mb-0 text-lg-start">
+                                                <tr>
+                                                    <th style="width: 120px; vertical-align: middle;">첨부파일</th>
+                                                    <td>
+                                                        <span class="material-symbols-outlined web_font">attach_file</span>
+                                                        <span><a href="#">${dto.org_file_name}</a></span>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </c:if>
                                     </div>
                                 </div>
                             </div>
@@ -111,7 +119,7 @@
                 <div class="mt-md-2">
                     <div>
                         <button type="button" class="btn btn-primary btn-circle btn-lg btn-circle ml-2" onclick="location.href='/admin/product/list';"><span class="material-symbols-outlined">list</span></button>
-                        <button type="button" class="btn btn-primary btn-circle btn-lg btn-circle ml-2" onclick="location.href='/admin/product/modify?product_idx=${productDTO.product_idx}';"><span class="material-symbols-outlined">edit_note</span></button>
+                        <button type="button" class="btn btn-primary btn-circle btn-lg btn-circle ml-2" onclick="location.href='/admin/product/modify?product_idx=${dto.product_idx}';"><span class="material-symbols-outlined">edit_note</span></button>
                         <button type="submit" class="btn btn-primary btn-circle btn-lg btn-circle ml-2"><span class="material-symbols-outlined">delete</span></button>
                     </div>
                 </div>
@@ -124,7 +132,7 @@
                             <span>이전글</span>
                         </th>
                         <c:if test="${prevDTO != null}">
-                            <td><a href="/admin/faq/view?idx=${prevDTO.idx}">${prevDTO.title}</a></td>
+                            <td><a href="/admin/product/view?product_idx=${prevDTO.product_idx}">${prevDTO.product_name}</a></td>
                         </c:if>
                         <c:if test="${prevDTO == null}">
                             <td>이전글이 없습니다.</td>
@@ -136,7 +144,7 @@
                             <span>다음글</span>
                         </th>
                         <c:if test="${nextDTO != null}">
-                            <td><a href="/admin/faq/view?idx=${nextDTO.idx}">${nextDTO.title}</a></td>
+                            <td><a href="/admin/product/view?product_idx=${nextDTO.product_idx}">${nextDTO.product_name}</a></td>
                         </c:if>
                         <c:if test="${nextDTO == null}">
                             <td>다음글이 없습니다.</td>

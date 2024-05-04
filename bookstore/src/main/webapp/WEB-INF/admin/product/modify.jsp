@@ -43,6 +43,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <form name="modifyFrm" id="modifyFrm" method="post" action="/admin/product/modify" enctype="multipart/form-data">
+                        <input type="hidden" name="product_idx" id="product_idx" value="${productDTO.product_idx}"/>
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title text-uppercase mb-0" style="text-align: center;">도서상품 수정</h5>
@@ -52,34 +53,128 @@
                                     <div>
                                         <table class="table no-wrap user-table mb-0 text-lg-start">
                                             <tr class="table-light">
-                                                <th style="width: 120px;">제목<span class="material-symbols-outlined web_font" value="${productDTO.product_name}">title</span></th>
+                                                <th style="width: 120px; vertical-align: middle;">교재명</th>
                                                 <td>
-                                                    <input type="text" name="title" id="title" class="form-control" value="" placeholder="제목"/>
-                                                    <div id="div_err_title" style="display: none"></div>
+                                                    <input type="text" name="product_name" id="product_name" class="form-control" value="${productDTO.product_name}" placeholder="교재명"/>
+                                                    <div id="div_err_product_name" style="display: none"></div>
                                                 </td>
                                             </tr>
                                             <tr class="table-light">
-                                                <th>작성자<span class="material-symbols-outlined web_font">face</span></th>
-                                                <td><input type="text" name="writer" id="writer" class="form-control" value="${member_id}" readonly/></td>
-                                            </tr>
-                                            <%--                                            product_name, product_content, publisher, author, page_cnt, price,--%>
-                                            <%--                                            publish_date, type, grade, subject, discount, tax_yn, reg_date--%>
-                                            <tr class="table-light">
-                                                <th>고정여부<span class="material-symbols-outlined web_font">keep</span></th>
+                                                <th style="width: 120px;" class="va-middle">출판사</th>
                                                 <td>
-                                                    <label class="control control--checkbox">
-                                                        <input type="checkbox" name="fix_state" id="fix_state" value="-1">
-                                                        <div class="control__indicator"></div>
-                                                    </label>
+                                                    <input type="text" name="publisher" id="publisher" class="form-control" value="${productDTO.publisher}" placeholder="출판사"/>
+                                                    <div id="div_err_publisher" style="display: none"></div>
+                                                </td>
+                                            </tr>
+                                            <tr class="table-light">
+                                                <th style="width: 120px;" class="va-middle">저자</th>
+                                                <td>
+                                                    <input type="text" name="author" id="author" class="form-control" value="${productDTO.author}" placeholder="저자"/>
+                                                    <div id="div_err_author" style="display: none"></div>
+                                                </td>
+                                            </tr>
+                                            <tr class="table-light">
+                                                <th style="width: 120px;" class="va-middle">쪽수</th>
+                                                <td>
+                                                    <input type="text" name="page_cnt" id="page_cnt" class="form-control" value="${productDTO.page_cnt}" placeholder="쪽수"/>
+                                                    <div id="div_err_page_cnt" style="display: none"></div>
+                                                </td>
+                                            </tr>
+                                            <tr class="table-light">
+                                                <th style="width: 120px;" class="va-middle">가격</th>
+                                                <td>
+                                                    <input type="text" name="price" id="price" class="form-control" value="${productDTO.price}" placeholder="가격"/>
+                                                    <div id="div_err_price" style="display: none"></div>
+                                                </td>
+                                            </tr>
+                                            <tr class="table-light">
+                                                <th style="width: 120px;" class="va-middle">소득공제여부</th>
+                                                <td class="input-group">
+                                                    <div class="control control--radio my-0">
+                                                        <label class="form-check-label" for="tax_y">가능
+                                                            <input class="form-check-input va-middle" type="radio" name="tax_yn" id="tax_y" value="Y"
+                                                                    <c:out value="${productDTO.tax_yn == 'Y' ? 'checked' : ''}"/>/>
+                                                            <div class="control__indicator2"></div>
+                                                        </label>
+                                                    </div>
+                                                    <div class="control control--radio ms-3 my-0">
+                                                        <label class="form-check-label" for="tax_n">불가능
+                                                            <input class="form-check-input va-middle" type="radio" name="tax_yn" id="tax_n" value="N"
+                                                                    <c:out value="${productDTO.tax_yn == 'N' ? 'checked' : ''}"/>/>
+                                                            <div class="control__indicator2"></div>
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="table-light">
+                                                <th style="width: 120px;" class="va-middle">출판일</th>
+                                                <td>
+                                                    <input type="date" name="publish_date" id="publish_date" class="form-control" value="${productDTO.publish_date}"/>
+                                                    <div id="div_err_publish_date" style="display: none"></div>
+                                                </td>
+                                            </tr>
+                                            </tr>
+                                            <tr class="table-light">
+                                                <th style="width: 120px;" class="va-middle">유형</th>
+                                                <td class="input-group">
+                                                    <div class="control control--radio my-0">
+                                                        <label class="form-check-label" for="type_0">유아
+                                                            <input class="form-check-input va-middle" type="radio" name="type" id="type_0" value="유아"
+                                                                    <c:out value="${productDTO.type == '유아' ? 'checked' : ''}"/>/>
+                                                            <div class="control__indicator2"></div>
+                                                        </label>
+                                                    </div>
+                                                    <div class="control control--radio ms-3 my-0">
+                                                        <label class="form-check-label" for="type_1">초등
+                                                            <input class="form-check-input va-middle" type="radio" name="type" id="type_1" value="초등"
+                                                                    <c:out value="${productDTO.type == '초등' ? 'checked' : ''}"/>/>
+                                                            <div class="control__indicator2"></div>
+                                                        </label>
+                                                    </div>
+                                                    <div class="control control--radio ms-3 my-0">
+                                                        <label class="form-check-label" for="type_2">중등
+                                                            <input class="form-check-input va-middle" type="radio" name="type" id="type_2" value="중등"
+                                                                    <c:out value="${productDTO.type == '중등' ? 'checked' : ''}"/>/>
+                                                            <div class="control__indicator2"></div>
+                                                        </label>
+                                                    </div>
+                                                    <div class="control control--radio ms-3 my-0">
+                                                        <label class="form-check-label" for="type_3">고등
+                                                            <input class="form-check-input va-middle" type="radio" name="type" id="type_3" value="고등"
+                                                                    <c:out value="${productDTO.type == '고등' ? 'checked' : ''}"/>/>
+                                                            <div class="control__indicator2"></div>
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="table-light">
+                                                <th style="width: 120px;" class="va-middle">학년</th>
+                                                <td>
+                                                    <input type="text" name="grade" id="grade" class="form-control" value="${productDTO.grade}" placeholder="학년"/>
+                                                    <div id="div_err_grade" style="display: none"></div>
+                                                </td>
+                                            </tr>
+                                            <tr class="table-light">
+                                                <th style="width: 120px;" class="va-middle">과목</th>
+                                                <td>
+                                                    <input type="text" name="subject" id="subject" class="form-control" value="${productDTO.subject}" placeholder="과목"/>
+                                                    <div id="div_err_subject" style="display: none"></div>
+                                                </td>
+                                            </tr>
+                                            <tr class="table-light">
+                                                <th style="width: 120px;" class="va-middle">할인율</th>
+                                                <td>
+                                                    <input type="text" name="discount" id="discount" class="form-control" value="${productDTO.discount}" placeholder="할인율"/>
+                                                    <div id="div_err_discount" style="display: none"></div>
                                                 </td>
                                             </tr>
                                         </table>
                                     </div>
                                     <div class="p-3" style="min-height: 20vh;">
-                                        <textarea name="content" id="content" placeholder="내용을 입력하세요.">
-                                                                                        ${productDTO.product_content}
+                                        <textarea name="product_content" id="product_content" placeholder="내용을 입력하세요.">
+                                            ${productDTO.product_content}
                                         </textarea>
-                                        <div id="div_err_content" style="display: none"></div>
+                                        <div id="div_err_product_content" style="display: none"></div>
                                     </div>
                                     <table class="table no-wrap user-table mb-0 text-lg-start">
                                         <tr class="table-light">

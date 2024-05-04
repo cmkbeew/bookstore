@@ -27,6 +27,11 @@
     <link rel="stylesheet" href="/resources/fonts/icomoon/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0" />
     <script src="https://cdn.tiny.cloud/1/l7s9qc136p4pmwyuszv8b1a5nh66vdir4b84oksbknriidxl/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+        });
+    </script>
 </head>
 <body style="background-color: #eeeeee;">
 <%@ include file="/WEB-INF/common/header.jsp"%>
@@ -90,10 +95,6 @@
 </div>
 <%@ include file="/WEB-INF/common/footer.jsp"%>
 <script>
-    tinymce.init({
-        selector: 'textarea',
-    });
-
     const serverValidResult = {};
     <c:forEach items="${errors}" var="err">
     if(document.getElementById("div_err_${err.getField()}") != null) {

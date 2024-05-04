@@ -2,6 +2,7 @@ package org.fullstack4.bookstore.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.fullstack4.bookstore.domain.DataVO;
 import org.fullstack4.bookstore.domain.NoticeVO;
 import org.fullstack4.bookstore.domain.ProductVO;
 import org.fullstack4.bookstore.domain.ReviewVO;
@@ -10,7 +11,9 @@ import org.fullstack4.bookstore.mapper.ProductMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Log4j2
@@ -127,7 +130,31 @@ public class ProductServiceImpl implements ProductService {
         return dtoList;
     }
 
+
     // 도서 관리 페이지
+    @Override
+    public ProductPageResponseDTO<ProductDTO> adminProductListByPage(ProductPageRequestDTO productPageRequestDTO) {
+        List<ProductVO> voList = productMapper.adminProductListByPage(productPageRequestDTO);
+        List<ProductDTO> dtoList = voList.stream()
+                .map(vo -> modelMapper.map(vo, ProductDTO.class))
+                .collect(Collectors.toList());
+
+        int total_count = productMapper.adminProductTotalCount(productPageRequestDTO);
+
+        ProductPageResponseDTO<ProductDTO> pageResponseDTO = ProductPageResponseDTO.<ProductDTO>withAll()
+                .productPageRequestDTO(productPageRequestDTO)
+                .dtoList(dtoList)
+                .total_count(total_count)
+                .build();
+
+        return pageResponseDTO;
+    }
+
+    @Override
+    public int adminProductTotalCount(ProductPageRequestDTO productPageRequestDTO) {
+        return productMapper.adminProductTotalCount(productPageRequestDTO);
+    }
+
     @Override
     public List<ProductDTO> adminProductList() {
         List<ProductVO> voList = productMapper.adminProductList();
@@ -137,14 +164,25 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductDTO adminProductView(int product_idx) {
-        ProductVO productVO = productMapper.adminProductView(product_idx);
+    public Map<String, ProductDTO> adminProductView(int product_idx) {
+        Map<String, ProductDTO> maps = new HashMap<>();
 
-        ProductDTO productDTO = modelMapper.map(productVO, ProductDTO.class);
+        ProductVO adminProductVO = productMapper.adminProductView(product_idx);
+        ProductVO adminProductPrevVO = productMapper.adminProductPrev(product_idx);
+        ProductVO adminProductNextVO = productMapper.adminProductNext(product_idx);
 
-        productDTO.setDisplay_price(productDTO.getPrice(), productDTO.getDiscount());
+        ProductDTO adminProductDTO = modelMapper.map(adminProductVO, ProductDTO.class);
+        maps.put("adminProductDTO", adminProductDTO);
 
-        return productDTO;
+        if(adminProductPrevVO != null) {
+            ProductDTO adminProductPrevDTO = modelMapper.map(adminProductPrevVO, ProductDTO.class);
+            maps.put("adminProductPrevDTO", adminProductPrevDTO);
+        }
+        if(adminProductNextVO != null) {
+            ProductDTO adminProductNextDTO = modelMapper.map(adminProductNextVO, ProductDTO.class);
+            maps.put("adminProductNextDTO", adminProductNextDTO);
+        }
+        return maps;
     }
 
     @Override
@@ -153,6 +191,14 @@ public class ProductServiceImpl implements ProductService {
         int result = productMapper.adminProductRegist(productVO);
 
         return result;
+    }
+
+    @Override
+    public ProductDTO adminProductModifyGet(int product_idx) {
+        ProductVO productVO = productMapper.adminProductView(product_idx);
+        ProductDTO productDTO = modelMapper.map(productVO, ProductDTO.class);
+
+        return productDTO;
     }
 
     @Override
@@ -170,6 +216,5 @@ public class ProductServiceImpl implements ProductService {
 
         return result;
     }
-
 
 }

@@ -36,7 +36,7 @@
     </sql>
 
     <select id="productList" resultType="org.fullstack4.bookstore.domain.ProductVO">
-        SELECT product_idx, product_name, product_content, publisher, author, page_cnt, price, publish_date, type, grade, subject, discount, tax_yn, reg_date
+        SELECT product_idx, product_name, product_content, publisher, author, page_cnt, price, publish_date, type, grade, subject, discount, tax_yn, reg_date, org_file_name, save_file_name
         FROM tbl_product
         WHERE type = #{type}
         <include refid="whereCondition"></include>
@@ -53,7 +53,7 @@
     </select>
 
     <select id="productView" resultType="org.fullstack4.bookstore.domain.ProductVO">
-        SELECT product_idx, product_name, product_content, publisher, author, page_cnt, price, publish_date, type, grade, subject, discount, tax_yn, reg_date
+        SELECT product_idx, product_name, product_content, publisher, author, page_cnt, price, publish_date, type, grade, subject, discount, tax_yn, reg_date, org_file_name, save_file_name
         FROM tbl_product
         WHERE product_idx = #{param1} AND type = #{param2}
     </select>
@@ -96,7 +96,7 @@
     </delete>
 
     <select id="relatedProductList" resultType="org.fullstack4.bookstore.domain.ProductVO">
-        SELECT product_idx, product_name, product_content, publisher, author, page_cnt, price, publish_date, type, grade, subject, discount, tax_yn, reg_date
+        SELECT product_idx, product_name, product_content, publisher, author, page_cnt, price, publish_date, type, grade, subject, discount, tax_yn, reg_date, org_file_name, save_file_name
         FROM tbl_product
         WHERE product_idx != #{product_idx} AND type = #{type} AND grade = #{grade}
         -- AND subject = #{subject}
@@ -104,21 +104,52 @@
         LIMIT 4
     </select>
 
+    <select id="adminProductListByPage" resultType="org.fullstack4.bookstore.domain.ProductVO">
+        SELECT product_idx, product_name, product_content, publisher, author, page_cnt, price, publish_date, type, grade, subject, discount, tax_yn, reg_date, org_file_name, save_file_name
+        FROM tbl_product
+        <include refid="whereCondition"></include>
+        <include refid="orderCondition"></include>
+        LIMIT #{page_skip_count}, #{page_size}
+    </select>
+
+    <select id="adminProductTotalCount" resultType="int">
+        SELECT COUNT(*)
+        FROM tbl_product
+        <include refid="whereCondition"></include>
+    </select>
+
+
     <select id="adminProductList" resultType="org.fullstack4.bookstore.domain.ProductVO">
-        SELECT product_idx, product_name, product_content, publisher, author, page_cnt, price, publish_date, type, grade, subject, discount, tax_yn, reg_date
+        SELECT product_idx, product_name, product_content, publisher, author, page_cnt, price, publish_date, type, grade, subject, discount, tax_yn, reg_date, org_file_name, save_file_name
         FROM tbl_product
         ORDER BY product_idx DESC
     </select>
 
     <select id="adminProductView" resultType="org.fullstack4.bookstore.domain.ProductVO">
-        SELECT product_idx, product_name, product_content, publisher, author, page_cnt, price, publish_date, type, grade, subject, discount, tax_yn, reg_date
+        SELECT product_idx, product_name, product_content, publisher, author, page_cnt, price, publish_date, type, grade, subject, discount, tax_yn, reg_date, org_file_name, save_file_name
         FROM tbl_product
         WHERE product_idx = #{product_idx}
     </select>
 
+    <select id="adminProductPrev" resultType="org.fullstack4.bookstore.domain.ProductVO">
+        SELECT product_idx, product_name
+        FROM tbl_product
+        WHERE product_idx <![CDATA[<]]> #{product_idx}
+        ORDER BY product_idx DESC
+            LIMIT 1
+    </select>
+
+    <select id="adminProductNext" resultType="org.fullstack4.bookstore.domain.ProductVO">
+        SELECT product_idx, product_name
+        FROM tbl_product
+        WHERE product_idx <![CDATA[>]]> #{product_idx}
+        ORDER BY product_idx
+            LIMIT 1
+    </select>
+
     <insert id="adminProductRegist">
-        INSERT INTO tbl_product(product_name, product_content, publisher, author, page_cnt, price, publish_date, type, grade, subject, discount, tax_yn, reg_date)
-        VALUES (#{product_name}, #{product_content}, #{publisher}, #{author}, #{page_cnt}, #{price}, #{publish_date}, #{type}, #{grade}, #{subject}, #{discount}, #{tax_yn}, NOW())
+        INSERT INTO tbl_product(product_name, product_content, publisher, author, page_cnt, price, publish_date, type, grade, subject, discount, tax_yn, reg_date, org_file_name, save_file_name)
+        VALUES (#{product_name}, #{product_content}, #{publisher}, #{author}, #{page_cnt}, #{price}, #{publish_date}, #{type}, #{grade}, #{subject}, #{discount}, #{tax_yn}, NOW(), #{org_file_name}, #{save_file_name})
     </insert>
 
     <update id="adminProductModify">
@@ -134,7 +165,9 @@
            grade = #{grade},
            subject = #{subject},
            discount = #{discount},
-           tax_yn = #{tax_yn}
+           tax_yn = #{tax_yn},
+           org_file_name = #{org_file_name},
+           save_file_name = #{save_file_name}
         WHERE product_idx = #{product_idx}
     </update>
 
