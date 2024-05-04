@@ -35,6 +35,7 @@ public class MemberDTO {
     private String phone_num3;
     private String phone_num;
     @NotBlank
+    @Pattern(regexp = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$", message = "email@email.com 형식으로 입력해주세요")
 //    @Pattern(regexp = "\"[0-9a-zA-Z]+(.[_a-z0-9-]+)*@(?:\\\\w+\\\\.)+\\\\w+$\"", message = "email@email.com 형식으로 입력해주세요")
     private String email;
     @NotBlank

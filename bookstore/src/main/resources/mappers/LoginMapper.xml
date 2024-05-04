@@ -13,13 +13,13 @@
     <select id="search_id" resultType="String">
         SELECT member_id
         FROM tbl_member
-        WHERE name = #{name} and email = #{email}
+        WHERE name = #{name} and email = #{email} and member_state = "Y"
     </select>
     <!--    비밀번호 찾기-->
     <select id="search_pwd">
         SELECT count(*)
         FROM tbl_member
-        WHERE name = #{name} and email = #{email} and member_id = #{member_id}
+        WHERE name = #{name} and email = #{email} and member_id = #{member_id} and member_state = "Y"
     </select>
     <!--    비밀번호 재 설정-->
     <update id="change_pwd">

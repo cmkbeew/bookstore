@@ -64,7 +64,6 @@
                 <div class="row justify-content-center">
                     <div class="col-md-12">
                         <div class="form-block">
-                            <%--                            class="form-block"--%>
                             <div class="py-5 text-center">
                                 <span class="material-symbols-outlined d-block mx-auto mb-4" style="font-size: 72px">edit_square</span>
                                 <h2>Modify Information</h2>
@@ -77,23 +76,17 @@
                                             <label for="member_id" class="small ifta-label">아이디</label>
                                             <input type="text" class="ifta-field" id="member_id" name="member_id"
                                                    placeholder="" value="${memberDTO.member_id}" readonly>
-                                            <div class="invalid-feedback">
-                                                사용할 아이디를 입력해주세요.
-                                            </div>
                                         </div>
                                         <div class="col-12">
                                             <label for="name" class="small ifta-label">이름</label>
                                             <input type="text" class="ifta-field" id="name" name="name" placeholder=""
                                                    value="${memberDTO.name}" readonly>
-                                            <div class="invalid-feedback">
-                                                이름을 입력해주세요.
-                                            </div>
                                         </div>
                                         <div class="col-12">
                                             <label for="email" class="small ifta-label">이메일</label>
                                             <input type="email" class="ifta-field" id="email" name="email" value="${memberDTO.email}"
                                                    placeholder="you@example.com" required>
-                                            <div class="invalid-feedback">
+                                            <div class="invalid-feedback" id="emailCk">
                                                 이메일을 형식에 맞게 입력해주세요.
                                             </div>
                                         </div>
@@ -115,8 +108,8 @@
                                                     <input type="tel" class="ifta-field" id="phone_num3" name="phone_num3"
                                                            placeholder="1111" maxlength="4" value="${memberDTO.phone_num3}" required>
                                                 </div>
-                                                <div class="invalid-feedback">
-                                                    전화번호 형식에 맞게 입력해주세요.
+                                                <div class="invalid-feedback" id="phoneck" style='display: none; width:100%;margin-bottom:.25rem;font-size:.875em;color:#dc3545'>
+                                                    전화번호를 입력해주세요.
                                                 </div>
                                             </div>
                                         </div>
@@ -129,10 +122,9 @@
                                             </div>
                                         </div>
                                         <div class="col-md-4">
-                                            <%--                                            <label for="zipcodebtn" class="form-label">우편번호</label>--%>
-                                            <input type="button" class="btn btn-outline-primary col-12" value="주소 찾기" name="zipcodebtn"
+                                           <label for="zipcodebtn" class="form-label"> </label>
+                                            <input type="button" class="btn btn-outline-primary col-12" value="주소 찾기" name="zipcodebtn" style="height: 62%;"
                                                    id="zipcodebtn" onclick="addr()">
-
                                         </div>
                                         <div class="col-12">
                                             <label for="addr1" class="small ifta-label">주소1</label>
@@ -175,7 +167,7 @@
                                                 </p>
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="checkbox" name="option"
-                                                           id="option" value="${memberDTO.option}" <c:if test="${memberDTO.option eq 'Y'}">checked</c:if>>
+                                                           id="option" value="Y" <c:if test="${memberDTO.option eq 'Y'}">checked</c:if>>
                                                     <label class="form-check-label" for="option">동의함</label>
                                                 </div>
                                             </div>
@@ -225,6 +217,14 @@
 <%--        crossorigin="anonymous"></script>--%>
 
 <script>
+    let p1 = document.getElementById("phone_num1");
+    let p2 = document.getElementById("phone_num2");
+    let p3 = document.getElementById("phone_num3");
+    let email = document.getElementById("email");
+    let emailCk = document.getElementById("emailCk");
+    let submitBtn = document.getElementById("submitBtn");
+    const emailCheck = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
+
     function addr() {
         new daum.Postcode({
             oncomplete: function (data) {
@@ -234,17 +234,34 @@
         }).open();
     }
 
-    let optBtn = document.getElementById("option")
-
-    optBtn.addEventListener("click", (e) => {
-        if (optBtn.value == "N") {
-            optBtn.value = "Y"
-            console.log(optBtn.value);
-        } else {
-            optBtn.value = 'N';
-            console.log(optBtn.value);
+    email.addEventListener("input", (e) => {
+        if(!(emailCk.test(email.value))) {
+            e.preventDefault();
+            e.stopPropagation();
+            document.getElementById("emailCk").style.display = "block";
+            document.getElementById("emailCk").innerText = "규칙에 맞는 아이디를 입력해주세요."
         }
     });
+
+    p1.addEventListener("input", () => {
+        if (p1.value.length === 3) {
+            p2.focus();
+        }
+    });
+    p2.addEventListener("input", () => {
+        if (p2.value.length === 4) {
+            p3.focus();
+        }
+    });
+
+    submitBtn.addEventListener("click", (e)=> {
+        if(p2.value.length < 3 || p3.value.length < 4) {
+            document.getElementById("phoneck").style.display="block";
+            e.stopPropagation();
+            e.preventDefault();
+        }
+    })
+
 </script>
 
 
