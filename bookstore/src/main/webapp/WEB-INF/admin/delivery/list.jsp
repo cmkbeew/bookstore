@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="/resources/fonts/icomoon/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0" />
 </head>
-<body>
+<body style="background-color: #eeeeee">
 <%@ include file="/WEB-INF/common/header.jsp"%>
 <div class="d-flex" id="wrapper">
     <%@ include file="/WEB-INF/common/adminSidebar.jsp"%>
@@ -57,10 +57,10 @@
                                 </c:if>
                             </div>
                         </div>
-                        <div class="table-responsive">
-                            <table class="table no-wrap user-table mb-0">
+                        <div class="table-responsive px-1 pb-4">
+                            <table class="table no-wrap user-table mb-0 table-hover">
                                 <thead>
-                                <tr>
+                                <tr class="table-light">
                                     <th scope="col" class="border-0">
                                         <input type="checkbox" class="form-check my-1 mx-auto" id="checkAll" name="checkAll" onclick="checkAll(this)"/>
                                     </th>
@@ -95,7 +95,7 @@
                                     </c:when>
                                     <c:otherwise>
                                         <tr>
-                                            <td class="text-center" colspan="5">배송정보가 없습니다.</td>
+                                            <td class="text-center" colspan="9">배송정보가 없습니다.</td>
                                         </tr>
                                     </c:otherwise>
                                 </c:choose>
