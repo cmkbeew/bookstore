@@ -26,6 +26,19 @@
             </if>
         </trim>
     </sql>
+    <sql id="whereCondition2">
+        <trim prefix="where" prefixOverrides="AND">
+            <if test="search_type != null">
+                <if test="search_type == 'member_id'">
+                    AND member_id LIKE concat('%', #{search_word}, '%')
+                </if>
+                <if test="search_type == 'name'">
+                    AND name LIKE concat('%', #{search_word}, '%')
+                </if>
+            </if>
+        </trim>
+    </sql>
+
     <!--  페이징  -->
     <select id="noticeTotalCount" resultType="int">
         SELECT COUNT(*) FROM tbl_bbs_notice
@@ -44,7 +57,7 @@
 
     <select id="memberTotalCount" resultType="int">
         SELECT COUNT(*) FROM tbl_member
-        <include refid="whereCondition"></include>
+        <include refid="whereCondition2"></include>
     </select>
 
     <select id="noticeListByPage" resultType="org.fullstack4.bookstore.domain.NoticeVO">
@@ -75,7 +88,7 @@
         SELECT member_idx, member_id, name, addr1, addr2, zipcode, phone_num, email
         , forever_yn, point, mileage, member_state, join_state, option, reg_date, leave_date
         FROM tbl_member
-        <include refid="whereCondition"></include>
+        <include refid="whereCondition2"></include>
         ORDER BY member_idx DESC
         LIMIT #{page_skip_count}, #{page_size}
     </select>
@@ -216,19 +229,12 @@
     </update>
 
 
-    <!-- 도서   -->
-    <select id="productList" resultType="org.fullstack4.bookstore.domain.ProductVO">
-        SELECT product_idx, reg_date, product_name, publisher, author, page_cnt, price, tax_yn
-        , publish_date, category1, category2, discount
-        FROM tbl_product
-        ORDER BY product_idx DESC
-    </select>
-
     <!-- 회원  -->
     <select id="memberList" resultType="org.fullstack4.bookstore.domain.MemberVO">
         SELECT member_idx, member_id, name, addr1, addr2, zipcode, phone_num, email
              , forever_yn, point, mileage, member_state, join_state, option, reg_date, leave_date
         FROM tbl_member
+        <include refid="whereCondition2"></include>
         ORDER BY member_idx DESC
     </select>
 

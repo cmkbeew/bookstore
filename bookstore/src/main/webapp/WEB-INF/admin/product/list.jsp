@@ -40,12 +40,10 @@
         <!-- Page content-->
         <div class="container">
             <!-- 검색 -->
-            <form id="frmSearch" name="frmSearch" method="get" action="admin/product/list">
-                <input type="hidden" name="type" id="type" value="${adminProductListByPage.type}" />
-                <input type="hidden" name="grade" id="grade" value="${adminProductListByPage.grade}" />
+            <form id="frmSearch" name="frmSearch" method="get" action="/admin/product/list">
                 <div class="d-flex justify-content-center align-items-center mb-3">
                     <div class="me-2">
-                        <input class="form-control form-control-lg me-2" type="search" placeholder="교재이름" name="search_word" id="search_word" value="${productList.search_word}">
+                        <input class="form-control form-control-lg me-2" type="search" placeholder="교재명" name="search_word" id="search_word" value="${productList.search_word}">
                     </div>
                     <div>
                         <button class="btn btn-primary" type="submit" id="btn_search">검색</button>
@@ -56,23 +54,22 @@
             <div class="row">
                 <div class="col-md-12">
                     <form name="deleteFrm" id="deleteFrm" method="post" action="/admin/product/list/delete">
-
                         <h5>총 <span class="text-primary">${adminProductListByPage.total_count}</span>개</h5>
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title text-uppercase mb-0 text-center">도서관리</h5>
                             </div>
-                            <div class="table-responsive">
-                                <table class="table no-wrap user-table mb-0">
+                            <div class="table-responsive px-1 pb-4">
+                                <table class="table no-wrap user-table mb-0 table-hover">
                                     <thead>
-                                    <tr>
+                                    <tr class="table-light">
                                         <th scope="col" class="border-0 text-uppercase font-medium pl-4" style="vertical-align: middle;">
                                             <label class="control control--checkbox">
                                                 <input type="checkbox" name="selectAll" id="selectAll" value="">
                                                 <div class="control__indicator"></div>
                                             </label>
                                         </th>
-                                        <th scope="col" class="border-0">상품명</th>
+                                        <th scope="col" class="border-0">교재명</th>
                                         <th scope="col" class="border-0">출판사</th>
                                         <th scope="col" class="border-0">저자</th>
                                         <th scope="col" class="border-0">출판일</th>
@@ -86,7 +83,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <c:if test="${not empty adminProductListByPage}">
+                                    <c:if test="${not empty adminProductListByPage && adminProductListByPage.total_count > 0}">
                                         <c:forEach items="${adminProductListByPage.dtoList}" var="list">
                                             <tr>
                                                 <td class="pl-4" style="width: 80px;">
@@ -111,7 +108,7 @@
                                     </c:if>
                                     <c:if test="${empty adminProductListByPage}">
                                         <tr>
-                                            <td class="text-center" colspan="5">도서정보가 없습니다.</td>
+                                            <td class="text-center" colspan="12">도서정보가 없습니다.</td>
                                         </tr>
                                     </c:if>
                                     </tbody>

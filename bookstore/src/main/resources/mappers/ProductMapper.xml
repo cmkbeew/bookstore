@@ -15,6 +15,14 @@
         </if>
     </sql>
 
+    <sql id="whereCondition2">
+        <trim prefix="where" prefixOverrides="AND">
+            <if test="search_word != null and !search_word.equals('')">
+                product_name LIKE CONCAT('%', #{search_word}, '%')
+            </if>
+        </trim>
+    </sql>
+
     <sql id="orderCondition">
         <if test="sort_type != null and !sort_type.equals('')">
             <if test="sort_type == 1">
@@ -107,7 +115,7 @@
     <select id="adminProductListByPage" resultType="org.fullstack4.bookstore.domain.ProductVO">
         SELECT product_idx, product_name, product_content, publisher, author, page_cnt, price, publish_date, type, grade, subject, discount, tax_yn, reg_date, org_file_name, save_file_name
         FROM tbl_product
-        <include refid="whereCondition"></include>
+        <include refid="whereCondition2"></include>
         <include refid="orderCondition"></include>
         LIMIT #{page_skip_count}, #{page_size}
     </select>
@@ -115,7 +123,7 @@
     <select id="adminProductTotalCount" resultType="int">
         SELECT COUNT(*)
         FROM tbl_product
-        <include refid="whereCondition"></include>
+        <include refid="whereCondition2"></include>
     </select>
 
 

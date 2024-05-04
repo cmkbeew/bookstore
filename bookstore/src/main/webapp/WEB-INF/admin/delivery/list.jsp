@@ -29,7 +29,7 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/common/header.jsp"%>
-<div class="d-flex py-h" id="wrapper">
+<div class="d-flex" id="wrapper">
     <%@ include file="/WEB-INF/common/adminSidebar.jsp"%>
     <!-- Page content wrapper-->
     <div id="page-content-wrapper" style="min-height: 80vh;">

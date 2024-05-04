@@ -606,9 +606,9 @@ public class AdminController {
 
         PageResponseDTO<MemberDTO> memberList = adminService.memberListByPage(pageRequestDTO);
         model.addAttribute("memberList", memberList);
-
         log.info("===============================");
     }
+
 
     @PostMapping("/member/list")
     public void memberListPOST() {

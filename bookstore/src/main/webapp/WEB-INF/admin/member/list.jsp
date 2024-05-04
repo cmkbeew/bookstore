@@ -40,26 +40,17 @@
         <!-- Page content-->
         <div class="container">
             <!-- 검색 -->
-            <form id="frmSearch" name="frmSearch" method="get" action="/member/list">
-                <input type="hidden" name="type" value="${memberList.type}"/>
+            <form id="frmSearch" name="frmSearch" method="get" action="/admin/member/list">
                 <div class="d-flex justify-content-center align-items-center">
-                    <div class="mx-2 my-3">
-                        <select class="form-select form-select-lg" name="search_date" id="search_date">
-                            <option value="all">전체</option>
-                            <option value="day" <c:if test="${memberList.search_date == 'day'}">selected</c:if>>하루</option>
-                            <option value="week" <c:if test="${memberList.search_date == 'week'}">selected</c:if>>일주일</option>
-                            <option value="month"<c:if test="${memberList.search_date == 'month'}">selected</c:if>>한달</option>
-                        </select>
-                    </div>
                     <div class="mx-2 my-3">
                         <select class="form-select form-select-lg" name="search_type" id="search_type">
                             <option value="">전체</option>
-                            <option value="title" <c:if test="${memberList.search_type == 'title'}">selected</c:if>>제목</option>
-                            <option value="writer"<c:if test="${memberList.search_type == 'writer'}">selected</c:if>>작성자</option>
+                            <option value="member_id" <c:if test="${memberList.search_type == 'member_id'}">selected</c:if>>아이디</option>
+                            <option value="name" <c:if test="${memberList.search_type == 'name'}">selected</c:if>>이름</option>
                         </select>
                     </div>
                     <div class="me-2">
-                        <input class="form-control form-control-lg me-2" type="search" placeholder="Search" aria-label="Search" name="search_word" id="search_word" value="${communityList.search_word}">
+                        <input class="form-control form-control-lg me-2" type="search" placeholder="Search" aria-label="Search" name="search_word" id="search_word" value="${memberList.search_word}">
                     </div>
                     <button class="btn btn-primary me-2" type="submit" id="btn_search">검색</button>
                     <button class="btn btn-outline-danger" type="reset">초기화</button>
@@ -68,7 +59,7 @@
             <!-- 검색 끝 -->
             <div class="row">
                 <div class="col-md-12">
-                    <form name="sendFrm" id="sendFrm" method="post" action="/member/list">
+                    <form name="sendFrm" id="sendFrm" method="post" action="/admin/member/list">
                         <h5>총 <span class="text-primary">${memberList.total_count}</span>명</h5>
                         <div class="card">
                             <div class="card-body">
@@ -96,7 +87,7 @@
                                     </thead>
                                     <tbody>
                                     <c:choose>
-                                        <c:when test="${!empty memberList}">
+                                        <c:when test="${!empty memberList && memberList.total_count > 0}">
                                             <c:forEach items="${memberList.dtoList}" var="list">
                                                 <tr>
                                                     <td>
@@ -118,7 +109,7 @@
                                         </c:when>
                                         <c:otherwise>
                                             <tr>
-                                                <td class="text-center" colspan="5">회원정보가 없습니다.</td>
+                                                <td class="text-center" colspan="9">회원정보가 없습니다.</td>
                                             </tr>
                                         </c:otherwise>
                                     </c:choose>
