@@ -1,20 +1,27 @@
 package org.fullstack4.bookstore.util;
 
 import lombok.extern.log4j.Log4j2;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.UUID;
 
 @Log4j2
 public class FileUploadUtil {
-
-    private static String uploadFolder = "C:\\Uploads\\test";
+    public static HttpServletRequest getRequest() {
+        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+        return attr.getRequest();
+    }
+    public static String uploadFolder = getRequest().getServletContext().getRealPath("/resources/img");
 
     public static String saveFile(MultipartFile multipartFile) {
+        log.info(uploadFolder);
         String org_file_name = multipartFile.getOriginalFilename();
         String ext = org_file_name.substring(org_file_name.lastIndexOf("."), org_file_name.length());
 
@@ -41,12 +48,11 @@ public class FileUploadUtil {
 
     // 파일 다운로드
     public static void download(HttpServletRequest req, HttpServletResponse resp, String orgFileName, String saveFileName) {
-        String saveDirectory = req.getServletContext().getRealPath("resumeFiles");
 
         try {
 
             // 파일을 찾아 입력 스트림 생성
-            File file = new File(saveDirectory, saveFileName);
+            File file = new File(uploadFolder, saveFileName);
             InputStream is = new FileInputStream(file);
 
             // 한글 파일명 깨짐 방지
@@ -56,6 +62,7 @@ public class FileUploadUtil {
             } else {
                 orgFileName = new String(orgFileName.getBytes("KSC5601"), "ISO-8859-1");
             }
+
 
             // 파일 다운로드용 응답 헤더 설정
             resp.reset();

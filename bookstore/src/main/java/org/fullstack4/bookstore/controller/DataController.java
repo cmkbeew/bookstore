@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -86,14 +87,15 @@ public class DataController {
             HttpServletRequest req,
             HttpServletResponse res
     ) throws UnsupportedEncodingException {
-//        String upload_path = req.getServletContext().getRealPath("");
         DataDTO dataDTO = dataService.dataModifyGet(data_idx);
 
-        File file = new File("C:\\Uploads" + dataDTO.getSave_file_name());
-        res.setHeader("Content-Disposition", "attachment; filename=\"" + dataDTO.getOrg_file_name() + "\";");
+        File file = new File(FileUploadUtil.uploadFolder+"\\"+ dataDTO.getSave_file_name());
+        FileUploadUtil.download(req,res,dataDTO.getOrg_file_name(),dataDTO.getSave_file_name());
+        String orgFileName = URLEncoder.encode(dataDTO.getOrg_file_name(), "UTF-8");
+        res.setHeader("Content-Disposition", "attachment; filename=\"" + orgFileName + "\";");
         res.setHeader("Content-Transfer-Encoding", "binary");
         res.setHeader("Content-Type",
-                dataDTO.getSave_file_name().substring(dataDTO.getSave_file_name().lastIndexOf("."), dataDTO.getSave_file_name().length()));
+                dataDTO.getSave_file_name().substring(orgFileName.lastIndexOf("."), dataDTO.getSave_file_name().length()));
         res.setHeader("Content-Length", "" + file.length());
         res.setHeader("Pragma", "no-cache;");
         res.setHeader("Expires", "-1;");
