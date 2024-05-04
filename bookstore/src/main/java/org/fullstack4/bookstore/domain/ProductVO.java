@@ -24,4 +24,6 @@ public class ProductVO {
     private int discount;
     private String tax_yn;
     private LocalDate reg_date;
+    private String org_file_name;
+    private String save_file_name;
 }

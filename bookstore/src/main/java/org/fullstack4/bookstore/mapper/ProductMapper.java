@@ -1,5 +1,6 @@
 package org.fullstack4.bookstore.mapper;
 
+import org.fullstack4.bookstore.domain.NoticeVO;
 import org.fullstack4.bookstore.domain.ProductVO;
 import org.fullstack4.bookstore.domain.ReviewVO;
 import org.fullstack4.bookstore.dto.ProductDTO;
@@ -25,8 +26,12 @@ public interface ProductMapper {
     List<ProductVO> relatedProductList(ProductVO productVO);
 
     // 도서 관리 페이지
+    List<ProductVO> adminProductListByPage(ProductPageRequestDTO productPageRequestDTO);
+    int adminProductTotalCount(ProductPageRequestDTO productPageRequestDTO);
     List<ProductVO> adminProductList();
     ProductVO adminProductView(int product_idx);
+    ProductVO adminProductPrev(int product_idx);
+    ProductVO adminProductNext(int product_idx);
     int adminProductRegist(ProductVO productVO);
     int adminProductModify(ProductVO productVO);
     int adminProductDelete(int product_idx);

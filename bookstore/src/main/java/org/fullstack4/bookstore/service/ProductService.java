@@ -5,6 +5,7 @@ import org.fullstack4.bookstore.domain.ReviewVO;
 import org.fullstack4.bookstore.dto.*;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ProductService {
     ProductPageResponseDTO<ProductDTO> productList(ProductPageRequestDTO productPageRequestDTO);
@@ -23,9 +24,12 @@ public interface ProductService {
 
 
     // 도서 관리 페이지
+    ProductPageResponseDTO<ProductDTO> adminProductListByPage(ProductPageRequestDTO productPageRequestDTO);
+    int adminProductTotalCount(ProductPageRequestDTO productPageRequestDTO);
     List<ProductDTO> adminProductList();
-    ProductDTO adminProductView(int product_idx);
+    Map<String, ProductDTO> adminProductView(int product_idx);
     int adminProductRegist(ProductDTO productDTO);
+    ProductDTO adminProductModifyGet(int product_idx);
     int adminProductModify(ProductDTO productDTO);
     int adminProductDelete(int product_idx);
 

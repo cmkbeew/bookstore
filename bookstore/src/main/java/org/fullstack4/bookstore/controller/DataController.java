@@ -70,6 +70,8 @@ public class DataController {
         Map<String, DataDTO> dataMap = dataService.dataView(data_idx);
         dataMap.get("dataDTO").setContent(dataMap.get("dataDTO").getContent().replace("\r\n", "<br>"));
 
+        log.info("dataDTO" + dataMap.get("dataDTO"));
+
         model.addAttribute("dto", dataMap.get("dataDTO"));
         model.addAttribute("prevDTO", dataMap.get("dataPrevDTO"));
         model.addAttribute("nextDTO", dataMap.get("dataNextDTO"));

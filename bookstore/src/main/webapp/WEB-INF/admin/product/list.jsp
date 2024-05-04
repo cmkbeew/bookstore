@@ -55,7 +55,8 @@
             <!-- 검색 끝 -->
             <div class="row">
                 <div class="col-md-12">
-                    <form name="deleteFrm" id="deleteFrm" method="post" action="/admin/product/delete">
+                    <form name="deleteFrm" id="deleteFrm" method="post" action="/admin/product/list/delete">
+
                         <h5>총 <span class="text-primary">${adminProductListByPage.total_count}</span>개</h5>
                         <div class="card">
                             <div class="card-body">
@@ -65,7 +66,12 @@
                                 <table class="table no-wrap user-table mb-0">
                                     <thead>
                                     <tr>
-                                        <th scope="col" class="border-0">선택</th>
+                                        <th scope="col" class="border-0 text-uppercase font-medium pl-4" style="vertical-align: middle;">
+                                            <label class="control control--checkbox">
+                                                <input type="checkbox" name="selectAll" id="selectAll" value="">
+                                                <div class="control__indicator"></div>
+                                            </label>
+                                        </th>
                                         <th scope="col" class="border-0">상품명</th>
                                         <th scope="col" class="border-0">출판사</th>
                                         <th scope="col" class="border-0">저자</th>
@@ -80,12 +86,12 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <c:if test="${not empty adminProductList}">
-                                        <c:forEach items="${adminProductList}" var="list">
+                                    <c:if test="${not empty adminProductListByPage}">
+                                        <c:forEach items="${adminProductListByPage.dtoList}" var="list">
                                             <tr>
-                                                <td class="pl-4">
+                                                <td class="pl-4" style="width: 80px;">
                                                     <label class="control control--checkbox">
-                                                        <input type="checkbox" name="select" id="select" value="">
+                                                        <input type="checkbox" name="select" class="selectOne" id="select${list.product_idx}" value="${list.product_idx}">
                                                         <div class="control__indicator"></div>
                                                     </label>
                                                 </td>
@@ -103,7 +109,7 @@
                                             </tr>
                                         </c:forEach>
                                     </c:if>
-                                    <c:if test="${empty adminProductList}">
+                                    <c:if test="${empty adminProductListByPage}">
                                         <tr>
                                             <td class="text-center" colspan="5">도서정보가 없습니다.</td>
                                         </tr>
@@ -123,11 +129,80 @@
                             </div>
                         </div>
                     </form>
+                    <nav aria-label="Page navigation example pagination">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item
+                            <c:if test="${adminProductListByPage.prev_page_flag ne true}"> disabled</c:if>">
+                                <a class="page-link"
+                                   data-num="<c:choose><c:when test="${adminProductListByPage.prev_page_flag}">${adminProductListByPage.page_block_start-1}</c:when><c:otherwise>1</c:otherwise></c:choose>"
+                                   href="<c:choose><c:when test="${adminProductListByPage.prev_page_flag}">${adminProductListByPage.linkParams}&page=${adminProductListByPage.page_block_start-1}</c:when><c:otherwise>#</c:otherwise></c:choose>" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <c:forEach begin="${adminProductListByPage.page_block_start}" end="${adminProductListByPage.page_block_end}" var="page_num">
+                                <li class="page-item<c:if test="${adminProductListByPage.page == page_num}"> active</c:if> ">
+                                    <a class="page-link" data-num="${page_num}"
+                                       href="<c:choose><c:when test="${adminProductListByPage.page == page_num}">#</c:when><c:otherwise>${adminProductListByPage.linkParams}&page=${page_num}</c:otherwise></c:choose>">${page_num}</a>
+                                </li>
+                            </c:forEach>
+                            <li class="page-item
+                            <c:if test="${adminProductListByPage.next_page_flag ne true}"> disabled</c:if>">
+                                <a class="page-link"
+                                   data-num="<c:choose><c:when test="${adminProductListByPage.next_page_flag}">${adminProductListByPage.page_block_end+1}</c:when><c:otherwise>${adminProductListByPage.page_block_end}</c:otherwise></c:choose>"
+                                   href="<c:choose><c:when test="${adminProductListByPage.next_page_flag}">${adminProductListByPage.linkParams}&page=${adminProductListByPage.page_block_end+1}</c:when><c:otherwise>#</c:otherwise></c:choose>" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <%@ include file="/WEB-INF/common/footer.jsp"%>
+<script>
+    const selectAllDOM = document.querySelector("#selectAll");
+    const selectOneDOMList = document.querySelectorAll(".selectOne");
+    const fixBtn = document.querySelector("#fixBtn");
+    let idx = [];
+
+    // 체크 박스 전체 선택 및 해제
+    selectAllDOM.addEventListener("click", function (e) {
+        if (selectAllDOM.checked) {
+            for (let i = 0; i < selectOneDOMList.length; i++) {
+                selectOneDOMList[i].checked = true;
+            }
+        } else {
+            for (let i = 0; i < selectOneDOMList.length; i++) {
+                selectOneDOMList[i].checked = false;
+            }
+        }
+    }, false)
+
+    // 체크 박스 하나씩 선택 및 해제
+    for (let i = 0; i < selectOneDOMList.length; i++) {
+        selectOneDOMList[i].addEventListener("click", function (e) {
+
+            if (selectOneDOMList[i].checked) {
+                idx.push(e.target.parentNode.children[0].value);
+            }
+            console.log(idx);
+
+        }, false)
+    }
+
+
+    function goDelete() {
+        const frm = document.getElementById("deleteFrm");
+        let confirm_flag = confirm("해당 게시글을 삭제하시겠습니까?");
+
+        if (confirm_flag) {
+            frm.submit();
+        }
+    }
+</script>
+
+
 </body>
 </html>
