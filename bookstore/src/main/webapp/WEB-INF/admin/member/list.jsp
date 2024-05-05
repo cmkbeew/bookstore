@@ -109,7 +109,7 @@
                                         </c:when>
                                         <c:otherwise>
                                             <tr>
-                                                <td class="text-center" colspan="9">회원정보가 없습니다.</td>
+                                                <td class="text-center" colspan="9">해당하는 회원정보가 없습니다.</td>
                                             </tr>
                                         </c:otherwise>
                                     </c:choose>

@@ -32,7 +32,7 @@
         }
     </style>
 </head>
-<body>
+<body style="padding-bottom: 0px;">
 <%@ include file="../common/header.jsp"%>
 
 <section class="py-h" style="background-color: #eee;">

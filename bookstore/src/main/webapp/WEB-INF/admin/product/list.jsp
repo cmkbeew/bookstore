@@ -106,9 +106,9 @@
                                             </tr>
                                         </c:forEach>
                                     </c:if>
-                                    <c:if test="${empty adminProductListByPage}">
+                                    <c:if test="${empty adminProductListByPage || adminProductListByPage.total_count == 0}">
                                         <tr>
-                                            <td class="text-center" colspan="12">도서정보가 없습니다.</td>
+                                            <td class="text-center" colspan="12">해당하는 도서정보가 없습니다.</td>
                                         </tr>
                                     </c:if>
                                     </tbody>

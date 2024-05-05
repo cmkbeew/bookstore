@@ -46,7 +46,7 @@
     <link rel="stylesheet" href="/resources/css/owl.theme.green.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0" />
 </head>
-<body>
+<body style="background-color: #eeeeee;">
 <%@ include file="/WEB-INF/common/header.jsp"%>
 <div class="d-flex" id="wrapper">
 <%--    <%@ include file="/WEB-INF/common/adminSidebar.jsp"%>--%>
@@ -58,7 +58,7 @@
                 <div class="col-md-3" style="background-color: #e4f3ef">
                     <%@ include file="/WEB-INF/common/sidebar.jsp"%>
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-9 py-h">
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title text-uppercase mb-0 text-center">나의 문의 내역</h5>

@@ -4,7 +4,6 @@
 <head>
     <title>도서 목록</title>
     <%--  header 부트스트랩  --%>
-    <link href="/resources/mintybootstrap.min.css" rel="stylesheet"/>
     <link href="/resources/css/styles.css" rel="stylesheet" />
 
     <%--    해당 템플릿 css--%>
@@ -61,7 +60,7 @@
 </header>
 <!-- Section-->
 <section class="py-5 d-flex">
-    <div class="container px-4 px-lg-5 mt-5">
+    <div class="container px-4 px-lg-5 mt-5" style="min-height: 80vh;">
 <%--        <ul class="d-flex justify-content-center list-unstyled mb-3" id="listUi">--%>
 <%--                    <li class="mx-2"><button class="btn badge rounded-pill bg-primary" type="button" style="font-size: 1rem">유아</button></li>--%>
 <%--                    <li class="mx-2"><button class="btn badge rounded-pill bg-dark" type="button" style="font-size: 1rem">초등</button></li>--%>

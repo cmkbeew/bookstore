@@ -33,7 +33,7 @@
         }
     </style>
 </head>
-<body style="background-color: #f3f3f3; padding-bottom: 0px;">
+<body style="background-color: #eeeeee; padding-bottom: 0px;">
     <%@ include file="/WEB-INF/common/header.jsp"%>
         <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-bs-ride="carousel" style="height: 610px">
                 <div class="carousel-indicators">
