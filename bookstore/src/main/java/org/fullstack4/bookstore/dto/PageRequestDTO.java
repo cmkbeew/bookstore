@@ -31,7 +31,7 @@ public class PageRequestDTO {
     @Builder.Default
     @PositiveOrZero
     @Min(value=1)
-    private int page_size=5;
+    private int page_size=10;
     @Builder.Default
     @PositiveOrZero
     @Min(value=1)

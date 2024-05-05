@@ -45,10 +45,10 @@
 
 <body>
 <%@ include file="/WEB-INF/common/header.jsp"%>
-<div class="container py-h" id="wrapper">
+<div class="container" id="wrapper">
     <div id="page-content-wrapper">
         <div class="container">
-            <div class="row g-5">
+            <div class="row g-5" style="min-height: 80vh;">
                 <div class="col-md-3" style="background-color: #e4f3ef">
                 <%@ include file="/WEB-INF/common/sidebar.jsp"%>
                 </div>

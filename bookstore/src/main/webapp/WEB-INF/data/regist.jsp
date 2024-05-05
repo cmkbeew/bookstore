@@ -22,7 +22,7 @@
         });
     </script>
 </head>
-<body style="background-color: #eeeeee;">
+<body style="background-color: #eeeeee; padding-bottom: 0px;">
 <%@ include file="../common/header.jsp"%>
 <div class="d-flex py-h" id="wrapper">
     <!-- Page content wrapper-->

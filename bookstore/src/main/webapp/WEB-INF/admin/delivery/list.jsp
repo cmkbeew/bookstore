@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="/resources/fonts/icomoon/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0" />
 </head>
-<body style="background-color: #eeeeee">
+<body style="background-color: #eeeeee; padding-bottom: 0px;">
 <%@ include file="/WEB-INF/common/header.jsp"%>
 <div class="d-flex" id="wrapper">
     <%@ include file="/WEB-INF/common/adminSidebar.jsp"%>

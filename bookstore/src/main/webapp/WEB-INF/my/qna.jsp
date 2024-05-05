@@ -48,13 +48,13 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/common/header.jsp"%>
-<div class="d-flex py-h" id="wrapper">
+<div class="d-flex" id="wrapper">
 <%--    <%@ include file="/WEB-INF/common/adminSidebar.jsp"%>--%>
     <!-- Page content wrapper-->
     <div id="page-content-wrapper">
         <!-- Page content-->
         <div class="container">
-            <div class="row">
+            <div class="row" style="min-height: 80vh;">
                 <div class="col-md-3" style="background-color: #e4f3ef">
                     <%@ include file="/WEB-INF/common/sidebar.jsp"%>
                 </div>

@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="/resources/css/owl.theme.green.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 </head>
-<body>
+<body style="padding-bottom: 0px;">
 <%@ include file="/WEB-INF/common/header.jsp"%>
 <div class="content">
     <div class="container">

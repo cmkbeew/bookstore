@@ -33,7 +33,7 @@
         }
     </style>
 </head>
-<body>
+<body style="padding-bottom: 0px;">
 <%@ include file="/WEB-INF/common/header.jsp"%>
 <!-- Product section-->
 <section class="py-5">

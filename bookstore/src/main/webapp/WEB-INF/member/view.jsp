@@ -45,9 +45,9 @@
 
 
 </head>
-<body>
+<body style="padding-bottom: 0px;">
 <%@ include file="/WEB-INF/common/header.jsp" %>
-<main class="container py-h" id="wrapper">
+<main class="container" id="wrapper">
     <div id="page-content-wrapper">
         <div class="container">
             <div class="row g-5">

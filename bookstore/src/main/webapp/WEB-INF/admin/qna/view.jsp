@@ -27,9 +27,9 @@
     <link rel="stylesheet" href="/resources/fonts/icomoon/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0" />
 </head>
-<body style="background-color: #eeeeee;">
+<body style="background-color: #eeeeee; padding-bottom: 0px;">
 <%@ include file="/WEB-INF/common/header.jsp"%>
-<div class="d-flex py-h" id="wrapper">
+<div class="d-flex" id="wrapper">
     <%@ include file="/WEB-INF/common/adminSidebar.jsp"%>
     <!-- Page content wrapper-->
     <div id="page-content-wrapper" style="min-height: 80vh;">
@@ -38,7 +38,7 @@
             <span class="material-symbols-outlined" style="display: none;">arrow_forward</span>
         </button>
         <!-- Page content-->
-        <div class="container py-h">
+        <div class="container">
             <form name="deleteFrm" id="deleteFrm" method="post" action="/admin/qna/delete">
                 <input type="hidden" name="type" value="${communityList.type}"/>
                 <input type="hidden" name="idx" value="${qnaDTO.idx}"/>

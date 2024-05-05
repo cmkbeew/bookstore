@@ -38,7 +38,7 @@
         }
     </style>
 </head>
-<body>
+<body style="padding-bottom: 0px;">
 <%@ include file="/WEB-INF/common/header.jsp"%>
 <!-- Header-->
 <%--<header class="bg-info py-5" style="background:linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) ),url('/resources/img/book_img.jpg')">--%>
