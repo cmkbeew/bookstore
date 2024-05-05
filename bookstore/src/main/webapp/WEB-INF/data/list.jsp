@@ -64,7 +64,7 @@
                                 </thead>
                                 <tbody>
                                 <c:choose>
-                                    <c:when test="${!empty dataList}">
+                                    <c:when test="${!empty dataList && dataList.total_count > 0}">
                                         <c:forEach items="${dataList.dtoList}" var="list">
                                             <tr>
                                                 <td style="max-width: 300px;">
