@@ -23,6 +23,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -105,8 +106,10 @@ public class CommunityController {
 //        String upload_path = req.getServletContext().getRealPath("");
         NoticeDTO noticeDTO = adminService.noticeView(idx);
 
-        File file = new File("C:\\Uploads" + noticeDTO.getSave_file_name());
-        res.setHeader("Content-Disposition", "attachment; filename=\"" + noticeDTO.getOrg_file_name() + "\";");
+        File file = new File(FileUploadUtil.uploadFolder+"\\"+ noticeDTO.getSave_file_name());
+        FileUploadUtil.download(req,res,noticeDTO.getOrg_file_name(),noticeDTO.getSave_file_name());
+        String orgFileName = URLEncoder.encode(noticeDTO.getOrg_file_name(), "UTF-8");
+        res.setHeader("Content-Disposition", "attachment; filename=\"" + orgFileName + "\";");
         res.setHeader("Content-Transfer-Encoding", "binary");
         res.setHeader("Content-Type",
                 noticeDTO.getSave_file_name().substring(noticeDTO.getSave_file_name().lastIndexOf("."), noticeDTO.getSave_file_name().length()));

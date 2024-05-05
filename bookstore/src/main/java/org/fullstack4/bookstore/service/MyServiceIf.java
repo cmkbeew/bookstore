@@ -13,6 +13,7 @@ public interface MyServiceIf {
     List<CartListDTO> cart_list(String member_id);
 
 //    List<CartListDTO> cart_selcList(String member_id, int cart_idx);
+    int total_cart (String member_id);
     void update_cnt(String cart_idx, int product_count, String or_member_id);
 
     int deleteCart (int idx);

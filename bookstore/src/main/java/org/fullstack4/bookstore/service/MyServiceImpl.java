@@ -30,6 +30,12 @@ public class MyServiceImpl implements MyServiceIf{
 
         return cartDTOList;
     }
+
+    @Override
+    public int total_cart(String member_id) {
+        int result = myMapper.total_cart(member_id);
+        return result;
+    }
 //    public List<CartListDTO> cart_selcList(String member_id, int cart_idx) {
 //        List<CartListDTO> cartselcList = myMapper.cart_selcList(member_id, cart_idx).stream()
 //                .map(vo->modelMapper.map(vo, CartListDTO.class))
