@@ -43,7 +43,7 @@
     </style>
 </head>
 
-<body>
+<body style="padding-bottom: 0px;">
 <%@ include file="/WEB-INF/common/header.jsp"%>
 <div class="container" id="wrapper">
     <div id="page-content-wrapper">
