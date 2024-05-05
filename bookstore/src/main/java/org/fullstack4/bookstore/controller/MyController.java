@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.fullstack4.bookstore.dto.*;
 import org.fullstack4.bookstore.service.MyServiceIf;
+import org.fullstack4.bookstore.util.CookieUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
@@ -83,9 +85,11 @@ public class MyController {
     public void cartGet(CartListDTO cartListDTO,
                         @RequestParam(name="member_id", defaultValue = "") String member_id,
                         Model model,
+//                        HttpServletResponse resp,
                         HttpSession session
     ) {
         List<CartListDTO> cartList = myServiceIf.cart_list(member_id);
+        int total_cart = myServiceIf.total_cart(member_id);
 
         int total_price = cartList.stream().mapToInt(CartListDTO::getDisplay_price).sum();
 
@@ -97,6 +101,7 @@ public class MyController {
         model.addAttribute("cartList", cartList);
         model.addAttribute("shipping", shipping);
         model.addAttribute("total_price", total_price);
+//        CookieUtil.setCookies(resp,"cartCnt",Integer.toString(total_cart),60*60*24,"","/");
     }
 
     @PostMapping("/updateCnt")
