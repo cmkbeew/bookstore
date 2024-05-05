@@ -1,3 +1,4 @@
+<%@ page import="static org.fullstack4.bookstore.util.FileUploadUtil.getRequest" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <html>
@@ -42,7 +43,8 @@
                 <c:if test="${productDTO.discount != 0}">
                     <div class="badge bg-secondary text-white position-absolute" style="top: 1rem; right: 2rem">Sale</div>
                 </c:if>
-                <img class="card-img-top mb-5 mb-md-0" src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg" alt="...">
+<%--이미지 보여주기 시도--%>
+                <img class="card-img-top mb-5 mb-md-0" src="<%=getRequest().getServletContext().getRealPath("/resources/img/")%>${productDTO.save_file_name}" alt="...">
             </div>
             <div class="col-md-6">
                 <%--                    <div class="small mb-1">SKU: BST-498</div>--%>

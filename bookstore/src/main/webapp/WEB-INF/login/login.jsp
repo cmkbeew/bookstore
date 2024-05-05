@@ -96,38 +96,38 @@
                                         </form>
                                     </main>
                                 </div>
-                                <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel"
-                                     aria-labelledby="profile-tab" tabindex="0">
-                                    <div class="mb-4">
-                                        <h3><strong>비회원 로그인</strong></h3>
-                                        <p class="mt-4 mb-4">비회원의 경우, 주문 시 주문번호로 조회 가능합니다.</p>
-                                    </div>
-                                    <main class="form-signin">
-                                        <form name="frmLoginGuest" id="frmLoginGuest" action="/my/order" method="post">
-                                            <div class="form-floating form-group first mt-4">
-                                                <label for="name" class="small ifta-label">이름</label>
-                                                <input type="text" class="ifta-field" style="border:none" name="name" id="name">
-                                            </div>
-                                            <div class="form-floating form-group last mb-4 mt-4">
-                                                <label for="order_no" class="small ifta-label">주문번호</label>
-                                                <input type="text" class="ifta-field" style="border:none" name="order_no" id="order_no">
-                                            </div>
-                                            <div class="form-floating form-group last mb-4 mt-4">
-                                                <label for="pwdGuest" class="small ifta-label" >비밀번호</label>
-                                                <input type="password" class="ifta-field" style="border:none" name="pwd" id="pwdGuest">
-                                            </div>
-                                            <div class="invalid-feedback mb-3">
-                                            </div>
-                                            <input type="submit" value="조회"
-                                                   class="btn btn-pill text-white btn-block btn-primary w-100">
-                                            <span class="d-block text-center my-4 text-muted"> or </span>
-                                            <button type="button"
-                                                    class="btn btn-pill text-white btn-block btn-dark w-100"
-                                                    onclick="location.href='/member/join'">회원가입
-                                            </button>
-                                        </form>
-                                    </main>
-                                </div>
+<%--                                <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel"--%>
+<%--                                     aria-labelledby="profile-tab" tabindex="0">--%>
+<%--                                    <div class="mb-4">--%>
+<%--                                        <h3><strong>비회원 로그인</strong></h3>--%>
+<%--                                        <p class="mt-4 mb-4">비회원의 경우, 주문 시 주문번호로 조회 가능합니다.</p>--%>
+<%--                                    </div>--%>
+<%--                                    <main class="form-signin">--%>
+<%--                                        <form name="frmLoginGuest" id="frmLoginGuest" action="/my/order" method="post">--%>
+<%--                                            <div class="form-floating form-group first mt-4">--%>
+<%--                                                <label for="name" class="small ifta-label">이름</label>--%>
+<%--                                                <input type="text" class="ifta-field" style="border:none" name="name" id="name">--%>
+<%--                                            </div>--%>
+<%--                                            <div class="form-floating form-group last mb-4 mt-4">--%>
+<%--                                                <label for="order_no" class="small ifta-label">주문번호</label>--%>
+<%--                                                <input type="text" class="ifta-field" style="border:none" name="order_no" id="order_no">--%>
+<%--                                            </div>--%>
+<%--                                            <div class="form-floating form-group last mb-4 mt-4">--%>
+<%--                                                <label for="pwdGuest" class="small ifta-label" >비밀번호</label>--%>
+<%--                                                <input type="password" class="ifta-field" style="border:none" name="pwd" id="pwdGuest">--%>
+<%--                                            </div>--%>
+<%--                                            <div class="invalid-feedback mb-3">--%>
+<%--                                            </div>--%>
+<%--                                            <input type="submit" value="조회"--%>
+<%--                                                   class="btn btn-pill text-white btn-block btn-primary w-100">--%>
+<%--                                            <span class="d-block text-center my-4 text-muted"> or </span>--%>
+<%--                                            <button type="button"--%>
+<%--                                                    class="btn btn-pill text-white btn-block btn-dark w-100"--%>
+<%--                                                    onclick="location.href='/member/join'">회원가입--%>
+<%--                                            </button>--%>
+<%--                                        </form>--%>
+<%--                                    </main>--%>
+<%--                                </div>--%>
                             </div>
                         </div>
                     </div>

@@ -148,7 +148,7 @@ public class MemberController {
 
         if (result > 0) {
             PrintWriter out = resp.getWriter();
-            out.println("<script>alert('비밀번호가 변경되었습니다.\\n로그인 페이지로 이동합니다.');</script>");
+            out.println("<script>alert('비밀번호가 변경되었습니다.');</script>");
             return "redirect:/member/view?member_id="+member_id;
         } else {
             return "/member/modifyPwd";

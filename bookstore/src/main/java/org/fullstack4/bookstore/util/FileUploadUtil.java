@@ -1,6 +1,10 @@
 package org.fullstack4.bookstore.util;
 
 import lombok.extern.log4j.Log4j2;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
@@ -10,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.nio.file.Files;
 import java.util.UUID;
 
 @Log4j2
@@ -103,5 +108,21 @@ public class FileUploadUtil {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+//파일 보여주기 시도
+    public static ResponseEntity<byte[]> getFile(String fileName){
+        File file=new File(uploadFolder+"\\"+File.separatorChar +fileName);
+        log.info(file);
+        ResponseEntity<byte[]> result=null;
+        try {
+            HttpHeaders headers=new HttpHeaders();
+            headers.add("Content-Type", Files.probeContentType(file.toPath()));
+            result=new ResponseEntity<>(FileCopyUtils.copyToByteArray(file),headers, HttpStatus.OK );
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+        log.info("result : "+ result);
+        return result;
     }
 }

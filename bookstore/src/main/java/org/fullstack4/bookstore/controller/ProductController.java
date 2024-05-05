@@ -7,6 +7,7 @@ import org.fullstack4.bookstore.dto.ProductPageRequestDTO;
 import org.fullstack4.bookstore.dto.ProductPageResponseDTO;
 import org.fullstack4.bookstore.dto.ReviewDTO;
 import org.fullstack4.bookstore.service.ProductService;
+import org.fullstack4.bookstore.util.FileUploadUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,6 +18,8 @@ import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
+
+import static org.fullstack4.bookstore.util.FileUploadUtil.uploadFolder;
 
 @Log4j2
 @Controller
@@ -45,6 +48,8 @@ public class ProductController {
 
         // 관련 상품 4개
         List<ProductDTO> relatedProductList = productService.relatedProductList(productDTO);
+//        이미지 보여주기 시도
+        FileUploadUtil.getFile(productDTO.getSave_file_name());
 
         model.addAttribute("productDTO", productDTO);
         model.addAttribute("reviewList", reviewList);
