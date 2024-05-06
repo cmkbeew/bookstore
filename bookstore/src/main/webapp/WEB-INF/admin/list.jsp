@@ -163,7 +163,7 @@
                         </div>
                         <div style="display: flex; justify-content: space-between; margin-top: 4px;">
                             <div>
-                                <button type="submit" id="deleteBtn" class="btn btn-primary btn-circle btn-lg btn-circle ml-2" onclick="goDelete()">
+                                <button type="button" id="deleteBtn" class="btn btn-primary btn-circle btn-lg btn-circle ml-2" onclick="goDelete()">
                                     <span class="material-symbols-outlined">delete</span>
                                 </button>
                                 <c:if test="${communityList.type == 'notice'}">

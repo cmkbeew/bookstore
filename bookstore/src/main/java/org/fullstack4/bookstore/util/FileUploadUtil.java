@@ -56,12 +56,12 @@ public class FileUploadUtil {
     }
 
     // 파일 다운로드
-    public static void download(HttpServletRequest req, HttpServletResponse resp, String orgFileName, String saveFileName) {
+    public static void download(HttpServletRequest req, HttpServletResponse resp, String orgFileName, String saveFileName, String path) {
 
         try {
 
             // 파일을 찾아 입력 스트림 생성
-            File file = new File(uploadFolder, saveFileName);
+            File file = new File(uploadFolder+path+"\\", saveFileName);
             InputStream is = new FileInputStream(file);
 
             // 한글 파일명 깨짐 방지

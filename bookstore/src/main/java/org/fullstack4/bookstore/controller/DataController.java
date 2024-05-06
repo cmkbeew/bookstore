@@ -90,7 +90,7 @@ public class DataController {
         DataDTO dataDTO = dataService.dataModifyGet(data_idx);
 
         File file = new File(FileUploadUtil.uploadFolder+"\\"+ dataDTO.getSave_file_name());
-        FileUploadUtil.download(req,res,dataDTO.getOrg_file_name(),dataDTO.getSave_file_name());
+        FileUploadUtil.download(req,res,dataDTO.getOrg_file_name(),dataDTO.getSave_file_name(), "data");
         String orgFileName = URLEncoder.encode(dataDTO.getOrg_file_name(), "UTF-8");
         res.setHeader("Content-Disposition", "attachment; filename=\"" + orgFileName + "\";");
         res.setHeader("Content-Transfer-Encoding", "binary");
