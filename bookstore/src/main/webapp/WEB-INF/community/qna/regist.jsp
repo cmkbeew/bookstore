@@ -43,7 +43,6 @@
             <div class="row">
                 <div class="col-md-12">
                     <form name="frmRegist" id="frmRegist" method="post" action="/community/qna/regist">
-                        <input type="hidden" name="idx" id="idx" value="${qnaDTO.idx}"/>
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title text-uppercase mb-0" style="text-align: center;">QnA 등록</h5>

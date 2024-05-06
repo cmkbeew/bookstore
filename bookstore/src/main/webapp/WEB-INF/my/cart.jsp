@@ -143,7 +143,7 @@
                                                     </div>
                                                     <div class="row justify-content-around">
                                                         <button type="button" id="delBtn" class="btn btn-outline-danger btn-circle btn-lg btn-circle col-3">삭제하기</button>
-                                                        <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle col-4" onclick="selectedProduct()">선택 상품 주문하기</button>
+<%--                                                        <button type="button" class="btn btn-outline-primary btn-circle btn-lg btn-circle col-4" onclick="selectedProduct()">선택 상품 주문하기</button>--%>
                                                         <button type="button" class="btn btn-primary btn-circle btn-lg btn-circle col-4" onclick="location.href='/my/payment?member_id=${sessionScope.member_id}'">전체 상품 주문하기</button>
                                                     </div>
                                                 </c:when>
@@ -223,30 +223,30 @@
         }, false)
     }
 
-    // 체크된 값 가져오기
-    function selectedProduct(obj) {
-        let checkboxes = [];
-
-        $("input:checkbox[name=checkList]").each(function() {
-            if($(this).is(":checked") == true) {
-                checkboxes.push($(this).val());
-            }
-        });
-
-        if(checkboxes != null) {
-            $.ajax({
-                type : "get",
-                url : "/my/payment",
-                data : {
-                    check_idx : checkboxes
-                },
-                success : function(url) {
-                    alert("배송 상태가 변경되었습니다.")
-                    location.reload(url);
-                }
-            });
-        }
-    }
+    // // 체크된 값 가져오기
+    // function selectedProduct(obj) {
+    //     let checkboxes = [];
+    //
+    //     $("input:checkbox[name=checkList]").each(function() {
+    //         if($(this).is(":checked") == true) {
+    //             checkboxes.push($(this).val());
+    //         }
+    //     });
+    //
+    //     if(checkboxes != null) {
+    //         $.ajax({
+    //             type : "get",
+    //             url : "/my/payment",
+    //             data : {
+    //                 check_idx : checkboxes
+    //             },
+    //             success : function(url) {
+    //                 alert("배송 상태가 변경되었습니다.")
+    //                 location.reload(url);
+    //             }
+    //         });
+    //     }
+    // }
 </script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 </body>
