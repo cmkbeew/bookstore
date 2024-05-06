@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <html>
@@ -93,7 +94,7 @@
                         <c:forEach items="${allList}" var="list" >
                             <div class="col-lg-3 my-3">
                                 <a href="/product/view?type=${list.type}&product_idx=${list.product_idx}" style="color:black">
-                                    <svg class="bd-placeholder-img" width="250" height="300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+                                    <img class="bd-placeholder-img" width="250" height="300"  src="<spring:url value='/resources/img/product/${list.save_file_name}'/>" alt="이미지"/>
                                     <h4 class="my-2">${list.product_name}</h4>
                                     <p class="mb-1">${list.type}&nbsp;${list.grade}</p>
                                     <p class="mb-1">${list.price}원</p>
@@ -107,7 +108,7 @@
                         <c:forEach items="${elemList}" var="list" >
                             <div class="col-lg-3 my-3">
                             <a href="/product/view?type=${list.type}&product_idx=${list.product_idx}" style="color:black">
-                                <svg class="bd-placeholder-img" width="250" height="300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+                                <img class="bd-placeholder-img" width="250" height="300"  src="<spring:url value='/resources/img/product/${list.save_file_name}'/>" alt="이미지"/>
                                 <h4 class="my-2">${list.product_name}</h4>
                                 <p class="mb-1">${list.type}&nbsp;${list.grade}</p>
                                 <p class="mb-1">${list.price}원</p>
@@ -121,7 +122,7 @@
                         <c:forEach items="${midList}" var="list" >
                             <div class="col-lg-3 my-3">
                                 <a href="/product/view?type=${list.type}&product_idx=${list.product_idx}" style="color:black">
-                                    <svg class="bd-placeholder-img" width="250" height="300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+                                    <img class="bd-placeholder-img" width="250" height="300"  src="<spring:url value='/resources/img/product/${list.save_file_name}'/>" alt="이미지"/>
                                     <h4 class="my-2">${list.product_name}</h4>
                                     <p class="mb-1">${list.type}&nbsp;${list.grade}</p>
                                     <p class="mb-1">${list.price}원</p>
@@ -135,7 +136,7 @@
                         <c:forEach items="${highList}" var="list" >
                             <div class="col-lg-3 my-3">
                                 <a href="/product/view?type=${list.type}&product_idx=${list.product_idx}" style="color:black">
-                                    <svg class="bd-placeholder-img" width="250" height="300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+                                    <img class="bd-placeholder-img" width="250" height="300"  src="<spring:url value='/resources/img/product/${list.save_file_name}'/>" alt="이미지"/>
                                     <h4 class="my-2">${list.product_name}</h4>
                                     <p class="mb-1">${list.type}&nbsp;${list.grade}</p>
                                     <p class="mb-1">${list.price}원</p>
@@ -159,7 +160,7 @@
                         <c:forEach items="${elemRandom}" var="list" >
                             <div class="col-lg-3 my-3 text-center">
                                 <a href="/product/view?type=${list.type}&product_idx=${list.product_idx}" style="color:black">
-                                    <svg class="bd-placeholder-img" width="250" height="300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+                                    <img class="bd-placeholder-img" width="250" height="300"  src="<spring:url value='/resources/img/product/${list.save_file_name}'/>" alt="이미지"/>
                                     <h4 class="my-2">${list.product_name}</h4>
                                     <p class="mb-1">${list.type}&nbsp;${list.grade}</p>
                                     <p class="mb-1">${list.price}원</p>
@@ -183,7 +184,7 @@
                         <c:forEach items="${midRandom}" var="list" >
                             <div class="col-lg-3 my-3 text-center">
                                 <a href="/product/view?type=${list.type}&product_idx=${list.product_idx}" style="color:black">
-                                    <svg class="bd-placeholder-img" width="250" height="300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+                                    <img class="bd-placeholder-img" width="250" height="300"  src="<spring:url value='/resources/img/product/${list.save_file_name}'/>" alt="이미지"/>
                                     <h4 class="my-2">${list.product_name}</h4>
                                     <p class="mb-1">${list.type}&nbsp;${list.grade}</p>
                                     <p class="mb-1">${list.price}원</p>
@@ -209,7 +210,7 @@
                         <c:forEach items="${highRandom}" var="list" >
                             <div class="col-lg-3 my-3 owl-item text-center">
                                 <a href="/product/view?type=${list.type}&product_idx=${list.product_idx}" style="color:black">
-                                    <svg class="bd-placeholder-img" width="250" height="300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+                                    <img class="bd-placeholder-img" width="250" height="300"  src="<spring:url value='/resources/img/product/${list.save_file_name}'/>" alt="이미지"/>
                                     <h4 class="my-2">${list.product_name}</h4>
                                     <p class="mb-1">${list.type}&nbsp;${list.grade}</p>
                                     <p class="mb-1">${list.price}원</p>

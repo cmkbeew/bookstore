@@ -216,7 +216,8 @@
     const selectOneDOMList = document.querySelectorAll(".selectOne");
     const fixBtn = document.querySelector("#fixBtn");
     let idx = [];
-
+    let delidx = [];
+    let set = new Set();
     // 체크 박스 전체 선택 및 해제
     selectAllDOM.addEventListener("click", function (e) {
         if (selectAllDOM.checked) {
@@ -241,9 +242,19 @@
 
             if (selectOneDOMList[i].checked) {
                 idx.push(e.target.parentNode.children[0].value);
-            }
+                delidx.push(e.target.parentNode.children[0].value);
             console.log(idx);
-
+            console.log(delidx);
+            }
+            else {
+                for(let i = 0; i < delidx.length; i++) {
+                    if(delidx[i] === e.target.parentNode.children[0].value)  {
+                        delidx.splice(i, 1);
+                        i--;
+                        console.log(delidx);
+                    }
+                }
+            }
             //
             //     if (idx.includes(e.target.parentNode.children[0].value)) {
             //         idx.pop()
@@ -277,13 +288,19 @@
     }, false)
 
     function goDelete() {
-        const frm = document.getElementById("deleteFrm");
-        let confirm_flag = confirm("해당 게시글을 삭제하시겠습니까?");
-
-        if (confirm_flag) {
-            frm.submit();
+        if(delidx.length < 1) {
+            alert("삭제할 글을 선택해주세요.");
+            event.preventDefault();
+            event.stopPropagation();
+        } else {
+            const frm = document.getElementById("deleteFrm");
+            let confirm_flag = confirm("해당 게시글을 삭제하시겠습니까?");
+            if (confirm_flag) {
+                frm.submit();
+            }
         }
     }
+
 
 </script>
 </body>

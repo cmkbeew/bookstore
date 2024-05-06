@@ -86,7 +86,10 @@
                                             <label for="email" class="small ifta-label">이메일</label>
                                             <input type="email" class="ifta-field" id="email" name="email" value="${memberDTO.email}"
                                                    placeholder="you@example.com" required>
-                                            <div class="invalid-feedback" id="emailCk">
+                                            <div class="invalid-feedback">
+                                                이메일을 형식에 맞게 입력해주세요.
+                                            </div>
+                                            <div id="emailCk" style="display:none;width:100%;margin-top:.15rem;font-size:.875em;color:#dc3545">
                                                 이메일을 형식에 맞게 입력해주세요.
                                             </div>
                                         </div>
@@ -108,18 +111,21 @@
                                                     <input type="tel" class="ifta-field" id="phone_num3" name="phone_num3"
                                                            placeholder="1111" maxlength="4" value="${memberDTO.phone_num3}" required>
                                                 </div>
-                                                <div class="invalid-feedback" id="phoneck" style='display: none; width:100%;margin-bottom:.25rem;font-size:.875em;color:#dc3545'>
+                                                <div class="invalid-feedback">
                                                     전화번호를 입력해주세요.
+                                                </div>
+                                                <div id="phoneck" style='display: none; width:100%;margin-bottom:.25rem;font-size:.875em;color:#dc3545'>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-8">
+                                        <div class="col-md-8 mt-3">
                                             <label for="zipcode" class="small ifta-label">우편번호</label>
                                             <input type="text" class="ifta-field" name="zipcode" id="zipcode"
                                                    placeholder="" value="${memberDTO.zipcode}" required readonly>
                                             <div class="invalid-feedback">
                                                 주소를 작성해주세요.
                                             </div>
+                                            <div id="div_err_zipcode" style="display: none"></div>
                                         </div>
                                         <div class="col-md-4">
                                            <label for="zipcodebtn" class="form-label"> </label>
@@ -141,6 +147,9 @@
                                             <input type="text" class="ifta-field mb-0" name="addr2" id="addr2" placeholder=""
                                                    value="${memberDTO.addr2}" required>
                                             <small class="text-muted">상세 주소를 입력해주세요.</small>
+                                            <div class="invalid-feedback">
+                                                주소를 작성해주세요.
+                                            </div>
                                         </div>
                                         <div class="row mt-3 mb-4">
                                             <hr class="my-2">
@@ -234,25 +243,53 @@
         }).open();
     }
 
+    // email.addEventListener("input", (e) => {
+    //     if(!(emailCk.test(email.value))) {
+    //         e.preventDefault();
+    //         e.stopPropagation();
+    //         document.getElementById("emailCk").style.display = "block";
+    //         document.getElementById("emailCk").innerText = "규칙에 맞는 아이디를 입력해주세요."
+    //     }
+    // });
+    //이메일 체크
     email.addEventListener("input", (e) => {
-        if(!(emailCk.test(email.value))) {
-            e.preventDefault();
-            e.stopPropagation();
+        if(!(emailCheck).test(email.value)) {
             document.getElementById("emailCk").style.display = "block";
-            document.getElementById("emailCk").innerText = "규칙에 맞는 아이디를 입력해주세요."
+            document.getElementById("emailCk").innerText = "이메일 형식에 맞춰 입력해주세요."
+        } else {
+            document.getElementById("emailCk").style.display = "none";
         }
     });
 
+    // 전화번호 다음 칸 이동
     p1.addEventListener("input", () => {
         if (p1.value.length === 3) {
+            document.getElementById("phoneck").style.display = "none";
             p2.focus();
+        }
+        else {
+            document.getElementById("phoneck").style.display = "block";
+            document.getElementById("phoneck").innerText = "전화번호 형식에 맞게 입력해주세요.";
         }
     });
     p2.addEventListener("input", () => {
-        if (p2.value.length === 4) {
+        if (p2.value.length == 4) {
+            document.getElementById("phoneck").style.display = "none";
             p3.focus();
+        } if (p2.vlaue.length <=2) {
+            document.getElementById("phoneck").style.display = "block";
+            document.getElementById("phoneck").innerText = "전화번호 형식에 맞게 입력해주세요.";
         }
     });
+    p3.addEventListener("input" , () => {
+        if(p3.value.length != 4) {
+            document.getElementById("phoneck").style.display = "block";
+            document.getElementById("phoneck").innerText = "전화번호 형식에 맞게 입력해주세요.";
+        } else {
+            document.getElementById("phoneck").style.display = "none";
+        }
+    })
+
 
     submitBtn.addEventListener("click", (e)=> {
         if(p2.value.length < 3 || p3.value.length < 4) {
@@ -260,6 +297,17 @@
             e.stopPropagation();
             e.preventDefault();
         }
+
+        if((document.querySelector(".idCk1").style.display == 'block')  ||
+            (document.getElementById("emailCk").display == 'block') ||
+            (document.getElementById("phoneck").style.display == "block")) {
+            e.stopPropagation();
+            e.preventDefault();
+            alert("정보를 다 입력해주세요.")
+            return false;
+        }
+
+
     })
 
 </script>
