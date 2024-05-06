@@ -23,10 +23,14 @@ public class FileUploadUtil {
         ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
         return attr.getRequest();
     }
-    public static String uploadFolder = getRequest().getServletContext().getRealPath("/resources/img");
+//    public static String uploadFolder = getRequest().getServletContext().getRealPath("/");
+//    public static String uploadFolder = "C:\\Uploads\\";
+    public static String uploadFolder = "C:\\HK\\bookstore\\bookstore\\src\\main\\webapp\\resources\\img\\";
 
-    public static String saveFile(MultipartFile multipartFile) {
+
+    public static String saveFile(MultipartFile multipartFile, String path) {
         log.info(uploadFolder);
+
         String org_file_name = multipartFile.getOriginalFilename();
         String ext = org_file_name.substring(org_file_name.lastIndexOf("."), org_file_name.length());
 
@@ -34,7 +38,7 @@ public class FileUploadUtil {
         String[] uuids = uuid.toString().split("-");
         String newName = uuids[0];
 
-        File save_file = new File(uploadFolder + "\\" + newName + ext);
+        File save_file = new File(uploadFolder + path + "\\" + newName + ext);
 
         if(!save_file.exists()) {
             save_file.mkdir();
@@ -100,9 +104,9 @@ public class FileUploadUtil {
         }
     }
 
-    public static void deleteFile(String save_file_name) {
+    public static void deleteFile(String save_file_name, String path) {
         try {
-            File file = new File(uploadFolder + "\\" + URLDecoder.decode(save_file_name, "UTF-8"));
+            File file = new File(uploadFolder + path + "\\" + URLDecoder.decode(save_file_name, "UTF-8"));
 
             file.delete();
         } catch (Exception e) {

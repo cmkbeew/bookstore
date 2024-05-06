@@ -214,7 +214,7 @@ public class AdminController {
         String save_file_name = "";
 
         if (!multipartFile.isEmpty()) {
-            save_file_name = FileUploadUtil.saveFile(multipartFile);
+            save_file_name = FileUploadUtil.saveFile(multipartFile, "notice");
         }
         noticeDTO.setOrg_file_name(multipartFile.getOriginalFilename());
         noticeDTO.setSave_file_name(save_file_name);
@@ -282,6 +282,7 @@ public class AdminController {
 
     @PostMapping("/notice/modify")
     public String noticeModifyPOST(
+            @RequestParam("file") MultipartFile multipartFile,
             @Valid NoticeDTO noticeDTO,
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes
@@ -297,6 +298,19 @@ public class AdminController {
             redirectAttributes.addFlashAttribute("noticeDTO", noticeDTO);
             return "redirect:/admin/notice/modify?idx=" + noticeDTO.getIdx();
         }
+
+        NoticeDTO dto = adminService.noticeView(noticeDTO.getIdx());
+        String save_file_name = "";
+
+        // 수정 파일 있을 때 저장 및 기존 파일 삭제
+        if(!multipartFile.isEmpty()) {
+            save_file_name = FileUploadUtil.saveFile(multipartFile, "notice");
+
+            FileUploadUtil.deleteFile(dto.getSave_file_name(), "notice");
+        }
+
+        noticeDTO.setOrg_file_name(multipartFile.getOriginalFilename());
+        noticeDTO.setSave_file_name(save_file_name);
 
         int result = adminService.noticeModify(noticeDTO);
         log.info("result : " + result);
@@ -319,7 +333,7 @@ public class AdminController {
         NoticeDTO dto = adminService.noticeView(idx);
 
         if(dto != null && dto.getSave_file_name() != null) {
-            FileUploadUtil.deleteFile(dto.getSave_file_name());
+            FileUploadUtil.deleteFile(dto.getSave_file_name(), "notice");
         }
 
         int result = adminService.noticeDelete(idx);

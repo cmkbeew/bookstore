@@ -49,7 +49,7 @@ public class ProductController {
         // 관련 상품 4개
         List<ProductDTO> relatedProductList = productService.relatedProductList(productDTO);
 //        이미지 보여주기 시도
-        FileUploadUtil.getFile(productDTO.getSave_file_name());
+//        FileUploadUtil.getFile(productDTO.getSave_file_name());
 
         model.addAttribute("productDTO", productDTO);
         model.addAttribute("reviewList", reviewList);

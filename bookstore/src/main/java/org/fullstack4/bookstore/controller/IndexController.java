@@ -22,23 +22,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-
-@Log4j2
 @Controller
 @RequestMapping(value = "/")
 @RequiredArgsConstructor
 public class IndexController {
+
     private final IndexServiceIf indexServiceIf;
+
     @GetMapping("/")
     public void mainGet(
             HttpServletRequest req,
-            HttpServletResponse resp,
-            RedirectAttributes redirectAttributes,
-            Model model) throws ServletException, IOException {
-        log.info("IndexController >> mainGet()");
-//        List<Object> elementary = null;
-//        List<ProductDTO> middle = null;
-//        List<ProductDTO> high = null;;
+            HttpServletResponse resp
+    ) throws ServletException, IOException {
 
 //        신상품 리스트
         List<ProductDTO> allList = indexServiceIf.product_list("유아");
@@ -71,6 +66,5 @@ public class IndexController {
     }
     @GetMapping("/company/greeting")
     public void companyGet() {
-        log.info("회사 소개");
     }
 }

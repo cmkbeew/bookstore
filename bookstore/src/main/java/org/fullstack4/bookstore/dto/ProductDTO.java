@@ -3,9 +3,7 @@ package org.fullstack4.bookstore.dto;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.PositiveOrZero;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 @ToString
@@ -32,7 +30,11 @@ public class ProductDTO {
     @Length(min=1, max=50, message = "1~50자 이내로 입력하세요.")
     private String author;
 
+    @NotNull(message = "쪽수를 숫자로 입력하세요.")
+    @PositiveOrZero
     private int page_cnt;
+    @NotNull(message = "가격을 숫자로 입력하세요.")
+    @PositiveOrZero
     private int price;
 
     private LocalDate publish_date;
@@ -49,8 +51,9 @@ public class ProductDTO {
     @Length(min=1, max=20, message = "1~20자 이내로 입력하세요.")
     private String subject;
 
-    @Builder.Default
-    private int discount=0;
+    @NotNull(message = "할인율을 숫자로 입력하세요.")
+    @PositiveOrZero
+    private int discount;
     private String tax_yn;
     private LocalDate reg_date;
 

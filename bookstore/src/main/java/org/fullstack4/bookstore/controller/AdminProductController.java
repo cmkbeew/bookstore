@@ -34,11 +34,8 @@ public class AdminProductController {
             RedirectAttributes redirectAttributes,
             Model model
     ) {
-        log.info("===============================");
-        log.info("AdminProductController >> adminProductListGET()");
 
         if (bindingResult.hasErrors()) {
-            log.info("AdminProductController >> list Error");
             redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
         }
 
@@ -81,8 +78,6 @@ public class AdminProductController {
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes
     ) {
-        log.info("AdminProductController >> registPOST");
-
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
             redirectAttributes.addFlashAttribute("productDTO", productDTO);
@@ -93,7 +88,7 @@ public class AdminProductController {
         String save_file_name = "";
 
         if (!multipartFile.isEmpty()) {
-            save_file_name = FileUploadUtil.saveFile(multipartFile);
+            save_file_name = FileUploadUtil.saveFile(multipartFile, "product");
         }
         productDTO.setOrg_file_name(multipartFile.getOriginalFilename());
         productDTO.setSave_file_name(save_file_name);
@@ -138,9 +133,9 @@ public class AdminProductController {
 
         // 수정 파일 있을 때 저장 및 기존 파일 삭제
         if(!multipartFile.isEmpty()) {
-            save_file_name = FileUploadUtil.saveFile(multipartFile);
+            save_file_name = FileUploadUtil.saveFile(multipartFile, "product");
 
-            FileUploadUtil.deleteFile(dto.getSave_file_name());
+            FileUploadUtil.deleteFile(dto.getSave_file_name(), "product");
         }
 
         productDTO.setOrg_file_name(multipartFile.getOriginalFilename());

@@ -141,7 +141,7 @@ public class DataController {
         String save_file_name = "";
 
         if(!multipartFile.isEmpty()) {
-            save_file_name = FileUploadUtil.saveFile(multipartFile);
+            save_file_name = FileUploadUtil.saveFile(multipartFile, "data");
         }
 
         dataDTO.setOrg_file_name(multipartFile.getOriginalFilename());
@@ -188,9 +188,9 @@ public class DataController {
 
         // 수정 파일 있을 때 저장 및 기존 파일 삭제
         if(!multipartFile.isEmpty()) {
-            save_file_name = FileUploadUtil.saveFile(multipartFile);
+            save_file_name = FileUploadUtil.saveFile(multipartFile, "data");
 
-            FileUploadUtil.deleteFile(dto.getSave_file_name());
+            FileUploadUtil.deleteFile(dto.getSave_file_name(), "data");
         }
 
         dataDTO.setOrg_file_name(multipartFile.getOriginalFilename());
@@ -212,7 +212,7 @@ public class DataController {
         DataDTO dto = dataService.dataModifyGet(data_idx);
 
         if(dto != null && dto.getSave_file_name() != null) {
-            FileUploadUtil.deleteFile(dto.getSave_file_name());
+            FileUploadUtil.deleteFile(dto.getSave_file_name(), "data");
         }
         int result = dataService.dataDelete(data_idx);
 

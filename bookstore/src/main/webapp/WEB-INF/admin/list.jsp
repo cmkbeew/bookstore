@@ -139,7 +139,7 @@
                                                     <c:if test="${communityList.type == 'notice'}">
                                                         <td>
                                                             <a href="/admin/${communityList.type}/view?idx=${list.idx}">
-                                                            <c:out value="${!empty list.org_file_name ? list.org_file_name : '첨부파일 없음'}" />  ${list.org_file_name}
+                                                            <c:out value="${!empty list.org_file_name ? list.org_file_name : '첨부파일 없음'}" />
                                                             </a>
                                                         </td>
                                                     </c:if>

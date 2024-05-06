@@ -64,7 +64,7 @@
                                                 첨부파일
                                                 <span class="material-symbols-outlined web_font">attach_file</span>
                                             </th>
-                                            <td><input type="file" name="file" class="form-control" /></td>
+                                            <td><input type="file" name="file" class="form-control" value="${dataDTO.save_file_name}"/></td>
                                         </tr>
                                     </table>
                                 </div>

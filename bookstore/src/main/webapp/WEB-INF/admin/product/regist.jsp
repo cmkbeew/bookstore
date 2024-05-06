@@ -48,7 +48,6 @@
             <div class="row">
                 <div class="col-md-12">
                     <form name="registFrm" id="registFrm" method="post" action="/admin/product/regist" enctype="multipart/form-data">
-                        <input type="hidden" name="product_idx" id="product_idx" value="${productDTO.product_idx}"/>
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title text-uppercase mb-0" style="text-align: center;">도서상품 등록</h5>
