@@ -33,4 +33,6 @@ public class OrderDetailVO {
     private int discount;
     private int discount_price;
     private int order_price;
+    private String org_file_name;
+    private String save_file_name;
 }

@@ -1,3 +1,4 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <html>
@@ -44,22 +45,22 @@
                         <div class="row">
                             <div class="col-lg-7">
                                 <h5 class="mb-3">
-                                    <a href="#!" class="text-body">
-                                        <i class="fas fa-long-arrow-alt-left me-2"></i>Continue shopping
-                                    </a>
+                                    <p class="text-body">
+                                        <i class="fas fa-long-arrow-alt-left me-2"></i>결제목록
+                                    </p>
                                 </h5>
                                 <hr>
                                 <div class="d-flex justify-content-between align-items-center mb-4">
-                                    <div>
-                                        <p class="mb-1">Shopping cart</p>
-                                        <p class="mb-0">You have 4 items in your cart</p>
-                                    </div>
-                                    <div>
-                                        <p class="mb-0">
-                                            <span class="text-muted">Sort by:</span>
-                                            <a href="#!" class="text-body">price <i class="fas fa-angle-down mt-1"></i></a>
-                                        </p>
-                                    </div>
+<%--                                    <div>--%>
+<%--                                        <p class="mb-1">Shopping cart</p>--%>
+<%--                                        <p class="mb-0">You have 4 items in your cart</p>--%>
+<%--                                    </div>--%>
+<%--                                    <div>--%>
+<%--                                        <p class="mb-0">--%>
+<%--                                            <span class="text-muted">Sort by:</span>--%>
+<%--                                            <a href="#!" class="text-body">price <i class="fas fa-angle-down mt-1"></i></a>--%>
+<%--                                        </p>--%>
+<%--                                    </div>--%>
                                 </div>
                                 <form class="mt-4" id="frmOrder" method="post" action="/my/payment">
                                     <input type="hidden" name="member_id" value="${sessionScope.member_id}" />
@@ -72,8 +73,8 @@
                                                 <div class="d-flex flex-row align-items-center">
                                                     <div>
                                                         <img
-                                                                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp"
-                                                                class="img-fluid rounded-3" alt="Shopping item" style="width: 65px;">
+                                                        <img src="<spring:url value='/resources/img/product/${list.save_file_name}'/>"
+                                                             class="img-fluid rounded-3" alt="Shopping item" style="width: 65px;">
                                                     </div>
                                                     <div class="ms-3">
                                                         <h5>${list.product_name}</h5>
