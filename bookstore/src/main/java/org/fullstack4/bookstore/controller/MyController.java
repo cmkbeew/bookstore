@@ -117,9 +117,11 @@ public class MyController {
     @PostMapping("deleteCart")
     public String deleteCart(
             HttpServletRequest req,HttpSession Session,
-            RedirectAttributes redirectAttributes) {
+            RedirectAttributes redirectAttributes,
+            CartListDTO cartListDTO,
+            HttpServletResponse resp) {
         String memberId = Session.getAttribute("member_id").toString();
-        String[] delete_idx = req.getParameterValues("select");
+        String[] delete_idx = req.getParameterValues("checkList");
         log.info(Arrays.toString(delete_idx));
         int result = 0;
 
@@ -128,6 +130,8 @@ public class MyController {
             result = myServiceIf.deleteCart(intIdx);
         }
         if (result > 0) {
+            int total_cart = myServiceIf.total_cart(memberId);
+            CookieUtil.setCookies(resp,"cartCnt",Integer.toString(total_cart),60*60*24,"","/");
             return "redirect:/my/cart?member_id="+memberId;
         } else {
             redirectAttributes.addFlashAttribute("error", "삭제되지 않았습니다.");

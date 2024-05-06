@@ -84,7 +84,7 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <input type="button" class="btn btn-outline-primary col-12 mb-2" style="height: 70px" value="아이디 중복체크" name="idBtn"
-                                                       id="idBtn" onclick="idbtnChek()" disabled>
+                                                       id="idBtn" onclick="idbtnChek()">
                                             </div>
                                             <div class="invalid-feedback">
                                                 사용할 아이디를 입력해주세요.
@@ -111,7 +111,7 @@
                                             <input type="text" class="ifta-field" id="name" name="name" placeholder=""
                                                    value="${dto.name}" required>
                                             <div class="invalid-feedback">
-                                                이름을 입력해주세요.
+                                                이름을 입력해주세요
                                             </div>
                                         </div>
                                         <div class="col-12 mt-3">
@@ -142,7 +142,10 @@
                                             <label for="email" class="small ifta-label">이메일</label>
                                             <input type="email" class="ifta-field" id="email" name="email" value="${dto.email}"
                                                    placeholder="you@example.com" required>
-                                            <div class="invalid-feedback" id="emailCk">
+                                            <div class="invalid-feedback">
+                                                이메일을 작성해주세요.
+                                            </div>
+                                            <div id="emailCk" style="display:none;width:100%;margin-top:.15rem;font-size:.875em;color:#dc3545">
                                                 이메일을 형식에 맞게 입력해주세요.
                                             </div>
                                             <div id="div_err_email" style="display: none"></div>
@@ -165,9 +168,11 @@
                                                     <input type="tel" class="ifta-field" id="phone_num3" name="phone_num3" value="${dto.phone_num3}"
                                                            placeholder="1111" maxlength="4" required>
                                                 </div>
-                                                <div class="invalid-feedback" id="phoneck" style='display: none; width:100%;margin-bottom:.25rem;font-size:.875em;color:#dc3545'>
-                                                    전화번호를 입력해주세요.
+                                                <div id="phoneck" style='display: none; width:100%;margin-bottom:.25rem;font-size:.875em;color:#dc3545'>
                                                 </div>
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                전화번호를 입력해주세요.
                                             </div>
                                         </div>
                                             <div class="row" style="align-items: center">
@@ -178,7 +183,7 @@
                                                 <div class="invalid-feedback">
                                                     주소를 작성해주세요.
                                                 </div>
-                                                <div id="div_err_display_zipcode" style="display: none"></div>
+                                                <div id="div_err_zipcode" style="display: none"></div>
                                             </div>
                                             <div class="col-md-4">
                                                 <%--                                            <label for="zipcodebtn" class="form-label">우편번호</label>--%>
@@ -562,61 +567,79 @@ SNS 계정 가입   [필수 – 네이버] 이름, 이메일주소, 휴대폰번
     let p2 = document.getElementById("phone_num2");
     let p3 = document.getElementById("phone_num3");
     let idCk = document.getElementById("idCk");
-    let emailCk = document.getElementById("emailCk");
     let submitBtn = document.getElementById("submitBtn");
 
     const idcheck = /^[a-z0-9_]{4,20}$/;
     const pwdCheck = /^.*(?=^.{8,16}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[@#$%^&~!]).*$/;
     const emailCheck = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
     //validator 체크
-
-    email.addEventListener("input", (e) => {
-        if(!(emailCk.test(email.value))) {
-            e.preventDefault();
-            e.stopPropagation();
-            document.getElementById("emailCk").style.display = "block";
-            document.getElementById("emailCk").innerText = "규칙에 맞는 아이디를 입력해주세요."
+    //아이디 중복 체크
+    function idbtnChek() {
+        if(member_id.value.length <4) {
+            alert("4자 이상 아이디를 입력해주세요.")
+            return ;
+        } else {
+            let id = $('#member_id').val();
+            $.ajax({
+                url: '/member/idCheck',
+                type: 'post',
+                data: {member_id: id},
+                success: function (cnt) {
+                    if (cnt == 0) {
+                        $('.idCk1').css("display", "none");
+                        $('.idCk2').css("display", "block");
+                    } else {
+                        $('.idCk2').css("display", "none");
+                        $('.idCk1').css("display", "block");
+                    }
+                },
+                error: function () {
+                    alert("에러입니다");
+                }
+            });
         }
-    });
-
+    }
+    //아이디 js
     member_id.addEventListener("input", (e) => {
+        //입력시 문구 초기화
         document.querySelector(".idCk1").style.display='none';
         document.querySelector(".idCk2").style.display='none';
+        //정규식에 맞지 않는 경우
         if (!(idcheck).test(member_id.value)) {
-            e.preventDefault();
-            e.stopPropagation();
             document.getElementById("feedbackId").style.display = "block";
             document.getElementById("feedbackId").innerText = "규칙에 맞는 아이디를 입력해주세요."
-            document.getElementById("idBtn").disabled() ;
         }
+        // 아무것도 입력 되지 않은 상태 or 정규식에 맞는 경우 관련 문구 처리
         if (member_id.value.length < 1 || (idcheck).test(member_id.value)) {
             document.getElementById("feedbackId").style.display = "none";
-        } if(member_id.value.length >=4) {
-            document.getElementById("idBtn").disabled = false;
         }
     })
+    //이메일 체크
+    email.addEventListener("input", (e) => {
+        if(!(emailCheck).test(email.value)) {
+            document.getElementById("emailCk").style.display = "block";
+            document.getElementById("emailCk").innerText = "이메일 형식에 맞춰 입력해주세요."
+        } else {
+            document.getElementById("emailCk").style.display = "none";
+        }
+    });
+    //비밀번호 체크
     pwd1.addEventListener("input", (e) => {
+        //정규식에 맞지 않는 경우
         if (!(pwdCheck).test(pwd1.value)) {
-            e.preventDefault();
-            e.stopPropagation();
             document.getElementById("feedbackPwd").style.display = "block";
             document.getElementById("feedbackPwd").innerText = "규칙에 맞는 비밀번호를 입력해주세요."
-        }
+        } // 빈칸 또는 정규식 맞는 경우
         if (pwd1.value.length < 1 || (pwdCheck).test(pwd1.value)) {
             document.getElementById("feedbackPwd").style.display = "none";
-        }
-    })
-    // 비밀번호 동일 체크
-    pwd1.addEventListener("input", (e) => {
+        } // 비밀번호 동일 체크
         if (pwd1.value == pwd2.value) {
             document.getElementById("pwdck").style.display = "none";
         }
-    });
+    })
     pwd2.addEventListener("input", (e) => {
-        console.log("chang2")
         if (pwd1.value != pwd2.value) {
             document.getElementById("pwdck").style = "display:block;width:100%;margin-top:.25rem;font-size:.875em;color:#dc3545";
-            console.log("chang2222")
         }
         if (pwd2.value === "" || pwd1.value == pwd2.value) {
             document.getElementById("pwdck").style.display = "none";
@@ -635,14 +658,31 @@ SNS 계정 가입   [필수 – 네이버] 이름, 이메일주소, 휴대폰번
     // 전화번호 다음 칸 이동
     p1.addEventListener("input", () => {
         if (p1.value.length === 3) {
+            document.getElementById("phoneck").style.display = "none";
             p2.focus();
+        }
+        else {
+            document.getElementById("phoneck").style.display = "block";
+            document.getElementById("phoneck").innerText = "전화번호 형식에 맞게 입력해주세요.";
         }
     });
     p2.addEventListener("input", () => {
-        if (p2.value.length === 4) {
+        if (p2.value.length == 4) {
+            document.getElementById("phoneck").style.display = "none";
             p3.focus();
+        } if (p2.vlaue.length <=2) {
+            document.getElementById("phoneck").style.display = "block";
+            document.getElementById("phoneck").innerText = "전화번호 형식에 맞게 입력해주세요.";
         }
     });
+    p3.addEventListener("input" , () => {
+        if(p3.value.length != 4) {
+            document.getElementById("phoneck").style.display = "block";
+            document.getElementById("phoneck").innerText = "전화번호 형식에 맞게 입력해주세요.";
+        } else {
+            document.getElementById("phoneck").style.display = "none";
+        }
+    })
     const serverValidResult = {};
     <c:forEach items="${errors}" var="err">
     if (document.getElementById("div_err_${err.getField()}") != null) {
@@ -652,29 +692,6 @@ SNS 계정 가입   [필수 – 네이버] 이름, 이메일주소, 휴대폰번
     serverValidResult['${err.getField()}'] = '${err.defaultMessage}';
     </c:forEach>
     console.log(serverValidResult);
-
-
-    function idbtnChek() {
-        let id = $('#member_id').val();
-        $.ajax({
-            url:'/member/idCheck',
-            type:'post',
-            data:{member_id : id},
-            success:function(cnt){
-                if(cnt == 0){
-                    $('.idCk1').css("display","none");
-                    $('.idCk2').css("display","block");
-                } else {
-                    $('.idCk2').css("display","none");
-                    $('.idCk1').css("display","block");
-                    $('#member_id').val('');
-                }
-            },
-            error:function(){
-                alert("에러입니다");
-            }
-        });
-    }
 
     submitBtn.addEventListener("click", (e)=> {
         if(p2.value.length < 3 || p3.value.length < 4) {
@@ -687,17 +704,27 @@ SNS 계정 가입   [필수 – 네이버] 이름, 이메일주소, 휴대폰번
             e.stopPropagation();
             e.preventDefault();
         }
-        if(document.querySelector(".idCk2").style.display != 'block') {
+        // 아이디가 확인이 안된 경우
+        if(document.querySelector(".idCk2").style.display !== 'block') {
             member_id.focus();
-
+            e.stopPropagation();
+            e.preventDefault();
         }
+        // 비밀번호 입력이 끝나지 않은 경우
+        if((document.querySelector(".idCk1").style.display == 'block')  ||
+            (document.getElementById("emailCk").display == 'block') ||
+            (document.getElementById("pwdck").style.display == "block") ||
+            (document.getElementById("feedbackPwd").style.display == "block") ||
+            (document.getElementById("phoneck").style.display == "block")) {
+            e.stopPropagation();
+            e.preventDefault();
+            alert("정보를 다 입력해주세요.")
+            return false;
+        }
+
+
     })
 
-
 </script>
-
-
 </body>
 </html>
-
-

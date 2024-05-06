@@ -206,7 +206,6 @@
             },
             success: function (url) {
                 location.reload(url);
-
             },
             error: function (err) {
                 console.log(err);
