@@ -174,25 +174,8 @@ public class MyController {
     }
 
     @GetMapping("/payment")
-    public void cartPay(@RequestParam(name="member_id") String member_id,
-                        CartDTO cartDTO,
-                        ProductDTO productDTO,
-                        HttpServletRequest req,
-                        Model model) {
-        String[] select_idx = req.getParameterValues("select");
-        log.info(cartDTO);
-        log.info("select Idx : " + Arrays.toString(select_idx));
-
-
-//        List<CartListDTO> cartList ;
-//        if( select_idx.length < 1) {
-//            // 장바구니 전체 리스트
-//             cartList = myServiceIf.cart_list(member_id);
-//        } else {
-//            for(int i = 0; i< select_idx.length < i++) {
-//                cartList = myServiceIf.cart_selcList(member_id, select_idx[i]);
-//            }
-//        }
+    public void cartPay(@RequestParam(name="member_id") String member_id, Model model) {
+        // 장바구니 목록
         List<CartListDTO> cartList= myServiceIf.cart_list(member_id);
 
         // 주문 금액 합계
@@ -222,6 +205,7 @@ public class MyController {
 
             return "redirect:/my/payment?member_id=" + orderDTO.getMember_id();
         }
+        // 주문번호 랜덤으로 생성
         Random rand = new Random();
         int createNum = 0;
         String strNum = "";
@@ -245,6 +229,7 @@ public class MyController {
             orderItemDTO.setDiscount_price(cartList.get(i).getPrice());
             orderItemDTO.setOrder_price(cartList.get(i).getDisplay_price());
 
+            // 결제한 목록 추가
             myServiceIf.order_item_insert(orderItemDTO);
             // 결제한 목록 카트 삭제
             myServiceIf.deleteCart(cartList.get(i).getCart_idx());
