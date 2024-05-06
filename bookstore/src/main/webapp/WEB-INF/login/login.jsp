@@ -38,12 +38,12 @@
                                         aria-controls="home-tab-pane" aria-selected="true">회원 로그인
                                 </button>
                             </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="guest-tab" data-bs-toggle="tab"
-                                        data-bs-target="#profile-tab-pane" type="button" role="tab"
-                                        aria-controls="profile-tab-pane" aria-selected="false">비회원 로그인(주문 조회)
-                                </button>
-                            </li>
+<%--                            <li class="nav-item" role="presentation">--%>
+<%--                                <button class="nav-link" id="guest-tab" data-bs-toggle="tab"--%>
+<%--                                        data-bs-target="#profile-tab-pane" type="button" role="tab"--%>
+<%--                                        aria-controls="profile-tab-pane" aria-selected="false">비회원 로그인(주문 조회)--%>
+<%--                                </button>--%>
+<%--                            </li>--%>
                         </ul>
                         <div class="form-block">
                             <div class="tab-content" id="myTabContent">

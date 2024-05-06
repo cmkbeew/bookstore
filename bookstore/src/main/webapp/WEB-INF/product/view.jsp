@@ -455,6 +455,7 @@
     }
 
     function addCart() {
+        if (${sessionScope.member_id != null} ) {
         let params = { product_idx : document.getElementById("product_idx").value,
             product_cnt : document.getElementById("product_cnt").value,
             or_member_id : document.getElementById("or_member_id").value
@@ -482,6 +483,11 @@
                 alert("장바구니 담기 실패");
             }
         });
+        }
+        else {
+            alert("로그인 후 사용가능한 서비스입니다.");
+            window.location.href="/login/login";
+        }
     }
     function pay() {
         if(${not empty sessionScope.member_id}) {

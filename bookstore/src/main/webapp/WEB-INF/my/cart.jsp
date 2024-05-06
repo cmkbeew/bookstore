@@ -160,7 +160,6 @@
                                         </div>
                                     </form>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -177,11 +176,22 @@
     let totalCntValue = document.querySelector(".totalCnt");
     let total_price = document.getElementById("total_price");
     let delBtn = document.getElementById("delBtn");
+    const allCheckboxDOM = document.querySelectorAll(".control--checkbox");
+    const control = document.querySelectorAll(".control_value");
+    let idx = [];
+    let set = new Set();
     delBtn.addEventListener("click", (e) => {
-        document.getElementById("frm").action = "/my/deleteCart";
-        document.getElementById("frm").submit();
+        if(set.size < 1) {
+            alert("삭제할 상품을 선택해주세요.");
+            e.preventDefault();
+            e.stopPropagation();
+        } else {
+            if(confirm(set.size+" 개 상품을 삭제하시겠습니까?")) {
+                document.getElementById("frm").action = "/my/deleteCart";
+                document.getElementById("frm").submit();
+            }
+        }
     });
-
 
     function bookCntUpdate(cartIdx) {
         let product_cnt = document.getElementById("form" + cartIdx).value;
@@ -204,22 +214,19 @@
         });
     }
 
-    const allCheckboxDOM = document.querySelectorAll(".control--checkbox");
-    const control = document.querySelectorAll(".control_value");
-    let idx = [];
-
     for (let i = 0; i < control.length; i++) {
         control[i].addEventListener("click", function (e) {
-            // if(!e.target.parentNode.parentNode.parentNode.children[0].children[0].children[0].checked) {
-            //     e.target.parentNode.parentNode.parentNode.children[0].children[0].children[0].checked = true;
-            // } else {
-            //     e.target.parentNode.parentNode.parentNode.children[0].children[0].children[0].checked = false;
-            // }
-            // e.target.parentNode.parentNode.parentNode.children[0].children[0].children[0].checked = true;
-            console.log(e.target.checked)
-            console.log(e.target.id);
-            idx.push(e.target.id);
-            console.log(idx);
+            if(e.target.checked) {
+                idx.push(e.target.id);
+            } else {
+                for(let i = 0; i < idx.length; i++) {
+                    if(idx[i] === e.target.id)  {
+                        idx.splice(i, 1);
+                        i--;
+                    }
+                }
+            }
+            set = new Set(idx);
         }, false)
     }
 
