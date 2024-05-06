@@ -56,7 +56,7 @@
                                                 <label for="email" class="small ifta-label">이메일</label>
                                                 <input type="email" class="ifta-field" style="border:none;" name="email" id="email">
                                             </div>
-                                            <input type="submit" value="비밀번호 찾기"
+                                            <input type="submit" id="submitBtn" value="비밀번호 찾기"
                                                    class="btn btn-pill text-white btn-block btn-primary w-100">
                                         </form>
                                     </main>
@@ -82,5 +82,21 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
+
+<script>
+    let name = document.getElementById("name");
+    let email = document.getElementById("email");
+    let id = document.getElementById("member_id");
+    let submitBtn = document.getElementById("submitBtn");
+
+    submitBtn.addEventListener("click", (e)=> {
+        if(name.value.length < 1 || email.value.length <1 || id.value.length < 1) {
+            alert('모든 칸을 입력해주세요');
+            e.preventDefault();
+            e.stopPropagation();
+        } else {
+        }
+    });
+</script>
 </body>
 </html>

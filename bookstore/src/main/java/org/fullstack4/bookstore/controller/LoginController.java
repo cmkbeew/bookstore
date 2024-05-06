@@ -179,13 +179,19 @@ public class LoginController {
             @RequestParam(name = "name", defaultValue = "") String name,
             @RequestParam(name = "email", defaultValue = "") String email,
             @RequestParam(name = "member_id", defaultValue = "") String member_id,
-            RedirectAttributes redirectAttributes) {
+            RedirectAttributes redirectAttributes,
+            HttpServletResponse resp) throws IOException {
         log.info("=========================");
         int result = loginServiceIf.search_pwd(name, email, member_id);
         if (result > 0) {
             redirectAttributes.addAttribute("member_id", member_id);
             return "redirect:/login/findPwdResult";
         } else {
+            resp.setCharacterEncoding("UTF-8");
+            resp.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = resp.getWriter();
+            out.println("<script>alert('조건에 맞는 회원정보가 없습니다.'); window.location.href='/login/findPwd'</script>");
+            out.close();
             return "/login/findPwd";
         }
     }
@@ -203,18 +209,18 @@ public class LoginController {
             HttpServletResponse resp
     ) throws IOException {
 
-        resp.setCharacterEncoding("UTF-8");
-        resp.setContentType("text/html; charset=UTF-8");
-        PrintWriter out = resp.getWriter();
 
         int result = loginServiceIf.change_pwd(member_id, pwd);
 
         if (result > 0) {
+            resp.setCharacterEncoding("UTF-8");
+            resp.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = resp.getWriter();
             out.println("<script>alert('비밀번호가 변경되었습니다.\\n로그인 페이지로 이동합니다.'); window.location.href='/login/login'</script>");
             out.close();
             return "redirect:/login/login";
         } else {
-            out.close();
+//            out.close();
             return "/login/findPwd";
         }
     }
