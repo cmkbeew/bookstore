@@ -125,7 +125,7 @@ public class LoginController {
 
     @GetMapping("/logout")
     public String logout(HttpSession session,
-                       HttpServletResponse resp
+                         HttpServletResponse resp
     ) {
         log.info("로그아웃");
         session.invalidate();
@@ -166,7 +166,7 @@ public class LoginController {
     @GetMapping("/findIdResult")
     public void findIdResult(Model model,
                              @RequestParam(name = "member_id", defaultValue = "") String member_id
-            ) {
+    ) {
         model.addAttribute("member_id", member_id);
 
     }
@@ -176,10 +176,10 @@ public class LoginController {
     }
     @PostMapping("/findPwd")
     public String findPwdPost(
-                            @RequestParam(name = "name", defaultValue = "") String name,
-                            @RequestParam(name = "email", defaultValue = "") String email,
-                            @RequestParam(name = "member_id", defaultValue = "") String member_id,
-                            RedirectAttributes redirectAttributes) {
+            @RequestParam(name = "name", defaultValue = "") String name,
+            @RequestParam(name = "email", defaultValue = "") String email,
+            @RequestParam(name = "member_id", defaultValue = "") String member_id,
+            RedirectAttributes redirectAttributes) {
         log.info("=========================");
         int result = loginServiceIf.search_pwd(name, email, member_id);
         if (result > 0) {
@@ -198,17 +198,14 @@ public class LoginController {
     }
     @PostMapping("/findPwdResult")
     public String findPwdResultPost(
-                                    @RequestParam(name = "member_id", defaultValue = "") String member_id,
-                                    @RequestParam(name = "pwd", defaultValue = "") String pwd,
-                                    HttpServletResponse resp,
-                                    PrintWriter out) throws IOException {
-        log.info("=========================");
-        log.info("member_id: " + member_id);
-        log.info("pwd: " + pwd);
-        log.info("=========================");
+            @RequestParam(name = "member_id", defaultValue = "") String member_id,
+            @RequestParam(name = "pwd", defaultValue = "") String pwd,
+            HttpServletResponse resp
+    ) throws IOException {
+
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html; charset=UTF-8");
-        out = resp.getWriter();
+        PrintWriter out = resp.getWriter();
 
         int result = loginServiceIf.change_pwd(member_id, pwd);
 
@@ -217,6 +214,7 @@ public class LoginController {
             out.close();
             return "redirect:/login/login";
         } else {
+            out.close();
             return "/login/findPwd";
         }
     }

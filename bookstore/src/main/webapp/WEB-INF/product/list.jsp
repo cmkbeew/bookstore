@@ -106,7 +106,7 @@
                 <li><button class="border-0 bg-transparent me-2" id="1">최신순</button></li>
                 <li><button class="border-0 bg-transparent me-2" id="2">높은가격순</button></li>
                 <li><button class="border-0 bg-transparent me-2" id="3">낮은가격순</button></li>
-                <li><button class="border-0 bg-transparent me-2" id="4">리뷰많은순</button></li>
+<%--                <li><button class="border-0 bg-transparent me-2" id="4">리뷰많은순</button></li>--%>
                 <li><button class="border-0 bg-transparent me-2" id="5">발행일순</button></li>
             </ul>
         </div>
