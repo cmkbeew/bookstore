@@ -37,6 +37,7 @@ public class ProductDTO {
     @PositiveOrZero
     private int price;
 
+    @PastOrPresent(message = "과거의 날짜를 선택하세요.")
     private LocalDate publish_date;
 
     @NotBlank(message = "유형을 입력하세요.")
