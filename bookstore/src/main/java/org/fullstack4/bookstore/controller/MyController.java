@@ -89,9 +89,9 @@ public class MyController {
                         HttpSession session
     ) {
         List<CartListDTO> cartList = myServiceIf.cart_list(member_id);
-        int total_cart = myServiceIf.total_cart(member_id);
-
         int total_price = cartList.stream().mapToInt(CartListDTO::getDisplay_price).sum();
+
+
 
         // 배송비
         int shipping = 2500;
@@ -101,7 +101,6 @@ public class MyController {
         model.addAttribute("cartList", cartList);
         model.addAttribute("shipping", shipping);
         model.addAttribute("total_price", total_price);
-//        CookieUtil.setCookies(resp,"cartCnt",Integer.toString(total_cart),60*60*24,"","/");
     }
 
     @PostMapping("/updateCnt")
@@ -138,10 +137,16 @@ public class MyController {
 
     @PostMapping("/cart/add")
     @ResponseBody
-    public String addCart(@RequestBody CartDTO cartDTO) {
+    public String addCart(@RequestBody CartDTO cartDTO,
+                          CartListDTO cartListDTO,
+                          HttpServletRequest req,
+                          HttpServletResponse resp){
+        HttpSession session = req.getSession();
+        String member_id = session.getAttribute("member_id").toString();
         int result = myServiceIf.cart_add(cartDTO);
-
         if(result > 0) {
+            int total_cart = myServiceIf.total_cart(member_id);
+            CookieUtil.setCookies(resp,"cartCnt",Integer.toString(total_cart),60*60*24,"","/");
             return "Y";
         } else {
             return "N";

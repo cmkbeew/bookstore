@@ -646,7 +646,7 @@ SNS 계정 가입   [필수 – 네이버] 이름, 이메일주소, 휴대폰번
     const serverValidResult = {};
     <c:forEach items="${errors}" var="err">
     if (document.getElementById("div_err_${err.getField()}") != null) {
-        document.getElementById("div_err_${err.getField()}").innerHTML = "<div style='width:100%;margin-bottom:.25rem;font-size:.875em;color:#dc3545'>${err.getField()}을 다시 한 번 확인해주세요./div>";
+        document.getElementById("div_err_${err.getField()}").innerHTML = "<div style='width:100%;margin-bottom:.25rem;font-size:.875em;color:#dc3545'>${err.getField()}을 다시 한 번 확인해주세요.</div>";
         document.getElementById("div_err_${err.getField()}").style.display = "block";
     }
     serverValidResult['${err.getField()}'] = '${err.defaultMessage}';

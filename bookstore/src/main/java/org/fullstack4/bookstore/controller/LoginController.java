@@ -2,9 +2,11 @@ package org.fullstack4.bookstore.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.fullstack4.bookstore.dto.CartListDTO;
 import org.fullstack4.bookstore.dto.LoginDTO;
 import org.fullstack4.bookstore.dto.MemberDTO;
 import org.fullstack4.bookstore.service.LoginServiceIf;
+import org.fullstack4.bookstore.service.MyServiceIf;
 import org.fullstack4.bookstore.util.CookieUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +31,7 @@ import java.io.PrintWriter;
 @RequiredArgsConstructor
 public class LoginController {
     private final LoginServiceIf loginServiceIf;
+    private final MyServiceIf myServiceIf;
 
     @GetMapping("/login")
     public void loginGet(
@@ -50,6 +53,7 @@ public class LoginController {
     public String loginPost(
             @Valid LoginDTO loginDTO,
             BindingResult bindingResult,
+            CartListDTO cartListDTO,
             @RequestParam(name = "return_url", defaultValue = "/", required = false) String return_url,
             RedirectAttributes redirectAttributes,
             HttpServletResponse resp,
@@ -71,6 +75,8 @@ public class LoginController {
 
         session = req.getSession();
         if (loginMemberDTO != null) {
+            int total_cart = myServiceIf.total_cart(loginDTO.getMember_id());
+            CookieUtil.setCookies(resp,"cartCnt",Integer.toString(total_cart),60*60*24,"","/");
             // TODO :암호화 복호화 고도화 시 추가
             if(loginDTO.getSave_id().equals("on")) {
                 System.out.println("save_id.equals");
@@ -124,6 +130,7 @@ public class LoginController {
         log.info("로그아웃");
         session.invalidate();
         CookieUtil.setCookies(resp, "auto_login", "", 0, "", "/");
+        CookieUtil.setCookies(resp,"cartCnt","",0,"","/");
         return "redirect:/";
     }
     @GetMapping("/find")
