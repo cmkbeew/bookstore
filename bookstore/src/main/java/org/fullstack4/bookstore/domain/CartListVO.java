@@ -21,4 +21,6 @@ public class CartListVO {
     private int display_price;
     private int price;
     private int discount;
+    private String org_file_name;
+    private String save_file_name;
 }

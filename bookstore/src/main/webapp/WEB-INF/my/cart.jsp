@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -80,7 +81,7 @@
                                                                             <div class="control__indicator"></div>
                                                                         </label></div>
                                                                         <div>
-                                                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp"
+                                                                            <img src="<spring:url value='/resources/img/product/${list.save_file_name}'/>"
                                                                                     class="img-fluid rounded-3" alt="Shopping item" style="width: 65px;">
                                                                         </div>
                                                                         <div class="ms-3">

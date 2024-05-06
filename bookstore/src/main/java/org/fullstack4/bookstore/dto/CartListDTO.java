@@ -23,6 +23,8 @@ public class CartListDTO {
     private int display_price;
     private int price;
     private int discount;
+    private String org_file_name;
+    private String save_file_name;
 
     public void setDisplay_price (int price, int discount) {
         this.display_price = (int)(price * ((double)(100-discount)/100));
