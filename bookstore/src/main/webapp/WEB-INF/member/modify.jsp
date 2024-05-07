@@ -37,7 +37,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/resources/fonts/icomoon/style.css">
-    <title>회원가입</title>
+    <title>회원정보수정</title>
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -194,7 +194,7 @@
                                         </div>
                                         <hr class="my-2">
                                     </div>
-                                    <button class="w-100 btn btn-primary btn-lg mt-3 mb-5" type="submit">수정하기</button>
+                                    <button class="w-100 btn btn-primary btn-lg mt-3 mb-5" id="submitBtn" type="submit">수정하기</button>
                                 </form>
                             </div>
                         </div>
@@ -298,8 +298,7 @@
             e.preventDefault();
         }
 
-        if((document.querySelector(".idCk1").style.display == 'block')  ||
-            (document.getElementById("emailCk").display == 'block') ||
+        if((document.getElementById("emailCk").style.display == 'block') ||
             (document.getElementById("phoneck").style.display == "block")) {
             e.stopPropagation();
             e.preventDefault();
