@@ -36,7 +36,7 @@
 <body>
 <div style="margin:0 auto;width: 50%; height: 100%">
     <img src="/resources/img/error_img.jpg" alt="에러 이미지" style="width: 100%; height: 100%; margin: 0 auto;">
-    <button class="noto-sans-kr" onclick="window.location.href=''">메인 화면 가기</button>
+    <button class="noto-sans-kr" onclick="window.location.href='/'">메인 화면 가기</button>
 </div>
 <script>
     console.log(document.referrer)

@@ -131,7 +131,7 @@ public class MyController {
         }
         if (result > 0) {
             int total_cart = myServiceIf.total_cart(memberId);
-            CookieUtil.setCookies(resp,"cartCnt",Integer.toString(total_cart),60*60*24,"","/");
+            CookieUtil.setCookies(resp,"cartCnt",Integer.toString(total_cart),0,"","/");
             return "redirect:/my/cart?member_id="+memberId;
         } else {
             redirectAttributes.addFlashAttribute("error", "삭제되지 않았습니다.");

@@ -95,6 +95,7 @@
         FROM tbl_order AS od
                  INNER JOIN tbl_order_item AS oi ON oi.order_code = od.order_code
                  inner join tbl_product as tp on oi.product_idx = tp.product_idx
+        WHERE od.order_code = #{order_code}
     </select>
 
     <update id="orderCancelRequest">

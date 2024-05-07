@@ -84,7 +84,6 @@
         </div>
     </div>
 </div>
-<%@ include file="/WEB-INF/common/footer.jsp"%>
 <script>
     const serverValidResult = {};
     <c:forEach items="${errors}" var="err">
