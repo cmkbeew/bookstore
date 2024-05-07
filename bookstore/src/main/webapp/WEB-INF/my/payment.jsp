@@ -132,7 +132,7 @@
                                         <div class="form-outline form-white mb-2">
                                             <label class="form-label" for="phone_num">휴대폰번호</label>
                                             <input type="text" id="phone_num" name="phone_num" class="form-control form-control-lg text-black"
-                                                   placeholder="010 0000 0000" maxlength="13" value="${sessionScope.phone_num}" />
+                                                   placeholder="010-0000-0000" maxlength="13" value="${sessionScope.phone_num}" />
                                         </div>
                                         <div id="div_err_phone_num" style="display: none"></div>
 
@@ -162,7 +162,7 @@
                                         <div class="form-outline form-white mb-2">
                                             <label class="form-label" for="receiver_phone_num">휴대폰번호</label>
                                             <input type="text" id="receiver_phone_num" name="receiver_phone_num" class="form-control form-control-lg text-black"
-                                                   placeholder="010 0000 0000" maxlength="13" value="${orderDTO.receiver_phone_num}"/>
+                                                   placeholder="010-0000-0000" maxlength="13" value="${orderDTO.receiver_phone_num}"/>
                                         </div>
                                         <div id="div_err_receiver_phone_num" style="display: none"></div>
 

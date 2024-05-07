@@ -5,25 +5,129 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="64051777-53e8-4d29-985d-b98c77db865d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/bookstore.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/data/2b243350.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/data/4a488abe.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/data/749cd26b.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/data/c17b0866.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/notice/97e1d9d1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/002f2c98.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/02308e3b.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/05d7bf6e.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/06a1786f.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/0b362729.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/0d0a0281.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/15703b6b.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/1b1988c2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/1b3bcdfd.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/1b7bd2c6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/1dd3aa4c.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/1f88b0ff.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/204854c6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/2063f8b5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/20aad605.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/210e8b44.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/22740f4d.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/23aa674a.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/2633ff6d.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/2738df9d.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/28c73792.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/2b08774f.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/2ecf0555.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/31dcec5a.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/361cf33d.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/362ebc41.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/39da4b39.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/3c3c431a.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/3e1c1035.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/412d380c.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/4909950e.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/49945041.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/4ac357cb.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/4d5a6f1b.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/4f865349.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/57fa6ba0.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/5cba472c.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/5ce67b2d.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/604d3e11.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/61d259b3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/61d4f31c.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/61f2629c.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/67a05a31.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/6ba173c9.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/6bf97bbf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/6c27ec07.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/6c984b14.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/6c991e1f.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/70e6dc68.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/727f6961.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/72e92885.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/741bf243.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/74e0141c.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/75c1f503.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/76b4442f.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/774c8e60.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/7751e168.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/78b2289e.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/796670a4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/7d9ff841.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/81ba3e46.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/8334a666.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/87cf5137.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/888c0d6f.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/8f5deda4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/931a41b1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/968cdf1e.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/98a79d12.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/9a2a8a18.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/9d777c37.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/9fa53067.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/a0dc718b.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/a13c25e3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/a4948d41.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/a6fc3a54.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/a811ab91.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/a99072ab.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/abaf02ad.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/b02493b8.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/b171f3a3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/b5e03caf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/b77c5057.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/bc3dd8ba.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/c26239f6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/c511d691.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/c6181d11.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/c66dfa0d.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/c7958eca.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/caea3792.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/cd5f2c20.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/company_.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/d66c0526.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/db1d7762.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/dc2eca03.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/e1531406.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/e3f2d146.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/e55ef171.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/e7b25504.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/ec4c569c.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/ecd7eb1d.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/ee5433f9.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/error_img.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/f2a50c5c.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/f368261d.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/f3b0bc96.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/f4b445f4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/f57bca5c.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/f5cfda56.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/fab1aca1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/img/product/fce8f47a.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/controller/AdminProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/controller/AdminProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/controller/DataController.java" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/controller/DataController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/domain/ProductVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/domain/ProductVO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/dto/ProductDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/dto/ProductDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/mapper/ProductMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/mapper/ProductMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/service/ProductService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/service/ProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/service/ProductServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookstore/src/main/resources/mappers/ProductMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/resources/mappers/ProductMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/product/list.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/product/list.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/product/modify.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/product/modify.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/product/regist.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/product/regist.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/product/view.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/product/view.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/qna/replyRegist.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/qna/replyRegist.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/custom404.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/product/list.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/product/list.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/root-context.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/root-context.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookstore/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/css/admin/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/resources/css/admin/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/controller/AdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/util/FileUploadUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/java/org/fullstack4/bookstore/util/FileUploadUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/list.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/admin/list.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/my/payment.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/bookstore/src/main/webapp/WEB-INF/my/payment.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,23 +147,7 @@
         </task>
         <projects_view>
           <tree_state>
-            <expand>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="bookstore" type="f1a62948:ProjectNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="bookstore" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="bookstore" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="build" type="c8890929:TasksNode$1" />
-              </path>
-            </expand>
+            <expand />
             <select />
           </tree_state>
         </projects_view>
@@ -127,13 +215,15 @@
     "Gradle.bookstore [clean].executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Tomcat Server.Tomcat 9.0.87.executor": "Run",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "create.test.in.the.same.root": "true",
     "git-widget-placeholder": "yh",
+    "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/bookstorePrj/bookstore/src/main/webapp/resources/img",
+    "last_opened_file_path": "D:/java4/spring/bookstore/bookstore/src/main/webapp/resources/img/notice",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -145,11 +235,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\java4\spring\bookstore\bookstore\src\main\webapp\resources\img\notice" />
+      <recent name="D:\java4\spring\bookstore\bookstore\src\main\webapp\resources\img" />
       <recent name="C:\bookstorePrj\bookstore\src\main\webapp\resources\img" />
       <recent name="C:\bookstorePrj\bookstore\src\main\resources\mappers" />
       <recent name="C:\bookstorePrj\bookstore\src\main\webapp\WEB-INF" />
-      <recent name="C:\bookstorePrj\bookstore\src\main\webapp\WEB-INF\admin\qna" />
-      <recent name="C:\bookstorePrj\bookstore\src\main\webapp\WEB-INF\admin\faq" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -174,6 +264,7 @@
   </component>
   <component name="RunManager">
     <configuration name="Tomcat 9.0.87" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.87" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="11" nameIsGenerated="true">
+      <option name="OPEN_IN_BROWSER" value="false" />
       <option name="COMMON_VM_ARGUMENTS" value="-Dfile.encoding=UTF-8" />
       <option name="UPDATE_ON_FRAME_DEACTIVATION" value="true" />
       <option name="UPDATE_CLASSES_ON_FRAME_DEACTIVATION" value="true" />
@@ -264,7 +355,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-11.0.21-corretto-11.0.21-f644763e9732-97de7592" />
+        <option value="jdk-11.0.22-corretto-11.0.22-4caba194b151-868cef46" />
       </set>
     </attachedChunks>
   </component>
@@ -303,6 +394,7 @@
       <workItem from="1714807771317" duration="11337000" />
       <workItem from="1714819146578" duration="1642000" />
       <workItem from="1714820828265" duration="18200000" />
+      <workItem from="1715038386884" duration="3719000" />
     </task>
     <servers />
   </component>

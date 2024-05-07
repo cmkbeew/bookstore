@@ -25,8 +25,8 @@ public class FileUploadUtil {
     }
 //    public static String uploadFolder = getRequest().getServletContext().getRealPath("/");
 //    public static String uploadFolder = "C:\\Uploads\\";
-    public static String uploadFolder = "C:\\HK\\bookstore\\bookstore\\src\\main\\webapp\\resources\\img\\";
-
+//    public static String uploadFolder = "C:\\HK\\bookstore\\bookstore\\src\\main\\webapp\\resources\\img\\";
+    public static String uploadFolder = "D:\\java4\\spring\\bookstore\\bookstore\\src\\main\\webapp\\resources\\img\\";
 
     public static String saveFile(MultipartFile multipartFile, String path) {
         log.info(uploadFolder);

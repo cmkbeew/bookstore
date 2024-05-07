@@ -240,7 +240,9 @@ public class AdminController {
 //        String upload_path = req.getServletContext().getRealPath("");
         NoticeDTO noticeDTO = adminService.noticeView(idx);
 
-        File file = new File("C:\\Uploads" + noticeDTO.getSave_file_name());
+        File file = new File(FileUploadUtil.uploadFolder + "\\" + noticeDTO.getSave_file_name());
+        FileUploadUtil.download(req,res,noticeDTO.getOrg_file_name(),noticeDTO.getSave_file_name(), "notice");
+
         res.setHeader("Content-Disposition", "attachment; filename=\"" + noticeDTO.getOrg_file_name() + "\";");
         res.setHeader("Content-Transfer-Encoding", "binary");
         res.setHeader("Content-Type",
