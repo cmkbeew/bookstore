@@ -34,7 +34,6 @@ MariaDB 10.11 / dbeaver
 | **Library** | <img src="https://img.shields.io/badge/bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white"> <img src="https://img.shields.io/badge/mybatis-2D8C3C?style=for-the-badge&logo=mybatis&logoColor=white"> |
 | **IDE / Tool** |  <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white"> <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white"> <img src="https://img.shields.io/badge/intellij IDEA-000000?style=for-the-badge&logo=intellijidea&logoColor=white"> <img src="https://img.shields.io/badge/SourceTree-0052CC?style=for-the-badge&logo=sourcetree&logoColor=white"> <img src="https://img.shields.io/badge/HeidiSQL 12.6-83B81A?style=for-the-badge&logo=Heidi&logoColor=white"> <img src="https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=slack&logoColor=white">|
 <br/>
-|||
 
 
 
