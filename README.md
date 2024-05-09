@@ -27,10 +27,13 @@ MariaDB 10.11 / dbeaver
 
 |||
 |---|---|
-| **Frontend** |<img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white"> <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=white"> <img src="https://img.shields.io/badge/jsp-004088?style=for-the-badge&logo=jsp&logoColor=white"> |
-| **Backend** | <img src="https://img.shields.io/badge/Java-6DB33F?style=for-the-badge&logo=Java&logoColor=red"> <img src="https://img.shields.io/badge/Java Servlet-6DB33F?style=for-the-badge&logo=JavaServlet&logoColor=white"> |
-| **Database** | <img src="https://img.shields.io/badge/mariaDB-F80000?style=for-the-badge&logo=oracle&logoColor=mariaDB"> |
-| **Tool** |  <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white"> <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white"> <img src="https://img.shields.io/badge/slack-000000?style=for-the-badge&logo=slack&logoColor=white"> |
+| **Frontend** |<img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white"> <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=white"> <img src="https://img.shields.io/badge/jsp-004088?style=for-the-badge&logo=jsp&logoColor=white">|
+| **Backend** | <img src="https://img.shields.io/badge/JDK 11.0.21 (java11)-3BABFF?style=for-the-badge&logo=java&logoColor=red"> <img src="https://img.shields.io/badge/Java Servlet-6DB33F?style=for-the-badge&logo=JavaServlet&logoColor=white">|
+| **Database** | <img src="https://img.shields.io/badge/Maria DB 10.11-003545?style=for-the-badge&logo=mariadb&logoColor=white"> |
+| **WAS** | <img src="https://img.shields.io/badge/Apache Tomcat 9.0.87-F8DC75?style=for-the-badge&logo=apachetomcat&logoColor=black"> |
+| **Library** | <img src="https://img.shields.io/badge/bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white"> <img src="https://img.shields.io/badge/mybatis-2D8C3C?style=for-the-badge&logo=mybatis&logoColor=white"> |
+| **IDE / Tool** |  <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white"> <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white"> <img src="https://img.shields.io/badge/intellij IDEA-000000?style=for-the-badge&logo=intellijidea&logoColor=white"> <img src="https://img.shields.io/badge/SourceTree-0052CC?style=for-the-badge&logo=sourcetree&logoColor=white"> <img src="https://img.shields.io/badge/HeidiSQL 12.6-83B81A?style=for-the-badge&logo=Heidi&logoColor=white"> <img src="https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=slack&logoColor=white">|
+<br/>
 |||
 
 
